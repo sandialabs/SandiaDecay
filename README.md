@@ -69,7 +69,7 @@ g++ -I. -I3rdparty SandiaDecay.cpp ./examples/sandia_decay_example.cpp -o exampl
 
 ## Efficiency
 On a 2017 macbook pro it takes about 100 ms to to initialize the a `SandiaDecayDataBase` object using
-[sandia.decay.min.xml](https://github.com/sandialabs/SandiaDecay/tree/master/sandia.decay.min.xml), or about 225 ms using [sandia.decay.xml](https://github.com/sandialabs/SandiaDecay/tree/master/sandia.decay.min.xml), with the only difference between the XML files being how human readable they are (and thus their size).
+[sandia.decay.nocoinc.min.xml](https://github.com/sandialabs/SandiaDecay/blob/master/sandia.decay.nocoinc.min.xml), or about 225 ms using [sandia.decay.xml](https://github.com/sandialabs/SandiaDecay/tree/master/sandia.decay.xml), with the differences between the XML files being how human readable they are and the former not including gamma coincidence information (to save file size).
 On average it takes about 200 &mu;s to calculate a nuclides decay equations, which only needs to be done once for every nuclide you are interested in, and then about 20 &mu;s to evaluate the decay equations and determine the decay product or activities for given time.
 A `SandiaDecayDataBase` object allocates about 10 MB of memory during initialization.  After initialization all operations are `const` operations, meaning a single `SandiaDecayDataBase` can be used in multiple threads without issues; no global variables are used, and except during construction of a `SandiaDecayDataBase` object, no files are accessed.
 
