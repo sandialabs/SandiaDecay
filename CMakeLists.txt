@@ -6,8 +6,6 @@ project(SandiaDecay)
 set( RAPID_XML_DIR "${CMAKE_CURRENT_SOURCE_DIR}/3rdparty" )
 #find_path( RAPID_XML_DIR rapidxml/rapidxml.hpp ${CMAKE_CURRENT_SOURCE_DIR}/3rdparty )
 
-include_directories( ${CMAKE_CURRENT_SOURCE_DIR} ${RAPID_XML_DIR} )
-
 set( sources ${CMAKE_CURRENT_SOURCE_DIR}/SandiaDecay.cpp )
 set( headers ${CMAKE_CURRENT_SOURCE_DIR}/SandiaDecay.h )
 
