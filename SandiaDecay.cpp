@@ -1792,12 +1792,12 @@ vector<EnergyRatePair> NuclideMixture::decayParticle( double time,
               continue;
             
             /*
-             //20181220: bellow is how wcjohnson had been detecting duplicates,
+             //20181220: below is how wcjohnson had been detecting duplicates,
              //          but on further review (and greater understanding of
              //          the issue), it probably isnt correct, so for the
              //          current time, will use the above solution reproducing
              //          Greg solution
-            //XXX: Note bellow neglects situations where you add a nuclide to
+            //XXX: Note below neglects situations where you add a nuclide to
             //  the NuclideMixture that is a iso>0 state, and its a decendant of
             //  another nuclide that you added
             if( transition->parent->isomerNumber
