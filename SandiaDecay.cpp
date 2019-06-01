@@ -1745,6 +1745,9 @@ vector<EnergyRatePair> NuclideMixture::decayParticle( double time,
   {
     const Nuclide *nuclide = activities[nucIndex].nuclide;
     const double activity = activities[nucIndex].activity;
+    
+    //if( activity <= 0.0 )
+    //  continue;
 
     const size_t n_decaysToChildren = nuclide->decaysToChildren.size();
 
