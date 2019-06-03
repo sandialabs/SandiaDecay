@@ -315,18 +315,17 @@ vector<const SandiaDecay::Nuclide *>::const_iterator find(
 }//find(...)
 
   
-typedef double DecayCoefType;
 struct BatemanWorkingSpace
 {
   std::vector< std::vector<const SandiaDecay::Nuclide *> > nuclide_path;
-  std::vector< std::vector< std::vector<DecayCoefType> > > decay_coeffs;
+  std::vector< std::vector< std::vector<SandiaDecay::CalcFloatType> > > decay_coeffs;
 };//struct BatemanWorkingSpace
   
 //The following nuclides are known to give nan or inf coeficients in
 //  BatemanWorkingSpace::decay_coeffs :  Sm136, Pt183, Ir172, Hg179, Eu136
 //  (this issue was found 20121011, but not investigated furhter - I think
 //  its been fixed (20180402), but I didnt check that)
-void calc_bateman_coef( std::vector< vector<DecayCoefType> > &coefs,
+void calc_bateman_coef( std::vector< vector<SandiaDecay::CalcFloatType> > &coefs,
                         std::vector<const SandiaDecay::Transition *> decay_path,
                         BatemanWorkingSpace &ws )
 {
@@ -336,15 +335,15 @@ void calc_bateman_coef( std::vector< vector<DecayCoefType> > &coefs,
   assert( child );
   
   const size_t row = coefs.size();
-  coefs.push_back( vector<DecayCoefType>(row+1, 0.0) );  //13.5% of time
+  coefs.push_back( vector<SandiaDecay::CalcFloatType>(row+1, 0.0) );  //13.5% of time
   
   for( size_t col = 0; col < row; ++col )
   {
     assert( decay_path.at(row-1)->child );
-    const double lambda_iminus1 = decay_path.at(row-1)->parent->decayConstant();
-    const double lambda_i = decay_path.at(row-1)->child->decayConstant();
-    const double lambda_j = decay_path.at(col)->parent->decayConstant();
-    const double br = decay_path[row-1]->branchRatio;
+    const SandiaDecay::CalcFloatType lambda_iminus1 = decay_path.at(row-1)->parent->decayConstant();
+    const SandiaDecay::CalcFloatType lambda_i = decay_path.at(row-1)->child->decayConstant();
+    const SandiaDecay::CalcFloatType lambda_j = decay_path.at(col)->parent->decayConstant();
+    const SandiaDecay::CalcFloatType br = decay_path[row-1]->branchRatio;
     
     coefs[row][col] = br * (lambda_iminus1/(lambda_i - lambda_j)) * coefs[row-1][col];
     coefs[row][row] -= coefs[row][col];
@@ -1620,11 +1619,11 @@ double NuclideMixture::totalActivity( double time ) const
   if( m_decayedToNuclides.empty() )
     performTimeEvolution();
 
-  double activity = 0.0;
+  SandiaDecay::CalcFloatType activity = 0.0;
   for( size_t i = 0; i < m_decayedToNuclides.size(); ++i )
     activity += m_decayedToNuclides[i].activity( time );
 
-  return activity;
+  return static_cast<double>(activity);
 }//double NuclideMixture::totalActivity( double time ) const
 
 
@@ -1633,7 +1632,7 @@ double NuclideMixture::totalMassInGrams( double time ) const
   if( m_decayedToNuclides.empty() )
     performTimeEvolution();
 
-  double mass_amu = 0.0;
+  SandiaDecay::CalcFloatType mass_amu = 0.0;
   for( size_t i = 0; i < m_decayedToNuclides.size(); ++i )
   {
     const NuclideTimeEvolution &evo = m_decayedToNuclides[i];
@@ -1641,8 +1640,8 @@ double NuclideMixture::totalMassInGrams( double time ) const
     mass_amu += evo.numAtoms( time ) * nuc->atomicMass;
   }//for( loop over m_decayedToNuclides )
 
-  const double mole = 6.02214179E+23;  //AMU/gram
-  return mass_amu/mole;
+  const SandiaDecay::CalcFloatType mole = 6.02214179E+23;  //AMU/gram
+  return static_cast<double>( mass_amu / mole );
 }//double totalMassInGrams( double time )
 
 
@@ -1687,8 +1686,25 @@ vector<NuclideActivityPair> NuclideMixture::activity( double time_in_seconds )  
   for( size_t i = 0; i < m_decayedToNuclides.size(); ++i )
   {
     const Nuclide *nuclide = m_decayedToNuclides[i].nuclide;
-    const double activity = m_decayedToNuclides[i].activity( time_in_seconds );
-    answer.push_back( NuclideActivityPair( nuclide, activity )  );
+    
+    CalcFloatType activity = m_decayedToNuclides[i].activity( time_in_seconds );
+    
+    /*
+     //At time=0, we would expect only the original nuclides would have non-zero
+     //  activity; however, because of numerical rounding in the bateman
+     //  equations, we may get small amounts (like 1E-22) of daughter products.
+     //  If this bothers you, you can un-comment out the next few lines of code
+    if( time_in_seconds <= 0.0 && activity > 0.0 )
+    {
+      bool isorig = false;
+      for( size_t i = 0; activity > 0.0 && i < m_originalNuclides.size(); ++i )
+        isorig = (m_originalNuclides[i].nuclide == nuclide);
+      if( !isorig )
+        activity = 0.0;
+    }//if( time_in_seconds <= 0.0 && activity > 0.0 )
+     */
+    
+    answer.push_back( NuclideActivityPair( nuclide, static_cast<double>(activity) )  );
   }//for( loop over atoms decayed too, i )
 
   return answer;
@@ -1704,7 +1720,7 @@ vector<NuclideNumAtomsPair> NuclideMixture::numAtoms( double time_in_seconds )  
   for( size_t i = 0; i < m_decayedToNuclides.size(); ++i )
   {
     const Nuclide *nuclide = m_decayedToNuclides[i].nuclide;
-    const double numAtoms = m_decayedToNuclides[i].numAtoms( time_in_seconds );
+    const CalcFloatType numAtoms = m_decayedToNuclides[i].numAtoms( time_in_seconds );
     answer.push_back( NuclideNumAtomsPair( nuclide, numAtoms )  );
   }//for( loop over atoms decayed too, i )
 
@@ -2890,7 +2906,7 @@ std::vector<NuclideTimeEvolution> SandiaDecayDataBase::getTimeEvolution( const s
   for( size_t parentNum = 0; parentNum < parents.size(); ++parentNum )
   {
     const Nuclide *parent = parents[parentNum].nuclide;
-    const double n_original = parents[parentNum].numAtoms;
+    const SandiaDecay::CalcFloatType n_original = parents[parentNum].numAtoms;
 
     for( size_t decayNum = 0; decayNum < parent->decaysToChildren.size(); ++decayNum )
     {
@@ -2898,7 +2914,7 @@ std::vector<NuclideTimeEvolution> SandiaDecayDataBase::getTimeEvolution( const s
       if( trans->child )
       {
         const vector<const Transition *> decay_path( 1, trans );
-        vector< vector<DecayCoefType> > coefs(1, vector<DecayCoefType>(1, n_original) );
+        vector< vector<SandiaDecay::CalcFloatType> > coefs(1, vector<SandiaDecay::CalcFloatType>(1, n_original) );
         coefs.reserve( 128 );
         calc_bateman_coef( coefs, decay_path, ws );
       }//if( trans->child )
@@ -2913,14 +2929,14 @@ std::vector<NuclideTimeEvolution> SandiaDecayDataBase::getTimeEvolution( const s
   typedef DecayPath::const_iterator DecayPathIter;
   typedef vector< DecayPath > DecayPathVec;
   typedef DecayPathVec::const_iterator DecayPathVecIter;
-  typedef map<const Nuclide *,double> NuclideToMagnitudeMap;
+  typedef map<const Nuclide *, SandiaDecay::CalcFloatType> NuclideToMagnitudeMap;
   typedef map<const Nuclide *, NuclideToMagnitudeMap, bool(*)(const Nuclide *,const Nuclide *) > NuclToCoefMapMap;
 
   DecayPathVec sub_paths_used;
   NuclToCoefMapMap nuc_to_coef_map( &Nuclide::lessThan );
 
-  const DecayPathVec  &nuclide_paths = ws.nuclide_path;
-  const vector< vector< vector<DecayCoefType> > > &decay_coeffs = ws.decay_coeffs;
+  const DecayPathVec &nuclide_paths = ws.nuclide_path;
+  const vector< vector< vector<SandiaDecay::CalcFloatType> > > &decay_coeffs = ws.decay_coeffs;
 
 //  cerr << "There were " << decay_coeffs.size() << " paths found" << endl;
 
@@ -2948,7 +2964,7 @@ std::vector<NuclideTimeEvolution> SandiaDecayDataBase::getTimeEvolution( const s
 
       for( size_t j = 0; j <= i; ++j )
       {
-        const float coeff = decay_coeffs[solution][i][j];
+        const SandiaDecay::CalcFloatType coeff = decay_coeffs[solution][i][j];
         const Nuclide *orig_nuc = sub_path[j];
 
         if( !coeff_mapp.count( orig_nuc ) )
@@ -3000,11 +3016,11 @@ NuclideNumAtomsPair::NuclideNumAtomsPair( const Nuclide *_nuclide, double _numAt
   {}
 
 
-  TimeEvolutionTerm::TimeEvolutionTerm( double mag,  const Nuclide *nuc )
+  TimeEvolutionTerm::TimeEvolutionTerm( SandiaDecay::CalcFloatType mag,  const Nuclide *nuc )
     : termCoeff( mag ), exponentialCoeff( nuc->decayConstant() )
   {}
 
-  double TimeEvolutionTerm::eval( double time_in_seconds ) const
+  SandiaDecay::CalcFloatType TimeEvolutionTerm::eval( double time_in_seconds ) const
   {
     return termCoeff * exp( -time_in_seconds*exponentialCoeff );
   }
@@ -3031,21 +3047,25 @@ NuclideNumAtomsPair::NuclideNumAtomsPair( const Nuclide *_nuclide, double _numAt
   NuclideTimeEvolution::NuclideTimeEvolution( const Nuclide *_nuclide )
      : nuclide(_nuclide){}
 
-  double NuclideTimeEvolution::numAtoms( double time_in_seconds ) const
+  SandiaDecay::CalcFloatType NuclideTimeEvolution::numAtoms( double time_in_seconds ) const
   {
-    double n_atoms = 0.0;
+    SandiaDecay::CalcFloatType n_atoms = 0.0;
     for( size_t i = 0; i < evolutionTerms.size(); ++i )
+    {
       n_atoms += evolutionTerms[i].eval( time_in_seconds );
-    return max( 0.0, n_atoms );
+      //cout << "\tEvolutionTerms " << i << ": { termCoeff: " << evolutionTerms[i].termCoeff
+      //  << ", exponentialCoeff: " << evolutionTerms[i].exponentialCoeff << " }, n_atoms=" << n_atoms << endl;
+    }
+    return max( SandiaDecay::CalcFloatType(0.0), n_atoms );
   }
 
-  double NuclideTimeEvolution::activity( double time_in_seconds ) const
+  SandiaDecay::CalcFloatType NuclideTimeEvolution::activity( double time_in_seconds ) const
   {
-    const double n_atoms = numAtoms( time_in_seconds );
+    const SandiaDecay::CalcFloatType n_atoms = numAtoms( time_in_seconds );
     return nuclide->numAtomsToActivity( n_atoms );
   }
 
-  void NuclideTimeEvolution::addEvolutionTerm( double mag,  const Nuclide *nuc )
+  void NuclideTimeEvolution::addEvolutionTerm( SandiaDecay::CalcFloatType mag,  const Nuclide *nuc )
   {
     evolutionTerms.push_back( TimeEvolutionTerm( mag, nuc ) );
   }

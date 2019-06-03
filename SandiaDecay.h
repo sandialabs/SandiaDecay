@@ -194,7 +194,6 @@ namespace SandiaDecay
   struct NuclideNumAtomsPair;
   struct NuclideActivityPair;
   struct NuclideTimeEvolution;
-
   
   /** Unit system used by this library, examples of use are:
   \code{.cpp}
@@ -236,6 +235,11 @@ namespace SandiaDecay
 //So... just skipping defining mass right now and instead will explicitly add
 //  mass units of variables or member functions in their respective names.
 
+  /** The float type to use for intermediate decay calculations.
+   You can set this to float, double, or long double.  However, the underlying
+   Nuclear data will probably be the limiting factor in accuracy for even float.
+   */
+  typedef double CalcFloatType;
   
   /** Class that parses the input "sandia.decay.xml" file and "owns" the decay
    information.  Once initialized, all member functions (besides reset()) are
@@ -1093,11 +1097,11 @@ namespace SandiaDecay
    */
   struct TimeEvolutionTerm
   {
-    double termCoeff;
-    double exponentialCoeff;
+    CalcFloatType termCoeff;
+    CalcFloatType exponentialCoeff;
     
-    double eval( double time_in_seconds ) const;
-    TimeEvolutionTerm( double mag, const Nuclide *nuc );
+    CalcFloatType eval( double time_in_seconds ) const;
+    TimeEvolutionTerm( CalcFloatType mag, const Nuclide *nuc );
   };//struct TimeEvolutionTerm
 
   
@@ -1111,9 +1115,9 @@ namespace SandiaDecay
     std::vector<TimeEvolutionTerm> evolutionTerms;
     NuclideTimeEvolution( const Nuclide *_nuclide );
 
-    double numAtoms( double time_in_seconds ) const;
-    double activity( double time_in_seconds ) const;
-    void addEvolutionTerm( double mag,  const Nuclide *nuc );
+    CalcFloatType numAtoms( double time_in_seconds ) const;
+    CalcFloatType activity( double time_in_seconds ) const;
+    void addEvolutionTerm( CalcFloatType mag,  const Nuclide *nuc );
   };//struct TimeEvolution
 
   
