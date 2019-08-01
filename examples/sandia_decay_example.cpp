@@ -31,6 +31,7 @@
 #include <cstdlib>
 #include <iostream>
 #include <assert.h>
+#include <algorithm>
 
 #include "SandiaDecay.h"
 
