@@ -24,6 +24,8 @@
    -Check that all float fields in the file have valid float values (right now
     SandiaDecay.cpp uses atof() which does not have a good error mechansim)
    -The coincidence range check should be improved
+   -For beta decay SandiaDecay::Transistions, should make sure sum of beta
+    intensities add up to one.
  */
 
 using namespace std;
