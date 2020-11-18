@@ -71,7 +71,7 @@
  However, leaving in this fixed compile-time switch until the next release to make it easier to
  debug if any issues popup.
  */
-#define DO_NO_TRANSITION_FIX 1
+#define DO_EMPTY_TRANSITION_FIX 1
 
 // Ignore this warning. It shouldn't be important, and seems to be Windows-only.
 // warning C4244: 'initializing' : conversion from 'std::streamoff' to 'size_t', possible loss of data
@@ -348,9 +348,10 @@ void calc_bateman_coef( std::vector< vector<SandiaDecay::CalcFloatType> > &coefs
 {
   assert( decay_path.size() );
   const SandiaDecay::Transition * const trans = decay_path.back();
+  assert( trans );
   
   const SandiaDecay::Nuclide * const child = trans->child;
-#if( !DO_NO_TRANSITION_FIX )
+#if( !DO_EMPTY_TRANSITION_FIX )
   assert( child );
 #endif
   
@@ -359,13 +360,13 @@ void calc_bateman_coef( std::vector< vector<SandiaDecay::CalcFloatType> > &coefs
   
   for( size_t col = 0; col < row; ++col )
   {
-#if( !DO_NO_TRANSITION_FIX )
+#if( !DO_EMPTY_TRANSITION_FIX )
     assert( decay_path[row-1]->child );
 #endif
     assert( decay_path[row-1]->parent );
     
     const SandiaDecay::CalcFloatType lambda_iminus1 = decay_path[row-1]->parent->decayConstant();
-#if( DO_NO_TRANSITION_FIX )
+#if( DO_EMPTY_TRANSITION_FIX )
     const SandiaDecay::CalcFloatType lambda_i = (decay_path[row-1]->child ? decay_path[row-1]->child->decayConstant() : 0.0);
 #else
     const SandiaDecay::CalcFloatType lambda_i = decay_path[row-1]->child->decayConstant();
@@ -380,7 +381,7 @@ void calc_bateman_coef( std::vector< vector<SandiaDecay::CalcFloatType> > &coefs
   
   //We have to get rid of any transition without a child for efficiency sake
   vector<const SandiaDecay::Transition *> decays;
-#if( DO_NO_TRANSITION_FIX )
+#if( DO_EMPTY_TRANSITION_FIX )
   if( child )
 #endif
   {
@@ -388,7 +389,7 @@ void calc_bateman_coef( std::vector< vector<SandiaDecay::CalcFloatType> > &coefs
   
     for( size_t t = 0; t < child->decaysToChildren.size(); ++t )
     {
-#if( !DO_NO_TRANSITION_FIX )
+#if( !DO_EMPTY_TRANSITION_FIX )
       if( child->decaysToChildren[t]->child )
 #endif
         decays.push_back( child->decaysToChildren[t] );
@@ -851,9 +852,15 @@ void Transition::set( const ::rapidxml::xml_node<char> *node,
 // XXX only kinda tested
 bool Nuclide::operator<( const Nuclide &rhs ) const
 {
+  if( (massNumber == rhs.massNumber)
+     && (atomicNumber == rhs.atomicNumber)
+     && (isomerNumber == rhs.isomerNumber) )
+    return false;
+    
   //is 'this' a daughter of 'rhs' ? If not, is 'this' lighter than 'rhs
   if( massNumber != rhs.massNumber )
     return (massNumber < rhs.massNumber);
+  
   if( atomicNumber == rhs.atomicNumber )
     return (isomerNumber < rhs.isomerNumber);
 
@@ -868,10 +875,10 @@ bool Nuclide::operator<( const Nuclide &rhs ) const
   const float lhsToRhsBr = this->branchRatioToDecendant( &rhs );
   const float rhsToLhsBr = rhs.branchRatioToDecendant( this );
 
-  if( lhsToRhsBr==0.0 && rhsToLhsBr==0.0 )
-    return (atomicMass<rhs.atomicMass);
-
-  return (lhsToRhsBr<rhsToLhsBr);
+  if( lhsToRhsBr == rhsToLhsBr ) //These nuclides dont decay into each other.
+    return (atomicNumber < rhs.atomicNumber);
+  
+  return (lhsToRhsBr < rhsToLhsBr);
 }//operator<
 
 
@@ -2912,7 +2919,7 @@ std::vector<NuclideTimeEvolution> SandiaDecayDataBase::getTimeEvolution( const s
   //This function needs serious cleanup!
   //Also, profiling done 20121010 shows that this function is what should really
   //  be optimized, which makes sense given its implementation
-
+  
   BatemanWorkingSpace ws;
   ws.decay_coeffs.reserve( 65 );  //64 is largest in database
   ws.nuclide_path.reserve( 65 );
@@ -2938,27 +2945,38 @@ std::vector<NuclideTimeEvolution> SandiaDecayDataBase::getTimeEvolution( const s
       parents.push_back( input[i] );
   }//for( loop over input, i )
 
+#if( DO_EMPTY_TRANSITION_FIX )
+  // If an input nuclide doesnt have any children, calc_bateman_coef(...) will ignore it, so we need
+  //  to take extra care to insert that nuclide into the decay coefficients.
+  std::vector<NuclideNumAtomsPair> childless_parents;
+#endif
 
   for( size_t parentNum = 0; parentNum < parents.size(); ++parentNum )
   {
     const Nuclide *parent = parents[parentNum].nuclide;
     const SandiaDecay::CalcFloatType n_original = parents[parentNum].numAtoms;
-
-    for( size_t decayNum = 0; decayNum < parent->decaysToChildren.size(); ++decayNum )
+    
+    const size_t num_trans = parent->decaysToChildren.size();
+    for( size_t decayNum = 0; decayNum < num_trans; ++decayNum )
     {
       const Transition * const trans = parent->decaysToChildren[decayNum];
       assert( trans );
       
-#if( !DO_NO_TRANSITION_FIX )
+#if( !DO_EMPTY_TRANSITION_FIX )
       if( trans->child )
 #endif
-      {
+      { 
         const vector<const Transition *> decay_path( 1, trans );
         vector< vector<SandiaDecay::CalcFloatType> > coefs(1, vector<SandiaDecay::CalcFloatType>(1, n_original) );
         coefs.reserve( 128 );
         calc_bateman_coef( coefs, decay_path, ws );
       }//if( trans->child )
     }//for( loop over transition, decayNum )
+    
+#if( DO_EMPTY_TRANSITION_FIX )
+    if( !num_trans )
+      childless_parents.push_back( parents[parentNum] );
+#endif
   }//for( loop over parental nucildes, parentNum )
 
 
@@ -2970,10 +2988,15 @@ std::vector<NuclideTimeEvolution> SandiaDecayDataBase::getTimeEvolution( const s
   typedef vector< DecayPath > DecayPathVec;
   typedef DecayPathVec::const_iterator DecayPathVecIter;
   typedef map<const Nuclide *, SandiaDecay::CalcFloatType> NuclideToMagnitudeMap;
+#if( DO_EMPTY_TRANSITION_FIX )
+  typedef map<const Nuclide *, NuclideToMagnitudeMap> NuclToCoefMapMap;
+  NuclToCoefMapMap nuc_to_coef_map;
+#else
   typedef map<const Nuclide *, NuclideToMagnitudeMap, bool(*)(const Nuclide *,const Nuclide *) > NuclToCoefMapMap;
+  NuclToCoefMapMap nuc_to_coef_map( &Nuclide::lessThan );
+#endif
 
   DecayPathVec sub_paths_used;
-  NuclToCoefMapMap nuc_to_coef_map( &Nuclide::lessThan );
 
   const DecayPathVec &nuclide_paths = ws.nuclide_path;
   const vector< vector< vector<SandiaDecay::CalcFloatType> > > &decay_coeffs = ws.decay_coeffs;
@@ -2998,12 +3021,11 @@ std::vector<NuclideTimeEvolution> SandiaDecayDataBase::getTimeEvolution( const s
 
       const Nuclide * const nuclide = sub_path[i];
 
-#if( DO_NO_TRANSITION_FIX )
+#if( DO_EMPTY_TRANSITION_FIX )
       if( nuclide )  //Nuclides that have no transitions listed will have nullptr child
 #endif
       {
         assert( sub_path.size() > i );
-        
         NuclideToMagnitudeMap &coeff_mapp = nuc_to_coef_map[nuclide];
         
         for( size_t j = 0; j <= i; ++j )
@@ -3015,7 +3037,7 @@ std::vector<NuclideTimeEvolution> SandiaDecayDataBase::getTimeEvolution( const s
             coeff_mapp[orig_nuc] = 0.0;
           
           coeff_mapp[orig_nuc] += coeff;
-        }
+        }//
       }//if( nuclide )
     }//for( loop over nuclides, i, that we are forming solutions for )
   }//for( loop over solution )
@@ -3027,7 +3049,7 @@ std::vector<NuclideTimeEvolution> SandiaDecayDataBase::getTimeEvolution( const s
       coef_map_iter != nuc_to_coef_map.end();
       ++coef_map_iter )
   {
-    const Nuclide *nuclide = coef_map_iter->first;
+    const Nuclide * const nuclide = coef_map_iter->first;
     answer.push_back( NuclideTimeEvolution( nuclide ) );
     NuclideTimeEvolution &evolution = answer.back();
 
@@ -3040,6 +3062,32 @@ std::vector<NuclideTimeEvolution> SandiaDecayDataBase::getTimeEvolution( const s
   }//for( each nuc_to_coef_map entry )
 
 
+#if( DO_EMPTY_TRANSITION_FIX )
+  for( size_t i = 0; i < childless_parents.size(); ++i )
+  {
+    const NuclideNumAtomsPair &parent = childless_parents[i];
+    
+    bool found = false;
+    for( size_t j = 0; j < answer.size(); ++j )
+    {
+      if( answer[j].nuclide == parent.nuclide )
+      {
+        answer[j].addEvolutionTerm( parent.numAtoms, parent.nuclide );
+        found = true;
+        break;
+      }
+    }//for( size_t j = 0; j < answer.size(); ++j )
+    
+    if( !found )
+    {
+      NuclideTimeEvolution term( parent.nuclide );
+      term.addEvolutionTerm( parent.numAtoms, parent.nuclide );
+      answer.push_back( term );
+    }//if( !found )
+  }//for( size_t i = 0; i < childless_parents.size(); ++i )
+  
+  std::sort( answer.begin(), answer.end() );
+#endif
 
   return answer;
 }//std::vector<NuclideTimeEvolution> getTimeEvolution( std::vector<NuclideNumAtomsPair> & ) const
@@ -3115,4 +3163,11 @@ NuclideNumAtomsPair::NuclideNumAtomsPair( const Nuclide *_nuclide, double _numAt
     evolutionTerms.push_back( TimeEvolutionTerm( mag, nuc ) );
   }
 
+  bool NuclideTimeEvolution::operator<( const NuclideTimeEvolution &rhs ) const
+  {
+    if( !nuclide || !rhs.nuclide )
+      return nuclide < rhs.nuclide;
+    
+    return ((*nuclide) < (*rhs.nuclide));
+  }
 }//namespace SandiaDecay

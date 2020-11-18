@@ -4,6 +4,7 @@
 #include <iomanip>
 #include <float.h>
 #include <cstring>
+#include <fstream>
 #include <sstream>
 #include <cstdlib>
 #include <iostream>
@@ -114,6 +115,7 @@ namespace
             << " for lamda_i->child=" << decay_path.at(row-1)->child->symbol
             << " and lambda_j->parent=" << decay_path.at(col)->parent->symbol
             << " (chain parent=" << chain_parent->symbol << ")";
+        //cerr << msg.str() << endl;
         throw runtime_error( msg.str() );
       }
     }//for( loop over 'col' of matrix A )
@@ -197,7 +199,12 @@ void sanity_check_nuclides_and_transistions()
     
     const Element * const el1 = database.element(elstr);
     if( nuc->symbol!="n1" && el1 != el )  //"n1" gets a pass...
-      throw runtime_error( "Getting element for " + nuc->symbol + " via label and atomic number did not get same element." );
+    {
+      const string mssg = "Getting element for " + nuc->symbol
+                    + " via label and atomic number did not get same element.  elstr='" + elstr
+                    + "', vs el->symbol='" + (el ? el->symbol : string("null")) + "'";
+      throw runtime_error( mssg );
+    }
     
     
     const std::vector<const Transition *> &transitions = nuc->decaysToChildren;
@@ -437,15 +444,98 @@ void sanity_check_all_decays()
         
         const vector<NuclideActivityPair> activities = mixture.activity( time );
         const vector<EnergyRatePair> gammas = mixture.gammas( time, SandiaDecay::NuclideMixture::OrderByEnergy, true );
+        
+        // A sanity check that parent nuclide gets decayed okay.
+        const double nucExpCoeff = nuclide->decayConstant();
+        const double nucDecayAct = 1.0*SandiaDecay::curie * std::exp( -time * nucExpCoeff );
+        const double mixNucAct = mixture.activity(time, nuclide);
+        const maxAct = (nucDecayAct > mixNucAct ? nucDecayAct : mixNucAct);
+        if( fabs(nucDecayAct - mixNucAct) > (1.0E-9 * maxAct) ) //1.0E-9 is arbitrary
+        {
+          stringstream msg;
+          msg << "Parent nuclide (" << nuclide->symbol << ") had an activity " << mixNucAct
+              << " from the NuclideMixture, but a simple calculation gave " << nucDecayAct
+              << " for time " << time << " seconds" << endl;
+          throw runtime_error( msg.str() );
+        }//if( activity of parent nuclide is to far off )
+        
+        //Make sure mixture can get the activity of all progeny
+        const vector<const SandiaDecay::Nuclide *> progeny = nuclide->descendants();
+        for( size_t progeny_index = 0; progeny_index < progeny.size(); ++progeny_index )
+        {
+          const SandiaDecay::Nuclide * const descendant = progeny[progeny_index];
+          try
+          {
+            const double activity = mixture.activity( time, descendant );
+          }catch( std::exception &e )
+          {
+            stringstream msg;
+            msg << "Failed to get activity of " << descendant->symbol << " from decay of "
+                << nuclide->symbol << " at time " << time << " from NuclideMixture."
+                << "  The BR through this nuclide is "
+                << nuclide->branchRatioToDecendant(descendant);
+            cerr << msg.str() << endl;
+            throw runtime_error( msg.str() );
+          }//try / catch
+        }//
+        
+        /*
+         //A simple test to help check for changes when I change SandiaDecay.cpp
+        if( i == 7 )
+        {
+          ofstream dbgout( "/Users/wcjohns/Downloads/actout.nofix.txt", ios::out | ios::binary | ios::app );
+          assert( dbgout.is_open() );
+          //for( size_t gamma_index = 0; gamma_index < gammas.size(); ++gamma_index )
+          //  dbgout << nuclide->symbol << " " << gammas[gamma_index].energy << "," << gammas[gamma_index].numPerSecond << endl;
+          for( size_t act_index = 0; act_index < activities.size(); ++act_index )
+            dbgout << nuclide->symbol << " " << activities[act_index].nuclide->symbol << "," << activities[act_index].activity << endl;
+        }
+         */
       }//for( test the decay for 7 halfLives )
     }//for( iterate over nuclides available, iter )
     
     cout << "All " << num_nuclieds_decayed << " radioactive nuclides have been "
     << " decayed and evaluated at 20 different times, for both daughter "
     << " products, and gammas produced" << endl;
+    
+    //We'll do the like ~million checks below since we had a problem in the past
+    for( size_t i = 0; i < nuclidesVec.size(); ++i )
+    {
+      for( size_t j = 0; j < nuclidesVec.size(); ++j )
+      {
+        const SandiaDecay::Nuclide * const lhs = nuclidesVec[i];
+        const SandiaDecay::Nuclide * const rhs = nuclidesVec[j];
+        assert( lhs && rhs );
+        
+        if( (i != j) && (lhs->symbol == rhs->symbol) )
+          throw runtime_error( "Duplicate nuclide defined in XML: " + rhs->symbol );
+        
+        const bool oneway = ((*lhs) < (*rhs));
+        const bool otherway = ((*rhs) < (*lhs));
+        if( (i == j) && (oneway != otherway) )
+          throw runtime_error( "Nuclide::operator< failed to make equality comparison for " + lhs->symbol );
+        
+        if( (i != j) && (oneway == otherway) )
+        {
+          const float lhsToRhsBr = lhs->branchRatioToDecendant( rhs );
+          const float rhsToLhsBr = rhs->branchRatioToDecendant( lhs );
+          
+          stringstream msg;
+          
+          msg << "Nuclide::operator< failed by making equality comparison for " << lhs->symbol
+              << " vs " + rhs->symbol
+              << ".\n\tBR(" << lhs->symbol << " -> " << rhs->symbol << ")=" << lhsToRhsBr
+              << ".\n\tBR(" << rhs->symbol << " -> " << lhs->symbol << ")=" << rhsToLhsBr << endl;
+          
+          cerr << msg.str() << endl;
+          //throw runtime_error( msg );
+        }
+      }//for( size_t j = 0; j < nuclidesVec.size(); ++j )
+    }//for( size_t i = 0; i < nuclidesVec.size(); ++i )
+    
   }catch( std::exception &e )
   {
-    throw std::runtime_error( "Problem teting decays: " + string(e.what()) );
+    throw std::runtime_error( "Problem testing decays: " + string(e.what()) );
   }//try / catch
 }//int sanity_check_all_decays();
 

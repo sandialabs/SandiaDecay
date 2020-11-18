@@ -829,7 +829,7 @@ namespace SandiaDecay
      */
     size_t memsize() const;
 
-    //operator< compares how we intuatively want: if lhs is a daughter of rhs
+    //operator< compares how we intuitively want: if lhs is a daughter of rhs
     //  then returns true, else compares based on mass, atomic, & isomer numbers
     bool operator<( const Nuclide &rhs ) const;
     bool operator==( const Nuclide &rhs ) const;
@@ -1118,6 +1118,7 @@ namespace SandiaDecay
     CalcFloatType numAtoms( double time_in_seconds ) const;
     CalcFloatType activity( double time_in_seconds ) const;
     void addEvolutionTerm( CalcFloatType mag,  const Nuclide *nuc );
+    bool operator<( const NuclideTimeEvolution &rhs ) const;
   };//struct TimeEvolution
 
   
