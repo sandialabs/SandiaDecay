@@ -73,6 +73,10 @@
  */
 #define DO_EMPTY_TRANSITION_FIX 1
 
+// TODO: evaluate effects of DO_EMPTY_TRANSITION_FIX and FIX_NUCLIDE_LESS_THAN to assess their impacts
+//  THen check to see if can make operator< more efficient consistent
+#define FIX_NUCLIDE_LESS_THAN 1
+
 // Ignore this warning. It shouldn't be important, and seems to be Windows-only.
 // warning C4244: 'initializing' : conversion from 'std::streamoff' to 'size_t', possible loss of data
 #pragma warning(disable:4244)
@@ -849,13 +853,15 @@ void Transition::set( const ::rapidxml::xml_node<char> *node,
 
 
 
-// XXX only kinda tested
 bool Nuclide::operator<( const Nuclide &rhs ) const
 {
+#if( FIX_NUCLIDE_LESS_THAN )
   if( (massNumber == rhs.massNumber)
      && (atomicNumber == rhs.atomicNumber)
      && (isomerNumber == rhs.isomerNumber) )
+  {
     return false;
+  }
     
   //is 'this' a daughter of 'rhs' ? If not, is 'this' lighter than 'rhs
   if( massNumber != rhs.massNumber )
@@ -864,14 +870,24 @@ bool Nuclide::operator<( const Nuclide &rhs ) const
   if( atomicNumber == rhs.atomicNumber )
     return (isomerNumber < rhs.isomerNumber);
 
-// XXX
-//The below commented out code makes this function not act correctly,
-// (eg allow duplicate nuclides in a map<Nuclide,double> object) but I am unsure why...
-//
-//  const int an_diff = atomicNumber - rhs.atomicNumber;
-//  if( abs( an_diff ) > 1 )
-//    return (atomicNumber<rhs.atomicNumber);
-
+  // If the atomic numbers differ more than 7, then we know which way the decay goes (I tested
+  //  commenting this particular test out will give identical results, just take more cpu).
+  const int an_diff = ((atomicNumber > rhs.atomicNumber)
+                        ? (atomicNumber - rhs.atomicNumber) : (rhs.atomicNumber - atomicNumber));
+  if( an_diff > 7 )
+    return (atomicNumber < rhs.atomicNumber);
+  
+  // This next test was verified to give identical results with or without it, but saves CPU with
+  const float am_diff = fabs(atomicMass - rhs.atomicMass);
+  if( (am_diff > 1.0f) && (an_diff > 4) )
+    return atomicNumber < rhs.atomicNumber;
+  
+  // \TODO: We could do a few more tests to avoid calling into Nuclide::branchRatioToDecendant,
+  //    but this is decent for now
+  assert( massNumber == rhs.massNumber );
+  assert( (an_diff > 0) && (an_diff < 8) );
+  assert( (am_diff <= 1.0f) || (an_diff <= 4) );
+  
   const float lhsToRhsBr = this->branchRatioToDecendant( &rhs );
   const float rhsToLhsBr = rhs.branchRatioToDecendant( this );
 
@@ -879,6 +895,29 @@ bool Nuclide::operator<( const Nuclide &rhs ) const
     return (atomicNumber < rhs.atomicNumber);
   
   return (lhsToRhsBr < rhsToLhsBr);
+#else
+  //is 'this' a daughter of 'rhs' ? If not, is 'this' lighter than 'rhs
+  if( massNumber != rhs.massNumber )
+    return (massNumber < rhs.massNumber);
+  if( atomicNumber == rhs.atomicNumber )
+    return (isomerNumber < rhs.isomerNumber);
+  
+  // XXX
+  //The below commented out code makes this function not act correctly,
+  // (eg allow duplicate nuclides in a map<Nuclide,double> object) but I am unsure why...
+  //
+  //  const int an_diff = atomicNumber - rhs.atomicNumber;
+  //  if( abs( an_diff ) > 1 )
+  //    return (atomicNumber<rhs.atomicNumber);
+  
+  const float lhsToRhsBr = this->branchRatioToDecendant( &rhs );
+  const float rhsToLhsBr = rhs.branchRatioToDecendant( this );
+  
+  if( lhsToRhsBr==0.0 && rhsToLhsBr==0.0 )
+    return (atomicMass<rhs.atomicMass);
+  
+  return (lhsToRhsBr<rhsToLhsBr);
+#endif
 }//operator<
 
 
@@ -2604,7 +2643,7 @@ const Nuclide *SandiaDecayDataBase::nuclide( const std::string &label ) const
     if( pos == m_nuclides.end() )
       return NULL;
     return (*pos);
-  }catch( std::exception &e )
+  }catch( std::exception & )
   {
     //cout << "Invalid: " << e.what() << endl;
   }
@@ -2988,7 +3027,7 @@ std::vector<NuclideTimeEvolution> SandiaDecayDataBase::getTimeEvolution( const s
   typedef vector< DecayPath > DecayPathVec;
   typedef DecayPathVec::const_iterator DecayPathVecIter;
   typedef map<const Nuclide *, SandiaDecay::CalcFloatType> NuclideToMagnitudeMap;
-#if( DO_EMPTY_TRANSITION_FIX )
+#if( FIX_NUCLIDE_LESS_THAN )
   typedef map<const Nuclide *, NuclideToMagnitudeMap> NuclToCoefMapMap;
   NuclToCoefMapMap nuc_to_coef_map;
 #else
@@ -3085,10 +3124,12 @@ std::vector<NuclideTimeEvolution> SandiaDecayDataBase::getTimeEvolution( const s
       answer.push_back( term );
     }//if( !found )
   }//for( size_t i = 0; i < childless_parents.size(); ++i )
-  
-  std::sort( answer.begin(), answer.end() );
 #endif
 
+#if( FIX_NUCLIDE_LESS_THAN )
+  std::sort( answer.begin(), answer.end() );
+#endif
+  
   return answer;
 }//std::vector<NuclideTimeEvolution> getTimeEvolution( std::vector<NuclideNumAtomsPair> & ) const
 
