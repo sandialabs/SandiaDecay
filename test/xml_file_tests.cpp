@@ -51,10 +51,11 @@ int main( int argc, const char * argv[] )
   
   try
   {
-    sanity_check_nuclides_and_transistions();
+    //sanity_check_nuclides_and_transistions();
+    cerr << "Only running sanity_check_all_decays(), not other tests" << endl;
     sanity_check_all_decays();
-    check_bateman_denominator();
-    check_sum_branching_ratios();
+    //check_bateman_denominator();
+    //check_sum_branching_ratios();
   }catch( std::exception &e )
   {
     cerr << "Caught error doign tests: " << e.what() << endl;
@@ -417,7 +418,8 @@ void sanity_check_nuclides_and_transistions()
 void sanity_check_all_decays()
 {
   //This function just makes sure that the decays for all nuclides can be
-  //  evaluated; does not check to makesure answers are necassarily correct.
+  //  evaluated; does not check to make sure answers are necessarily correct.
+  
   try
   {
     using namespace SandiaDecay;
@@ -429,6 +431,9 @@ void sanity_check_all_decays()
     vector<const Nuclide *>::const_iterator iter;
     for( iter = nuclidesVec.begin(); iter != nuclidesVec.end(); ++iter )
     {
+      cerr << "Will skip decay test" << endl;
+      break;
+      
       const Nuclide *nuclide = *iter;
       const double halfLife = nuclide->halfLife;
       
@@ -449,13 +454,14 @@ void sanity_check_all_decays()
         const double nucExpCoeff = nuclide->decayConstant();
         const double nucDecayAct = 1.0*SandiaDecay::curie * std::exp( -time * nucExpCoeff );
         const double mixNucAct = mixture.activity(time, nuclide);
-        const maxAct = (nucDecayAct > mixNucAct ? nucDecayAct : mixNucAct);
+        const double maxAct = (nucDecayAct > mixNucAct ? nucDecayAct : mixNucAct);
         if( fabs(nucDecayAct - mixNucAct) > (1.0E-9 * maxAct) ) //1.0E-9 is arbitrary
         {
           stringstream msg;
           msg << "Parent nuclide (" << nuclide->symbol << ") had an activity " << mixNucAct
               << " from the NuclideMixture, but a simple calculation gave " << nucDecayAct
               << " for time " << time << " seconds" << endl;
+//          cerr << msg.str() << endl;
           throw runtime_error( msg.str() );
         }//if( activity of parent nuclide is to far off )
         
@@ -474,23 +480,30 @@ void sanity_check_all_decays()
                 << nuclide->symbol << " at time " << time << " from NuclideMixture."
                 << "  The BR through this nuclide is "
                 << nuclide->branchRatioToDecendant(descendant);
-            cerr << msg.str() << endl;
+//            cerr << msg.str() << endl;
             throw runtime_error( msg.str() );
           }//try / catch
         }//
         
         /*
          //A simple test to help check for changes when I change SandiaDecay.cpp
-        if( i == 7 )
+        if( i == 7 && (nuclide->halfLife > 60) )
         {
-          ofstream dbgout( "/Users/wcjohns/Downloads/actout.nofix.txt", ios::out | ios::binary | ios::app );
-          assert( dbgout.is_open() );
-          //for( size_t gamma_index = 0; gamma_index < gammas.size(); ++gamma_index )
-          //  dbgout << nuclide->symbol << " " << gammas[gamma_index].energy << "," << gammas[gamma_index].numPerSecond << endl;
+          ofstream dbg_act_out( "/Users/wcjohns/Downloads/act_out.WithEmptyTransFix.txt", ios::out | ios::binary | ios::app );
+          assert( dbg_act_out.is_open() );
+          
+          ofstream dbg_gama_out( "/Users/wcjohns/Downloads/gamma_out.WithEmptyTransFix.txt", ios::out | ios::binary | ios::app );
+          assert( dbg_gama_out.is_open() );
+          
+          for( size_t gamma_index = 0; gamma_index < gammas.size(); ++gamma_index )
+            dbg_gama_out << nuclide->symbol << " " << gammas[gamma_index].energy
+                         << "," << gammas[gamma_index].numPerSecond << endl;
+          
           for( size_t act_index = 0; act_index < activities.size(); ++act_index )
-            dbgout << nuclide->symbol << " " << activities[act_index].nuclide->symbol << "," << activities[act_index].activity << endl;
-        }
-         */
+            dbg_act_out << nuclide->symbol << " " << activities[act_index].nuclide->symbol
+                        << "," << activities[act_index].activity << endl;
+        }//if( i == 7 )
+        */
       }//for( test the decay for 7 halfLives )
     }//for( iterate over nuclides available, iter )
     
@@ -499,9 +512,10 @@ void sanity_check_all_decays()
     << " products, and gammas produced" << endl;
     
     //We'll do the like ~million checks below since we had a problem in the past
+    ofstream dbg_out( "/Users/wcjohns/Downloads/operator_less_out_test.txt", ios::out | ios::binary );
     for( size_t i = 0; i < nuclidesVec.size(); ++i )
     {
-      for( size_t j = 0; j < nuclidesVec.size(); ++j )
+      for( size_t j = 0; (j <= i) /*j < nuclidesVec.size()*/; ++j )
       {
         const SandiaDecay::Nuclide * const lhs = nuclidesVec[i];
         const SandiaDecay::Nuclide * const rhs = nuclidesVec[j];
@@ -512,6 +526,9 @@ void sanity_check_all_decays()
         
         const bool oneway = ((*lhs) < (*rhs));
         const bool otherway = ((*rhs) < (*lhs));
+        
+        dbg_out << lhs->symbol << "," << rhs->symbol << "," << oneway << "," << otherway << endl;
+        
         if( (i == j) && (oneway != otherway) )
           throw runtime_error( "Nuclide::operator< failed to make equality comparison for " + lhs->symbol );
         
