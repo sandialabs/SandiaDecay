@@ -23,7 +23,7 @@
     unlikely to change, and "unit-test" those decays.
    -Add in numerical stability tests for BRs of decay products
    -Check that all float fields in the file have valid float values (right now
-    SandiaDecay.cpp uses atof() which does not have a good error mechansim)
+    SandiaDecay.cpp uses atof() which does not have a good error mechanism)
    -The coincidence range check should be improved
  */
 
@@ -51,11 +51,10 @@ int main( int argc, const char * argv[] )
   
   try
   {
-    //sanity_check_nuclides_and_transistions();
-    cerr << "Only running sanity_check_all_decays(), not other tests" << endl;
+    sanity_check_nuclides_and_transistions();
     sanity_check_all_decays();
-    //check_bateman_denominator();
-    //check_sum_branching_ratios();
+    check_bateman_denominator();
+    check_sum_branching_ratios();
   }catch( std::exception &e )
   {
     cerr << "Caught error doign tests: " << e.what() << endl;
@@ -159,6 +158,8 @@ void check_bateman_denominator()
         check_bateman_stability( parent, vector<const Transition *>(1, trans) );
     }//for( loop over transition, decayNum )
   }//for( size_t i = 0; i < nucs.size(); ++i )
+  
+  cout << "All of the Bateman equation coefficients have been checked for degeneracies" << endl;
 }//void check_bateman_denominator()
 
 
@@ -412,6 +413,8 @@ void sanity_check_nuclides_and_transistions()
       }//for( size_t k = 0; k < trans->products.size(); ++k )
     }//for( size_t j = 0; j < transitions.size(); ++j )
   }//for( size_t i = 0; i < nucs.size(); ++i )
+  
+  cout << "All nuclides and their transitions, have been sanity checked for reasonableness" << endl;
 }//void sanity_check_nuclides_and_transistions()
 
 
@@ -431,9 +434,6 @@ void sanity_check_all_decays()
     vector<const Nuclide *>::const_iterator iter;
     for( iter = nuclidesVec.begin(); iter != nuclidesVec.end(); ++iter )
     {
-      cerr << "Will skip decay test" << endl;
-      break;
-      
       const Nuclide *nuclide = *iter;
       const double halfLife = nuclide->halfLife;
       
@@ -509,13 +509,13 @@ void sanity_check_all_decays()
     
     cout << "All " << num_nuclieds_decayed << " radioactive nuclides have been "
     << " decayed and evaluated at 20 different times, for both daughter "
-    << " products, and gammas produced" << endl;
+    << " products, and gammas produced." << endl;
     
     //We'll do the like ~million checks below since we had a problem in the past
-    ofstream dbg_out( "/Users/wcjohns/Downloads/operator_less_out_test.txt", ios::out | ios::binary );
+    //ofstream dbg_out( "/Users/wcjohns/Downloads/operator_less_out_test.txt", ios::out | ios::binary );
     for( size_t i = 0; i < nuclidesVec.size(); ++i )
     {
-      for( size_t j = 0; (j <= i) /*j < nuclidesVec.size()*/; ++j )
+      for( size_t j = 0; j < nuclidesVec.size(); ++j )
       {
         const SandiaDecay::Nuclide * const lhs = nuclidesVec[i];
         const SandiaDecay::Nuclide * const rhs = nuclidesVec[j];
@@ -527,7 +527,7 @@ void sanity_check_all_decays()
         const bool oneway = ((*lhs) < (*rhs));
         const bool otherway = ((*rhs) < (*lhs));
         
-        dbg_out << lhs->symbol << "," << rhs->symbol << "," << oneway << "," << otherway << endl;
+        //dbg_out << lhs->symbol << "," << rhs->symbol << "," << oneway << "," << otherway << endl;
         
         if( (i == j) && (oneway != otherway) )
           throw runtime_error( "Nuclide::operator< failed to make equality comparison for " + lhs->symbol );
@@ -538,18 +538,18 @@ void sanity_check_all_decays()
           const float rhsToLhsBr = rhs->branchRatioToDecendant( lhs );
           
           stringstream msg;
-          
           msg << "Nuclide::operator< failed by making equality comparison for " << lhs->symbol
               << " vs " + rhs->symbol
               << ".\n\tBR(" << lhs->symbol << " -> " << rhs->symbol << ")=" << lhsToRhsBr
               << ".\n\tBR(" << rhs->symbol << " -> " << lhs->symbol << ")=" << rhsToLhsBr << endl;
           
-          cerr << msg.str() << endl;
-          //throw runtime_error( msg );
+          //cerr << msg.str() << endl;
+          throw runtime_error( msg.str() );
         }
       }//for( size_t j = 0; j < nuclidesVec.size(); ++j )
     }//for( size_t i = 0; i < nuclidesVec.size(); ++i )
     
+    cout << "Checked all nuclides compare correctly with each other" << endl;
   }catch( std::exception &e )
   {
     throw std::runtime_error( "Problem testing decays: " + string(e.what()) );
@@ -569,7 +569,7 @@ void check_sum_branching_ratios()
   SandiaDecayDataBase database( g_xml_file );
   
   const vector<const Nuclide *> &nuclides = database.nuclides();
-  
+  stringstream msg;
   for( size_t i = 0; i < nuclides.size(); ++i )
   {
     const Nuclide * const nuclide = nuclides[i];
@@ -582,8 +582,14 @@ void check_sum_branching_ratios()
       totalBr += nuclide->decaysToChildren[i]->branchRatio;
     
     if( (fabs(1.0-totalBr)>0.001) && (totalBr!=0.0) /* && nuclide->halfLife>300.0*/ )
-      cout << nuclide->symbol << " (hl=" << nuclide->halfLife << "s) has a BR=" << totalBr << endl;;
+      msg << nuclide->symbol << " (hl=" << nuclide->halfLife << "s) has a BR=" << totalBr << ", ";
   }//for( iterate over nuclides available, iter )
+  
+  string errmsg = msg.str();
+  if( !errmsg.empty() )
+    cout << "Nuclides with total branching ratios that dont sum to one: " << msg.str() << endl;
+  else
+    cout << "All nuclides total branch ratios sum to one." << endl;
 }//int check_sum_branching_ratios();
 
 
