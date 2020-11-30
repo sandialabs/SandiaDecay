@@ -73,10 +73,6 @@
  */
 #define DO_EMPTY_TRANSITION_FIX 1
 
-// TODO: evaluate effects of DO_EMPTY_TRANSITION_FIX and FIX_NUCLIDE_LESS_THAN to assess their impacts
-//  THen check to see if can make operator< more efficient consistent
-#define FIX_NUCLIDE_LESS_THAN 1
-
 // Ignore this warning. It shouldn't be important, and seems to be Windows-only.
 // warning C4244: 'initializing' : conversion from 'std::streamoff' to 'size_t', possible loss of data
 #pragma warning(disable:4244)
@@ -855,7 +851,6 @@ void Transition::set( const ::rapidxml::xml_node<char> *node,
 
 bool Nuclide::operator<( const Nuclide &rhs ) const
 {
-#if( FIX_NUCLIDE_LESS_THAN )
   if( (massNumber == rhs.massNumber)
      && (atomicNumber == rhs.atomicNumber)
      && (isomerNumber == rhs.isomerNumber) )
@@ -895,29 +890,6 @@ bool Nuclide::operator<( const Nuclide &rhs ) const
     return (atomicNumber < rhs.atomicNumber);
   
   return (lhsToRhsBr < rhsToLhsBr);
-#else
-  //is 'this' a daughter of 'rhs' ? If not, is 'this' lighter than 'rhs
-  if( massNumber != rhs.massNumber )
-    return (massNumber < rhs.massNumber);
-  if( atomicNumber == rhs.atomicNumber )
-    return (isomerNumber < rhs.isomerNumber);
-  
-  // XXX
-  //The below commented out code makes this function not act correctly,
-  // (eg allow duplicate nuclides in a map<Nuclide,double> object) but I am unsure why...
-  //
-  //  const int an_diff = atomicNumber - rhs.atomicNumber;
-  //  if( abs( an_diff ) > 1 )
-  //    return (atomicNumber<rhs.atomicNumber);
-  
-  const float lhsToRhsBr = this->branchRatioToDecendant( &rhs );
-  const float rhsToLhsBr = rhs.branchRatioToDecendant( this );
-  
-  if( lhsToRhsBr==0.0 && rhsToLhsBr==0.0 )
-    return (atomicMass<rhs.atomicMass);
-  
-  return (lhsToRhsBr<rhsToLhsBr);
-#endif
 }//operator<
 
 
@@ -3027,7 +2999,11 @@ std::vector<NuclideTimeEvolution> SandiaDecayDataBase::getTimeEvolution( const s
   typedef vector< DecayPath > DecayPathVec;
   typedef DecayPathVec::const_iterator DecayPathVecIter;
   typedef map<const Nuclide *, SandiaDecay::CalcFloatType> NuclideToMagnitudeMap;
-#if( FIX_NUCLIDE_LESS_THAN )
+  
+  // We ca either sort nuclides by value or by ptr.
+  //  Doesnt really seem to matter from a time/efficiency/result standpoint
+#define SORT_NUCLIDE_BY_PTR 1
+#if( SORT_NUCLIDE_BY_PTR )
   typedef map<const Nuclide *, NuclideToMagnitudeMap> NuclToCoefMapMap;
   NuclToCoefMapMap nuc_to_coef_map;
 #else
@@ -3126,7 +3102,7 @@ std::vector<NuclideTimeEvolution> SandiaDecayDataBase::getTimeEvolution( const s
   }//for( size_t i = 0; i < childless_parents.size(); ++i )
 #endif
 
-#if( FIX_NUCLIDE_LESS_THAN )
+#if( SORT_NUCLIDE_BY_PTR )
   std::sort( answer.begin(), answer.end() );
 #endif
   

@@ -400,6 +400,10 @@ void sanity_check_nuclides_and_transistions()
       for( size_t k = 0; k < trans->products.size(); ++k )
       {
         const RadParticle &part = trans->products[k];
+        if( part.intensity < 0.0 || part.intensity > 2.0 )
+          cerr << "Warning: " << nuc->symbol << " has " << to_str(part.type) << " at "
+               << part.energy << " keV with intensity " << part.intensity << endl;
+          
         for( size_t l = 0; l < part.coincidences.size(); ++l )
         {
           if( part.coincidences[l].first >= trans->products.size() )
