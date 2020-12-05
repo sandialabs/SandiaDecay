@@ -780,7 +780,7 @@ void check_revision_attrib( rapidxml::xml_attribute<char> *att )
   if( !att )
     return;
   const string val = att->value();
-  if( val != "deleted" && val != "edited" && val != "inserted" )
+  if( val != "deleted" && val != "edited" && val != "inserted" && val != "edit" )
     throw runtime_error( "Invalid revision attribute value: '" + val + "'" );
 }
 
