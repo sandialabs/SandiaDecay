@@ -1,21 +1,4 @@
 #Project and CMake specific files
-data/sandia.decay.xml
-InterSpec/InterSpec.entitlements
-#target/ios/InterSpec/InterSpec.xcodeproj
-target/ios/boost*
-target/ios/prefix
-target/ios/wt
-target/ios/libs
-target/ios/build*
-target/android/Boost*
-target/android/InterSpec/app/arm*
-target/android/InterSpec/app/libs
-target/android/InterSpec/app/universal
-target/android/InterSpec/app/x86*
-target/android/InterSpec/app/
-target/android/InterSpec/app/build
-target/electron/node_modules
-target/electron/release-builds
 
 *OUO*
 *ouo*
@@ -28,17 +11,12 @@ target/electron/release-builds
 .svnignore
 .bin
 .vs
-WtsRsrcs
 XcodeFiles
 build
 build_*
 build-*
 release-builds*
 package-lock.json
-node_modules
-documentation
-testing
-README.txt
 *.tmp
 *.zip
 *.tgz
@@ -70,13 +48,3 @@ xcuserdata/
 *.ipa
 *.dSYM.zip
 *.dSYM
-target/electron/node_modules/.bin/asar
-
-# Incase you copy Wt resource directory to base code dir
-resources/
-
-target/electron/LibInterSpec/
-InterSpec_resources/SpectrumChartD3.js
-InterSpec_resources/SpectrumChartD3.css
-InterSpecUserData.db
-InterSpec_resources/d3.v3.min.js
