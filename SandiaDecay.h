@@ -274,6 +274,14 @@ namespace SandiaDecay
      */
     void initialize( const std::string &sandia_decay_xml_filename );
     
+    /** Parses the data passed in from an in-memory data source.
+     
+     @param data Contents of "sandia.decay.xml".  Must be non-empty, and the last element in the vector must have a value of '\0'
+     
+     Throws exception on error.
+     */
+    void initialize( std::vector<char> &data );
+    
     /** Discards the parsed in nuclear decay information from memory.  You must
         call #initialize() again before further using.
      */
@@ -397,14 +405,19 @@ namespace SandiaDecay
     std::vector<NuclideTimeEvolution> getTimeEvolution(
                               const std::vector<NuclideActivityPair> &parents );
 
-//  private:
+  private:
     /** Performs the actual work of parsing sandia.decay.xml */
-    static void parseSandiaDecayXml( const std::string &filename,
+    static void parseSandiaDecayXml( std::vector<char> &data,
                                     std::vector<const Nuclide *> &sorted_nucs,
                                     std::vector<Nuclide> &stored_nuclides,
                                     std::vector<const Element *> &elements,
                                     std::vector<Element> &stored_elements,
                                     std::vector<Transition> &transitionStore );
+
+    /** Reads a files contents into a vector<char>, and terminates it with a '\0'.
+     Throws exception on error.
+     */
+    static void read_file_contents( const std::string &filename, std::vector<char> &data );
     
     /** Helper function that sets m_xmlFileContainedDecayXrays and
         m_xmlFileContainedElementalXrays.

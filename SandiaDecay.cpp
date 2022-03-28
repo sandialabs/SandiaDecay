@@ -2217,12 +2217,34 @@ void NuclideMixture::performTimeEvolution() const
   m_decayedToNuclides = SandiaDecayDataBase::getTimeEvolution( m_originalNuclides );
 }//void performTimeEvolution()
 
+void SandiaDecayDataBase::read_file_contents( const std::string &filename, std::vector<char> &data )
+{
+  std::ifstream stream( filename.c_str(), ios::binary );
+  if (!stream)
+    throw runtime_error(string("Cannot open file ") + filename);
+  
+  stream.unsetf(ios::skipws);
+  
+  // Determine stream size
+  stream.seekg(0, ios::end);
+  size_t size = stream.tellg();
+  stream.seekg(0);
+  
+  // Load data and add terminating 0
+  data.resize( size + 1 );
+  stream.read(&data.front(), static_cast<streamsize>(size));
+  data[size] = 0;
+}//void SandiaDecayDataBase::read_file_contents( std::string filename, std::vector<char> &data )
+
 
 SandiaDecayDataBase::SandiaDecayDataBase( const std::string &filename )
   : m_xmlFileContainedDecayXrays( false ),
     m_xmlFileContainedElementalXrays( false )
 {
-  parseSandiaDecayXml( filename, m_nuclides, m_nuclideStore,
+  std::vector<char> data;
+  read_file_contents( filename, data );
+  
+  parseSandiaDecayXml( data, m_nuclides, m_nuclideStore,
                         m_elements, m_elementStore, m_transitionStore );
   
   checkIfContainedXrays();
@@ -2255,16 +2277,25 @@ bool SandiaDecayDataBase::initialized() const
 
 void SandiaDecayDataBase::initialize( const std::string &filename )
 {
-  if( !m_nuclides.empty() )
-    throw std::runtime_error( "SandiaDecayDataBase::initialize(...): Database "
-                              "already initialezed form XML file" );
-  parseSandiaDecayXml( filename, m_nuclides, m_nuclideStore,
-                       m_elements, m_elementStore, m_transitionStore );
-  
-  checkIfContainedXrays();
+  std::vector<char> data;
+  read_file_contents( filename, data );
+  initialize( data );
 }//void initialize( const std::string &filename )
 
+
+void SandiaDecayDataBase::initialize( std::vector<char> &data )
+{
+  if( !m_nuclides.empty() )
+    throw std::runtime_error( "SandiaDecayDataBase::initialize(...): Database "
+                             "already initialized form XML file" );
   
+  parseSandiaDecayXml( data, m_nuclides, m_nuclideStore,
+                      m_elements, m_elementStore, m_transitionStore );
+  
+  checkIfContainedXrays();
+}//void initialize( std::vector<char> &data );
+  
+
 void SandiaDecayDataBase::reset()
 {
   m_nuclides.clear();
@@ -2377,34 +2408,13 @@ const Element *SandiaDecayDataBase::element( const std::string &input ) const
 
 
 
-void SandiaDecayDataBase::parseSandiaDecayXml( const std::string &filename,
+void SandiaDecayDataBase::parseSandiaDecayXml( std::vector<char> &data,
                                                vector<const Nuclide *> &nuclides,
                                                std::vector<Nuclide> &stored_nuclides,
                                                std::vector<const Element *> &elements,
                                                std::vector<Element> &stored_elements,
                                                std::vector<Transition> &transitionStore )
 {
-  vector<char> data;
-
-  {//Begin codeblock for reading the data from disk
-    //this method for reading the file was taken from rapidxml_utils.hpp
-    //  and is much faster than other methods tried
-    basic_ifstream<char> stream(filename.c_str(), ios::binary);
-    if (!stream)
-      throw runtime_error(string("Cannot open file ") + filename);
-    stream.unsetf(ios::skipws);
-
-    // Determine stream size
-    stream.seekg(0, ios::end);
-    size_t size = stream.tellg();
-    stream.seekg(0);
-
-    // Load data and add terminating 0
-    data.resize(size + 1);
-    stream.read(&data.front(), static_cast<streamsize>(size));
-    data[size] = 0;
-  }//end codeblock for reading the data from disk
-
   elements.clear();
   stored_elements.clear();
 
@@ -2412,6 +2422,12 @@ void SandiaDecayDataBase::parseSandiaDecayXml( const std::string &filename,
   {
     using namespace ::rapidxml;
 
+    if( data.empty() )
+      throw runtime_error( "SandiaDecayDataBase: empty xml contents" );
+    
+    if( data.back() ) // We could null-terminate the data, but instead we'll be 
+      throw runtime_error( "SandiaDecayDataBase::parseSandiaDecayXml: data must be null terminated." );
+    
     xml_document<char> doc;
     doc.parse<parse_normalize_whitespace | parse_trim_whitespace>( &data.front() );
 
