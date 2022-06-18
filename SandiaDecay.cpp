@@ -1798,13 +1798,13 @@ vector<EnergyRatePair> NuclideMixture::decayParticle( double time,
                                                            HowToOrder sortType ) const
 {
   //Should make a vector of energies first, sort them, then a second vector
-  //  of abundances made to coordespond to the vector of energies
+  //  of abundances made to correspond to the vector of energies
 
   //Pre 20121010 I had thought the call to activity was harmless (1.8% of time),
   //  but using "Instruments" in OSX, instead of "Activity Monitor" profiling
   //  shows it taking up close to 100% of the time of this function, at least
   //  for the case fitting shielding and source activities in the spectrum
-  //  viewer - the inneficient function looks to be SandiaDecayDataBase::getTimeEvolution(...)
+  //  viewer - the inefficient function looks to be SandiaDecayDataBase::getTimeEvolution(...)
   const vector<NuclideActivityPair> activities = activity( time ); //takes up 1.8% of the time for this function call
 
   vector<double> energies, branchratios;
@@ -1950,7 +1950,7 @@ vector<EnergyRatePair> NuclideMixture::gammas( const double time_in_seconds,
   EnergyRatePair possbr( 0.0, 510.998910 );
   
   for( size_t i = 0; i < poss.size(); ++i )
-    possbr.numPerSecond += 2.0*poss[i].numPerSecond; //an annihaltion event creates two photons
+    possbr.numPerSecond += 2.0*poss[i].numPerSecond; //an annihilation event creates two photons
   
   vector<EnergyRatePair>::iterator pos;
   switch( sortType )

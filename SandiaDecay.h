@@ -574,9 +574,9 @@ namespace SandiaDecay
     std::vector<NuclideNumAtomsPair> numAtoms( double time_in_seconds )  const;
 
     /** Get the total summed activity for all nuclide in the mixture, including
-        the prodigeny, at a given time.
+        the progeny, at a given time.
         There are probably not to many circumstances when this function is
-        useful, so make sure its what you actualy want.
+        useful, so make sure its what you actually want.
      */
     double totalActivity( double time ) const;
     
