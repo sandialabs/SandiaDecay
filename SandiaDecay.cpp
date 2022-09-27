@@ -89,22 +89,13 @@ using namespace std;
 #define isnan(x) _isnan(x)
 #define isinf(x) (!_finite(x))
 #define fpu_error(x) (isinf(x) || isnan(x))
+#endif
 
+#if !( defined(WIN32) || defined(UNDER_CE) || defined(_WIN32) || defined(WIN64) )
 #define snprintf c99_snprintf
-
 namespace
 {
 //from http://stackoverflow.com/questions/2915672/snprintf-and-visual-studio-2010
-inline int c99_vsnprintf(char* str, size_t size, const char* format, va_list ap)
-{
-  int count = -1;
-  if( size != 0 )
-    count = _vsnprintf_s(str, size, _TRUNCATE, format, ap);
-  if( count == -1 )
-    count = _vscprintf(format, ap);
-  return count;
-}
-
 inline int c99_snprintf(char* str, size_t size, const char* format, ...)
 {
   int count;
