@@ -805,40 +805,52 @@ void Transition::set( const ::rapidxml::xml_node<char> *node,
   {
     RadParticle &particle = new_particles[i];
     
-    const ::rapidxml::xml_node<char> *node = new_particle_nodes[i];
+    const ::rapidxml::xml_node<char> *gamma_node = new_particle_nodes[i];
+    
 #if( ENABLE_SHORT_NAME )
-    const ::rapidxml::xml_node<char> *coinc = shortnames ? node->first_node( "c", 1 ) : node->first_node( "coincidentGamma", 15 );
+    const ::rapidxml::xml_node<char> *coinc = shortnames ? gamma_node->first_node( "c", 1 ) : gamma_node->first_node( "coincidentGamma", 15 );
 #else
-    const ::rapidxml::xml_node<char> *coinc = node->first_node( "coincidentGamma", 15 );
+    const ::rapidxml::xml_node<char> *coinc = gamma_node->first_node( "coincidentGamma", 15 );
 #endif
     
-    if( !coinc )
-      continue;
-    
-    const ::rapidxml::xml_attribute<char> *idattr = coinc->first_attribute("id",2);
-#if( ENABLE_SHORT_NAME )
-    const ::rapidxml::xml_attribute<char> *intensityattr = shortnames ? coinc->first_attribute("i",1)
-                                                           : coinc->first_attribute("intensity",9);
-#else
-    const ::rapidxml::xml_attribute<char> *intensityattr = coinc->first_attribute("intensity",9);
-#endif
-    
-    if( !idattr || !intensityattr || !idattr->value_size() || !intensityattr->value_size() )
-      continue;
-    
-    const std::string uuid( idattr->value(), idattr->value_size() );
-    const float intensity = parse_float( intensityattr->value() );
-    
-    for( unsigned short int j = 0; j < new_particle_ids.size(); ++j )
+    for( ; coinc; coinc = coinc->next_sibling( coinc->name(), coinc->name_size() ) )
     {
-      const std::string &trialuuid = new_particle_ids[j];
-      if( trialuuid == uuid )
+      const ::rapidxml::xml_attribute<char> *idattr = coinc->first_attribute("id",2);
+#if( ENABLE_SHORT_NAME )
+      const ::rapidxml::xml_attribute<char> *intensityattr = shortnames ? coinc->first_attribute("i",1)
+      : coinc->first_attribute("intensity",9);
+#else
+      const ::rapidxml::xml_attribute<char> *intensityattr = coinc->first_attribute("intensity",9);
+#endif
+      
+      if( !idattr || !intensityattr || !idattr->value_size() || !intensityattr->value_size() )
+        continue;
+      
+      const std::string uuid( idattr->value(), idattr->value_size() );
+      const float intensity = parse_float( intensityattr->value() );
+      
+      bool found_partner = false;
+      for( unsigned short int j = 0; j < new_particle_ids.size(); ++j )
       {
-        particle.coincidences.push_back( std::make_pair(j,intensity) );
-        break;
+        const std::string &trialuuid = new_particle_ids[j];
+        if( trialuuid == uuid )
+        {
+          particle.coincidences.push_back( std::make_pair(j,intensity) );
+          found_partner = true;
+          break;
+        }
       }
-    }
-    
+      
+      if( !found_partner )
+      {
+      // As of 20221027, there are about 250 missed matches... we'll not print out for the moment.
+      //  const char * const parent = (parent_att ? parent_att->value() : "null");
+      //  const rapidxml::xml_attribute<char> *energy_attrib = gamma_node ? gamma_node->first_attribute("energy") : nullptr;
+      //  const char * const energy = ((energy_attrib && energy_attrib->value()) ? energy_attrib->value() : "null");
+      //  cerr << "SandiaDecay: Failed to find coincident gamma for " << parent
+      //       << " with id=\"" << uuid << "\"" << " for gamma energy " << energy << " keV" << endl;
+      }//if( !found_partner )
+    }//for( loop over <coincidentGamma> )
   }//for( size_t i = 0; i < new_particle_nodes.size(); ++i )
   
   products.swap( new_particles );
