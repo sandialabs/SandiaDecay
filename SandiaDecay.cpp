@@ -870,7 +870,7 @@ bool Nuclide::operator<( const Nuclide &rhs ) const
     return false;
   }
     
-  //is 'this' a daughter of 'rhs' ? If not, is 'this' lighter than 'rhs
+  //is 'this' a child of 'rhs' ? If not, is 'this' lighter than 'rhs
   if( massNumber != rhs.massNumber )
     return (massNumber < rhs.massNumber);
   
@@ -1206,7 +1206,7 @@ double Nuclide::promptEquilibriumHalfLife() const
   //20111012 Verified gives correct correct for U235, U238, Pu240, Pu242, Th232
 
   //XXX
-  //  shouldnt this function just return the max 1/2 life of the daughter elements?
+  //  shouldnt this function just return the max 1/2 life of the child elements?
   //  Right now I'll leave below implementation, since this implinetation roughly
   //  follows some notes I found from by a fellow sandian, but I dont necassarily
   //  trust.
@@ -1758,7 +1758,7 @@ vector<NuclideActivityPair> NuclideMixture::activity( double time_in_seconds )  
     /*
      //At time=0, we would expect only the original nuclides would have non-zero
      //  activity; however, because of numerical rounding in the bateman
-     //  equations, we may get small amounts (like 1E-22) of daughter products.
+     //  equations, we may get small amounts (like 1E-22) of child products.
      //  If this bothers you, you can un-comment out the next few lines of code
     if( time_in_seconds <= 0.0 && activity > 0.0 )
     {
@@ -1846,7 +1846,7 @@ vector<EnergyRatePair> NuclideMixture::decayParticle( double time,
   //Comment from Greg T. in his code to read tori.db3:
   // The ToRI x-ray database will return x-rays for GS->isomeric state transitions,
   // even if the x-rays originate from the isomeric de-excitation
-  // so, we don't want to repeat different isomeric states of the same daughter
+  // so, we don't want to repeat different isomeric states of the same child
   //
   //wcjohns: and example is Br83, which decays to Kr83 and Kr83m, which the
   //         database has the same xrays (energies and intensities) listed

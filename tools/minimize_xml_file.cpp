@@ -36,7 +36,12 @@
 
 using namespace std;
 
-/** Program to remove the edit history of sandia.decay.xml. */
+/** Program to remove the edit history of sandia.decay.xml.
+ 
+ Some items TODO:
+ - Floating point values could be limited to reasonable accuracies. E.g., some coincidence fractions
+   have way more sig figures than reasonable, or similarly for branching ratios, energy, hlf.
+ */
 
 //forward declarations
 void remove_id_attrib( rapidxml::xml_node<char> *node );

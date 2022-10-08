@@ -48,7 +48,7 @@ namespace rapidxml { template<class Ch> class xml_node; }
  
  //Example of how to create a mixture of nuclides, decay them, and then
  //  retrieve what gammas there will be at a given time; you can also get
- //  the alphas and betas as well.  All daughter products included in correct
+ //  the alphas and betas as well.  All child products included in correct
  //  proportions
  NuclideMixture mixture;
  const Nuclide *np235 = database.nuclide( "Np-235" );
@@ -82,7 +82,7 @@ namespace rapidxml { template<class Ch> class xml_node; }
 //  large activities or elements with large half lifes; superficially this
 //  appears to not be an issue, but should be explicitly checked at some point.
 // -The XML input file, sandia.decay.xml is known to have issues
-// -If there are multiple daughters in a decay chain with the same half-life
+// -If there are multiple children in a decay chain with the same half-life
 //  decay calculations will fail (this has been manually checked for in the
 //  current sandia.decay.xml).
 // -Spontaneous fission products are not included in this library.
@@ -533,7 +533,7 @@ namespace SandiaDecay
                                          double parent_activity );
 
     
-    /** Adds the daughter nuclides of 'parent' of whose half lives are
+    /** Adds the children nuclides of 'parent' of whose half lives are
         monotonically decreasing, some examples are:
     
         Parent    What is Added to Mixture
@@ -785,8 +785,8 @@ namespace SandiaDecay
     //TODO - Barely tested
     float branchRatioFromForebear( const Nuclide *ancestor ) const;
 
-    /** Returns all prodigeny (descendant) isotopes (daughter, granddaughter,
-        etc.) and not just immediate daughter nuclides
+    /** Returns all progeny (descendant) isotopes (child, grand-child,
+        etc.) and not just immediate child nuclides
         Results will also include this nuclide.
      */
     std::vector<const Nuclide *> descendants() const;
@@ -842,7 +842,7 @@ namespace SandiaDecay
      */
     size_t memsize() const;
 
-    //operator< compares how we intuitively want: if lhs is a daughter of rhs
+    //operator< compares how we intuitively want: if lhs is a child of rhs
     //  then returns true, else compares based on mass, atomic, & isomer numbers
     bool operator<( const Nuclide &rhs ) const;
     bool operator==( const Nuclide &rhs ) const;

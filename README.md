@@ -1,7 +1,7 @@
 # SandiaDecay
 Simple, fast, and versatile C++ library to perform nuclear decay calculations, retrieve nuclide information, and compute decay products.
 
-[ENSDF](https://www.nndc.bnl.gov/ensdf/) provides a wealth of raw nuclear information, the [Bateman equations](https://en.wikipedia.org/wiki/Bateman_equation) are well known, but tasks such as determining what gammas will be produced, or the activities of daughter products from a 20 year old sample of 226-Ra, can still be formidable.   **SandiaDecay** makes performing calculations like these easy.
+[ENSDF](https://www.nndc.bnl.gov/ensdf/) provides a wealth of raw nuclear information, the [Bateman equations](https://en.wikipedia.org/wiki/Bateman_equation) are well known, but tasks such as determining what gammas will be produced, or the activities of child products from a 20 year old sample of 226-Ra, can still be formidable.   **SandiaDecay** makes performing calculations like these easy.
 
 An example of using this library to perform these calculations is:
 ```c++
