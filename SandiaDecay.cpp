@@ -91,7 +91,7 @@ using namespace std;
 #define fpu_error(x) (isinf(x) || isnan(x))
 #endif
 
-#if !( defined(WIN32) || defined(UNDER_CE) || defined(_WIN32) || defined(WIN64) )
+#if defined(_MSC_VER) && _MSC_VER < 1900
 #define snprintf c99_snprintf
 namespace
 {
