@@ -52,6 +52,8 @@ void test_db_still_same( const string orig_xml_filename,
                          const bool coincidences_removed );
 template <typename pod>
 std::string pod_to_str( const pod &val );
+string print_compact(const double val, const size_t precision);
+bool make_float_val_compact(rapidxml::xml_attribute<char>* attrib, const size_t precision);
 
 
 //Usuage:
@@ -77,7 +79,9 @@ int main( int argc, char **argv )
   bool do_remove_coincidence_gamma = false; //setting to true reduces file size from 32MB to 9.6M
   bool do_shrink_coincidence = false; //reduces ID attribute value to minimum size needed, removes unecassary info from XML.
   bool do_shrink_tag_names = false; //Shrinks XML element and attribute names to one or two character names, ex "nuclide"->"n", "intensity"->"i", etc.  Also removes trailing zeroes from float values.
-  
+  const int num_coinc_shrunk_sig_figs = 4;
+  bool do_limit_coinc_precision = false; //Shrings coincidence intensity value to have `num_coinc_shrunk_sig_figs` values
+
   for( int i = 1; i < argc; ++i )
   {
     const string arg = argv[i];
@@ -87,6 +91,8 @@ int main( int argc, char **argv )
       do_remove_coincidence_gamma = true;
     else if( arg == "--shrink-coinc" )
       do_shrink_coincidence = true;
+    else if (arg == "--limit-coinc-precision")
+      do_limit_coinc_precision = true;
     else if( arg == "--shrink-tag-names" )
       do_shrink_tag_names = true;
     else
@@ -264,7 +270,21 @@ int main( int argc, char **argv )
                   }
                 }
               }//if( do_shrink_coincidence )
-              
+
+              if (do_limit_coinc_precision)
+              {
+                rapidxml::xml_attribute<char>* attrib = gchild->first_attribute("intensity");
+                if (attrib)
+                {
+                  if( !make_float_val_compact(attrib, num_coinc_shrunk_sig_figs) )
+                    printf("Error shrinking coincidence precision.\n");
+                }
+                else
+                {
+                  printf("Coincidence node with no intensity value.\n");
+                }
+              }//if (do_limit_coinc_precision)
+
             }else //if( !rapidxml::internal::compare(gchild->name(), gchild->name_size(), "coincidentgamma", 15, false ) )
             {
               throw runtime_error( "Unknown gchild node: '"
@@ -790,6 +810,260 @@ void check_revision_attrib( rapidxml::xml_attribute<char> *att )
 }
 
 
+// A function to convert floats to their shortest text representation with at least the
+//  specified precision (e.g., number of sig figs),
+// Definitely not a very efficient function, or even optimal, but better than nothing.
+string printCompact_trial(double val, size_t precision, const bool use_scientific)
+{
+  assert(precision > 0);
+  if (!precision)
+    precision = 1;
+
+  //Note that using %.{precision}G will cause snprintf to use the
+  //  IEEE 754 rounding rule of "round to nearest and ties to even"...
+
+  char buffer[256] = { '\0' };
+  if (use_scientific)
+  {
+    snprintf(buffer, sizeof(buffer), ("%." + to_string(precision) + "E").c_str(), val);
+  }
+  else
+  {
+    // We add 1 to precision to avoid double-rounding that leads to errors (I think 1 is
+    //  probably enough, but we're not exactly being efficient anyway)
+    //  Ex. 1.2345 to precision=3, if "%.3f" then will be "1.235", which we would then round to
+    //      "1.24", which is not correct
+    size_t ndec = precision + 2;
+    if ((fabs(val) < 1.0) && (fabs(val) > std::numeric_limits<float>::min()))
+      ndec = 2 + precision + std::ceil(fabs(std::log10(fabs(val))));
+
+    snprintf(buffer, sizeof(buffer), ("%." + to_string(ndec) + "f").c_str(), val);
+  }
+
+  string power;
+  string decimal = buffer;
+
+  const string::size_type e_pos = decimal.find('E');
+  if (e_pos != string::npos)
+  {
+    power = decimal.substr(e_pos);
+    decimal = decimal.substr(0, e_pos);
+  }//if( scientific notation )
+
+  if (decimal.find('.') != string::npos)
+  {
+    while (decimal.size() && (decimal.back() == '0'))
+      decimal.resize(decimal.size() - 1);
+
+    if (decimal.size() && (decimal.back() == '.'))
+      decimal.resize(decimal.size() - 1);
+  }//if( decimal.find('.') != string::npos )
 
 
 
+  auto round_at_pos = [](string input, size_t pos) -> string {
+    //pos indicates the first digit we do not want
+    if (pos >= input.size())
+      return input;
+
+    assert((input[pos] >= '0') && (input[pos] <= '9'));
+
+    for (size_t i = pos + 1; i < input.size(); ++i)
+      input[i] = '0';
+
+    // We'll attempt to do some rounding - man, is this horrible
+    bool no_round = (input[pos] < '5');
+    if (input[pos] == '5')
+    {
+      // round to nearest and ties to even
+      char prevchar = '\0';
+      if ((pos > 0) && (input[pos - 1] != '.'))
+        prevchar = input[pos - 1];
+      else if (pos > 1)
+        prevchar = input[pos - 2];
+
+      const int digval = prevchar - '0';
+      no_round = !(digval % 2);
+    }//if( input[pos] == '5' )
+
+
+    if (no_round)
+    {
+      input = input.substr(0, pos);
+    }
+    else
+    {
+      input = input.substr(0, pos);
+
+      const bool is_negative = (input[0] == '-');
+      if (is_negative)
+        input = input.substr(1);
+
+      for (size_t index = input.size() - 1; index > 0; --index)
+      {
+        if (input[index] != '.')
+        {
+          assert(input[index] >= '0' && input[index] <= '9');
+
+          if (input[index] != '9')
+          {
+            input[index] += 1;
+            break;
+          }
+
+          assert(input[index] == '9');
+
+          input[index] = '0';
+        }//if( input[index] != '.' )
+
+        if (index == 1)
+        {
+          if (input[0] == '.')
+          {
+            input = "1" + input;
+          }
+          else if (input[0] != '9')
+          {
+            input[0] += 1;
+          }
+          else
+          {
+            input[0] = '0';
+            input = "1" + input;
+            break;
+          }
+        }
+      }//for( size_t index = decimal.size() - 1; index > 0; --index )
+
+      if (is_negative)
+        input = "-" + input;
+    }//if( we need to round our last digit up )
+
+    return input;
+  };//round_at_pos
+
+
+  bool hit_dec = false, hit_nonzero = false;
+  size_t num_digit = 0;
+  for (size_t i = 0; i < decimal.size(); ++i)
+  {
+    if (decimal[i] == '-')
+      continue;
+
+    if (decimal[i] == '.')
+    {
+      hit_dec = true;
+
+      if ((num_digit >= precision) && hit_nonzero && ((i + 1) < decimal.size()))
+      {
+        decimal = round_at_pos(decimal, i + 1);
+        break;
+      }
+
+      continue;
+    }//if( decimal[i] == '.' )
+
+    assert((decimal[i] >= '0') && (decimal[i] <= '9'));
+
+    if (decimal[i] != '0')
+      hit_nonzero = true;
+
+    if (!hit_nonzero)
+      continue;
+
+    num_digit += 1;
+
+    if (num_digit >= precision)
+    {
+      // If were at the last character, theres nothing to do
+      if ((i + 1) == decimal.size())
+        break;
+
+      // If we're already past the decimal, get rid of everything past current character
+      if (hit_dec)
+      {
+        decimal = round_at_pos(decimal, i + 1);
+        break;
+      }//if( hit_dec )
+    }//if( we already have enough digits )
+  }//for( loop over digits before "E" )
+
+
+
+  // Remove trailing zeros after the decimal
+  const bool has_per = (decimal.find('.') != string::npos);
+  if (has_per)
+  {
+    while (decimal.size() && (decimal.back() == '0'))
+      decimal.resize(decimal.size() - 1);
+
+    // Dont leave a dangling decimal
+    if (decimal.size() && decimal.back() == '.')
+      decimal.resize(decimal.size() - 1);
+  }//if( has_per )
+
+
+  if (!power.empty())
+  {
+    power = power.substr(1);
+    int intpow = atoi(power.c_str());
+
+    if ((decimal.find('.') == string::npos) && (decimal.size() >= 2))
+    {
+      // decimal could now be "10", so we could increment the power, and remove a zero
+      size_t ndecdigit = decimal.size();
+      if (ndecdigit && (decimal[0] == '-'))
+        ndecdigit -= 1;
+
+      if ((ndecdigit > 0) && (decimal.back() == '0'))
+      {
+        intpow += 1;
+        decimal.resize(decimal.size() - 1);
+      }
+    }//if( decimal is maybe reducable )
+
+    power = "E" + std::to_string(intpow);
+  }//if( !power.empty() )
+
+  return decimal + power;
+};//printCompact
+
+
+string print_compact(const double val, const size_t precision)
+{
+  // From PhysicalUnits.cpp in InterSpec
+  const string as_science = printCompact_trial(val, precision, true);
+  const string as_fixed = printCompact_trial(val, precision, false);
+
+  return ((as_fixed.size() <= as_science.size()) ? as_fixed : as_science);
+}//string printCompact( double val, const size_t precision )
+
+
+bool make_float_val_compact(rapidxml::xml_attribute<char>* attrib, const size_t precision)
+{
+  if (!attrib)
+    return false;
+
+  const string orig_val = attrib->value();
+  if (orig_val.empty())
+    return false;
+
+  if (orig_val.size() <= precision)
+    return true;
+
+  double val;
+  const int nread = sscanf(orig_val.c_str(), "%lf", &val);
+  if (nread != 1)
+    return false;
+
+  if ((std::isnan)(val) || (std::isinf)(val))
+    return false;
+
+  string compacted = print_compact(val, precision);
+  if (compacted.size() >= orig_val.size())
+    return true;
+
+  assert(attrib->document());
+  const char* newval = attrib->document()->allocate_string(compacted.c_str());
+  attrib->value(newval);
+}//make_float_val_compact(...)
