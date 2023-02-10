@@ -21,10 +21,12 @@
  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
  */
 
+#include <cmath>
 #include <string>
 #include <vector>
 #include <sstream>
 #include <fstream>
+#include <iostream>
 #include <iterator>
 
 #include "SandiaDecay.h"
@@ -49,7 +51,8 @@ void check_revision_attrib( rapidxml::xml_attribute<char> *att );
 void shrink_xml_elements( rapidxml::xml_node<char> *doc_node );
 void test_db_still_same( const string orig_xml_filename,
                          const string final_xml_filename,
-                         const bool coincidences_removed );
+                         const bool coincidences_removed,
+                         const int coinc_nsig_fig );
 template <typename pod>
 std::string pod_to_str( const pod &val );
 string print_compact(const double val, const size_t precision);
@@ -103,7 +106,7 @@ int main( int argc, char **argv )
   if( args.size() != 2 )
   {
     fprintf( stderr, "Usage: %s <optional flags> <input sandia.decay.xml> <output file>\n"
-            "\tWhere optional flags are '--remove-id-attrib', '--remove-coinc', '--shrink-coinc' and/or '--shrink-tag-names'.\n"
+            "\tWhere optional flags are '--remove-id-attrib', '--remove-coinc', '--shrink-coinc', '--limit-coinc-precision' and/or '--shrink-tag-names'.\n"
             "\t e.x.: ./%s --remove-id-attrib input.sandia.decay.xml output.sandia.decay.xml\n",
             argv[0], argv[0] );
     return EXIT_FAILURE;
@@ -369,7 +372,9 @@ int main( int argc, char **argv )
     
     printf( "Saved output file '%s'\n", args[1].c_str() );
     
-    test_db_still_same( args[0], args[1], do_remove_coincidence_gamma );
+    const int coinc_nsig_fig = do_limit_coinc_precision ? num_coinc_shrunk_sig_figs : 0;
+    
+    test_db_still_same( args[0], args[1], do_remove_coincidence_gamma, coinc_nsig_fig );
   }catch( std::exception &e )
   {
     fprintf( stderr, "Error: %s\n", e.what() );
@@ -382,7 +387,9 @@ int main( int argc, char **argv )
 
 
 
-void test_db_still_same( const string orig_xml_filename, const string final_xml_filename, const bool coincidences_removed )
+void test_db_still_same( const string orig_xml_filename, const string final_xml_filename,
+                        const bool coincidences_removed,
+                        const int coinc_nsig_fig )
 {
   using namespace SandiaDecay;
   
@@ -493,13 +500,29 @@ void test_db_still_same( const string orig_xml_filename, const string final_xml_
           if( oldcoinc.size() != newcoinc.size() )
             throw runtime_error( "Number of coincidences does not match" );
           
+          //num_coinc_shrunk_sig_figs
+          
           for( size_t coinc_index = 0; coinc_index < oldcoinc.size(); ++coinc_index )
           {
             if( oldcoinc[coinc_index].first != newcoinc[coinc_index].first )
               throw runtime_error( "Coincidence index does not match" );
             
-            if( oldcoinc[coinc_index].second != newcoinc[coinc_index].second )
-              throw runtime_error( "Coincidence rate does not match" );
+            if( coinc_nsig_fig > 0 )
+            {
+              const double diff = fabs( oldcoinc[coinc_index].second - newcoinc[coinc_index].second);
+              
+              if( diff > (oldcoinc[coinc_index].second * std::pow(10.0,-1.0*(coinc_nsig_fig-1))) )
+                throw runtime_error( "Coincidence rate does not match (old="
+                                    + std::to_string(oldcoinc[coinc_index].second)
+                                    + ", new=" + std::to_string(newcoinc[coinc_index].second)
+                                    + ", diff=" + std::to_string(diff)
+                                    + ")" );
+            }else
+            {
+              //We didnt limit precision
+              if( oldcoinc[coinc_index].second != newcoinc[coinc_index].second )
+                throw runtime_error( "Coincidence rate does not match" );
+            }
           }//for( loop over coincidences )
         }//if( coincidenses shouldnt hav echanged )
       }//for( loop over decay particles )
@@ -810,6 +833,89 @@ void check_revision_attrib( rapidxml::xml_attribute<char> *att )
 }
 
 
+string round_at_pos( string input, size_t pos )
+{
+  //pos indicates the first digit we do not want
+  if (pos >= input.size())
+    return input;
+  
+  assert((input[pos] >= '0') && (input[pos] <= '9'));
+  
+  for (size_t i = pos + 1; i < input.size(); ++i)
+    input[i] = '0';
+  
+  // We'll attempt to do some rounding - man, is this horrible
+  bool no_round = (input[pos] < '5');
+  if (input[pos] == '5')
+  {
+    // round to nearest and ties to even
+    char prevchar = '\0';
+    if ((pos > 0) && (input[pos - 1] != '.'))
+      prevchar = input[pos - 1];
+    else if (pos > 1)
+      prevchar = input[pos - 2];
+    
+    const int digval = prevchar - '0';
+    no_round = !(digval % 2);
+  }//if( input[pos] == '5' )
+  
+  
+  if (no_round)
+  {
+    input = input.substr(0, pos);
+  }
+  else
+  {
+    input = input.substr(0, pos);
+    
+    const bool is_negative = (input[0] == '-');
+    if (is_negative)
+      input = input.substr(1);
+    
+    for (size_t index = input.size() - 1; index > 0; --index)
+    {
+      if (input[index] != '.')
+      {
+        assert(input[index] >= '0' && input[index] <= '9');
+        
+        if (input[index] != '9')
+        {
+          input[index] += 1;
+          break;
+        }
+        
+        assert(input[index] == '9');
+        
+        input[index] = '0';
+      }//if( input[index] != '.' )
+      
+      if (index == 1)
+      {
+        if (input[0] == '.')
+        {
+          input = "1" + input;
+        }
+        else if (input[0] != '9')
+        {
+          input[0] += 1;
+        }
+        else
+        {
+          input[0] = '0';
+          input = "1" + input;
+          break;
+        }
+      }
+    }//for( size_t index = decimal.size() - 1; index > 0; --index )
+    
+    if (is_negative)
+      input = "-" + input;
+  }//if( we need to round our last digit up )
+  
+  return input;
+}//string round_at_pos( string input, size_t pos )
+
+
 // A function to convert floats to their shortest text representation with at least the
 //  specified precision (e.g., number of sig figs),
 // Definitely not a very efficient function, or even optimal, but better than nothing.
@@ -859,88 +965,6 @@ string printCompact_trial(double val, size_t precision, const bool use_scientifi
       decimal.resize(decimal.size() - 1);
   }//if( decimal.find('.') != string::npos )
 
-
-
-  auto round_at_pos = [](string input, size_t pos) -> string {
-    //pos indicates the first digit we do not want
-    if (pos >= input.size())
-      return input;
-
-    assert((input[pos] >= '0') && (input[pos] <= '9'));
-
-    for (size_t i = pos + 1; i < input.size(); ++i)
-      input[i] = '0';
-
-    // We'll attempt to do some rounding - man, is this horrible
-    bool no_round = (input[pos] < '5');
-    if (input[pos] == '5')
-    {
-      // round to nearest and ties to even
-      char prevchar = '\0';
-      if ((pos > 0) && (input[pos - 1] != '.'))
-        prevchar = input[pos - 1];
-      else if (pos > 1)
-        prevchar = input[pos - 2];
-
-      const int digval = prevchar - '0';
-      no_round = !(digval % 2);
-    }//if( input[pos] == '5' )
-
-
-    if (no_round)
-    {
-      input = input.substr(0, pos);
-    }
-    else
-    {
-      input = input.substr(0, pos);
-
-      const bool is_negative = (input[0] == '-');
-      if (is_negative)
-        input = input.substr(1);
-
-      for (size_t index = input.size() - 1; index > 0; --index)
-      {
-        if (input[index] != '.')
-        {
-          assert(input[index] >= '0' && input[index] <= '9');
-
-          if (input[index] != '9')
-          {
-            input[index] += 1;
-            break;
-          }
-
-          assert(input[index] == '9');
-
-          input[index] = '0';
-        }//if( input[index] != '.' )
-
-        if (index == 1)
-        {
-          if (input[0] == '.')
-          {
-            input = "1" + input;
-          }
-          else if (input[0] != '9')
-          {
-            input[0] += 1;
-          }
-          else
-          {
-            input[0] = '0';
-            input = "1" + input;
-            break;
-          }
-        }
-      }//for( size_t index = decimal.size() - 1; index > 0; --index )
-
-      if (is_negative)
-        input = "-" + input;
-    }//if( we need to round our last digit up )
-
-    return input;
-  };//round_at_pos
 
 
   bool hit_dec = false, hit_nonzero = false;
@@ -1066,4 +1090,6 @@ bool make_float_val_compact(rapidxml::xml_attribute<char>* attrib, const size_t 
   assert(attrib->document());
   const char* newval = attrib->document()->allocate_string(compacted.c_str());
   attrib->value(newval);
+  
+  return true;
 }//make_float_val_compact(...)
