@@ -20,3 +20,7 @@ target_include_directories( decay_database_benchmark PUBLIC ${RAPID_XML_DIR} )
 # add_executable( add_tori_xray_to_xml_and_test add_tori_xray_to_xml_and_test.cpp sqlite3.h sqlite3.c )
 # target_link_libraries( add_tori_xray_to_xml_and_test SandiaDecay )
 # target_include_directories( add_tori_xray_to_xml_and_test PUBLIC ${RAPID_XML_DIR} )
+
+add_executable( batch_edit_xml batch_edit_xml.cpp )
+target_link_libraries( batch_edit_xml SandiaDecay )
+target_include_directories( batch_edit_xml PUBLIC ${RAPID_XML_DIR} )
