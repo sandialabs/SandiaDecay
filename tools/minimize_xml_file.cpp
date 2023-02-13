@@ -41,8 +41,9 @@ using namespace std;
 /** Program to remove the edit history of sandia.decay.xml.
  
  Some items TODO:
- - Floating point values could be limited to reasonable accuracies. E.g., some coincidence fractions
-   have way more sig figures than reasonable, or similarly for branching ratios, energy, hlf.
+ - Floating point values could be limited to reasonable accuracies. E.g., only coincidence fractions
+   are currently limited to reasonable accuracy.
+ - Decay particles with zero intensity could be removed.
  */
 
 //forward declarations
@@ -129,7 +130,7 @@ int main( int argc, char **argv )
     if( doc_node->first_attribute("version") )
       doc_node = doc_node->next_sibling();
     
-    int ntrans = 0, nodes_removed = 0;
+    int ntrans = 0, nodes_removed = 0, num_missing_uuid = 0;
     
     vector<rapidxml::xml_node<char> *> nuc_to_delete;
     for( rapidxml::xml_node<char> *nuc = doc_node->first_node( "nuclide" );
@@ -167,24 +168,40 @@ int main( int argc, char **argv )
       rapidxml::xml_attribute<char> *child_label_attrib = xmltrans->first_attribute("child");
       rapidxml::xml_attribute<char> *parent_label_attrib = xmltrans->first_attribute("parent");
       
-      const string parent_nuc = child_label_attrib ? child_label_attrib->value() : "";
-      const string child_nuc = parent_label_attrib ? parent_label_attrib->value() : "";
+      const string child_nuc = child_label_attrib ? child_label_attrib->value() : "";
+      const string parent_nuc = parent_label_attrib ? parent_label_attrib->value() : "";
       
       vector<bool> gamma_uuid_used;
       vector<string> gamma_uuid;
+      
+      // This is a bit of a micro-optimization, but we will set the id element value equal to
+      //  the child decay particle index, and then in SandiaDecay::Transition::set we will
+      //  optimistically check if the id value is the correct index, and if so, avoid looping
+      //  over all decay particles to match id values.
+      //  Saves 20 ms initializing DB for a minimized XML with this (micro-)optimization.
+      //  (this is about 20% total time when using sandia.decay.min.xml)
+      size_t child_index = 0;
+      vector<size_t> uuid_particle_index;
+      
       vector<rapidxml::xml_node<char> *> gamma_uuid_nodes;
-      for( rapidxml::xml_node<char> *child = xmltrans->first_node("gamma");
+      for( rapidxml::xml_node<char> *child = xmltrans->first_node();
           child;
-          child = child->next_sibling("gamma") )
+          child = child->next_sibling() )
       {
-        rapidxml::xml_attribute<char> *attrib = child->first_attribute("id");
-        if( attrib && attrib->value_size() )
+        if( rapidxml::internal::compare( child->name(), child->name_size(), "gamma", 5, true ) )
         {
-          gamma_uuid.push_back( attrib->value() );
-          gamma_uuid_used.push_back( false );
-          gamma_uuid_nodes.push_back( child );
-        }
-      }//
+          rapidxml::xml_attribute<char> *attrib = child->first_attribute("id");
+          if( attrib && attrib->value_size() )
+          {
+            gamma_uuid.push_back( attrib->value() );
+            gamma_uuid_used.push_back( false );
+            gamma_uuid_nodes.push_back( child );
+            uuid_particle_index.push_back( child_index );
+          }
+        }//if( <gamma> node )
+        
+        child_index += 1;
+      }//for( loop over xmltrans's children )
       
       
       vector<rapidxml::xml_node<char> *> to_delete;
@@ -261,13 +278,18 @@ int main( int argc, char **argv )
                   //assert( pos != gamma_uuid.end() );
                   if( pos == gamma_uuid.end() )
                   {
-                    fprintf( stderr, "Warning: Could not find UUID='%s' for %s->%s\n",
+                    num_missing_uuid += 1;
+                    gchild->remove_attribute( attrib );
+                    
+                    fprintf( stderr, "Warning: Could not find UUID='%s' for %s->%s - removing coincidence.\n",
                             gchild_uuid.c_str(), parent_nuc.c_str(), child_nuc.c_str() );
                   }else
                   {
                     const int64_t index = pos - gamma_uuid.begin();
+                    assert( index < uuid_particle_index.size() );
+                    const size_t child_index = uuid_particle_index[index];
                     gamma_uuid_used[index] = true;
-                    const string newuuid = pod_to_str(index);
+                    const string newuuid = pod_to_str(child_index);
                     const char *newuuidstr = doc.allocate_string( newuuid.c_str() );
                     attrib->value( newuuidstr );
                   }
@@ -324,7 +346,8 @@ int main( int argc, char **argv )
           }else
           {
             assert( attrib );
-            const char *newuuidstr = doc.allocate_string( pod_to_str(i).c_str() );
+            const size_t child_index = uuid_particle_index[i];
+            const char *newuuidstr = doc.allocate_string( pod_to_str(child_index).c_str() );
             attrib->value( newuuidstr );
           }
         }
@@ -354,7 +377,8 @@ int main( int argc, char **argv )
     if( do_shrink_tag_names )
       shrink_xml_elements( doc_node );
       
-    printf( "There were %i transitions; removed %i xml elements.\n", ntrans, nodes_removed );
+    printf( "There were %i transitions; removed %i xml elements, and %i missing coincidences.\n",
+           ntrans, nodes_removed, num_missing_uuid );
     
     {
       ifstream test( args[1].c_str() );
@@ -498,7 +522,15 @@ void test_db_still_same( const string orig_xml_filename, const string final_xml_
           const vector< pair<unsigned short int,float> > &newcoinc = newpart.coincidences;
           
           if( oldcoinc.size() != newcoinc.size() )
-            throw runtime_error( "Number of coincidences does not match" );
+          {
+            const string parent = oldtran->parent ? oldtran->parent->symbol : string();
+            const string child = oldtran->child ? oldtran->child->symbol : string();
+            const string nold = to_string(oldcoinc.size());
+            const string nnew = to_string(newcoinc.size());
+            throw runtime_error( "Number of coincidences does not match for "
+                                + parent + " -> " + child + ": from " + nold + " to " + nnew
+                                + " for gamma " + std::to_string(oldpart.energy) + " keV" );
+          }//if( oldcoinc.size() != newcoinc.size() )
           
           //num_coinc_shrunk_sig_figs
           
@@ -812,6 +844,33 @@ void shrink_xml_elements( rapidxml::xml_node<char> *doc_node )
       rename_attrib( x, "symbol", "s" );
     }
   }//foreach( element )
+  
+  const char *desc = "\nXML element names have been renamed to minimize file size, with the following mappings:\n"
+  "\t'transition'      to 't'\n"
+  "\t'branchRatio'     to 'br'\n"
+  "\t'child'           to 'c'\n"
+  "\t'mode'            to 'm'\n"
+  "\t'parent'          to 'p'\n"
+  "\t'beta'            to 'b'\n"
+  "\t'energy'          to 'e'\n"
+  "\t'intensity'       to 'i'\n"
+  "\t'logFT'           to 'lft'\n"
+  "\t'forbiddenness'   to 'f'\n"
+  "\t'electronCapture' to 'ec'\n"
+  "\t'alpha'           to 'a'\n"
+  "\t'gamma'           to 'g'\n"
+  "\t'coincidentGamma' to 'c'\n"
+  "\t'element'         to 'el'\n"
+  "\t'an'              to 'atomicNumber'\n"
+  "\t'name'            to 'n'\n"
+  "\t'symbol'          to 's'\n"
+  "\t'xray'            to 'x'\n"
+  "\t'relintensity'    to 'i'\n"
+  "\t'abundance'       to 'a'\n";
+   
+  const char *doc_desc = doc_node->document()->allocate_string(desc);
+  rapidxml::xml_node<char> *desc_node = doc_node->document()->allocate_node(rapidxml::node_comment, "", doc_desc );
+  doc_node->insert_node( doc_node->first_node(), desc_node );
 }//void shrink_xml_elements( )
 
 

@@ -145,19 +145,39 @@ namespace
   
   float parse_float( const char *str )
   {
-    //return (float)atof( str );
+    // This function is the primary bottleneck of parsing; to initualize
+    //  SandiaDecayDataBase with sandia.decay.min.xml (i.e., with coincidences, but minimzed tags),
+    //  on an M1 macbook it takes:
+    // - atof:   80ms
+    // - strtof: 110ms
+    // - sscanf: 150ms
+    //
+    // Even using atof, this function takes up almost 20% of the CPU time when constructing
+    //  with sandia.decay.min.xml.
+    //
+    // Some notes about atof:
+    //  - If input is not a valid float, will return 0.0; doesnt set `errno`.
+    //  - If input is out of the range, its undefined behavior
+    float answer = (float)atof( str );
+    if( answer != 0.0 )
+      return answer;
     
+    // If we got zero from atof, it could actually be a zero value, or it could be an error,
+    //  so we'll check this using strtof (we dont expect zero very often at all, and never expect
+    //  an error, so this second check doesnt add any real time).
     errno = 0;
-    const float answer = strtof(str,NULL);
+    answer = strtof(str,NULL);
     if( errno )
       throw runtime_error( "Could not convert '" + string(str) + "' to a float" );
     return answer;
     
-    //float val;
-    //const int nread = sscanf( str, "%f", &val );
-    //if( nread != 1 )
-    //  throw runtime_error( "Could not convert '" + string(str) + "' to a float" );
-    //return val;
+    /*
+    float val;
+    const int nread = sscanf( str, "%f", &val );
+    if( nread != 1 )
+      throw runtime_error( "Could not convert '" + string(str) + "' to a float" );
+    return val;
+     */
   }
   
   short int parse_short_int( const char *str )
@@ -750,7 +770,7 @@ void Transition::set( const ::rapidxml::xml_node<char> *node,
   //In order to link coincidences correctly, we will need to loop over decay
   //  products twice since we're using a index based mecahnism.
   std::vector<RadParticle> new_particles;
-  std::vector<std::string> new_particle_ids;
+  std::vector< std::pair<const char *,size_t> > new_particle_ids;
   std::vector<const ::rapidxml::xml_node<char> *> new_particle_nodes;
   
   for( const ::rapidxml::xml_node<char> *particle = node->first_node();
@@ -763,21 +783,20 @@ void Transition::set( const ::rapidxml::xml_node<char> *node,
 
     try
     {
-      RadParticle product( particle );
-
       const Attribute *revision_att = particle->first_attribute( "revision", 8 );
       if( revision_att
           && (revision_fromstr(revision_att->value())==DeletedRevision) )
           continue;
+     
+      new_particles.push_back( RadParticle( particle ) );
       
       const rapidxml::xml_attribute<char> *idattrib = particle->first_attribute("id");
       if( idattrib && idattrib->value_size() )
-        new_particle_ids.push_back( std::string(idattrib->value(), idattrib->value_size()) );
+        new_particle_ids.push_back( std::make_pair( (const char *)idattrib->value(), idattrib->value_size()) );
       else
-        new_particle_ids.push_back( "" );
+        new_particle_ids.push_back( std::make_pair( (const char *)0, size_t(0)) );
     
       new_particle_nodes.push_back( particle );
-      new_particles.push_back( product );
     }catch( std::exception &e )
     {
       cerr << "Caught: " << e.what()
@@ -791,6 +810,7 @@ void Transition::set( const ::rapidxml::xml_node<char> *node,
 
   assert( new_particles.size() == new_particle_ids.size() );
   assert( new_particles.size() == new_particle_nodes.size() );
+  
   
   for( size_t i = 0; i < new_particle_nodes.size(); ++i )
   {
@@ -807,30 +827,70 @@ void Transition::set( const ::rapidxml::xml_node<char> *node,
     for( ; coinc; coinc = coinc->next_sibling( coinc->name(), coinc->name_size() ) )
     {
       const ::rapidxml::xml_attribute<char> *idattr = coinc->first_attribute("id",2);
+      const char * const id_val = idattr ? idattr->value() : NULL;
+      const size_t id_len = idattr ? idattr->value_size() : std::size_t(0);
+      
 #if( ENABLE_SHORT_NAME )
       const ::rapidxml::xml_attribute<char> *intensityattr = shortnames ? coinc->first_attribute("i",1)
       : coinc->first_attribute("intensity",9);
 #else
       const ::rapidxml::xml_attribute<char> *intensityattr = coinc->first_attribute("intensity",9);
 #endif
+      const char * const intensity_val = intensityattr ? intensityattr->value() : NULL;
+      const size_t intensity_len = intensityattr ? intensityattr->value_size() : std::size_t(0);
       
-      if( !idattr || !intensityattr || !idattr->value_size() || !intensityattr->value_size() )
+      if( !id_len || !intensity_len )
         continue;
       
-      const std::string uuid( idattr->value(), idattr->value_size() );
-      const float intensity = parse_float( intensityattr->value() );
-      
       bool found_partner = false;
-      for( unsigned short int j = 0; j < new_particle_ids.size(); ++j )
+      const float intensity = parse_float( intensity_val );
+
+#if( ENABLE_SHORT_NAME )
+      // Here we will optimistically assume the "id" value is a string representing an integer
+      //  that gives the index of the matching particle - this assumes the input XML file was
+      //  made for this - which `minimize_xml_file` will do with the '--shrink-coinc' option.
+      //  If this assumption doesnt pan-out, we will instead do the full search, so not that
+      //  much will be lost.
+      //
+      //  Including the check for `shortnames`, either runtime or compiletime isnt really necassary,
+      //    just currently not 
+      if( shortnames && (id_len <= 3) )
       {
-        const std::string &trialuuid = new_particle_ids[j];
-        if( trialuuid == uuid )
+        unsigned short int trial_index = (id_val[id_len - 1] - '0');
+        if( id_len >= 2 )
+          trial_index += 10*(id_val[id_len - 2] - '0');
+        if( id_len >= 3 )
+          trial_index += 100*(id_val[id_len - 3] - '0');
+        
+        if( trial_index < new_particle_ids.size() )
         {
-          particle.coincidences.push_back( std::make_pair(j,intensity) );
-          found_partner = true;
-          break;
+          const char * const trial_val = new_particle_ids[trial_index].first;
+          const size_t trial_len = new_particle_ids[trial_index].second;
+          
+          if( rapidxml::internal::compare( id_val, id_len, trial_val, trial_len, true) )
+          {
+            particle.coincidences.push_back( std::make_pair(trial_index,intensity) );
+            found_partner = true;
+          }
+        }//if( trial_index < new_particle_ids.size() )
+      }//if( shortnames && (id_len <= 3) )
+#endif //#if( ENABLE_SHORT_NAME )
+      
+      if( !found_partner )
+      {
+        for( unsigned short int j = 0; j < new_particle_ids.size(); ++j )
+        {
+          const char * const trial_val = new_particle_ids[j].first;
+          const size_t trial_len = new_particle_ids[j].second;
+          
+          if( rapidxml::internal::compare( id_val, id_len, trial_val, trial_len, true) )
+          {
+            particle.coincidences.push_back( std::make_pair(j,intensity) );
+            found_partner = true;
+            break;
+          }
         }
-      }
+      }//if( !found_partner )
       
       if( !found_partner )
       {
