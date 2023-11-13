@@ -1,3 +1,4 @@
+#include <set>
 #include <cmath>
 #include <vector>
 #include <string>
@@ -60,7 +61,7 @@ int main( int argc, const char * argv[] )
     check_sum_branching_ratios();
   }catch( std::exception &e )
   {
-    cerr << "Caught error doign tests: " << e.what() << endl;
+    cerr << "Caught error doing tests: " << e.what() << endl;
     return EXIT_FAILURE;
   }//try . catch
   
@@ -171,6 +172,8 @@ void sanity_check_nuclides_and_transistions()
   using namespace SandiaDecay;
   SandiaDecayDataBase database( g_xml_file );
   
+  std::set<string> nuc_names;
+  
   const vector<const Nuclide *> &nucs = database.nuclides();
   for( size_t i = 0; i < nucs.size(); ++i )
   {
@@ -184,6 +187,9 @@ void sanity_check_nuclides_and_transistions()
     if( std::isinf(nuc->halfLife) && nuc->decaysToChildren.size() )
       throw runtime_error( "Nuclide " + nuc->symbol + " has infinite halflife (i.e., stable) but has "
                            + to_str(nuc->decaysToChildren.size()) + " children." );
+    
+    if( nuc_names.count(nuc->symbol) )
+      throw runtime_error( "Found duplicate nuclide: " + nuc->symbol );
     
     if( nuc->isStable() )
       continue;
