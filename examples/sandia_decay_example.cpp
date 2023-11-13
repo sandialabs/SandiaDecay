@@ -31,6 +31,7 @@
 #include <cstdlib>
 #include <iostream>
 #include <assert.h>
+#include <algorithm>
 
 #include "SandiaDecay.h"
 
@@ -42,7 +43,7 @@ using namespace std;
 //Forward declarations
 //
 
-/** Print some basic infomration about a nuclide. */
+/** Print some basic information about a nuclide. */
 void print_nuclide_info( const std::string &nuclideName );
 
 /** Print the decay chain of the specified nuclide. */
