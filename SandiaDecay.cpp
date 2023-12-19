@@ -1606,23 +1606,11 @@ void NuclideMixture::addAgedNuclideByActivity( const Nuclide *nuclide,
 {
   NuclideMixture ager;
   ager.addNuclideByActivity( nuclide, activity );
-  const std::vector<NuclideActivityPair> aged_activities = ager.activity( age );
-
-  double age_sf = 1.0;
-  for( size_t i = 0; i < aged_activities.size(); ++i )
+  const std::vector<NuclideNumAtomsPair> aged_atoms = ager.numAtoms( age );
+  for( size_t i = 0; i < aged_atoms.size(); ++i )
   {
-    const NuclideActivityPair &red = aged_activities[i];
-    if( red.nuclide == nuclide )
-    {
-      age_sf = activity / red.activity;
-      i = aged_activities.size();
-    }
-  }//for( size_t i = 0; i < aged_activities.size(); ++i )
-
-  for( size_t i = 0; i < aged_activities.size(); ++i )
-  {
-    const NuclideActivityPair &red = aged_activities[i];
-    addNuclideByActivity( red.nuclide, age_sf * red.activity );
+    const NuclideNumAtomsPair &red = aged_atoms[i];
+    addNuclideByAbundance( red.nuclide, red.numAtoms );
   }
 }//void addAgedNuclideByActivity(...)
 
