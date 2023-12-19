@@ -2118,7 +2118,7 @@ int NuclideMixture::internalIndexNumber(int z, int atomic_mass, int iso ) const
   for( size_t i = 0; i < m_decayedToNuclides.size(); ++i )
   {
     const Nuclide *nuclide = m_decayedToNuclides[i].nuclide;
-    if( nuclide->atomicMass == atomic_mass
+    if( nuclide->massNumber == atomic_mass
         && nuclide->atomicNumber == z
         && nuclide->isomerNumber == iso )
       return static_cast<int>( i );
