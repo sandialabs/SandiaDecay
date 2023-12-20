@@ -28,6 +28,7 @@
 #include <fstream>
 #include <iostream>
 #include <iterator>
+#include <algorithm>
 
 #include "SandiaDecay.h"
 
