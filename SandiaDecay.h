@@ -676,10 +676,43 @@ namespace SandiaDecay
     double initialActivity( int index ) const;
     
 
-    //internal_index_number runs from 0 to numSolutionNuclides()
+    /** Gives the internal index into `m_decayedToNuclides` for a specific nuclide in
+     the decay chain of any of the added parent nuclides (including the parents).
+     
+     @param nuclide The nuclide of interest
+     @returns a value from 0 to `numSolutionNuclides()`.
+              Value denoted by `internal_index_number` in this header.
+     
+     Throws exception if the specified nuclide is not any of the added
+     nuclides, or any of their progeny.
+     */
     int internalIndexNumber( const Nuclide *nuclide ) const;
+    
+    /** Gives the internal index into `m_decayedToNuclides` for a specific nuclide in
+     the decay chain of any of the added parent nuclides (including the parents).
+     
+     @param symbol The string symbol for nuclide of interest (e.x., "U235", "Co60", etc)
+     @returns a value from 0 to `numSolutionNuclides()`.
+              Value denoted by `internal_index_number` in this header.
+     
+     Throws exception if the specified nuclide is not any of the added
+     nuclides, or any of their progeny.
+     */
     int internalIndexNumber( const std::string &symbol ) const;
-    int internalIndexNumber( int z, int atomic_mass, int iso ) const;
+    
+    /** Gives the internal index into `m_decayedToNuclides` for a specific nuclide in
+     the decay chain of any of the added parent nuclides (including the parents).
+     
+     @param z Number of protons for the nuclide of interest
+     @param mass_number Mass number (protons+neutrons) for nuclide of interest
+     @param iso The meta-stable state of the nuclide (i.e., 0, 1, 2, 3)
+     @returns a value from 0 to `numSolutionNuclides()`.
+              Value denoted by `internal_index_number` in this header.
+     
+     Throws exception if the specified nuclide is not any of the added
+     nuclides, or any of their progeny.
+     */
+    int internalIndexNumber( int z, int mass_number, int iso ) const;
     
     
     /** Internal index number spans from 0 to #numSolutionNuclides()

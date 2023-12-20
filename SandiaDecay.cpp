@@ -2110,7 +2110,7 @@ int NuclideMixture::internalIndexNumber( const std::string &symbol ) const
 }//int internalIndexNumber( const std::string &symbol ) const
 
 
-int NuclideMixture::internalIndexNumber(int z, int atomic_mass, int iso ) const
+int NuclideMixture::internalIndexNumber(int z, int mass_number, int iso ) const
 {
   if( m_decayedToNuclides.empty() )
     performTimeEvolution();
@@ -2118,7 +2118,7 @@ int NuclideMixture::internalIndexNumber(int z, int atomic_mass, int iso ) const
   for( size_t i = 0; i < m_decayedToNuclides.size(); ++i )
   {
     const Nuclide *nuclide = m_decayedToNuclides[i].nuclide;
-    if( nuclide->atomicMass == atomic_mass
+    if( nuclide->massNumber == mass_number
         && nuclide->atomicNumber == z
         && nuclide->isomerNumber == iso )
       return static_cast<int>( i );
@@ -2126,8 +2126,8 @@ int NuclideMixture::internalIndexNumber(int z, int atomic_mass, int iso ) const
 
   char buffer[256];
   snprintf( buffer, sizeof(buffer),
-            "Z=%i AN=%i, ISO=%i is not in this NuclideMixture.",
-            z, atomic_mass, iso );
+            "Z=%i MN=%i, ISO=%i is not in this NuclideMixture.",
+            z, mass_number, iso );
   throw std::runtime_error( buffer );
   return -1;
 }//int internalIndexNumber(int z, int atomic_mass ) const
