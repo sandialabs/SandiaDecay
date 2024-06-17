@@ -518,6 +518,11 @@ namespace SandiaDecay
     void addAgedNuclideByActivity( const Nuclide *nuclide,
                                    double activity,
                                    double age_in_seconds );
+    /** Not tested yet
+     */
+    void addAgedNuclideByNumAtoms( const Nuclide *nuclide,
+                                   double number_atoms,
+                                   double age_in_seconds );
 
     /** Add a nuclide to the mixture that has laready obtained secular
         equilibrium.  The activity specified is of the parent nuclide a the
