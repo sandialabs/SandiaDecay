@@ -39,6 +39,9 @@
 #include <stdexcept>
 #include <algorithm>
 
+// If you run with CalcFloatType==__float128 on GNU, you'll need this next
+//  include for `qexp(...)`, and you'll need to link against libquadmath
+// #include <quadmath.h>
 
 #include "rapidxml/rapidxml.hpp"
 
@@ -1097,15 +1100,15 @@ const Nuclide *Nuclide::child( const size_t transition_num ) const
 
 
 
-double Nuclide::numAtomsToActivity( const double num_atoms ) const
+CalcFloatType Nuclide::numAtomsToActivity( const CalcFloatType num_atoms ) const
 {
   return num_atoms * decayConstant();
 }//double numAtomsToActivity( const double num_atoms ) const
 
-double Nuclide::activityToNumAtoms( const double activity ) const
+CalcFloatType Nuclide::activityToNumAtoms( const CalcFloatType activity ) const
 {
   return activity / decayConstant();
-}//double activityToNumAtoms( const double activity ) const
+}//CalcFloatType activityToNumAtoms( const CalcFloatType activity ) const
 
 
 // XXX - Barely tested
@@ -1131,7 +1134,7 @@ float Nuclide::branchRatioToDecendant( const Nuclide *descendant ) const
   }//for( loop over decay paths )
 
   return br_sum;
-}//double branchRatioToDecendant( const Nuclide *descendant ) const
+}//CalcFloatType branchRatioToDecendant( const Nuclide *descendant ) const
 
 
 // XXX - barels tested
@@ -1157,7 +1160,7 @@ float Nuclide::branchRatioFromForebear( const Nuclide *ancestor ) const
   }//for( loop over decay paths )
 
   return br_sum;
-}//double branchRatioFromForebear( const Nuclide *ancestor ) const
+}//CalcFloatType branchRatioFromForebear( const Nuclide *ancestor ) const
 
 
 
@@ -1588,27 +1591,27 @@ void NuclideMixture::clear()
   m_decayedToNuclides.clear();
 }//void NuclideMixture::clear()
 
-void NuclideMixture::addNuclideByAbundance( const Nuclide *nuclide, double num_initial_atom )
+void NuclideMixture::addNuclideByAbundance( const Nuclide *nuclide, CalcFloatType num_initial_atom )
 {
   addNuclide( NuclideNumAtomsPair( nuclide, num_initial_atom )  );
 }
 
 
-void NuclideMixture::addNuclideByActivity( const Nuclide *nuclide, double activity )
+void NuclideMixture::addNuclideByActivity( const Nuclide *nuclide, CalcFloatType activity )
 {
-  const double num_initial_atom = nuclide->activityToNumAtoms( activity );
+  const CalcFloatType num_initial_atom = nuclide->activityToNumAtoms( activity );
   addNuclide( NuclideNumAtomsPair( nuclide, num_initial_atom ) );
 }
 
 
 void NuclideMixture::addAgedNuclideByActivity( const Nuclide *nuclide,
-                                               double activity, double age )
+                                              CalcFloatType activity, double age )
 {
   NuclideMixture ager;
   ager.addNuclideByActivity( nuclide, activity );
   const std::vector<NuclideActivityPair> aged_activities = ager.activity( age );
 
-  double age_sf = 1.0;
+  CalcFloatType age_sf = 1.0;
   for( size_t i = 0; i < aged_activities.size(); ++i )
   {
     const NuclideActivityPair &red = aged_activities[i];
@@ -1628,8 +1631,8 @@ void NuclideMixture::addAgedNuclideByActivity( const Nuclide *nuclide,
 
   
 void NuclideMixture::addAgedNuclideByNumAtoms( const Nuclide *nuclide,
-                                 double number_atoms,
-                                 double age_in_seconds )
+                                              CalcFloatType number_atoms,
+                                              double age_in_seconds )
 {
   if( nuclide->isStable() )
   {
@@ -1668,7 +1671,7 @@ void NuclideMixture::addAgedNuclideByNumAtoms( const Nuclide *nuclide,
   }//if( (max_num_hl*nuclide->halfLife) < age_in_seconds )
   
   
-  double age_sf = 1.0;
+  CalcFloatType age_sf = 1.0;
   for( size_t i = 0; i < aged_atoms.size(); ++i )
   {
     const NuclideNumAtomsPair &red = aged_atoms[i];
@@ -1697,20 +1700,20 @@ void NuclideMixture::addNuclide( const NuclideNumAtomsPair &nuclide )
 void NuclideMixture::addNuclide( const NuclideActivityPair &nucidePair )
 {
   const Nuclide *nuclide = nucidePair.nuclide;
-  const double num_atoms = nuclide->activityToNumAtoms( nucidePair.activity );
+  const CalcFloatType num_atoms = nuclide->activityToNumAtoms( nucidePair.activity );
   addNuclide( NuclideNumAtomsPair( nuclide, num_atoms ) );
 }
 
 
 
 bool NuclideMixture::addNuclideInSecularEquilibrium( const Nuclide *parent,
-                                                     double parent_activity )
+                                                    CalcFloatType parent_activity )
 {
   const double secEqHL = parent->secularEquilibriumHalfLife();
   if( (secEqHL >= parent->halfLife) || (secEqHL<=0.0)  )
   {
     cerr << "NuclideMixture::addNuclideInSecularEquilibrium( " << parent->symbol
-         << ", " << parent_activity/becquerel << "bq ): Nuclide "
+         << ", " << static_cast<double>(parent_activity/becquerel) << "bq ): Nuclide "
          << parent->symbol << " can not reach secular equilibrium! I am "
          << "cowardly refusing to add it to the NuclideMixture." << endl;
     return false;
@@ -1738,7 +1741,7 @@ bool NuclideMixture::addNuclideInSecularEquilibrium( const Nuclide *parent,
 
 
 void NuclideMixture::addNuclideInPromptEquilibrium( const Nuclide *parent,
-                                                   double activity )
+                                                   CalcFloatType activity )
 {
   if( IsInf(parent->halfLife) )
     return;
@@ -1763,22 +1766,22 @@ int NuclideMixture::numSolutionNuclides() const
 }
 
 
-double NuclideMixture::activity( double time_in_seconds, const Nuclide *nuclide )    const
+CalcFloatType NuclideMixture::activity( double time_in_seconds, const Nuclide *nuclide )    const
 {
   return activity( time_in_seconds, internalIndexNumber( nuclide ) );
 }
 
-double NuclideMixture::activity( double time_in_seconds, const std::string &symbol ) const
+CalcFloatType NuclideMixture::activity( double time_in_seconds, const std::string &symbol ) const
 {
   return activity( time_in_seconds, internalIndexNumber( symbol ) );
 }
 
-double NuclideMixture::activity( double time_in_seconds, int z, int atomic_mass, int iso )    const
+CalcFloatType NuclideMixture::activity( double time_in_seconds, int z, int atomic_mass, int iso )    const
 {
   return activity( time_in_seconds, internalIndexNumber( z, atomic_mass, iso ) );
 }
 
-double NuclideMixture::activity( double time_in_seconds, int index ) const
+CalcFloatType NuclideMixture::activity( double time_in_seconds, int index ) const
 {
   if( m_decayedToNuclides.empty() )
     performTimeEvolution();
@@ -1788,10 +1791,10 @@ double NuclideMixture::activity( double time_in_seconds, int index ) const
     throw std::runtime_error( "NuclideMixture::activity(...): hecka ish" );
 
   return m_decayedToNuclides[index].activity( time_in_seconds );
-}//double activity( double time_in_seconds, int internal_index_number ) const
+}//CalcFloatType activity( double time_in_seconds, int internal_index_number ) const
 
 
-double NuclideMixture::totalActivity( double time ) const
+CalcFloatType NuclideMixture::totalActivity( double time ) const
 {
   if( m_decayedToNuclides.empty() )
     performTimeEvolution();
@@ -1800,11 +1803,11 @@ double NuclideMixture::totalActivity( double time ) const
   for( size_t i = 0; i < m_decayedToNuclides.size(); ++i )
     activity += m_decayedToNuclides[i].activity( time );
 
-  return static_cast<double>(activity);
-}//double NuclideMixture::totalActivity( double time ) const
+  return static_cast<CalcFloatType>(activity);
+}//CalcFloatType NuclideMixture::totalActivity( double time ) const
 
 
-double NuclideMixture::totalMassInGrams( double time ) const
+CalcFloatType NuclideMixture::totalMassInGrams( double time ) const
 {
   if( m_decayedToNuclides.empty() )
     performTimeEvolution();
@@ -1818,29 +1821,29 @@ double NuclideMixture::totalMassInGrams( double time ) const
   }//for( loop over m_decayedToNuclides )
 
   const SandiaDecay::CalcFloatType mole = 6.02214179E+23;  //AMU/gram
-  return static_cast<double>( mass_amu / mole );
-}//double totalMassInGrams( double time )
+  return static_cast<CalcFloatType>( mass_amu / mole );
+}//CalcFloatType totalMassInGrams( double time )
 
 
-double NuclideMixture::numAtoms( double time_in_seconds, const Nuclide *nuclide )    const
+CalcFloatType NuclideMixture::numAtoms( double time_in_seconds, const Nuclide *nuclide )    const
 {
   return numAtoms( time_in_seconds, internalIndexNumber( nuclide ) );
 }
 
 
-double NuclideMixture::numAtoms( double time_in_seconds, const std::string &symbol ) const
+CalcFloatType NuclideMixture::numAtoms( double time_in_seconds, const std::string &symbol ) const
 {
   return numAtoms( time_in_seconds, internalIndexNumber( symbol ) );
 }
 
 
-double NuclideMixture::numAtoms( double time_in_seconds, int z, int atomic_mass, int iso )    const
+CalcFloatType NuclideMixture::numAtoms( double time_in_seconds, int z, int atomic_mass, int iso )    const
 {
   return numAtoms( time_in_seconds, internalIndexNumber( z, atomic_mass, iso ) );
 }//double numAtoms( double time_in_seconds, int z, int atomic_mass )  const;
 
 
-double NuclideMixture::numAtoms( double time_in_seconds, int index ) const
+CalcFloatType NuclideMixture::numAtoms( double time_in_seconds, int index ) const
 {
   if( m_decayedToNuclides.empty() )
     performTimeEvolution();
@@ -2255,7 +2258,7 @@ std::string NuclideMixture::info( const double time ) const
         tempstrm << "\n    ";
       }//if( we've reached our length limit )
 
-      tempstrm << pair.nuclide->numAtomsToActivity( pair.numAtoms ) / becquerel
+      tempstrm << static_cast<double>(pair.nuclide->numAtomsToActivity( pair.numAtoms ) / becquerel)
                << " Bq " << pair.nuclide->symbol;
     }//for( loop over orignal nuclides )
 
@@ -2282,7 +2285,7 @@ std::string NuclideMixture::info( const double time ) const
         tempstrm << "\n    ";
       }//if( we've reached our length limit )
 
-      tempstrm << " " << pair.activity / becquerel << " Bq " << pair.nuclide->symbol;
+      tempstrm << " " << static_cast<double>(pair.activity / becquerel) << " Bq " << pair.nuclide->symbol;
     }//for( loop over activities )
 
     infostrm << tempstrm.str();
@@ -3010,7 +3013,7 @@ std::string SandiaDecayDataBase::toNormalSymbolForm( const std::string &symbol )
 
 
 std::vector<NuclideTimeEvolution> SandiaDecayDataBase::getTimeEvolution( const Nuclide *parent,
-                                                 const double orignal_activity  )
+                                                 const CalcFloatType orignal_activity  )
 {
   const double n_atoms = parent->activityToNumAtoms( orignal_activity );
   vector<NuclideNumAtomsPair> parentV( 1, NuclideNumAtomsPair(parent, n_atoms) );
@@ -3020,7 +3023,7 @@ std::vector<NuclideTimeEvolution> SandiaDecayDataBase::getTimeEvolution( const N
 
 
 std::vector<NuclideActivityPair> SandiaDecayDataBase::decay( const Nuclide *parent,
-                                                             const double orignal_activity,
+                                                             const CalcFloatType orignal_activity,
                                                              const double time_in_seconds )
 {
   NuclideMixture mixture;
@@ -3254,13 +3257,13 @@ std::vector<NuclideTimeEvolution> SandiaDecayDataBase::getTimeEvolution( const s
 
 
 
-NuclideNumAtomsPair::NuclideNumAtomsPair( const Nuclide *_nuclide, double _numAtoms )
+NuclideNumAtomsPair::NuclideNumAtomsPair( const Nuclide *_nuclide, CalcFloatType _numAtoms )
   :   nuclide( _nuclide ), numAtoms( _numAtoms )
 {}
 
 
 
-  NuclideActivityPair::NuclideActivityPair( const Nuclide *_nuclide, double _activity )
+  NuclideActivityPair::NuclideActivityPair( const Nuclide *_nuclide, CalcFloatType _activity )
     : nuclide( _nuclide ), activity( _activity )
   {}
 
@@ -3271,6 +3274,7 @@ NuclideNumAtomsPair::NuclideNumAtomsPair( const Nuclide *_nuclide, double _numAt
 
   SandiaDecay::CalcFloatType TimeEvolutionTerm::eval( double time_in_seconds ) const
   {
+    //return termCoeff * ::expq( -time_in_seconds*exponentialCoeff ); //__float128
     return termCoeff * exp( -time_in_seconds*exponentialCoeff );
   }
 
