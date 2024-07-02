@@ -38,6 +38,7 @@ void check_sum_branching_ratios();
 void sanity_check_all_decays();
 void sanity_check_nuclides_and_transistions();
 void check_bateman_denominator();
+void check_addAgedNuclideByNumAtoms();
 
 //global variables - whatever, I do what I want!
 string g_xml_file;
@@ -59,6 +60,7 @@ int main( int argc, const char * argv[] )
     sanity_check_all_decays();
     check_bateman_denominator();
     check_sum_branching_ratios();
+    check_addAgedNuclideByNumAtoms();
   }catch( std::exception &e )
   {
     cerr << "Caught error doing tests: " << e.what() << endl;
@@ -607,3 +609,99 @@ void check_sum_branching_ratios()
 
 
 
+void check_addAgedNuclideByNumAtoms()
+{
+  // Basic sanity check for NuclideMixture::addAgedNuclideByNumAtoms().
+  
+  using namespace SandiaDecay;
+  SandiaDecayDataBase database( g_xml_file );
+  
+  
+  vector<const Nuclide *> test_nucs;
+  test_nucs.push_back( database.nuclide("Cs137") );
+  test_nucs.push_back( database.nuclide("Cr51") );
+  test_nucs.push_back( database.nuclide("Mn56") );
+  test_nucs.push_back( database.nuclide("Ni59") );
+  test_nucs.push_back( database.nuclide("Th232") );
+  
+  vector<double> test_activities;
+  test_activities.push_back( 1.0E-9 );
+  test_activities.push_back( 1.0E-3 );
+  test_activities.push_back( 1.0E0 );
+  test_activities.push_back( 1.0E3 );
+  
+  vector<double> test_hl_ages;
+  test_hl_ages.push_back( 0.0 );
+  test_hl_ages.push_back( 1.0 );
+  test_hl_ages.push_back( 10.0 );
+  test_hl_ages.push_back( 15.0 );
+  test_hl_ages.push_back( 25.0 );
+  test_hl_ages.push_back( 45.0 );
+  
+  
+  for( size_t nuc_index = 0; nuc_index < test_nucs.size(); ++nuc_index )
+  {
+    const Nuclide * const nuclide = test_nucs[nuc_index];
+    
+    for( size_t act_index = 0; act_index < test_activities.size(); ++act_index )
+    {
+      const double activity = test_activities[act_index];
+      const double num_parent_atoms = nuclide->activityToNumAtoms(activity);
+      
+      for( size_t age_index = 0; age_index < test_hl_ages.size(); ++age_index )
+      {
+        const double age = test_hl_ages[age_index] * nuclide->halfLife;
+        
+        NuclideMixture num_atom_mix, activity_mix;
+        
+        num_atom_mix.addAgedNuclideByNumAtoms( nuclide, num_parent_atoms, age );
+        activity_mix.addAgedNuclideByActivity( nuclide, activity, age );
+        
+        // Now make sure total number of atoms for `num_atom_mix` is preserved,
+        //  and also compare
+        const vector<NuclideNumAtomsPair> num_atoms_natoms = num_atom_mix.numAtoms(0.0);
+        double num_decay_atoms = 0.0, num_unstable_natom = 0.0;
+        for( size_t natom_index = 0; natom_index < num_atoms_natoms.size(); ++natom_index )
+        {
+          const NuclideNumAtomsPair &nuc_atom = num_atoms_natoms[natom_index];
+          if( !nuc_atom.nuclide->isStable() )
+            num_unstable_natom += nuc_atom.numAtoms;
+          num_decay_atoms += nuc_atom.numAtoms;
+        }
+        
+        const vector<NuclideNumAtomsPair> act_num_atoms = activity_mix.numAtoms(0.0);
+        double num_unstable_act = 0.0;
+        for( size_t natom_index = 0; natom_index < act_num_atoms.size(); ++natom_index )
+        {
+          const NuclideNumAtomsPair &nuc_atom = act_num_atoms[natom_index];
+          if( !nuc_atom.nuclide->isStable() )
+            num_unstable_act += nuc_atom.numAtoms;
+        }
+        
+        assert( fabs(num_unstable_natom - num_unstable_act) < 1.0E-9*std::max(num_unstable_natom,num_unstable_act)
+               || std::max(num_unstable_natom,num_unstable_act) < std::numeric_limits<double>::epsilon() );
+        
+        if( nuclide->decaysToStableChildren() )
+        {
+          const double num_initial_atoms = num_parent_atoms / exp( -age*nuclide->decayConstant() );
+          const double num_stable_expected = (num_initial_atoms - num_parent_atoms);
+          const double num_stable_calc = (num_decay_atoms - num_unstable_natom);
+          
+          assert( fabs(num_unstable_natom - num_parent_atoms) < 1.0E-9*std::max(num_decay_atoms, num_parent_atoms) );
+          assert( fabs(num_stable_expected - num_stable_calc) < 1.0E-9*std::max(num_stable_expected, num_stable_calc)
+                 || std::max(num_stable_expected, num_stable_calc) < std::numeric_limits<double>::epsilon() );
+        }
+        
+        //cout << "For " << nuclide->symbol << ":\n"
+        //<< std::setprecision(14)
+        //<< "\tnum_parent_atoms:" << num_parent_atoms << "\n"
+        //"\tact=" << activity << "\n"
+        //<< "\tNumHL=" << test_hl_ages[age_index] << "\n"
+        //<< "\tnum_decay_atoms=" << num_decay_atoms << "\n"
+        //<< "\tnum_unstable_natom=" << num_unstable_natom << " compared to byact method of num_unstable_act="
+        //<< num_unstable_act << "\n"
+        //<< endl;
+      }
+    }
+  }//for( const size_t nuc_index = 0; nuc_index < test_nucs.size(); ++nuc_index )
+}//void test_addAgedNuclideByNumAtoms()

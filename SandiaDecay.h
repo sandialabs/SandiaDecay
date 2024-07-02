@@ -507,7 +507,7 @@ namespace SandiaDecay
         corresponds to the parent nuclides activity at the mixtures t=0 age.
         For example, if you add 1uCi of U232 (t_{1/2}=68.8y) with an initial age
         of 20 years, and then ask for the gammas at time 68.8y, you will get the
-        gammas a 88.8y old sample with a current U232 activity of 0.5uCi; if you
+        gammas of a 88.8y old sample with a current U232 activity of 0.5uCi; if you
         asked for gammas at a time of 0y, you would get the gammas of a 20 year
         old sample that has an activity of 1uCi.  Ex.
      \code{.cpp}
@@ -526,7 +526,9 @@ namespace SandiaDecay
     
     /** Function to add an age nuclide, using the number of atoms
      
-     *** This function HAS NOT BEEN ADEQUATELY TESTED YET ***
+     If the age is so large that numerical accuracy is niavely suspect (seems to be
+     a little over 45 half lives of parent - i.e., there is no parent activity to
+     scale back up to wanted activity), than an exception will be thrown.
      
      Note: when this function is used, the `numAtoms(...)` family of functions
      will return the number of atoms present for all descendant nuclides, including

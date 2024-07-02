@@ -1640,36 +1640,10 @@ void NuclideMixture::addAgedNuclideByNumAtoms( const Nuclide *nuclide,
     return;
   }
   
-  
   NuclideMixture ager;
-  ager.addNuclideByAbundance( nuclide, number_atoms );
+  // We will use 1 initial atom, so we arent sensitive so much to value of `number_atoms`
+  ager.addNuclideByAbundance( nuclide, 1.0 );
   const std::vector<NuclideNumAtomsPair> aged_atoms = ager.numAtoms( age_in_seconds );
-  
-  // `nuclide->halfLife` may be much, much smaller than `age_in_seconds`, but one of the
-  //  descendants of `nuclide` could have a long half-life.
-  //  If we use the aged `nuclide` number of atoms to scale things, then our scale factor
-  //  would be huge, and giant numerical accuracy issues kick in and make our results
-  //  garbage.
-  //  So I think we need to walk down the decay chain and replace `nuclide` with the first
-  //  nuclide whose half-life is within a multiple of `age_in_seconds`, of say 10, or 15, or 20,
-  //  so this way we get a half-way reasonably activity multiple to use.
-  //
-  //  Right now I selected 15 arbitrarily - but this needs to be checked out.
-  //  And also I think we need some additional (small) corrections for the decayed away time.
-  //  Also we need to add some checks to `addAgedNuclideByActivity(...)` for similar issues.
-  const double max_num_hl = 15;
-  if( (max_num_hl*nuclide->halfLife) < age_in_seconds )
-  {
-    for( size_t i = 0; i < nuclide->decaysToChildren.size(); ++i )
-    {
-      const Transition * const trans = nuclide->decaysToChildren[i];
-      if( trans->child )
-        addAgedNuclideByNumAtoms( trans->child, trans->branchRatio * number_atoms, age_in_seconds );
-    }
-    
-    return;
-  }//if( (max_num_hl*nuclide->halfLife) < age_in_seconds )
-  
   
   CalcFloatType age_sf = 1.0;
   for( size_t i = 0; i < aged_atoms.size(); ++i )
@@ -1677,10 +1651,27 @@ void NuclideMixture::addAgedNuclideByNumAtoms( const Nuclide *nuclide,
     const NuclideNumAtomsPair &red = aged_atoms[i];
     if( red.nuclide == nuclide )
     {
+      //Lets check for at least some numerical accuracy:
+      //  epsilon: the difference between 1.0 and the next representable value of the given floating-point type
+      //  min: returns the smallest finite, normalized, value of the given type
+      // 100: arbitrary
+      // This test seems to trigger for age at around 47 half-lives of  parent nuclide
+      if( (red.numAtoms < 100.0*numeric_limits<CalcFloatType>::epsilon())
+         || (red.numAtoms < 100.0*numeric_limits<CalcFloatType>::min()) )
+      {
+        stringstream msg;
+        msg << "Call to NuclideMixture::addAgedNuclideByNumAtoms(" << nuclide->symbol
+        << ", " << number_atoms << ", " << age_in_seconds << ")"
+        << " results in too large of numerical imprecision.";
+        
+        throw runtime_error( msg.str() );
+      }
+      
       age_sf = number_atoms / red.numAtoms;
       i = aged_atoms.size(); //stop this loop
     }
   }//for( size_t i = 0; i < aged_activities.size(); ++i )
+
 
   for( size_t i = 0; i < aged_atoms.size(); ++i )
   {
