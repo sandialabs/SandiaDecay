@@ -236,8 +236,9 @@ namespace SandiaDecay
 //  mass units of variables or member functions in their respective names.
 
   /** The float type to use for intermediate decay calculations.
-   You can set this to float, double, or long double.  However, the underlying
-   Nuclear data will probably be the limiting factor in accuracy for even float.
+   You can set this to `float`, `double`, `long double`, or `__float128` (e.g., x64 GNU).
+   However, the underlying Nuclear data will probably be the limiting factor
+   in accuracy for even float.
    */
   typedef double CalcFloatType;
   
@@ -383,7 +384,7 @@ namespace SandiaDecay
     
     static
     std::vector<NuclideActivityPair> decay( const Nuclide *parent,
-                                            const double orignal_activity,
+                                            const CalcFloatType orignal_activity,
                                             const double time_in_seconds );
     static
     std::vector<NuclideActivityPair> decay(
@@ -397,7 +398,7 @@ namespace SandiaDecay
 
     static
     std::vector<NuclideTimeEvolution> getTimeEvolution( const Nuclide *parent,
-                                              const double orignal_activity );
+                                              const CalcFloatType orignal_activity );
     static
     std::vector<NuclideTimeEvolution> getTimeEvolution(
                               const std::vector<NuclideNumAtomsPair> &parents );
@@ -483,7 +484,7 @@ namespace SandiaDecay
     /** Add a nuclide by specifying how many nuclide atomis are initially in the
         mixture.
      */
-    void addNuclideByAbundance( const Nuclide *nuclide, double num_init_atom );
+    void addNuclideByAbundance( const Nuclide *nuclide, CalcFloatType num_init_atom );
     
     /** Add a nuclide by specifying the initial activity of the nuclide.
         Activity should be in SandiaDecay units.  Ex.
@@ -492,7 +493,7 @@ namespace SandiaDecay
      mixture.addNuclideByActivity( u238, 0.001*SandiaDecay::curie );
      \endcode
      */
-    void addNuclideByActivity( const Nuclide *nuclide, double activity );
+    void addNuclideByActivity( const Nuclide *nuclide, CalcFloatType activity );
     
     /** Convenience function to add nuclide by specifying number of initial
         atoms.
@@ -503,21 +504,39 @@ namespace SandiaDecay
     void addNuclide( const NuclideActivityPair &nucide );
 
     /** Add a nuclide to the mixture that is already pre-aged.  The activity
-        cooresponds to the parent nuclides activity at the mixtures t=0 age.
-        For example, if you add 1uCi of U232 (t_{1/2}=68.8y) with an inital age
+        corresponds to the parent nuclides activity at the mixtures t=0 age.
+        For example, if you add 1uCi of U232 (t_{1/2}=68.8y) with an initial age
         of 20 years, and then ask for the gammas at time 68.8y, you will get the
-        gammas a 88.8y old sample with a current U232 activity of 0.5uCi; if you
+        gammas of a 88.8y old sample with a current U232 activity of 0.5uCi; if you
         asked for gammas at a time of 0y, you would get the gammas of a 20 year
         old sample that has an activity of 1uCi.  Ex.
      \code{.cpp}
      const SandiaDecay::Nuclide *u238 = db.nuclide("U238");
      mixture.addAgedNuclideByActivity( u238, 0.001*SandiaDecay::curie, 20.0*SandiaDecay::year );
      \endcode
+     
+     Note: when this function is used, the `numAtoms(...)` family of functions
+     will NOT return the number of atoms present, at the given time, for the
+     stable nuclides.
      */
     //ToDo: implement test.
     void addAgedNuclideByActivity( const Nuclide *nuclide,
-                                   double activity,
-                                   double age_in_seconds );
+                                  CalcFloatType activity,
+                                  double age_in_seconds );
+    
+    /** Function to add an age nuclide, using the number of atoms
+     
+     If the age is so large that numerical accuracy is niavely suspect (seems to be
+     a little over 45 half lives of parent - i.e., there is no parent activity to
+     scale back up to wanted activity), than an exception will be thrown.
+     
+     Note: when this function is used, the `numAtoms(...)` family of functions
+     will return the number of atoms present for all descendant nuclides, including
+     stable nuclides.
+     */
+    void addAgedNuclideByNumAtoms( const Nuclide *nuclide,
+                                  CalcFloatType number_atoms,
+                                  double age_in_seconds );
 
     /** Add a nuclide to the mixture that has laready obtained secular
         equilibrium.  The activity specified is of the parent nuclide a the
@@ -530,7 +549,7 @@ namespace SandiaDecay
        added to mixture.
      */
     bool addNuclideInSecularEquilibrium( const Nuclide *parent,
-                                         double parent_activity );
+                                        CalcFloatType parent_activity );
 
     
     /** Adds the children nuclides of 'parent' of whose half lives are
@@ -545,7 +564,7 @@ namespace SandiaDecay
         The parent nuclide is always added in (unless its stable).
      */
     void addNuclideInPromptEquilibrium( const Nuclide *parent,
-                                       double parent_activity );
+                                       CalcFloatType parent_activity );
     
     /** Returns the number of nuclides given in the solution, and cooresponds
         to the index for nulides in the vector returned by
@@ -558,19 +577,19 @@ namespace SandiaDecay
         Returned value is in units of SandiaDecay (e.x., divide result by
         #SandiaDecay::curie to determine number of Curies).
      */
-    double activity( double time, const Nuclide *nuclide )    const;
-    double activity( double time, const std::string &symbol ) const;
-    double activity( double time, int z, int atomic_mass, int iso )  const;
-    double activity( double time, int internal_index_number ) const;
+    CalcFloatType activity( double time, const Nuclide *nuclide )    const;
+    CalcFloatType activity( double time, const std::string &symbol ) const;
+    CalcFloatType activity( double time, int z, int atomic_mass, int iso )  const;
+    CalcFloatType activity( double time, int internal_index_number ) const;
     std::vector<NuclideActivityPair> activity( double time_in_seconds ) const;
 
     /** Get the number of atoms of a specific nuclide remaining at a given time
         after mixture.
      */
-    double numAtoms( double time, const Nuclide *nuclide ) const;
-    double numAtoms( double time, const std::string &symbol ) const;
-    double numAtoms( double time, int z, int atomic_mass, int iso )  const;
-    double numAtoms( double time, int internal_index_number ) const;
+    CalcFloatType numAtoms( double time, const Nuclide *nuclide ) const;
+    CalcFloatType numAtoms( double time, const std::string &symbol ) const;
+    CalcFloatType numAtoms( double time, int z, int atomic_mass, int iso )  const;
+    CalcFloatType numAtoms( double time, int internal_index_number ) const;
     std::vector<NuclideNumAtomsPair> numAtoms( double time_in_seconds )  const;
 
     /** Get the total summed activity for all nuclide in the mixture, including
@@ -578,10 +597,10 @@ namespace SandiaDecay
         There are probably not to many circumstances when this function is
         useful, so make sure its what you actually want.
      */
-    double totalActivity( double time ) const;
+    CalcFloatType totalActivity( double time ) const;
     
     /** Get the total mass in grams of the mixture. */
-    double totalMassInGrams( double time = 0.0 ) const;  //in grams
+    CalcFloatType totalMassInGrams( double time = 0.0 ) const;  //in grams
 
     /** How to order returned decay particles. */
     enum HowToOrder
@@ -797,14 +816,14 @@ namespace SandiaDecay
         cout << u238->numAtomsToActivity(6.022E23)/SandiaDecay::curie << "ci\n";
         \endcode
      */
-    double numAtomsToActivity( const double num_atoms ) const;
+    CalcFloatType numAtomsToActivity( const CalcFloatType num_atoms ) const;
     /** Convert from the activity of this nuclide, to the number of atoms.
      \code{.cpp}
      const SandiaDecay::Nuclide *u238 = db.nuclide("U238");
      cout << u238->activityToNumAtoms(0.001*SandiaDecay::curie)/ << "atoms\n";
      \endcode
      */
-    double activityToNumAtoms( const double activity ) const;
+    CalcFloatType activityToNumAtoms( const CalcFloatType activity ) const;
 
     /** The fraction of decays of this nuclide that proceeds through the
         specified descendant (which may be multiple generations down the chain).
@@ -1116,9 +1135,9 @@ namespace SandiaDecay
     const Nuclide *nuclide;
     
     /** The number of atoms present. */
-    double numAtoms;
+    CalcFloatType numAtoms;
     
-    NuclideNumAtomsPair( const Nuclide *_nuclide, double _numAtoms );
+    NuclideNumAtomsPair( const Nuclide *_nuclide, CalcFloatType _numAtoms );
   };//struct NuclideNumAtomsPair
 
 
@@ -1131,9 +1150,9 @@ namespace SandiaDecay
     const Nuclide *nuclide;
     
     /** Activity of the nuclide, in units of SandiaDecay. */
-    double activity;
+    CalcFloatType activity;
     
-    NuclideActivityPair( const Nuclide *_nuclide, double _activity );
+    NuclideActivityPair( const Nuclide *_nuclide, CalcFloatType _activity );
   };//struct NuclideActivityPair
 
   
