@@ -2131,6 +2131,210 @@ std::vector<EnergyRatePair> NuclideMixture::photons( const double time_in_second
   return gam;
 }
 
+  
+std::vector<SandiaDecay::EnergyCountPair>
+NuclideMixture::decayParticlesInInterval( const double initial_age,
+                            const double interval_duration,
+                            const ProductType type,
+                            const HowToOrder sort_type,
+                            const size_t characteristic_time_slices ) const
+{
+  // This function is rather niave, it just performs a very simple-minded integration
+  //  at a fixed number of time-steps.
+  //
+  // TODO: figure out how many time slices are needed for reasonable accuracy, and use a more intelligent integration algorithm
+  //       A first quick go at this, for In110 (hl=4.9h), over a 2.8 hour measurement,
+  //       gave corrections of
+  //            For 250: 0.826922  (which matches analytical answer of 0.826922)
+  //            For 50:  0.82692
+  //            For 25:  0.826913
+  //            For 10:  0.826869
+  //
+  //  A spot check using Mn56 (hl=9283.8s), and a meas duration of 86423.86s, with 50 timeslices
+  //    gives a correction factor of 0.15473519892011101, vs analytical answer of 0.1547364350135815
+  
+  const int num_source_nuclides = numInitialNuclides();
+  if( num_source_nuclides < 1 )
+    throw runtime_error( "decayParticlesInInterval:"
+                        " passed in mixture must have at least one parent nuclide" );
+  
+  double minHalflife = std::numeric_limits<double>::max();
+  for( int nuc_num = 0; nuc_num < num_source_nuclides; ++nuc_num )
+  {
+    const SandiaDecay::Nuclide *nuclide = initialNuclide(nuc_num);
+    assert( nuclide );
+    if( !nuclide )
+      throw std::logic_error( "decayParticlesInInterval: nullptr nuc" );
+  
+    // TODO: the parent half-life may not be the relevant one; should check down the chain
+    minHalflife = std::min(nuclide->halfLife, minHalflife);
+  }
+      
+  const double characteristicTime = std::min( interval_duration, minHalflife );
+  const double dt = characteristicTime / characteristic_time_slices;
+  
+  const int max_num_slices = 2000;
+  const int min_num_slices = 50;
+  const int niave_num_slices = static_cast<int>( std::ceil( interval_duration / dt ) );
+      
+  const int num_time_slices = std::min( max_num_slices, std::max( min_num_slices, niave_num_slices ) );
+  
+  const vector<SandiaDecay::EnergyRatePair> initial_particles
+                  = decayParticle( initial_age, type, SandiaDecay::NuclideMixture::OrderByEnergy );
+  
+  const size_t num_energies = initial_particles.size();
+  
+  // Create the vector of particle {energy,counts} we will use to accumulate
+  vector<EnergyCountPair> energy_count_pairs( num_energies, EnergyCountPair(0.0,0.0) );
+  for( size_t i = 0; i < num_energies; ++i )
+  {
+    energy_count_pairs[i].energy = initial_particles[i].energy;
+    energy_count_pairs[i].count = 0.0;
+  }
+        
+  // Do a very niave integration, using the mid-point of the time interval for the average value,
+  // and multiply by the duration of the interval, to get the total - this could be so much better
+  for( int timeslice = 0; timeslice < num_time_slices; timeslice += 1 )
+  {
+    const double this_age = initial_age + interval_duration*(2.0*timeslice + 1.0)/(2.0*num_time_slices);
+    const vector<SandiaDecay::EnergyRatePair> these_gammas
+                        = decayParticle( this_age, type, SandiaDecay::NuclideMixture::OrderByEnergy );
+    
+    assert( these_gammas.size() == energy_count_pairs.size() );
+    if( these_gammas.size() != num_energies )
+      throw std::logic_error( "gamma result size doesn't match expected." );
+      
+    for( size_t i = 0; i < num_energies; ++i )
+      energy_count_pairs[i].count += these_gammas[i].numPerSecond;
+  }//for( loop over timeslices )
+  
+  const double time_delta = interval_duration / num_time_slices;
+  for( size_t i = 0; i < num_energies; ++i )
+    energy_count_pairs[i].count *= time_delta;
+  
+  switch( sort_type )
+  {
+    case OrderByAbundance:
+      sort( energy_count_pairs.begin(), energy_count_pairs.end(),
+           &EnergyCountPair::moreThanByCount );
+      break;
+
+    case OrderByEnergy:
+      //already sorted by energy
+      break;
+  }//switch( sortType )
+  
+#ifndef NDEBUG
+  // For debug builds we'll do a sanity check if we can easily compare to analytical answer
+  // when input has a single nuclide, and it decays to stable children
+  if( (num_source_nuclides == 1) && initialNuclide(0)->decaysToStableChildren() )
+  {
+    const SandiaDecay::Nuclide *nuclide = initialNuclide(0);
+    
+    bool found_issue = false;
+    const double lambda = nuclide->decayConstant();
+    const double corr_factor = (1.0 - exp(-1.0*lambda*interval_duration)) / (lambda * interval_duration);
+    
+    assert( initial_particles.size() == energy_count_pairs.size() );
+    for( size_t i = 0; i < energy_count_pairs.size(); ++i )
+    {
+      assert( energy_count_pairs[i].energy == initial_particles[i].energy );
+      
+      const double numerical_answer = energy_count_pairs[i].count / interval_duration;
+      const double uncorrected_answer = initial_particles[i].numPerSecond;
+      if( (uncorrected_answer > DBL_EPSILON) || (uncorrected_answer > DBL_EPSILON) )
+      {
+        const double numerical_corr_factor = numerical_answer / uncorrected_answer;
+        const double diff = fabs(numerical_corr_factor - corr_factor);
+        if( (diff > 0.0001) || (0.0001*diff > std::max(numerical_corr_factor, corr_factor)) )
+        {
+          found_issue = true;
+          cerr << "Found decay correction value of "
+          << numerical_corr_factor << ", when a true value of "
+          << corr_factor << " was expected for " << nuclide->symbol
+          << " with half life " << nuclide->halfLife/SandiaDecay::hour
+          << " hours and a measurement time "
+          << interval_duration/SandiaDecay::hour
+          << " hours (at energy " << energy_count_pairs[i].energy << " keV)"
+          << endl;
+        }//if( error is larger than expected )
+      }//if( not a zero BR gamma )
+    }//if( we can use standard formula to correct )
+    
+    assert( !found_issue );
+  }//if( one input nuclide that decays to stable children )
+#endif //NDEBUG
+  
+  return energy_count_pairs;
+}//decayParticlesInInterval(...)
+  
+  
+std::vector<SandiaDecay::EnergyCountPair>
+NuclideMixture::decayGammasInInterval( const double initial_age,
+                        const double interval_duration,
+                        const bool includeAnnihilation,
+                        const HowToOrder sort_type,
+                        const size_t characteristic_time_slices ) const
+{
+  vector<EnergyCountPair> gams = decayParticlesInInterval( initial_age, interval_duration,
+                                            GammaParticle, sort_type, characteristic_time_slices );
+  
+  if( !includeAnnihilation )
+    return gams;
+
+  const vector<EnergyCountPair> poss = decayParticlesInInterval( initial_age, interval_duration,
+                                      PositronParticle, OrderByEnergy, characteristic_time_slices );
+
+  EnergyCountPair possbr( 510.998910, 0.0 );
+  
+  for( size_t i = 0; i < poss.size(); ++i )
+    possbr.count += 2.0*poss[i].count; //an annihilation event creates two photons
+  
+  vector<EnergyCountPair>::iterator pos;
+  switch( sort_type )
+  {
+    case OrderByAbundance:
+      pos = lower_bound( gams.begin(), gams.end(), possbr, &EnergyCountPair::moreThanByCount );
+    break;
+        
+    case OrderByEnergy:
+      pos = lower_bound( gams.begin(), gams.end(), possbr, &EnergyCountPair::lessThanByEnergy );
+    break;
+  }//switch( sortType )
+    
+  gams.insert( pos, possbr );
+  
+  return gams;
+}//NuclideMixture::decayGammasInInterval(...)
+  
+  
+std::vector<SandiaDecay::EnergyCountPair>
+  NuclideMixture::decayPhotonsInInterval( const double initial_age,
+                            const double interval_duration,
+                            HowToOrder sort_type,
+                            const size_t characteristic_time_slices ) const
+{
+  vector<EnergyCountPair> gam = decayGammasInInterval( initial_age, interval_duration, true, 
+                                                          sort_type, characteristic_time_slices );
+  const vector<EnergyCountPair> x = decayParticlesInInterval( initial_age, interval_duration, 
+                                ProductType::XrayParticle, sort_type, characteristic_time_slices );
+    
+  gam.insert( gam.begin(), x.begin(), x.end() );
+    
+  switch( sort_type )
+  {
+    case OrderByAbundance:
+      sort( gam.begin(), gam.end(), &EnergyCountPair::moreThanByCount );
+      break;
+        
+    case OrderByEnergy:
+      sort( gam.begin(), gam.end(), &EnergyCountPair::lessThanByEnergy );
+      break;
+  }//switch( sortType )
+    
+  return gam;
+}//NuclideMixture::decayPhotonsInInterval(...)
+  
 
 //internal_index_number runs from 0 to numSolutionNuclides()
 int NuclideMixture::internalIndexNumber( const Nuclide *nuclide ) const
@@ -3281,13 +3485,28 @@ NuclideNumAtomsPair::NuclideNumAtomsPair( const Nuclide *_nuclide, CalcFloatType
       return (lhs.numPerSecond > rhs.numPerSecond);
   }
 
+  
   bool EnergyRatePair::lessThanByEnergy( const EnergyRatePair &lhs,
                                               const EnergyRatePair &rhs )
   {
     return lhs.energy < rhs.energy;
   }
 
+  
+  bool EnergyCountPair::moreThanByCount( const EnergyCountPair &lhs,
+                                     const EnergyCountPair &rhs )
+  {
+    return (lhs.count > rhs.count);
+  }
+  
+  
+  bool EnergyCountPair::lessThanByEnergy( const EnergyCountPair &lhs,
+                               const EnergyCountPair &rhs )
+  {
+    return lhs.energy < rhs.energy;
+  }
 
+  
   NuclideTimeEvolution::NuclideTimeEvolution( const Nuclide *_nuclide )
      : nuclide(_nuclide){}
 

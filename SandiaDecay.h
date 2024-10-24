@@ -58,12 +58,12 @@ namespace rapidxml { template<class Ch> class xml_node; }
  
  const double time = 5.7*SandiaDecay::year;
  
- //Get gammas emmitted by the nucleuses during decay, with results sorted
+ //Get gammas emitted by the nucleuses during decay, with results sorted
  //  by energy; the 'true' argument says include gammas from positron
  //  annihilations as well.
- //  The Co60 (t_{1/2}=5.7y) emmisions will be that from 5.7-year old Co60 (i.e.,
- //  0.005 ci), but the emmisions from Np237 (t_{1/2}=1.08y) will be equivalent
- //  from a sample aged 25.7y where the Np235 isotope currenly has an activity
+ //  The Co60 (t_{1/2}=5.7y) emissions will be that from 5.7-year old Co60 (i.e.,
+ //  0.005 ci), but the emissions from Np237 (t_{1/2}=1.08y) will be equivalent
+ //  from a sample aged 25.7y where the Np235 isotope currently has an activity
  //  of 26.15 uCi (1mCi aged 5.27 half lives).
  const vector<EnergyRatePair> gammas = mixture.gammas( time, NuclideMixture::kByEnergy, true );
  
@@ -77,50 +77,39 @@ namespace rapidxml { template<class Ch> class xml_node; }
 
 
 //Known Issues:
-// -Convertions between number of atoms and activity (happens durring
+// -Conversions between number of atoms and activity (happens during
 //  decay calculation, and other places) might cause numerical errors for
-//  large activities or elements with large half lifes; superficially this
-//  appears to not be an issue, but should be explicitly checked at some point.
-// -The XML input file, sandia.decay.xml is known to have issues
+//  large activities or elements with large half lives; superficially, by
+//  comparing calculations using 64 bit floating point to 128 bit floating
+//  point numbers, it doesn't appear to be an issue.
+// -The XML input file, sandia.decay.xml is known to have issues (as does
+//  nuclear data sources)
 // -If there are multiple children in a decay chain with the same half-life
-//  decay calculations will fail (this has been manually checked for in the
+//  decay calculations will fail (this has been checked for in the
 //  current sandia.decay.xml).
 // -Spontaneous fission products are not included in this library.
-// -A generall code clean up is needed
-// -Consistent use of floats vs doubles, and numeric stability could use
-//  additional checks
+// -A general code clean up is needed
 
-//A few design decitions:
+
+//A few design decisions:
 // -Code should compile using any C++03 compliant compiler
 // -A unit system based on seconds, keV, and becquerel has been used, with
-//  converstions to other units provided in this namespace SandiaDecay
-// -All necessary functions are included in one header and coresponding cpp
+//  conversions to other units provided in this namespace SandiaDecay
+// -All necessary functions are included in one header and corresponding cpp
 //  file; this is an attempt to make it easier to include in projects.
-// -To avoid unneccassary copying of nuclide and transition object, const
+// -To avoid unnecessary copying of nuclide and transition object, const
 //  pointers to these objects will be used by SandiaDecayDataBase; additionally
-//  the user should never delete these objects, as they are always owened by
+//  the user should never delete these objects, as they are always owned by
 //  SandiaDecayDataBase (and in fact can only be created by SandiaDecayDataBase)
-// -Lots of struct's are defined to aid in reading the code (as oposed to using
+// -Lots of struct's are defined to aid in reading the code (as opposed to using
 //  something like std::pair<>).  It is intended the user of this library should
 //  access the member variables of structs directly. For the structs, I try to
 //  follow the convention exampled by: for the struct NuclideAbundancePair,
 //  there is a member variable name nuclide, and a member variable named
-//  abundance.  Member variables should not be directly accesed for class object
+//  abundance.  Member variables should not be directly accessed for class object
 //  but for structs they should be
 // -Multithreaded initialization (parsing of xml) was tried, but added no
 //  performance gain, so was removed.
-
-//ToDo items (20181220):
-// -Add tests for function calls in this file where it is noted
-//  (search 'implement test.')
-// -Add test that independantly parses the XML and makes sure each nuclide,
-//  transition, etc is in memory and sane (watch for BR=0.0).
-// -Add explicit test of a few nuclide decays by hand
-// -Add test (maybe at runtime) that a sane number of nuclides, elements,
-//  transitions were parsed.
-// -Add test that each radioactive nuclide has transition
-// -Add test that sane numbers of x-rays, gammas, etc are seen from a handul of
-//  selected decays.
 
 
 namespace SandiaDecay
@@ -189,10 +178,11 @@ namespace SandiaDecay
   struct Transition;
   struct RadParticle;
   struct EnergyRatePair;
+  struct EnergyCountPair;
   struct EnergyIntensityPair;
-  struct NuclideAbundancePair;
   struct NuclideNumAtomsPair;
   struct NuclideActivityPair;
+  struct NuclideAbundancePair;
   struct NuclideTimeEvolution;
   
   /** Unit system used by this library, examples of use are:
@@ -658,13 +648,58 @@ namespace SandiaDecay
                                               const HowToOrder sortType = OrderByAbundance
                                              ) const;
     
-    /** The generic function to get rate of a specfici type of decay particle
+    /** The generic function to get rate of a specific type of decay particle
         at a given mixture age.
      */
     std::vector<EnergyRatePair> decayParticle( double time,
                                                ProductType type,
                                                HowToOrder sortType = OrderByAbundance
                                                    ) const;
+    
+    /** Calculates the number of expected particles, at each energy, for a given time interval,
+     accounting for decay during the interval.
+     
+     A simple integration over the interval, at fixed time steps, is used to estimate the total number
+     of particles expected in the interval.  It is a niave, and not particularly optimized algorithm, but
+     checks out well against analytical answer, for the cases that is available
+     
+     @param initial_age  The initial age, in seconds, of the mixture, at time of
+            interval (this is relative to the mixtures T=0 time).  E.g., the samples age at the start
+            of the measurement
+     @param interval_duration The duration, in seconds, of the interval. E.g.
+            how long the measurement is.
+     @param type The particle type you are interested in
+     @param sort_type How to order the returned answer.
+     @param characteristic_time_slices Used to calculate number of time slices to
+            integrate over.  The delta time step will be the minimum of the parent nuclide
+            half-lives, or the interval time span, divided by this number.  Then the number of
+            times steps will be clamped between 50 and 2000.
+            Default value is 50, which usually will get you to at least 5 significant figures of
+            exact answer.
+     @returns The number of total particles, at each energy, for the interval.
+     */
+    std::vector<SandiaDecay::EnergyCountPair>
+    decayParticlesInInterval( const double initial_age,
+                              const double interval_duration,
+                              const ProductType type,
+                              const HowToOrder sort_type = OrderByAbundance,
+                              const size_t characteristic_time_slices = 50 ) const;
+
+    /** The results of `decayParticlesInInterval`, but for both gammas and x-rays. */
+    std::vector<SandiaDecay::EnergyCountPair>
+    decayGammasInInterval( const double initial_age,
+                          const double interval_duration,
+                          const bool includeAnnihilation,
+                          const HowToOrder sort_type = OrderByAbundance,
+                          const size_t characteristic_time_slices = 50 ) const;
+    
+    /** The results of `decayParticlesInInterval`, but for both gammas and x-rays. */
+    std::vector<SandiaDecay::EnergyCountPair>
+    decayPhotonsInInterval( const double initial_age,
+                           const double interval_duration,
+                           const HowToOrder sort_type = OrderByAbundance,
+                           const size_t characteristic_time_slices = 50 ) const;
+    
     
     /** Return a human readable summary of mixture for a given time. */
     std::string info( const double time ) const;
@@ -1089,11 +1124,11 @@ namespace SandiaDecay
                                        const EnergyRatePair &rhs );
     static bool lessThanByEnergy( const EnergyRatePair &lhs,
                                  const EnergyRatePair &rhs );
-  };//struct AbundanceEnergyPair
+  };//struct EnergyRatePair
 
   
   /** Structure to return the relative (to the number of decays) intensities of
-      a specific-energied decay particles.
+      a specific-energy decay particles.
       E.g., Specify what fraction of decay event will have a gamma of a certain
       energy.
    */
@@ -1110,6 +1145,26 @@ namespace SandiaDecay
     
     EnergyIntensityPair( double e, double i ) : energy(e), intensity(i) {}
   };//struct EnergyIntensityPair
+  
+  
+  /** Struct to return the energy and number of those particles that are expected
+   for a given time interval.
+   */
+  struct EnergyCountPair
+  {
+    /** Energy, in units of SandiaDecay. */
+    double energy;
+    
+    /** The number of particles */
+    double count;
+    
+    EnergyCountPair( double e, double c ) : energy(e), count(c) {}
+    
+    static bool moreThanByCount( const EnergyCountPair &lhs,
+                                       const EnergyCountPair &rhs );
+    static bool lessThanByEnergy( const EnergyCountPair &lhs,
+                                 const EnergyCountPair &rhs );
+  };//struct EnergyCountPair
 
   
   /**  Structure to hold the information about the abundance (by mass) of a
@@ -1157,7 +1212,7 @@ namespace SandiaDecay
 
   
   /** Information to help calculate decays.
-      Probably not useful other than in the impementation of this library,
+      Probably not useful other than in the implementation of this library,
       unless you are really optimizing cpu-efficiency of calculations.
    */
   struct TimeEvolutionTerm

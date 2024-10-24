@@ -73,7 +73,7 @@ void print_photons_of_aged_sample( const std::string &nuclideName,
                                   const double parentAge );
 
 /** Takes two nuclides that that have already aged, makes a mixture out of them,
-   then prints out the photon yeild of the nuclides after aging for an
+   then prints out the photon yield of the nuclides after aging for an
    additional amount of time.
  */
 void example_nuclide_mixture_decay( const std::string &nuc1Name,
@@ -84,7 +84,7 @@ void example_nuclide_mixture_decay( const std::string &nuc1Name,
                                     const double nuc2_initial_activity,
                                     const double timeToAgeMixture );
 
-/** Prints the gammas produced in coincidence with eachother during decays.
+/** Prints the gammas produced in coincidence with each other during decays.
  Only includes gammas of nuclide specified, and not any of its descendants.
  */
 void print_coincident_gammas_of_nuclide( const std::string &nuclideName );
@@ -101,28 +101,10 @@ void print_nuclides_with_gammas_in_energy_range( const double lower_energy,
 std::vector<const SandiaDecay::Nuclide *>
 nuclidesWithGammaInRange( const float lowE, const float highE,
                          const std::vector<const SandiaDecay::Nuclide *> &candidates,
-                         const bool allowaging );
+                         const bool allow_aging );
 
-
-/** Function to compute the number of gamma-rays, at each energy, emitted by
-a source, during a fixed-duration measurement, taking into account the decay
-of the parent nuclide(s), and buildup of descendant nuclide(s).
-
-@param mixture The source nuclide mixture.  May have multiple nuclides added,
-possibly with different ages and strengths.
-@param initial_age The initial age, in seconds, of the source nuclide, at time of
-measurement (this is relative to the mixtures T=0 time).
-@param measurement_duration The duration, in seconds, of the measurement you wish
-to compute the sum of gammas for.
-@returns The average rate of gammas, at each energy, during the measurement
-time-frame.
-*/
-vector<SandiaDecay::EnergyRatePair>
-decay_during_meas_corrected_gammas( const SandiaDecay::NuclideMixture &mixture,
-                                   const double initial_age,
-                                   const double measurement_duration );
-
-/** Calls `decay_during_meas_corrected_gammas(...)` for a number of nuclides.
+/** Calculates the expected number of gammas during a measurement, taking into account
+ decay of the nuclides during the measurement.
  */
 void example_correct_for_decays_during_measurements();
 
@@ -606,146 +588,8 @@ nuclidesWithGammaInRange( const float lowE, const float highE,
 }//nuclidesWithGammaInRange(...)
 
 
-// See documentation for this function at declaration above.
-vector<SandiaDecay::EnergyRatePair> 
-    decay_during_meas_corrected_gammas( const SandiaDecay::NuclideMixture &mixture,
-                                        const double initial_age,
-                                        const double measurement_duration )
-{
-  // This function is rather niave, it just performs a very simple-minded integration
-  //  at a fixed number of time-steps.
-  //
-  // TODO: figure out how many time slices are needed for reasonable accuracy, and use a more intelligent integration algorithm
-  //       A first quick go at this, for In110 (hl=4.9h), over a 2.8 hour measurement,
-  //       gave corrections of
-  //            For 250: 0.826922  (which matches analytical answer of 0.826922)
-  //            For 50:  0.82692
-  //            For 25:  0.826913
-  //            For 10:  0.826869
-  //
-  //  A spot check using Mn56 (hl=9283.8s), and a meas duration of 86423.86s, with 50 timeslices
-  //    gives a correction factor of 0.15473519892011101, vs analytical answer of 0.1547364350135815
-  
-  const size_t characteristic_time_slices = 50; // Maybe at least ~5 sig figs
-  
-  const int num_source_nuclides = mixture.numInitialNuclides();
-  if( num_source_nuclides < 1 )
-    throw runtime_error( "decay_during_meas_corrected_gammas():"
-                        " passed in mixture must have at least one parent nuclide" );
-  
-  double minHalflife = std::numeric_limits<double>::max();
-  for( int nuc_num = 0; nuc_num < num_source_nuclides; ++nuc_num )
-  {
-    const SandiaDecay::Nuclide *nuclide = mixture.initialNuclide(nuc_num);
-    assert( nuclide );
-    if( !nuclide )
-      throw std::logic_error( "decay_during_meas_corrected_gammas: nullptr nuc" );
-  
-    // TODO: the parent half-life may not be the relevant one; should check down the chain
-    minHalflife = std::min(nuclide->halfLife, minHalflife);
-  }
-      
-  const double characteristicTime = std::min( measurement_duration, minHalflife );
-  const double dt = characteristicTime / characteristic_time_slices;
-  
-  const int max_num_slices = 2000;
-  const int min_num_slices = 50;
-  const int niave_num_slices = static_cast<int>( std::ceil( measurement_duration / dt ) );
-      
-  const int num_time_slices = std::min( max_num_slices, std::max( min_num_slices, niave_num_slices ) );
-  
-  const vector<SandiaDecay::EnergyRatePair> initial_gammas
-                      = mixture.photons( initial_age, SandiaDecay::NuclideMixture::OrderByEnergy );
-  
-  // A sanity check that the photons are sorted.
-  for( size_t i = 1; i < initial_gammas.size(); ++i )
-  {
-    assert( initial_gammas[i-1].energy <= initial_gammas[i].energy );
-  }
-  
-  // Create the vector of photon {energy,rates} we will use to sum over
-  vector<SandiaDecay::EnergyRatePair> energy_rate_pairs = initial_gammas;
-  
-  // Set initial gamma sum to zero
-  for( size_t i = 0; i < energy_rate_pairs.size(); ++i )
-    energy_rate_pairs[i].numPerSecond = 0.0;
-        
-  // Do a very niave integration, using the mid-point of the time interval for the average value,
-  // and multiply by the duration of the interval, to get the total - this could be so much better
-  for( int timeslice = 0; timeslice < num_time_slices; timeslice += 1 )
-  {
-    const double this_age = initial_age + measurement_duration*(2.0*timeslice + 1.0)/(2.0*num_time_slices);
-    const vector<SandiaDecay::EnergyRatePair> these_gammas
-                        = mixture.photons( this_age, SandiaDecay::NuclideMixture::OrderByEnergy );
-    
-    assert( these_gammas.size() == energy_rate_pairs.size() );
-    if( these_gammas.size() != energy_rate_pairs.size() )
-      throw std::logic_error( "gamma result size doesnt match expected." );
-      
-    for( size_t i = 0; i < these_gammas.size(); ++i )
-      energy_rate_pairs[i].numPerSecond += these_gammas[i].numPerSecond;
-  }//for( loop over timeslices )
-     
-  // Make the photon sums, into average rates over the interval
-  for( size_t i = 0; i < energy_rate_pairs.size(); ++i )
-    energy_rate_pairs[i].numPerSecond /= num_time_slices;
-  
-  //cout << "For " << nuclide->symbol << " the time corrections are:" << endl;
-  //for( size_t i = 0; i < energy_rate_pairs.size(); ++i )
-  //  cout << std::setw(15) << energy_rate_pairs[i].energy << ": "
-  //       << energy_rate_pairs[i].numPerSecond/initial_gammas[i].numPerSecond
-  //       << " (" << energy_rate_pairs[i].numPerSecond << " vs orig "
-  //       << initial_gammas[i].numPerSecond << ")" << endl;
-  
-  // If input has a single nuclide, and it decays to stable children, we will check the
-  //  answer we computed against an analytical answer.
-  if( (num_source_nuclides == 1) && mixture.initialNuclide(0)->decaysToStableChildren() )
-  {
-    const SandiaDecay::Nuclide *nuclide = mixture.initialNuclide(0);
-    
-    bool found_issue = false;
-    const double lambda = nuclide->decayConstant();
-    const double corr_factor = (1.0 - exp(-1.0*lambda*measurement_duration)) / (lambda * measurement_duration);
-    
-    assert( initial_gammas.size() == energy_rate_pairs.size() );
-    for( size_t i = 0; i < energy_rate_pairs.size(); ++i )
-    {
-      assert( energy_rate_pairs[i].energy == initial_gammas[i].energy );
-      
-      const double numerical_answer = energy_rate_pairs[i].numPerSecond;
-      const double uncorrected_answer = initial_gammas[i].numPerSecond;
-      if( (uncorrected_answer > DBL_EPSILON) || (uncorrected_answer > DBL_EPSILON) )
-      {
-        const double numerical_corr_factor = numerical_answer / uncorrected_answer;
-        const double diff = fabs(numerical_corr_factor - corr_factor);
-        if( (diff > 0.0001) || (0.0001*diff > std::max(numerical_corr_factor, corr_factor)) )
-        {
-          found_issue = true;
-          cerr << "Found decay correction value of "
-          << numerical_corr_factor << ", when a true value of "
-          << corr_factor << " was expected for " << nuclide->symbol
-          << " with half life " << nuclide->halfLife/SandiaDecay::hour
-          << " hours and a measurement time "
-          << measurement_duration/SandiaDecay::hour
-          << " hours (at energy " << energy_rate_pairs[i].energy << " keV)"
-          << endl;
-        }//if( error is larger than expected )
-      }//if( not a zero BR gamma )
-    }//if( we can use standard formula to correct )
-    
-    if( !found_issue )
-      cout << "Checked computed answer against analytical expectation for "
-           << nuclide->symbol << ", and there was no issue." << endl;
-  }//if( one input nuclide that decays to stable children )
-  
-  return energy_rate_pairs;
-}//decay_during_meas_corrected_gammas(...)
-
-
 void example_correct_for_decays_during_measurements()
 {
-  /** This function just calls decay_during_meas_corrected_gammas
-   */
   cout << "Will demonstrate correcting for a nuclides decay during a measurement." << endl;
   
   using namespace SandiaDecay;
@@ -760,8 +604,11 @@ void example_correct_for_decays_during_measurements()
     
     const double initial_age = 0.0;
     const double measurement_duration = 2.8*SandiaDecay::hour;
-    const vector<SandiaDecay::EnergyRatePair> photons
-                    = decay_during_meas_corrected_gammas( mix, initial_age, measurement_duration );
+    const size_t num_timeslices = 500;
+    const vector<SandiaDecay::EnergyCountPair> photons
+      = mix.decayPhotonsInInterval( initial_age, measurement_duration,
+                                       SandiaDecay::NuclideMixture::OrderByEnergy, num_timeslices );
+    
     cout << "During a " << (measurement_duration/SandiaDecay::hour) << " hour measurement of "
     << nuclide->symbol << " with an activity at the start of measurement of "
     << activity_at_meas_start/SandiaDecay::curie << " ci, the number of photons emitted will be:"
@@ -769,7 +616,7 @@ void example_correct_for_decays_during_measurements()
     for( size_t i = 0; i < photons.size(); ++i )
     {
       cout << "\t" << setw(10) << photons[i].energy << " keV: "
-      << measurement_duration*photons[i].numPerSecond << endl;
+      << photons[i].count << endl;
     }
   }// end In110 example
   
@@ -783,9 +630,71 @@ void example_correct_for_decays_during_measurements()
     
     const double initial_age = 0.0;
     const double measurement_duration = 86423.86*SandiaDecay::second;
-    const vector<SandiaDecay::EnergyRatePair> photons
-                = decay_during_meas_corrected_gammas( mix, initial_age, measurement_duration );
+    const size_t num_timeslices = 500;
+    const vector<SandiaDecay::EnergyCountPair> photons
+      = mix.decayPhotonsInInterval( initial_age, measurement_duration,
+                                       SandiaDecay::NuclideMixture::OrderByEnergy, num_timeslices );
   }// end Mn56 example
+  
+  {// begin U235 example
+    const SandiaDecay::Nuclide * const nuclide = database.nuclide("U235");
+    const double activity_at_meas_start = 1.0*SandiaDecay::curie;
+    
+    SandiaDecay::NuclideMixture mix;
+    mix.addNuclideByActivity( nuclide, activity_at_meas_start );
+    
+    const double initial_age = 10.0*SandiaDecay::year;
+    const double measurement_duration = 1.0*SandiaDecay::year;
+    const size_t num_timeslices = 500;
+    const vector<SandiaDecay::EnergyCountPair> photons
+      = mix.decayPhotonsInInterval( initial_age, measurement_duration,
+                                       SandiaDecay::NuclideMixture::OrderByEnergy, num_timeslices );
+  }// end U235 example
+  
+  {// begin Tc99 example
+    const SandiaDecay::Nuclide * const nuclide = database.nuclide("Tc99");
+    const double activity_at_meas_start = 1.0*SandiaDecay::curie;
+    
+    SandiaDecay::NuclideMixture mix;
+    mix.addNuclideByActivity( nuclide, activity_at_meas_start );
+    
+    const double initial_age = 3600*SandiaDecay::second;
+    const double measurement_duration = 1.0*SandiaDecay::year;
+    const size_t num_timeslices = 500;
+    const vector<SandiaDecay::EnergyCountPair> photons
+      = mix.decayPhotonsInInterval( initial_age, measurement_duration,
+                                       SandiaDecay::NuclideMixture::OrderByEnergy, num_timeslices );
+  }// end Tc99 example
+  
+  {// begin Tc99 example
+    const SandiaDecay::Nuclide * const nuclide = database.nuclide("Tc99");
+    const double activity_at_meas_start = 1.0*SandiaDecay::curie;
+    
+    SandiaDecay::NuclideMixture mix;
+    mix.addNuclideByActivity( nuclide, activity_at_meas_start );
+    
+    const double initial_age = 3600*SandiaDecay::second;
+    const double measurement_duration = 1.0*SandiaDecay::year;
+    const size_t num_timeslices = 500;
+    const vector<SandiaDecay::EnergyCountPair> photons
+      = mix.decayPhotonsInInterval( initial_age, measurement_duration,
+                                       SandiaDecay::NuclideMixture::OrderByEnergy, num_timeslices );
+  }// end Tc99 example
+  
+  {// begin I125 example
+    const SandiaDecay::Nuclide * const nuclide = database.nuclide("I125"); //t12=12.93d
+    const double activity_at_meas_start = 1.0*SandiaDecay::curie;
+    
+    SandiaDecay::NuclideMixture mix;
+    mix.addNuclideByActivity( nuclide, activity_at_meas_start );
+    
+    const double initial_age = 0;
+    const double measurement_duration = 14*24*3600.0*SandiaDecay::year;
+    const size_t num_timeslices = 500;
+    const vector<SandiaDecay::EnergyCountPair> photons
+      = mix.decayPhotonsInInterval( initial_age, measurement_duration,
+                                       SandiaDecay::NuclideMixture::OrderByEnergy, num_timeslices );
+  }// end I125 example
 }//void example_correct_for_decays_during_measurements()
 
 
