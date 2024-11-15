@@ -911,62 +911,84 @@ void Transition::set( const ::rapidxml::xml_node<char> *node,
 }//void set( ::rapidxml::xml_node<char> *node )
 
 
-
-
-
-
-bool Nuclide::operator<( const Nuclide &rhs ) const
+bool Nuclide::lessThanForOrdering( const Nuclide *lhs, const Nuclide *rhs )
 {
-  if( (massNumber == rhs.massNumber)
-     && (atomicNumber == rhs.atomicNumber)
-     && (isomerNumber == rhs.isomerNumber) )
+  if( !lhs || !rhs )
+    return lhs < rhs;
+  
+  if( (lhs->massNumber == rhs->massNumber)
+     && (lhs->atomicNumber == rhs->atomicNumber)
+     && (lhs->isomerNumber == rhs->isomerNumber) )
+  {
+    return false;
+  }
+
+  if( lhs->massNumber != rhs->massNumber )
+    return (lhs->massNumber < rhs->massNumber);
+  
+  if( lhs->atomicNumber == rhs->atomicNumber )
+    return (lhs->isomerNumber < rhs->isomerNumber);
+
+  return lhs->atomicNumber < rhs->atomicNumber;
+}
+
+
+bool Nuclide::greaterThanForOrdering( const Nuclide *lhs, const Nuclide *rhs )
+{
+  return lessThanForOrdering( rhs, lhs );
+}
+
+
+bool Nuclide::lessThanByDecay( const Nuclide *lhs, const Nuclide *rhs )
+{
+  if( !lhs || !rhs )
+    return lhs < rhs;
+  
+  if( (lhs->massNumber == rhs->massNumber)
+     && (lhs->atomicNumber == rhs->atomicNumber)
+     && (lhs->isomerNumber == rhs->isomerNumber) )
   {
     return false;
   }
     
   //is 'this' a child of 'rhs' ? If not, is 'this' lighter than 'rhs
-  if( massNumber != rhs.massNumber )
-    return (massNumber < rhs.massNumber);
+  if( lhs->massNumber != rhs->massNumber )
+    return (lhs->massNumber < rhs->massNumber);
   
-  if( atomicNumber == rhs.atomicNumber )
-    return (isomerNumber < rhs.isomerNumber);
+  if( lhs->atomicNumber == rhs->atomicNumber )
+    return (lhs->isomerNumber < rhs->isomerNumber);
 
   // If the atomic numbers differ more than 7, then we know which way the decay goes (I tested
   //  commenting this particular test out will give identical results, just take more cpu).
-  const int an_diff = ((atomicNumber > rhs.atomicNumber)
-                        ? (atomicNumber - rhs.atomicNumber) : (rhs.atomicNumber - atomicNumber));
+  const int an_diff = ((lhs->atomicNumber > rhs->atomicNumber)
+                        ? (lhs->atomicNumber - rhs->atomicNumber) : (rhs->atomicNumber - lhs->atomicNumber));
   if( an_diff > 7 )
-    return (atomicNumber < rhs.atomicNumber);
+    return (lhs->atomicNumber < rhs->atomicNumber);
   
   // This next test was verified to give identical results with or without it, but saves CPU with
-  const float am_diff = fabs(atomicMass - rhs.atomicMass);
+  const float am_diff = fabs(lhs->atomicMass - rhs->atomicMass);
   if( (am_diff > 1.0f) && (an_diff > 4) )
-    return atomicNumber < rhs.atomicNumber;
+    return lhs->atomicNumber < rhs->atomicNumber;
   
   // \TODO: We could do a few more tests to avoid calling into Nuclide::branchRatioToDecendant,
   //    but this is decent for now
-  assert( massNumber == rhs.massNumber );
+  assert( lhs->massNumber == rhs->massNumber );
   assert( (an_diff > 0) && (an_diff < 8) );
   assert( (am_diff <= 1.0f) || (an_diff <= 4) );
   
-  const float lhsToRhsBr = this->branchRatioToDecendant( &rhs );
-  const float rhsToLhsBr = rhs.branchRatioToDecendant( this );
+  const float lhsToRhsBr = lhs->branchRatioToDecendant( rhs );
+  const float rhsToLhsBr = rhs->branchRatioToDecendant( lhs );
 
   if( lhsToRhsBr == rhsToLhsBr ) //These nuclides dont decay into each other.
-    return (atomicNumber < rhs.atomicNumber);
+    return (lhs->atomicNumber < rhs->atomicNumber);
   
   return (lhsToRhsBr < rhsToLhsBr);
-}//operator<
+}//bool lessThanByDecay( const Nuclide *lhs, const Nuclide *rhs )
 
 
-bool Nuclide::lessThan( const Nuclide *lhs, const Nuclide *rhs )
+bool Nuclide::greaterThanByDecay( const Nuclide *lhs, const Nuclide *rhs )
 {
-  return ((*lhs) < (*rhs));
-}
-
-bool Nuclide::greaterThan( const Nuclide *lhs, const Nuclide *rhs )
-{
-  return lessThan( rhs, lhs );
+  return lessThanByDecay( rhs, lhs );
 }
 
 bool  Nuclide::operator==( const Nuclide &rhs ) const
@@ -1184,7 +1206,7 @@ vector<const Nuclide *> Nuclide::descendants() const
       const vector<const Nuclide *>::iterator begin = children.begin();
       const vector<const Nuclide *>::iterator end = children.end();
       vector<const Nuclide *>::iterator pos;
-      pos = lower_bound( begin, end, result, &Nuclide::greaterThan );
+      pos = lower_bound( begin, end, result, &Nuclide::greaterThanForOrdering );
 
       if( (pos==end) || ((*pos)!=result) )
         children.insert( pos, result );
@@ -1214,7 +1236,7 @@ std::vector<const Nuclide *> Nuclide::forebearers() const
       const vector<const Nuclide *>::iterator end = parents.end();
 
       vector<const Nuclide *>::iterator pos;
-      pos = lower_bound( begin, end, result, &Nuclide::lessThan );
+      pos = lower_bound( begin, end, result, &Nuclide::greaterThanForOrdering );
 
       if( (pos==end) || ((*pos)!=result) )
         parents.insert( pos, result );
@@ -3345,7 +3367,7 @@ std::vector<NuclideTimeEvolution> SandiaDecayDataBase::getTimeEvolution( const s
   NuclToCoefMapMap nuc_to_coef_map;
 #else
   typedef map<const Nuclide *, NuclideToMagnitudeMap, bool(*)(const Nuclide *,const Nuclide *) > NuclToCoefMapMap;
-  NuclToCoefMapMap nuc_to_coef_map( &Nuclide::lessThan );
+  NuclToCoefMapMap nuc_to_coef_map( &Nuclide::lessThanByDecay );
 #endif
 
   DecayPathVec sub_paths_used;
@@ -3535,9 +3557,11 @@ NuclideNumAtomsPair::NuclideNumAtomsPair( const Nuclide *_nuclide, CalcFloatType
 
   bool NuclideTimeEvolution::operator<( const NuclideTimeEvolution &rhs ) const
   {
-    if( !nuclide || !rhs.nuclide )
-      return nuclide < rhs.nuclide;
+    //if( !nuclide || !rhs.nuclide )
+    //  return nuclide < rhs.nuclide;
     
-    return ((*nuclide) < (*rhs.nuclide));
+    //return ((*nuclide) < (*rhs.nuclide));
+    
+    return Nuclide::lessThanForOrdering( nuclide, rhs.nuclide );
   }
 }//namespace SandiaDecay

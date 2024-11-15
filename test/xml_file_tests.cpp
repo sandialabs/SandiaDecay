@@ -539,8 +539,8 @@ void sanity_check_all_decays()
         if( (i != j) && (lhs->symbol == rhs->symbol) )
           throw runtime_error( "Duplicate nuclide defined in XML: " + rhs->symbol );
         
-        const bool oneway = ((*lhs) < (*rhs));
-        const bool otherway = ((*rhs) < (*lhs));
+        const bool oneway = SandiaDecay::Nuclide::lessThanByDecay( lhs, rhs );
+        const bool otherway = SandiaDecay::Nuclide::lessThanByDecay( rhs, lhs );
         
         //dbg_out << lhs->symbol << "," << rhs->symbol << "," << oneway << "," << otherway << endl;
         

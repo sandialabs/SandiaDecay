@@ -875,6 +875,8 @@ namespace SandiaDecay
     /** Returns all progeny (descendant) isotopes (child, grand-child,
         etc.) and not just immediate child nuclides
         Results will also include this nuclide.
+        Results are sorted roughly according to decay chain, but this ordering may
+        not be unique.
      */
     std::vector<const Nuclide *> descendants() const;
 
@@ -929,13 +931,27 @@ namespace SandiaDecay
      */
     size_t memsize() const;
 
-    //operator< compares how we intuitively want: if lhs is a child of rhs
-    //  then returns true, else compares based on mass, atomic, & isomer numbers
-    bool operator<( const Nuclide &rhs ) const;
     bool operator==( const Nuclide &rhs ) const;
     bool operator!=( const Nuclide &rhs ) const;
-    static bool lessThan( const Nuclide *lhs, const Nuclide *rhs );
-    static bool greaterThan( const Nuclide *lhs, const Nuclide *rhs );
+    
+    /** Compares how we intuitively want: if lhs is a child of rhs then returns true, else compares
+     based on mass, atomic, & isomer numbers.
+     BUT - be careful, this operator does not enforce strick weak ordering.
+     That is: if `a < b`, and `b < c`, then a may not be less than c.
+     
+     It looks like using this function for `std::sort` always gives a stable result, no
+     matter the initial ordering - however, the check for strict weak ordering of result can
+     still fail..
+     */
+    static bool lessThanByDecay( const Nuclide *lhs, const Nuclide *rhs );
+    static bool greaterThanByDecay( const Nuclide *lhs, const Nuclide *rhs );
+    
+    /** Orders by atomic number, then mass number, then isomer number.
+     This isnt stricktly ordering by how nuclides decay into each other, but approximately, and should be strickly weakly ordered.
+     (e.g., for use in `std::sort`, `std::lower_bound`, etc).
+     */
+    static bool lessThanForOrdering( const Nuclide *lhs, const Nuclide *rhs );
+    static bool greaterThanForOrdering( const Nuclide *lhs, const Nuclide *rhs );
     
     ~Nuclide();
     
