@@ -177,12 +177,6 @@ namespace SandiaDecay
   struct Nuclide;
   struct Transition;
   struct RadParticle;
-  struct EnergyRatePair;
-  struct EnergyCountPair;
-  struct EnergyIntensityPair;
-  struct NuclideNumAtomsPair;
-  struct NuclideActivityPair;
-  struct NuclideAbundancePair;
   struct NuclideTimeEvolution;
   
   /** Unit system used by this library, examples of use are:
@@ -228,9 +222,118 @@ namespace SandiaDecay
   /** The float type to use for intermediate decay calculations.
    You can set this to `float`, `double`, `long double`, or `__float128` (e.g., x64 GNU).
    However, the underlying Nuclear data will probably be the limiting factor
-   in accuracy for even float.
+   in accuracy for even float.  However, this is useful for checking for numerical accuracy issues of
+   calculations.
    */
   typedef double CalcFloatType;
+  
+  // Some convenience structs used for storing information; defined here because forward declaring
+  //  them gave some troubles when compiling as part of a C++20 project.
+  
+  /**  Structure to hold the information about the abundance (by mass) of a
+       specific nuclide in a mixture, material, or element.
+   */
+  struct NuclideAbundancePair
+  {
+    /** Nuclide this information is for. */
+    const Nuclide *nuclide;
+    
+    /** The fraction of this nuclide, by mass, in the mixture/material/element
+     */
+    double abundance;
+  };//struct NuclideAbundancePair
+  
+  
+  /** Structure to return the relative (to the number of decays) intensities of
+      a specific-energy decay particles.
+      E.g., Specify what fraction of decay event will have a gamma of a certain
+      energy.
+   */
+  struct EnergyIntensityPair
+  {
+    /** Energy, in units of SandiaDecay. */
+    double energy;
+    
+    /** The fraction of decays with a particle of this energy.
+        Typically 0 to 1.0, but for things like gammas caused by positron
+        annihilation, this number can be larger than 1.
+     */
+    double intensity;
+    
+    EnergyIntensityPair( double e, double i ) : energy(e), intensity(i) {}
+  };//struct EnergyIntensityPair
+  
+  
+  /** Structure to return the rate of a specific-energied decay particle.
+      E.g., Give the rate for a certain energy gamma.
+   */
+  struct EnergyRatePair
+  {
+    /** Energy, in units of SandiaDecay. */
+    double energy;
+    
+    /** The number of particles given off per second. */
+    double numPerSecond;
+    
+    EnergyRatePair( double _numPerSecond, double _energy );
+    static bool moreThanByNumPerSecond( const EnergyRatePair &lhs,
+                                       const EnergyRatePair &rhs );
+    static bool lessThanByEnergy( const EnergyRatePair &lhs,
+                                 const EnergyRatePair &rhs );
+  };//struct EnergyRatePair
+  
+  
+  /** Struct to return the energy and number of those particles that are expected
+   for a given time interval.
+   */
+  struct EnergyCountPair
+  {
+    /** Energy, in units of SandiaDecay. */
+    double energy;
+    
+    /** The number of particles */
+    double count;
+    
+    EnergyCountPair( double e, double c ) : energy(e), count(c) {}
+    
+    static bool moreThanByCount( const EnergyCountPair &lhs,
+                                       const EnergyCountPair &rhs );
+    static bool lessThanByEnergy( const EnergyCountPair &lhs,
+                                 const EnergyCountPair &rhs );
+  };//struct EnergyCountPair
+
+
+  /**  Structure to hold the information about the number of atoms of a
+       specific nuclide in a mixture, material, or element.
+   */
+  struct NuclideNumAtomsPair
+  {
+    /** Nuclide this information is for. */
+    const Nuclide *nuclide;
+    
+    /** The number of atoms present. */
+    CalcFloatType numAtoms;
+    
+    NuclideNumAtomsPair( const Nuclide *_nuclide, CalcFloatType _numAtoms );
+  };//struct NuclideNumAtomsPair
+
+
+  /**  Structure to hold the information about the activity of a specific
+       nuclide in a mixture, material, or element.
+   */
+  struct NuclideActivityPair
+  {
+    /** Nuclide this information is for. */
+    const Nuclide *nuclide;
+    
+    /** Activity of the nuclide, in units of SandiaDecay. */
+    CalcFloatType activity;
+    
+    NuclideActivityPair( const Nuclide *_nuclide, CalcFloatType _activity );
+  };//struct NuclideActivityPair
+  
+  
+  
   
   /** Class that parses the input "sandia.decay.xml" file and "owns" the decay
    information.  Once initialized, all member functions (besides reset()) are
@@ -794,7 +897,7 @@ namespace SandiaDecay
     mutable std::vector<NuclideTimeEvolution> m_decayedToNuclides;
   };//class NuclideMixture
 
-
+  
   /** Struct to store information about a nuclide. */
   //ToDo: check if the doubles and ints could be reduced in size with out
   //  effecting accuracy or performance
@@ -978,50 +1081,6 @@ namespace SandiaDecay
     friend class SandiaDecayDataBase;
   };//class Nuclide
 
-
-  /** Information representing the nuclear transition (decay channel) for
-      a nuclide.
-   */
-  struct Transition
-  {
-    /** The parent nuclide of the decay.  Will never be null when initialized
-        as part of a SandiaDecayDataBase.
-     */
-    const Nuclide *parent;
-    
-    /** The resultant nuclide after the decay.
-        May be null, for example for spontaneous fission decays.
-     */
-    const Nuclide *child;
-    
-    /** Decay mode represented by this transition object. */
-    DecayMode mode;
-    
-    /** Fraction of times the parent nuclide decays through this decay channel.
-     */
-    float branchRatio;
-    
-    /** The particles (gamma, beta, alphas, etc) emmitted when this transition
-        takes place.
-     */
-    std::vector<RadParticle> products;
-
-    /** Provides an _estimate_ of the memory taken up by this object, not what
-        is actually allocated for it.  For development purposes only.
-     */
-    size_t memsize() const;
-    
-    Transition(){}
-    Transition( const ::rapidxml::xml_node<char> *node,
-                const std::vector<const Nuclide *> &nuclides );
-    void set( const ::rapidxml::xml_node<char> *node,
-               const std::vector<const Nuclide *> &nuclides );
-
-    friend class SandiaDecayDataBase;
-  };//struct transition
-
-  
-  
   /** Represents information of a particle (of a given energy) given off during
       a nuclear transition.
   */
@@ -1074,6 +1133,48 @@ namespace SandiaDecay
 
     friend struct Transition;
   };//struct RadParticle
+  
+
+  /** Information representing the nuclear transition (decay channel) for
+      a nuclide.
+   */
+  struct Transition
+  {
+    /** The parent nuclide of the decay.  Will never be null when initialized
+        as part of a SandiaDecayDataBase.
+     */
+    const Nuclide *parent;
+    
+    /** The resultant nuclide after the decay.
+        May be null, for example for spontaneous fission decays.
+     */
+    const Nuclide *child;
+    
+    /** Decay mode represented by this transition object. */
+    DecayMode mode;
+    
+    /** Fraction of times the parent nuclide decays through this decay channel.
+     */
+    float branchRatio;
+    
+    /** The particles (gamma, beta, alphas, etc) emmitted when this transition
+        takes place.
+     */
+    std::vector<RadParticle> products;
+
+    /** Provides an _estimate_ of the memory taken up by this object, not what
+        is actually allocated for it.  For development purposes only.
+     */
+    size_t memsize() const;
+    
+    Transition(){}
+    Transition( const ::rapidxml::xml_node<char> *node,
+                const std::vector<const Nuclide *> &nuclides );
+    void set( const ::rapidxml::xml_node<char> *node,
+               const std::vector<const Nuclide *> &nuclides );
+
+    friend class SandiaDecayDataBase;
+  };//struct transition
 
 
   /** Represents information for an element */
@@ -1122,109 +1223,6 @@ namespace SandiaDecay
     static bool lessThan( const Element *lhs, const Element *rhs );
     static bool lessThanForAtomicNum( const Element *lhs, const int atomicNum );
   };//class Element
-
-
-  /** Structure to return the rate of a specific-energied decay particle.
-      E.g., Give the rate for a certain energy gamma.
-   */
-  struct EnergyRatePair
-  {
-    /** Energy, in units of SandiaDecay. */
-    double energy;
-    
-    /** The number of particles given off per second. */
-    double numPerSecond;
-    
-    EnergyRatePair( double _numPerSecond, double _energy );
-    static bool moreThanByNumPerSecond( const EnergyRatePair &lhs,
-                                       const EnergyRatePair &rhs );
-    static bool lessThanByEnergy( const EnergyRatePair &lhs,
-                                 const EnergyRatePair &rhs );
-  };//struct EnergyRatePair
-
-  
-  /** Structure to return the relative (to the number of decays) intensities of
-      a specific-energy decay particles.
-      E.g., Specify what fraction of decay event will have a gamma of a certain
-      energy.
-   */
-  struct EnergyIntensityPair
-  {
-    /** Energy, in units of SandiaDecay. */
-    double energy;
-    
-    /** The fraction of decays with a particle of this energy.
-        Typically 0 to 1.0, but for things like gammas caused by positron
-        annihilation, this number can be larger than 1.
-     */
-    double intensity;
-    
-    EnergyIntensityPair( double e, double i ) : energy(e), intensity(i) {}
-  };//struct EnergyIntensityPair
-  
-  
-  /** Struct to return the energy and number of those particles that are expected
-   for a given time interval.
-   */
-  struct EnergyCountPair
-  {
-    /** Energy, in units of SandiaDecay. */
-    double energy;
-    
-    /** The number of particles */
-    double count;
-    
-    EnergyCountPair( double e, double c ) : energy(e), count(c) {}
-    
-    static bool moreThanByCount( const EnergyCountPair &lhs,
-                                       const EnergyCountPair &rhs );
-    static bool lessThanByEnergy( const EnergyCountPair &lhs,
-                                 const EnergyCountPair &rhs );
-  };//struct EnergyCountPair
-
-  
-  /**  Structure to hold the information about the abundance (by mass) of a
-       specific nuclide in a mixture, material, or element.
-   */
-  struct NuclideAbundancePair
-  {
-    /** Nuclide this information is for. */
-    const Nuclide *nuclide;
-    
-    /** The fraction of this nuclide, by mass, in the mixture/material/element
-     */
-    double abundance;
-  };//struct NuclideAbundancePair
-
-
-  /**  Structure to hold the information about the number of atoms of a
-       specific nuclide in a mixture, material, or element.
-   */
-  struct NuclideNumAtomsPair
-  {
-    /** Nuclide this information is for. */
-    const Nuclide *nuclide;
-    
-    /** The number of atoms present. */
-    CalcFloatType numAtoms;
-    
-    NuclideNumAtomsPair( const Nuclide *_nuclide, CalcFloatType _numAtoms );
-  };//struct NuclideNumAtomsPair
-
-
-  /**  Structure to hold the information about the activity of a specific
-       nuclide in a mixture, material, or element.
-   */
-  struct NuclideActivityPair
-  {
-    /** Nuclide this information is for. */
-    const Nuclide *nuclide;
-    
-    /** Activity of the nuclide, in units of SandiaDecay. */
-    CalcFloatType activity;
-    
-    NuclideActivityPair( const Nuclide *_nuclide, CalcFloatType _activity );
-  };//struct NuclideActivityPair
 
   
   /** Information to help calculate decays.
