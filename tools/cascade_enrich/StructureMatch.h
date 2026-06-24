@@ -35,11 +35,17 @@ struct GammaMatch {
 };
 
 struct MatchParams {
-  double wide_tol = 2.5;    ///< candidate-collection window (keV)
-  double tight_tol = 0.6;   ///< "clean unique" window (keV)
-  double widen_tol = 1.0;   ///< unique-within-this accepted even without structure
-  double accept_tol = 1.5;  ///< hard cap on |gap| for any accepted match
-  double energy_sigma = 0.7;///< gaussian energy-score width (keV)
+  // Each tolerance below is a fixed keV floor; the effective tolerance for a
+  // gamma of energy E is max(floor, rel_tol*E). High-energy lines have larger
+  // absolute calibration spread (a ~2 keV offset at 4.4 MeV is 0.05%), and the
+  // level scheme is sparse there, so the relative term loosens matching exactly
+  // where it is safe while leaving dense low-energy schemes strict.
+  double wide_tol = 2.5;    ///< candidate-collection window (keV floor)
+  double tight_tol = 0.6;   ///< "clean unique" window (keV floor)
+  double widen_tol = 1.0;   ///< unique-within-this accepted even without structure (floor)
+  double accept_tol = 1.5;  ///< hard cap on |gap| for any accepted match (floor)
+  double energy_sigma = 0.7;///< gaussian energy-score width (keV floor)
+  double rel_tol = 5e-4;    ///< relative tolerance fraction (0.05% of E)
   double struct_bonus = 0.5;///< score added per chaining coincidence partner
   int iterations = 6;
 };

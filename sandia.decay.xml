@@ -3929,7 +3929,7 @@
 		<gamma energy="1771.31" intensity="0.04">
 			<coincidentGamma id="2" intensity="0.14400000000000002" a2="0.0737672" a4="0"/>
 			<coincidentGamma id="1" intensity="0.14400000000000002"/>
-			<coincidentGamma id="5" intensity="0.856"/>
+			<coincidentGamma id="5" intensity="0.856" a2="-0.171892" a4="0"/>
 		</gamma>
 		<gamma energy="2124.47" id="1" intensity="1"/>
 		<gamma energy="2895.3" id="2" intensity="0.144">
@@ -3941,7 +3941,7 @@
 		</gamma>
 		<gamma energy="5018.98" id="5" intensity="0.856"/>
 		<gamma energy="5851.47" intensity="0.532">
-			<coincidentGamma id="1" intensity="1"/>
+			<coincidentGamma id="1" intensity="1" a2="0" a4="0"/>
 		</gamma>
 		<gamma energy="6789.81" intensity="0.675"/>
 		<beta energy="1630" intensity="0.031" logFT="4.04"/>
@@ -3955,7 +3955,7 @@
 		<gamma energy="692.31" intensity="8.5000E-03"/>
 		<gamma energy="7282.92" intensity="8.7000E-01"/>
 		<gamma energy="7974.73" intensity="4.6200E-01"/>
-		<!-- cascade-match: SD-unmatched[keV]: 4443.90(I=1,neartol) 5018.98(I=0.856,neartol) 5851.47(I=0.532,neartol) 6789.81(I=0.675,neartol) 7282.92(I=0.87,neartol) 7974.73(I=0.462,absent); G4-unclaimed-on-populated[keV]: 5020.30(rI=85.6) 6791.80(rI=67.5) 2265.21(rI=7.5) 2840.53(rI=5.5) 7285.51(rI=87) 5853.15(rI=53.2) 7977.84(rI=46.2); -->
+		<!-- cascade-match: G4-unclaimed-on-populated[keV]: 2265.21(rI=7.5) 2840.53(rI=5.5); -->
 	</transition>
 	<transition branchRatio="1" child="Li7" mode="b-a" parent="Be11"/>
 	<transition branchRatio="1" child="B12" mode="b-" parent="Be12">
@@ -3973,7 +3973,6 @@
 		<beta energy="5715.00" intensity="0.015" logFT="4.13"/>
 		<beta energy="8930.39" intensity="0.0123" logFT="5.126"/>
 		<beta energy="13369.3" intensity="0.9722" logFT="4.066"/>
-		<!-- cascade-match: SD-unmatched[keV]: 4438.03(I=0,neartol); G4-unclaimed-on-populated[keV]: 4439.82(rI=100); -->
 	</transition>
 	<transition branchRatio="1" child="C13" mode="b-" parent="B13">
 		<gamma energy="169.3" intensity="9E-05">
@@ -4000,19 +3999,18 @@
 		<beta energy="9752.69" intensity="0.076" logFT="4.45"/>
 		<beta energy="10347.76" intensity="0.007" logFT="5.6"/>
 		<beta energy="13437.2" intensity="0.921" logFT="4.034"/>
-		<!-- cascade-match: SD-unmatched[keV]: 7545.00(I=0.00094,neartol) 8857.00(I=0.0016,neartol) 9893.00(I=0.00022,absent); -->
 	</transition>
 	<transition branchRatio="1" child="C14" mode="b-" parent="B14">
 		<gamma energy="613" intensity="0.038">
 			<coincidentGamma id="1" intensity="0.035874439461883414" a2="-0.171429" a4="-0"/>
 			<coincidentGamma id="3" intensity="0.035874439461883414"/>
-			<coincidentGamma id="4" intensity="0.9641255605381166"/>
+			<coincidentGamma id="4" intensity="0.9641255605381166" a2="-0.3" a4="0"/>
 		</gamma>
 		<gamma energy="634.4" id="1" intensity="0.0032">
-			<coincidentGamma id="3" intensity="1"/>
+			<coincidentGamma id="3" intensity="1" a2="-0.0714286" a4="0"/>
 		</gamma>
 		<gamma energy="1248" intensity="0.056">
-			<coincidentGamma id="3" intensity="1"/>
+			<coincidentGamma id="3" intensity="1" a2="0.05" a4="0"/>
 		</gamma>
 		<gamma energy="6092.4" id="3" intensity="0.86"/>
 		<gamma energy="6726.5" id="4" intensity="0.086"/>
@@ -4021,7 +4019,6 @@
 		<beta energy="13915.8" intensity="0.07" logFT="5.13"/>
 		<beta energy="14550.2" intensity="0.82" logFT="4.15"/>
 		<beta energy="20644" forbiddenness="1u" intensity="0.05" logFT="9.1"/>
-		<!-- cascade-match: SD-unmatched[keV]: 6092.40(I=0.86,neartol) 6726.50(I=0.086,neartol) 7339.00(I=0.019,neartol); G4-unclaimed-on-populated[keV]: 6093.80(rI=100) 6728.20(rI=100) 7341.00(rI=34); -->
 	</transition>
 	<transition branchRatio="1" child="B9" mode="b+" parent="C9">
 		<electronCapture energy="1839.8" intensity="3.8E-07" logFT="3.3"/>
@@ -4056,12 +4053,12 @@
 	</transition>
 	<transition branchRatio="1" child="N15" mode="b-" parent="C15">
 		<gamma energy="977.02" id="0" intensity="2.4E-07">
-			<coincidentGamma id="17" intensity="1"/>
+			<coincidentGamma id="17" intensity="1" a2="-0.283036" a4="0"/>
 		</gamma>
 		<gamma energy="1011.75" intensity="1.8E-05">
 			<coincidentGamma id="17" intensity="0.0024997396104572446"/>
 			<coincidentGamma id="7" intensity="0.0019789605249453186" a2="0.25" a4="0"/>
-			<coincidentGamma id="18" intensity="0.98948026247265919"/>
+			<coincidentGamma id="18" intensity="0.98948026247265919" a2="0.264574" a4="0"/>
 			<coincidentGamma id="0" intensity="0.0024997396104572446" a2="-0.2" a4="0"/>
 			<coincidentGamma id="8" intensity="0.00604103739193834" a2="0.05" a4="0"/>
 			<coincidentGamma id="15" intensity="0.00604103739193834"/>
@@ -4078,7 +4075,7 @@
 		<gamma energy="1748.77" intensity="4.1E-06">
 			<coincidentGamma id="17" intensity="0.0024997396104572446"/>
 			<coincidentGamma id="7" intensity="0.0019789605249453186" a2="0.25" a4="0"/>
-			<coincidentGamma id="18" intensity="0.98948026247265919"/>
+			<coincidentGamma id="18" intensity="0.98948026247265919" a2="0.264574" a4="0"/>
 			<coincidentGamma id="0" intensity="0.0024997396104572446" a2="-0.2" a4="0"/>
 			<coincidentGamma id="8" intensity="0.00604103739193834" a2="0.05" a4="0"/>
 			<coincidentGamma id="15" intensity="0.00604103739193834"/>
@@ -4088,22 +4085,22 @@
 			<coincidentGamma id="15" intensity="1" a2="0.195085" a4="6.88306E-05"/>
 		</gamma>
 		<gamma energy="1988.7" intensity="1.8E-05">
-			<coincidentGamma id="17" intensity="1"/>
+			<coincidentGamma id="17" intensity="1" a2="0.353795" a4="0"/>
 		</gamma>
 		<gamma energy="2001.86" id="7" intensity="1.9E-07">
-			<coincidentGamma id="16" intensity="1"/>
+			<coincidentGamma id="16" intensity="1" a2="0" a4="0"/>
 		</gamma>
 		<gamma energy="2030.53" id="8" intensity="5.8E-07">
 			<coincidentGamma id="15" intensity="1" a2="-0.16526" a4="-0"/>
 		</gamma>
 		<gamma energy="2247.44" intensity="1.8E-06">
-			<coincidentGamma id="17" intensity="1"/>
+			<coincidentGamma id="17" intensity="1" a2="-0.283036" a4="0"/>
 		</gamma>
 		<gamma energy="2725.66" intensity="1.5E-05">
-			<coincidentGamma id="17" intensity="1"/>
+			<coincidentGamma id="17" intensity="1" a2="0.353795" a4="0"/>
 		</gamma>
 		<gamma energy="3013.47" intensity="4.1E-05">
-			<coincidentGamma id="16" intensity="1"/>
+			<coincidentGamma id="16" intensity="1" a2="0" a4="0"/>
 		</gamma>
 		<gamma energy="3042.13" intensity="1.4E-05">
 			<coincidentGamma id="15" intensity="1" a2="0.236086" a4="0.546382"/>
@@ -4128,7 +4125,7 @@
 		<gamma energy="8310.15" intensity="3.2000E-04"/>
 		<gamma energy="8568.77" intensity="4.3000E-05"/>
 		<gamma energy="9046.78" intensity="3.1000E-04"/>
-		<!-- cascade-match: SD-unmatched[keV]: 5297.82(I=0.632,neartol) 6322.35(I=5.5e-05,neartol) 7298.92(I=9.5e-05,neartol) 8310.15(I=0.00032,neartol) 8568.77(I=4.3e-05,neartol) 9046.78(I=0.00031,neartol); G4-unclaimed-on-populated[keV]: 5298.82(rI=100) 6323.78(rI=100) 7300.83(rI=100) 8312.62(rI=100) 3272.58(rI=19) 8571.40(rI=51) 1894.66(rI=11) 9049.71(rI=100); -->
+		<!-- cascade-match: G4-unclaimed-on-populated[keV]: 3272.58(rI=19) 1894.66(rI=11); -->
 	</transition>
 	<transition branchRatio="1" child="N16" mode="b-" parent="C16">
 		<gamma energy="120.42" id="0" intensity="0.0067"/>
@@ -4235,12 +4232,12 @@
 			<coincidentGamma id="3" intensity="6.1181662632075919E-06" a2="0.473424" a4="0"/>
 			<coincidentGamma id="2" intensity="0.00069339217649686034" a2="-0.067632" a4="0"/>
 			<coincidentGamma id="9" intensity="0.00069339217649686034"/>
-			<coincidentGamma id="11" intensity="0.99930048965723994"/>
+			<coincidentGamma id="11" intensity="0.99930048965723994" a2="0.473424" a4="0"/>
 		</gamma>
 		<gamma energy="1954.7" intensity="0.00038">
 			<coincidentGamma id="1" intensity="0.0054955119985345318" a2="0.25" a4="-0"/>
 			<coincidentGamma id="9" intensity="7.8507314264779021E-05"/>
-			<coincidentGamma id="10" intensity="0.99442598068720078"/>
+			<coincidentGamma id="10" intensity="0.99442598068720078" a2="0.25" a4="-0"/>
 			<coincidentGamma id="0" intensity="7.8507314264779021E-05" a2="-0.05" a4="0"/>
 		</gamma>
 		<gamma energy="2741.5" intensity="0.0082">
@@ -4259,7 +4256,6 @@
 		<beta energy="4369.7" forbiddenness="1u" intensity="0.00012" logFT="9.96"/>
 		<beta energy="10419.1" forbiddenness="1u" intensity="0.28" logFT="9.071"/>
 		<gamma energy="8869.3" intensity="0.00076"/>
-		<!-- cascade-match: SD-unmatched[keV]: 6048.20(I=0.0014,neartol) 6915.50(I=0.00038,neartol) 7115.15(I=0.0475,neartol) 8869.30(I=0.00076,neartol); G4-unclaimed-on-populated[keV]: 6917.10(rI=100) 7116.85(rI=100) 8871.90(rI=9.3); -->
 	</transition>
 	<transition branchRatio="1" child="O17" mode="b-" parent="N17">
 		<gamma energy="870.71" id="0" intensity="0.033"/>
@@ -4286,7 +4282,7 @@
 			<coincidentGamma id="12" intensity="0.642042801556" a2="-0.175" a4="0"/>
 		</gamma>
 		<gamma energy="682.24" intensity="0.0025725">
-			<coincidentGamma id="25" intensity="0.735"/>
+			<coincidentGamma id="25" intensity="0.735" a2="0.5" a4="0"/>
 		</gamma>
 		<gamma energy="821.71" id="2" intensity="0.44541">
 			<coincidentGamma id="13" intensity="0.53862248681608438"/>
@@ -4443,7 +4439,7 @@
 		<beta energy="10344.87" intensity="0.005" logFT="7.3"/>
 		<beta energy="11916.95" intensity="0.034" logFT="6.79"/>
 		<gamma energy="4366.00" intensity="6.1740E-03"/>
-		<!-- cascade-match: SD-unmatched[keV]: 1893.93(I=0.00272,neartol) 6197.07(I=0.0103,neartol) 4366.00(I=0.00617,absent); G4-unclaimed-on-populated[keV]: 6198.22(rI=88.7) 1895.76(rI=12) 4369.23(rI=59.6) 4369.23(rI=32); -->
+		<!-- cascade-match: SD-unmatched[keV]: 1893.93(I=0.00272,neartol) 4366.00(I=0.00617,absent); G4-unclaimed-on-populated[keV]: 1895.76(rI=12) 4369.23(rI=59.6) 4369.23(rI=32); -->
 	</transition>
 	<transition branchRatio="1" child="O19" mode="b-" parent="N19">
 		<gamma energy="96" id="0" intensity="1"/>
@@ -4972,7 +4968,6 @@
 		<beta energy="7160.47" intensity="7.6600E-01" logFT="4.410"/>
 		<beta energy="7300" intensity="0.2"/>
 		<gamma energy="3599.00" intensity="2.2000E-03"/>
-		<!-- cascade-match: SD-unmatched[keV]: 3599.00(I=0.0022,neartol); -->
 	</transition>
 	<transition branchRatio="1" child="Na26" mode="b-" parent="Ne26">
 		<gamma energy="82.5" intensity="0"/>
@@ -5033,7 +5028,7 @@
 		<gamma energy="2578.00" intensity="5.0000E-02"/>
 		<gamma energy="4094.00" intensity="1.2000E-02"/>
 		<gamma energy="4166.00" intensity="2.9000E-02"/>
-		<!-- cascade-match: SD-unmatched[keV]: 223.80(I=0.102,absent) 2822.40(I=0.13,absent) 2918.20(I=0.035,neartol); G4-unclaimed-on-populated[keV]: 2917.00(rI=70); -->
+		<!-- cascade-match: SD-unmatched[keV]: 223.80(I=0.102,absent) 2822.40(I=0.13,absent); -->
 	</transition>
 	<transition branchRatio="1" child="Na30" mode="b-" parent="Ne30">
 		<gamma energy="150.6" intensity="7.8000E-01"/>
@@ -5096,20 +5091,20 @@
 			<coincidentGamma id="1" intensity="1.00542244641"/>
 		</gamma>
 		<gamma energy="6635" intensity="8.1000E-05">
-			<coincidentGamma id="2" intensity="4.42307692308"/>
+			<coincidentGamma id="2" intensity="4.42307692308" a2="-0.140306" a4="-0"/>
 			<coincidentGamma id="1" intensity="1.00542244641"/>
 		</gamma>
 		<gamma energy="8237" intensity="2.2000E-04">
-			<coincidentGamma id="1" intensity="1.00542244641"/>
+			<coincidentGamma id="1" intensity="1.00542244641" a2="-0.0714286" a4="-0"/>
 		</gamma>
 		<gamma energy="8638" intensity="3.8400E-04">
-			<coincidentGamma id="1" intensity="1.00542244641"/>
+			<coincidentGamma id="1" intensity="1.00542244641" a2="0.25" a4="-0"/>
 		</gamma>
 		<gamma energy="9248" intensity="2.7000E-04">
-			<coincidentGamma id="1" intensity="1.00542244641"/>
+			<coincidentGamma id="1" intensity="1.00542244641" a2="-0.0714286" a4="-0"/>
 		</gamma>
 		<gamma energy="9626.1" intensity="3.3000E-04">
-			<coincidentGamma id="1" intensity="1.00542244641"/>
+			<coincidentGamma id="1" intensity="1.00542244641" a2="-0.25" a4="-0"/>
 		</gamma>
 		<gamma energy="9870" intensity="1E-06"/>
 		<gamma energy="10271" intensity="0.00023"/>
@@ -5134,7 +5129,7 @@
 		<positron energy="7897.49" intensity="1.5700E-03" logFT="6.970"/>
 		<gamma energy="2852.00" intensity="3.0000E-05"/>
 		<gamma energy="5787.30" intensity="3.0000E-05"/>
-		<!-- cascade-match: SD-unmatched[keV]: 8237.00(I=0.00022,neartol) 8638.00(I=0.000384,neartol) 9248.00(I=0.00027,neartol) 9626.10(I=0.00033,neartol) 9870.00(I=1e-06,neartol) 10271.00(I=0.00023,neartol) 11258.90(I=0.00172,absent); G4-unclaimed-on-populated[keV]: 4154.03(rI=82) 3174.20(rI=7.6) 5788.23(rI=89.2) 7421.90(rI=10.8) 8239.33(rI=78) 8639.53(rI=88.9) 10622.33(rI=63); -->
+		<!-- cascade-match: G4-unclaimed-on-populated[keV]: 4154.03(rI=82) 3174.20(rI=7.6) 5788.23(rI=89.2) 7421.90(rI=10.8); -->
 	</transition>
 	<transition branchRatio="1" child="Ne21" mode="b+" parent="Na21">
 		<gamma energy="350.73" intensity="0.0507"/>
@@ -5315,7 +5310,7 @@
 		<beta energy="5371.20" intensity="0.016" logFT="5.77"/>
 		<beta energy="6373.62" intensity="0.002" logFT="7"/>
 		<beta energy="7503.30" intensity="0.881" logFT="4.71"/>
-		<!-- cascade-match: SD-unmatched[keV]: 815.20(I=0.00042,absent) 4833.80(I=0.003,neartol); G4-unclaimed-on-populated[keV]: 4835.13(rI=10.8) 1290.34(rI=5.2) 1792.95(rI=6.5) 3187.14(rI=5.8); -->
+		<!-- cascade-match: SD-unmatched[keV]: 815.20(I=0.00042,absent); G4-unclaimed-on-populated[keV]: 1290.34(rI=5.2) 1792.95(rI=6.5) 3187.14(rI=5.8); -->
 	</transition>
 	<transition branchRatio="1" child="Mg27" mode="b-" parent="Na27">
 		<gamma energy="713.3" id="0" intensity="0.0087">
@@ -5411,7 +5406,7 @@
 		<beta energy="12555.96" intensity="0.14" logFT="4.99"/>
 		<beta energy="14030.00" intensity="0.63" logFT="4.57"/>
 		<gamma energy="3086.00" intensity="2.6000E-02"/>
-		<!-- cascade-match: SD-unmatched[keV]: 3083.50(I=0.013,neartol) 5271.70(I=0.005,neartol) 3086.00(I=0.026,neartol); -->
+		<!-- cascade-match: SD-unmatched[keV]: 3083.50(I=0.013,neartol); -->
 	</transition>
 	<transition branchRatio="1" child="Mg29" mode="b-" parent="Na29">
 		<gamma energy="54.6" id="0" intensity="0.414"/>
@@ -5966,7 +5961,7 @@
 		<gamma energy="3431.8" intensity="0.064"/>
 		<gamma energy="3621.9" intensity="0.072"/>
 		<gamma energy="4201.1" intensity="0.022">
-			<coincidentGamma id="2" intensity="1"/>
+			<coincidentGamma id="2" intensity="1" a2="0" a4="0"/>
 		</gamma>
 		<gamma energy="4809" intensity="0.009"/>
 		<beta energy="6592.7" intensity="0.022" logFT="5.33"/>
@@ -5979,7 +5974,7 @@
 		<beta energy="10127.2" intensity="0.16" logFT="4.34"/>
 		<beta energy="10793.5" intensity="0.11" logFT="5.7"/>
 		<beta energy="11740" intensity="0.22" logFT="5.5"/>
-		<!-- cascade-match: SD-unmatched[keV]: 2949.00(I=0.048,neartol) 3431.80(I=0.064,neartol) 3621.90(I=0.072,neartol) 4201.10(I=0.022,neartol); G4-unclaimed-on-populated[keV]: 3433.30(rI=90) 3623.00(rI=100) 4143.30(rI=8.6); -->
+		<!-- cascade-match: SD-unmatched[keV]: 2949.00(I=0.048,neartol); G4-unclaimed-on-populated[keV]: 4143.30(rI=8.6); -->
 	</transition>
 	<transition branchRatio="1" child="Al32" mode="b-" parent="Mg32">
 		<gamma energy="735.5" id="0" intensity="9.0000E-02"/>
@@ -6044,7 +6039,7 @@
 		<gamma energy="2053.00" intensity="1.5180E-02"/>
 		<gamma energy="7350.00" intensity="4.5540E-02"/>
 		<gamma energy="7801.00" intensity="6.0720E-02"/>
-		<!-- cascade-match: SD-unmatched[keV]: 1598.00(I=0.081,neartol) 2053.00(I=0.0152,neartol) 7350.00(I=0.0455,neartol) 7801.00(I=0.0607,neartol); -->
+		<!-- cascade-match: SD-unmatched[keV]: 1598.00(I=0.081,neartol) 2053.00(I=0.0152,neartol); G4-unclaimed-on-populated[keV]: 5751.40(rI=5.5); -->
 	</transition>
 	<transition branchRatio="0.011" child="Na22" mode="b+p" parent="Al23"/>
 	<transition branchRatio="1" child="Mg24" mode="b+" parent="Al24">
@@ -6061,7 +6056,7 @@
 			<coincidentGamma id="23" intensity="0.045248868778280542"/>
 			<coincidentGamma id="24" intensity="0.011584107036291227"/>
 			<coincidentGamma id="40" intensity="0.61085972850678727" a2="0.05" a4="0"/>
-			<coincidentGamma id="43" intensity="0.25339366515837103"/>
+			<coincidentGamma id="43" intensity="0.25339366515837103" a2="-0.125" a4="0"/>
 			<coincidentGamma id="27" intensity="0.045248868778280542" a2="0.0208333" a4="0"/>
 			<coincidentGamma id="29" intensity="0.040792731339767269"/>
 			<coincidentGamma id="19" intensity="0.0418552036199095" a2="-0.0625" a4="0"/>
@@ -6097,7 +6092,7 @@
 			<coincidentGamma id="10" intensity="0.96842536314561933"/>
 			<coincidentGamma id="8" intensity="0.00086772185832485814"/>
 			<coincidentGamma id="43" intensity="0.0057094867316107968"/>
-			<coincidentGamma id="46" intensity="0.00076494372199759607"/>
+			<coincidentGamma id="46" intensity="0.00076494372199759607" a2="0.196429" a4="-0"/>
 			<coincidentGamma id="2" intensity="0.0001301582787487287"/>
 			<coincidentGamma id="39" intensity="0.00032804119034232442"/>
 			<coincidentGamma id="26" intensity="0.0010960175422288581"/>
@@ -6151,7 +6146,7 @@
 			<coincidentGamma id="42" intensity="0.023862618218018914"/>
 			<coincidentGamma id="10" intensity="0.96485547431851981"/>
 			<coincidentGamma id="39" intensity="0.014504728720756597"/>
-			<coincidentGamma id="44" intensity="0.5469387755102042"/>
+			<coincidentGamma id="44" intensity="0.5469387755102042" a2="0.196429" a4="-0"/>
 		</gamma>
 		<gamma energy="1368.63" id="10" intensity="0.96"/>
 		<gamma energy="1434.11" intensity="0.00063"/>
@@ -6177,7 +6172,7 @@
 			<coincidentGamma id="23" intensity="0.045248868778280542"/>
 			<coincidentGamma id="24" intensity="0.011584107036291227"/>
 			<coincidentGamma id="40" intensity="0.61085972850678727" a2="0.05" a4="0"/>
-			<coincidentGamma id="43" intensity="0.25339366515837103"/>
+			<coincidentGamma id="43" intensity="0.25339366515837103" a2="-0.125" a4="0"/>
 			<coincidentGamma id="27" intensity="0.045248868778280542" a2="0.0208333" a4="0"/>
 			<coincidentGamma id="29" intensity="0.040792731339767269"/>
 			<coincidentGamma id="19" intensity="0.0418552036199095" a2="-0.0625" a4="0"/>
@@ -6333,13 +6328,13 @@
 		<gamma energy="7348.20" id="42" intensity="0.00153"/>
 		<gamma energy="7615.20" id="43" intensity="0.00224"/>
 		<gamma energy="7930.87" id="44" intensity="0.0134">
-			<coincidentGamma id="10" intensity="0.99998700016899766"/>
+			<coincidentGamma id="10" intensity="0.99998700016899766" a2="0.102041" a4="0.00907029"/>
 		</gamma>
 		<gamma energy="8087.65" intensity="0.0002">
 			<coincidentGamma id="10" intensity="0.99998700016899766" a2="-0.0714286" a4="-0"/>
 		</gamma>
 		<gamma energy="8146.00" id="46" intensity="0.00028">
-			<coincidentGamma id="10" intensity="0.99998700016899766"/>
+			<coincidentGamma id="10" intensity="0.99998700016899766" a2="0.102041" a4="0.00907029"/>
 		</gamma>
 		<electronCapture energy="906" intensity="2E-07" logFT="5.3"/>
 		<electronCapture energy="1717.40" intensity="6.3E-07" logFT="5.3"/>
@@ -6379,7 +6374,7 @@
 		<gamma energy="8085.70" intensity="2.0000E-04"/>
 		<gamma energy="9450.10" intensity="1.1000E-03"/>
 		<gamma energy="9943.50" intensity="2.7000E-04"/>
-		<!-- cascade-match: SD-unmatched[keV]: 587.95(I=0.00149,absent) 860.20(I=0.00022,neartol) 909.09(I=0.00122,absent) 1434.11(I=0.00063,absent) 2127.51(I=0.00054,absent) 2566.96(I=0.00065,absent) 7615.20(I=0.00224,neartol) 7930.87(I=0.0134,neartol) 8146.00(I=0.00028,neartol) 863.00(I=0.00022,neartol) 5060.70(I=0.00036,neartol) 8085.70(I=0.0002,absent) 9450.10(I=0.0011,neartol) 9943.50(I=0.00027,neartol); G4-unclaimed-on-populated[keV]: 5235.16(rI=10) 7616.41(rI=38) 1802.06(rI=12) 3689.55(rI=51) 8438.40(rI=100) 7070.62(rI=100) 7932.40(rI=100) 4222.65(rI=12) 5219.46(rI=5.6) 5334.96(rI=28.4); -->
+		<!-- cascade-match: SD-unmatched[keV]: 587.95(I=0.00149,absent) 860.20(I=0.00022,neartol) 909.09(I=0.00122,absent) 1434.11(I=0.00063,absent) 2127.51(I=0.00054,absent) 2566.96(I=0.00065,absent) 863.00(I=0.00022,neartol); G4-unclaimed-on-populated[keV]: 5235.16(rI=10) 1802.06(rI=12) 3689.55(rI=51) 8438.40(rI=100) 7070.62(rI=100) 4222.65(rI=12) 5219.46(rI=5.6) 5334.96(rI=28.4); -->
 	</transition>
 	<transition branchRatio="0.825" child="Al24" mode="it" parent="Al24m">
 		<gamma energy="425.8" intensity="9.9890E-01"/>
@@ -6420,7 +6415,7 @@
 		<gamma energy="8688.60" intensity="1.1112E-02"/>
 		<gamma energy="9825.90" intensity="1.1112E-02"/>
 		<gamma energy="9963.00" intensity="8.8896E-02"/>
-		<!-- cascade-match: SD-unmatched[keV]: 8595.10(I=0.0333,neartol) 8688.60(I=0.0111,neartol) 9825.90(I=0.0111,neartol) 9963.00(I=0.0889,neartol); -->
+		<!-- cascade-match: G4-unclaimed-on-populated[keV]: 8459.33(rI=30.3) 9965.30(rI=100) 5820.75(rI=16); -->
 	</transition>
 	<transition branchRatio="1" child="Mg25" mode="b+" parent="Al25">
 		<gamma energy="389.71" intensity="2.2000E-04">
@@ -7009,12 +7004,12 @@
 		</gamma>
 		<gamma energy="1778.97" id="7" intensity="0.975"/>
 		<gamma energy="2063.14" intensity="3E-06">
-			<coincidentGamma id="42" intensity="0.95454545454545459"/>
+			<coincidentGamma id="42" intensity="0.95454545454545459" a2="0.25" a4="-0"/>
 			<coincidentGamma id="35" intensity="0.045454545454545463" a2="0.175" a4="0"/>
 			<coincidentGamma id="7" intensity="0.045454545454545463"/>
 		</gamma>
 		<gamma energy="2098.29" intensity="4E-06">
-			<coincidentGamma id="41" intensity="0.35629453681710205"/>
+			<coincidentGamma id="41" intensity="0.35629453681710205" a2="0.25" a4="-0"/>
 			<coincidentGamma id="13" intensity="0.0023752969121140139" a2="0.25" a4="-0"/>
 			<coincidentGamma id="34" intensity="0.64133016627078376" a2="0.175" a4="0"/>
 			<coincidentGamma id="20" intensity="0.0023752969121140139"/>
@@ -7161,18 +7156,18 @@
 			<coincidentGamma id="7" intensity="1" a2="-0.0792657" a4="-8.16245E-06"/>
 		</gamma>
 		<gamma energy="7601" intensity="0.0055">
-			<coincidentGamma id="7" intensity="1"/>
+			<coincidentGamma id="7" intensity="1" a2="0.31272" a4="0.00262365"/>
 		</gamma>
 		<gamma energy="7699.32" intensity="2E-05">
 			<coincidentGamma id="7" intensity="1" a2="0.25" a4="-0"/>
 		</gamma>
 		<gamma energy="7932.4" id="46" intensity="0.0215"/>
 		<gamma energy="8015.3" intensity="0.0004">
-			<coincidentGamma id="7" intensity="1"/>
+			<coincidentGamma id="7" intensity="1" a2="0.25" a4="-0"/>
 		</gamma>
 		<gamma energy="8257.8" intensity="0.00052"/>
 		<gamma energy="8428.4" intensity="0.00029">
-			<coincidentGamma id="7" intensity="1"/>
+			<coincidentGamma id="7" intensity="1" a2="-0.0714286" a4="-0"/>
 		</gamma>
 		<gamma energy="8887.5" intensity="0.00086">
 			<coincidentGamma id="7" intensity="1"/>
@@ -7232,7 +7227,7 @@
 		<gamma energy="9379.50" intensity="2.0200E-04"/>
 		<gamma energy="9477.40" intensity="5.5000E-04"/>
 		<gamma energy="9793.80" intensity="1.3000E-04"/>
-		<!-- cascade-match: SD-unmatched[keV]: 7379.54(I=0.00015,neartol) 7414.92(I=0.0021,neartol) 7601.00(I=0.0055,neartol) 7932.40(I=0.0215,neartol) 8015.30(I=0.0004,neartol) 8428.40(I=0.00029,neartol) 8887.50(I=0.00086,neartol) 9379.50(I=0.000202,neartol) 9477.40(I=0.00055,neartol) 9793.80(I=0.00013,neartol); G4-unclaimed-on-populated[keV]: 7380.59(rI=57.3) 7416.26(rI=100) 7933.45(rI=100) 7602.52(rI=100) 9479.49(rI=100) 8889.02(rI=49); -->
+		<!-- cascade-match: G4-unclaimed-on-populated[keV]: 4816.03(rI=7.2) 5591.15(rI=29); -->
 	</transition>
 	<transition branchRatio="1.3E-05" child="Al27" mode="b+p" parent="P28"/>
 	<transition branchRatio="8.6E-06" child="Mg24" mode="b+a" parent="P28"/>
@@ -8087,7 +8082,7 @@
 		<positron energy="2593.42" intensity="0.0046" logFT="4.97"/>
 		<positron energy="3719.60" intensity="0.0048" logFT="5.65"/>
 		<positron energy="4560.60" intensity="0.9851" logFT="3.75"/>
-		<!-- cascade-match: SD-unmatched[keV]: 4746.00(I=3.74e-06,neartol); G4-unclaimed-on-populated[keV]: 1086.17(rI=25) 1187.72(rI=25) 1741.95(rI=30); -->
+		<!-- cascade-match: G4-unclaimed-on-populated[keV]: 1086.17(rI=25) 1187.72(rI=25) 1741.95(rI=30) 3906.32(rI=11); -->
 	</transition>
 	<transition branchRatio="1" child="S34" mode="ec" parent="Cl34">
 		<positron energy="4469.28" intensity="1" logFT="3.48"/>
@@ -8786,7 +8781,7 @@
 		<beta energy="7480" forbiddenness="1u" intensity="0.09" logFT="9.8"/>
 		<gamma energy="621.10" intensity="2.4300E-03"/>
 		<gamma energy="1042.30" intensity="4.8600E-03"/>
-		<!-- cascade-match: SD-unmatched[keV]: 222.50(I=0.00162,neartol) 361.30(I=0.000729,neartol) 4580.10(I=0.00081,neartol) 6133.00(I=0.000405,absent); G4-unclaimed-on-populated[keV]: 987.45(rI=6.2) 3511.54(rI=14.7) 169.06(rI=8) 3680.60(rI=6) 2863.65(rI=43) 364.60(rI=90) 2079.35(rI=100) 1650.60(rI=100) 747.64(rI=23) 1227.37(rI=85) 1629.40(rI=100) 1203.00(rI=100); -->
+		<!-- cascade-match: SD-unmatched[keV]: 222.50(I=0.00162,neartol) 361.30(I=0.000729,neartol) 6133.00(I=0.000405,absent); G4-unclaimed-on-populated[keV]: 987.45(rI=6.2) 3511.54(rI=14.7) 169.06(rI=8) 3680.60(rI=6) 2863.65(rI=43) 1066.46(rI=90) 1370.07(rI=38) 1685.35(rI=100) 3117.15(rI=28) 364.60(rI=90) 2079.35(rI=100) 1650.60(rI=100) 747.64(rI=23) 1227.37(rI=85) 1629.40(rI=100) 1203.00(rI=100); -->
 	</transition>
 	<transition branchRatio="1" child="Ar41" mode="b-" parent="Cl41">
 		<gamma energy="167" intensity="0"/>
@@ -9990,7 +9985,7 @@
 		<gamma energy="3703.20" intensity="3.3286E-01"/>
 		<gamma energy="3995.30" intensity="2.7880E-03"/>
 		<gamma energy="4356.00" intensity="4.4200E-03"/>
-		<!-- cascade-match: SD-unmatched[keV]: 609.00(I=0.00309,absent) 1053.70(I=0.00377,absent) 1142.50(I=0.00364,absent) 1168.50(I=0.00347,absent) 1172.70(I=0.00813,absent) 1485.90(I=0.0033,absent) 2489.60(I=0.00568,absent) 2549.60(I=0.00632,absent) 2749.80(I=0.00561,neartol) 2796.60(I=0.0117,absent) 2885.00(I=0.00272,neartol) 3703.20(I=0.333,absent) 3995.30(I=0.00279,neartol) 4356.00(I=0.00442,neartol); G4-unclaimed-on-populated[keV]: 2747.90(rI=100) 3707.20(rI=100) 2883.40(rI=38) 4357.30(rI=58); -->
+		<!-- cascade-match: SD-unmatched[keV]: 609.00(I=0.00309,absent) 1053.70(I=0.00377,absent) 1142.50(I=0.00364,absent) 1168.50(I=0.00347,absent) 1172.70(I=0.00813,absent) 1485.90(I=0.0033,absent) 2489.60(I=0.00568,absent) 2549.60(I=0.00632,absent) 2749.80(I=0.00561,neartol) 2796.60(I=0.0117,absent) 2885.00(I=0.00272,neartol) 3703.20(I=0.333,absent); G4-unclaimed-on-populated[keV]: 2747.90(rI=100) 3707.20(rI=100) 2883.40(rI=38); -->
 	</transition>
 	<transition branchRatio="1" child="K46" mode="b-" parent="Ar46">
 		<gamma energy="288.1" intensity="0.007"/>
@@ -10120,7 +10115,7 @@
 			<coincidentGamma id="0" intensity="0.82" a2="0.25" a4="-0"/>
 		</gamma>
 		<gamma energy="4759" intensity="0.004428">
-			<coincidentGamma id="0" intensity="0.82"/>
+			<coincidentGamma id="0" intensity="0.82" a2="-0.25" a4="-0"/>
 		</gamma>
 		<gamma energy="4896.1" intensity="0.003444">
 			<coincidentGamma id="0" intensity="0.82" a2="-0.25" a4="-0"/>
@@ -10230,7 +10225,7 @@
 		<positron energy="5171.80" intensity="0.418" logFT="3.49"/>
 		<positron energy="7342.50" intensity="0.083" logFT="4.91"/>
 		<positron energy="9812.61" intensity="0.44" logFT="4.78"/>
-		<!-- cascade-match: SD-unmatched[keV]: 6729.00(I=0.00451,neartol) 7177.60(I=0.00377,neartol) 7708.60(I=0.00172,neartol) 7969.50(I=0.00127,neartol) 9218.80(I=0.000492,neartol); G4-unclaimed-on-populated[keV]: 537.00(rI=7) 2981.02(rI=18) 4951.40(rI=100) 197.08(rI=5) 756.73(rI=14.6) 992.81(rI=100) 3200.75(rI=7.3) 1416.54(rI=6.6) 1442.25(rI=5.3) 1678.33(rI=17.1) 3886.27(rI=100) 1439.87(rI=6.1) 1659.60(rI=6.1) 2196.60(rI=6.1) 2281.90(rI=7.3) 2725.20(rI=5.7) 2961.28(rI=5.7) 7178.90(rI=100) 1479.95(rI=7.4) 2362.55(rI=5.6) 2385.20(rI=9.3) 3007.50(rI=13) 7336.60(rI=5.6) 7710.30(rI=59) 2166.20(rI=14) ...; -->
+		<!-- cascade-match: G4-unclaimed-on-populated[keV]: 537.00(rI=7) 2981.02(rI=18) 4951.40(rI=100) 197.08(rI=5) 756.73(rI=14.6) 992.81(rI=100) 3200.75(rI=7.3) 1439.87(rI=6.1) 1659.60(rI=6.1) 2196.60(rI=6.1) 2281.90(rI=7.3) 6731.00(rI=100) 2725.20(rI=5.7) 2961.28(rI=5.7) 1479.95(rI=7.4) 2362.55(rI=5.6) 2385.20(rI=9.3) 3007.50(rI=13) 7336.60(rI=5.6) 4246.15(rI=6) 4780.09(rI=22) 7249.82(rI=100) 2166.20(rI=14) 2891.80(rI=28) 5062.69(rI=25) ...; -->
 	</transition>
 	<transition branchRatio="0.00048" child="Cl35" mode="ecp" parent="K36"/>
 	<transition branchRatio="3.1E-05" child="S32" mode="eca" parent="K36"/>
@@ -11150,7 +11145,7 @@
 		<beta energy="2761.94" intensity="0.014" logFT="7.6"/>
 		<beta energy="4022.22" intensity="0.079" logFT="7.600"/>
 		<beta energy="4196.50" forbiddenness="1u" intensity="0.05" logFT="9.5"/>
-		<!-- cascade-match: SD-unmatched[keV]: 834.50(I=0.000211,absent) 847.50(I=0.000211,absent) 1750.90(I=0.000369,absent) 1940.50(I=0.000105,neartol) 2231.00(I=0.000111,absent) 2769.90(I=0.000216,neartol) 3367.40(I=3.69e-05,absent) 3406.40(I=3.69e-05,absent); G4-unclaimed-on-populated[keV]: 942.13(rI=9.1) 957.65(rI=30); -->
+		<!-- cascade-match: SD-unmatched[keV]: 834.50(I=0.000211,absent) 847.50(I=0.000211,absent) 1750.90(I=0.000369,absent) 1940.50(I=0.000105,neartol) 2231.00(I=0.000111,absent) 3367.40(I=3.69e-05,absent) 3406.40(I=3.69e-05,absent); G4-unclaimed-on-populated[keV]: 942.13(rI=9.1) 957.65(rI=30); -->
 	</transition>
 	<transition branchRatio="1" child="Ca46" mode="b-" parent="K46">
 		<gamma energy="1347" id="0" intensity="0.9"/>
@@ -11400,7 +11395,7 @@
 		<beta energy="12090" forbiddenness="1u" intensity="0.01" logFT="11"/>
 		<gamma energy="648.40" intensity="2.3400E-04"/>
 		<gamma energy="4554.20" intensity="3.7440E-04"/>
-		<!-- cascade-match: SD-unmatched[keV]: 793.11(I=0.0632,neartol) 793.11(I=0.0328,neartol) 1932.00(I=0.000125,absent) 2689.00(I=0.000125,neartol) 6613.70(I=0.133,neartol) 7300.90(I=0.0242,neartol) 7400.00(I=0.00211,neartol) 8390.00(I=0.00382,absent) 9300.00(I=0.0046,absent); G4-unclaimed-on-populated[keV]: 757.66(rI=29) 8386.10(rI=100); -->
+		<!-- cascade-match: SD-unmatched[keV]: 793.11(I=0.0632,neartol) 793.11(I=0.0328,neartol) 1932.00(I=0.000125,absent) 2689.00(I=0.000125,neartol) 9300.00(I=0.0046,absent); G4-unclaimed-on-populated[keV]: 757.66(rI=29); -->
 	</transition>
 	<transition branchRatio="1" child="Ca49" mode="b-" parent="K49">
 		<gamma energy="2023" id="0" intensity="0.004"/>
@@ -11478,7 +11473,7 @@
 		<gamma energy="4072.00" intensity="1.2556E-02"/>
 		<gamma energy="3356.70" intensity="9.6320E-03"/>
 		<gamma energy="3859.70" intensity="1.3588E-02"/>
-		<!-- cascade-match: SD-unmatched[keV]: 3356.70(I=0.00963,neartol) 3859.70(I=0.0136,neartol); -->
+		<!-- cascade-match: SD-unmatched[keV]: 3356.70(I=0.00963,neartol); -->
 	</transition>
 	<transition branchRatio="1" child="Ca51" mode="b-" parent="K51">
 		<gamma energy="3462" intensity="0.107"/>
@@ -11629,7 +11624,7 @@
 		</gamma>
 		<gamma energy="3211.2" intensity="0.0028999874129371"/>
 		<gamma energy="3519.00" intensity="8.0449E-05">
-			<coincidentGamma id="0" intensity="0.200982168888"/>
+			<coincidentGamma id="0" intensity="0.200982168888" a2="-0.25" a4="0"/>
 		</gamma>
 		<gamma energy="3716.00" intensity="4.0224E-05">
 			<coincidentGamma id="0" intensity="0.200982168888" a2="-0.25" a4="0"/>
@@ -11655,7 +11650,7 @@
 		<gamma energy="1643.00" intensity="8.0385E-04"/>
 		<gamma energy="2534.00" intensity="4.2236E-05"/>
 		<gamma energy="3210.00" intensity="2.7755E-03"/>
-		<!-- cascade-match: SD-unmatched[keV]: 3848.00(I=0.00113,neartol); G4-unclaimed-on-populated[keV]: 130.22(rI=100) 3341.10(rI=16.7); -->
+		<!-- cascade-match: G4-unclaimed-on-populated[keV]: 130.22(rI=100) 3341.10(rI=16.7); -->
 	</transition>
 	<transition branchRatio="0.000605844432433958" child="K38" mode="ec" parent="Ca38">
 		<gamma energy="1698.00" intensity="2.6541E-01"/>
@@ -11901,7 +11896,7 @@
 		<beta energy="5960.98" intensity="0.149" logFT="6.080"/>
 		<beta energy="6187.67" intensity="0.025" logFT="6.9"/>
 		<beta energy="6493.38" intensity="0.051" logFT="6.720"/>
-		<!-- cascade-match: SD-unmatched[keV]: 2912.00(I=0.0141,neartol) 3196.50(I=0.0311,neartol) 4379.00(I=0.0117,absent); G4-unclaimed-on-populated[keV]: 3195.20(rI=14.8) 2910.48(rI=61); -->
+		<!-- cascade-match: SD-unmatched[keV]: 2912.00(I=0.0141,neartol) 4379.00(I=0.0117,absent); G4-unclaimed-on-populated[keV]: 2910.48(rI=61); -->
 	</transition>
 	<transition branchRatio="1" child="Sc52" mode="b-" parent="Ca52">
 		<gamma energy="675.2" id="0" intensity="0.624"/>
@@ -11922,10 +11917,10 @@
 	</transition>
 	<transition branchRatio="1" child="Ca40" mode="ec" parent="Sc40">
 		<gamma energy="755.6" intensity="4.0811E-01">
-			<coincidentGamma id="4" intensity="0.9954"/>
+			<coincidentGamma id="4" intensity="0.9954" a2="0.178571" a4="-0.004329"/>
 		</gamma>
 		<gamma energy="1877.8" id="1" intensity="0.24885">
-			<coincidentGamma id="4" intensity="0.9954"/>
+			<coincidentGamma id="4" intensity="0.9954" a2="0.179861" a4="0.00215704"/>
 		</gamma>
 		<gamma energy="2045.8" intensity="2.5383E-01">
 			<coincidentGamma id="1" intensity="0.67256756756756753" a2="-0.334438" a4="0"/>
@@ -11936,7 +11931,7 @@
 		</gamma>
 		<gamma energy="3735.6" id="4" intensity="0.9954"/>
 		<gamma energy="3920" intensity="1.2940E-01">
-			<coincidentGamma id="4" intensity="0.9954"/>
+			<coincidentGamma id="4" intensity="0.9954" a2="-0.125" a4="0"/>
 		</gamma>
 		<electronCapture energy="2257.00" intensity="2.2E-07" logFT="5.6"/>
 		<electronCapture energy="2289.00" intensity="1.8E-07" logFT="5.8"/>
@@ -12054,7 +12049,7 @@
 		<positron energy="9580.00" intensity="0.19" logFT="4.8"/>
 		<gamma energy="1126.00" intensity="1.1945E-01"/>
 		<gamma energy="3167.90" intensity="1.1945E-01"/>
-		<!-- cascade-match: SD-unmatched[keV]: 2844.00(I=0.0209,neartol) 3735.60(I=0.995,neartol) 3920.00(I=0.129,neartol) 1126.00(I=0.119,absent) 3167.90(I=0.119,neartol); G4-unclaimed-on-populated[keV]: 3736.69(rI=100) 1122.09(rI=41.4) 1122.09(rI=48) 1373.08(rI=33) 3166.80(rI=52) 3921.54(rI=59); -->
+		<!-- cascade-match: SD-unmatched[keV]: 2844.00(I=0.0209,neartol) 1126.00(I=0.119,absent); G4-unclaimed-on-populated[keV]: 1122.09(rI=41.4) 1122.09(rI=48) 1247.11(rI=23.1) 1506.79(rI=11.3) 1629.63(rI=8) 1918.74(rI=57) 3627.88(rI=36) 3795.57(rI=100) 1373.08(rI=33) 3166.80(rI=52) 3790.80(rI=5.1) 4669.79(rI=7.4) 5070.09(rI=10.7) 5420.70(rI=17.9) 6795.12(rI=100) 6962.81(rI=16); -->
 	</transition>
 	<transition branchRatio="0.0044" child="K39" mode="ecp" parent="Sc40"/>
 	<transition branchRatio="0.00017" child="Ar36" mode="eca" parent="Sc40"/>
@@ -12067,7 +12062,6 @@
 		<positron energy="2513.88" intensity="0.000138" logFT="5.77"/>
 		<positron energy="2898.38" intensity="0.00023" logFT="5.82"/>
 		<positron energy="5473.28" intensity="0.99869" logFT="3.461"/>
-		<!-- cascade-match: SD-unmatched[keV]: 2574.80(I=0.00023,neartol); -->
 	</transition>
 	<transition branchRatio="1" child="Ca42" mode="ec" parent="Sc42">
 		<gamma energy="312.6" intensity="7.5E-05">
@@ -12954,7 +12948,6 @@
 		<positron energy="1713.60" intensity="0.000108" logFT="5"/>
 		<positron energy="3418.40" intensity="3.9E-05" logFT="6.76"/>
 		<positron energy="6029.40" intensity="0.99886" logFT="3.485"/>
-		<!-- cascade-match: SD-unmatched[keV]: 4317.00(I=0.000113,neartol); -->
 	</transition>
 	<transition branchRatio="1" child="V46" mode="it" parent="V46m">
 		<gamma energy="801.1" intensity="1"/>
@@ -14535,7 +14528,7 @@
 		<positron energy="5172.00" intensity="0.0049" logFT="5.32"/>
 		<positron energy="6760.00" intensity="0.05" logFT="4.86"/>
 		<positron energy="6997.00" intensity="0.937" logFT="3.653"/>
-		<!-- cascade-match: SD-unmatched[keV]: 3426.00(I=0.002,neartol) 3555.00(I=0.0016,neartol); G4-unclaimed-on-populated[keV]: 2615.00(rI=100) 2333.90(rI=6.7) 3171.70(rI=23.3) 3370.50(rI=10) 3510.80(rI=10) 3772.60(rI=6.7) 3934.40(rI=6.7) 4006.80(rI=6.7) 4081.40(rI=6.7) 4223.50(rI=13.3) 4754.90(rI=6.7) 4789.00(rI=10) 4809.20(rI=6.7) 5240.30(rI=86.7) 6827.60(rI=6.7) 7064.90(rI=100); -->
+		<!-- cascade-match: SD-unmatched[keV]: 3426.00(I=0.002,neartol); G4-unclaimed-on-populated[keV]: 2615.00(rI=100) 2333.90(rI=6.7) 3171.70(rI=23.3) 3370.50(rI=10) 3510.80(rI=10) 3772.60(rI=6.7) 3934.40(rI=6.7) 4006.80(rI=6.7) 4081.40(rI=6.7) 4223.50(rI=13.3) 4754.90(rI=6.7) 4789.00(rI=10) 4809.20(rI=6.7) 5240.30(rI=86.7) 6827.60(rI=6.7) 7064.90(rI=100); -->
 	</transition>
 	<transition branchRatio="1" child="Mn52m" mode="ec" parent="Fe52">
 		<gamma energy="168.68" intensity="0.991752"/>
@@ -15487,7 +15480,7 @@
 		<beta energy="5220" intensity="0.005" logFT="8.4"/>
 		<beta energy="2059.00" intensity="3.3000E-03" logFT="6.800"/>
 		<gamma energy="2097.00" intensity="9.1850E-03"/>
-		<!-- cascade-match: SD-unmatched[keV]: 2083.00(I=0.00334,neartol) 3271.00(I=0.00292,neartol); G4-unclaimed-on-populated[keV]: 722.24(rI=47) 756.92(rI=100) 856.12(rI=12.3) 968.13(rI=11.6) 1221.29(rI=97.7) 3269.97(rI=23.3) 1068.14(rI=16.6) 1321.30(rI=12.8) 459.47(rI=10) 1469.55(rI=13.3) 1760.56(rI=100); -->
+		<!-- cascade-match: SD-unmatched[keV]: 2083.00(I=0.00334,neartol); G4-unclaimed-on-populated[keV]: 722.24(rI=47) 756.92(rI=100) 856.12(rI=12.3) 968.13(rI=11.6) 1221.29(rI=97.7) 1068.14(rI=16.6) 1321.30(rI=12.8) 459.47(rI=10) 1469.55(rI=13.3) 1760.56(rI=100); -->
 	</transition>
 	<transition branchRatio="0.99" child="Ni62" mode="b-" parent="Co62m">
 		<gamma energy="777.5" intensity="0.018">
@@ -15530,7 +15523,7 @@
 		<beta energy="1950" intensity="0.048" logFT="6.56"/>
 		<beta energy="2160.5" intensity="0.199" logFT="6.03"/>
 		<beta energy="2900" intensity="0.616" logFT="6.1"/>
-		<!-- cascade-match: SD-unmatched[keV]: 3271.10(I=0.00293,neartol); -->
+		<!-- cascade-match: G4-unclaimed-on-populated[keV]: 968.13(rI=11.6) 1221.29(rI=97.7) 2096.99(rI=100); -->
 	</transition>
 	<transition branchRatio="0.01" child="Co62" mode="it" parent="Co62m">
 		<gamma energy="22" intensity="0"/>
@@ -16263,7 +16256,7 @@
 		<electronCapture energy="5789.50" intensity="1.3000E-05" logFT="6.400"/>
 		<positron energy="3948.61" intensity="1.4000E-03" logFT="6.300"/>
 		<positron energy="4767.50" intensity="2.8000E-03" logFT="6.400"/>
-		<!-- cascade-match: SD-unmatched[keV]: 3595.00(I=0.00458,neartol); G4-unclaimed-on-populated[keV]: 651.15(rI=8.3) 3593.71(rI=100); -->
+		<!-- cascade-match: G4-unclaimed-on-populated[keV]: 651.15(rI=8.3); -->
 	</transition>
 	<transition branchRatio="1" child="Ni59" mode="ec" parent="Cu59">
 		<gamma energy="339.3" id="0" intensity="0.0797"/>
@@ -16716,7 +16709,7 @@
 			<coincidentGamma id="25" intensity="0.88"/>
 		</gamma>
 		<gamma energy="3513" intensity="0.000176">
-			<coincidentGamma id="25" intensity="0.88"/>
+			<coincidentGamma id="25" intensity="0.88" a2="0.25" a4="-0"/>
 		</gamma>
 		<gamma energy="3518" intensity="0.000176">
 			<coincidentGamma id="25" intensity="0.88"/>
@@ -16785,7 +16778,7 @@
 		<positron energy="3772.36" intensity="0.05" logFT="7.3"/>
 		<gamma energy="1713.00" intensity="1.7600E-04"/>
 		<gamma energy="2889.60" intensity="2.0240E-04"/>
-		<!-- cascade-match: SD-unmatched[keV]: 3513.00(I=0.000176,neartol) 3518.00(I=0.000176,neartol) 3735.60(I=0.000264,neartol) 4007.80(I=0.000792,neartol) 4536.00(I=6.16e-05,neartol) 4759.00(I=7.92e-05,neartol); G4-unclaimed-on-populated[keV]: 1853.47(rI=92) 1113.71(rI=33) 1449.64(rI=22) 677.18(rI=16.7) 569.53(rI=7) 693.49(rI=30) 1381.61(rI=28) 305.72(rI=30) 805.31(rI=21) 4006.44(rI=75) 992.09(rI=92) 4111.96(rI=49) 1829.77(rI=6) 758.72(rI=8) 2028.39(rI=63) 4534.14(rI=10) 813.52(rI=20) 1154.82(rI=13) 1354.09(rI=19) 1952.94(rI=100) 1491.04(rI=31) 1636.53(rI=85) 4760.23(rI=56) 3511.42(rI=45) 3516.39(rI=20); -->
+		<!-- cascade-match: G4-unclaimed-on-populated[keV]: 1853.47(rI=92) 1113.71(rI=33) 1449.64(rI=22) 677.18(rI=16.7) 569.53(rI=7) 693.49(rI=30) 1381.61(rI=28) 305.72(rI=30) 805.31(rI=21) 992.09(rI=92) 4111.96(rI=49) 1829.77(rI=6) 758.72(rI=8) 2028.39(rI=63) 813.52(rI=20) 1154.82(rI=13) 1354.09(rI=19) 1952.94(rI=100) 1491.04(rI=31) 1636.53(rI=85); -->
 	</transition>
 	<transition branchRatio="1" child="Ni61" mode="ec" parent="Cu61">
 		<gamma energy="67.41" id="0" intensity="0.042334"/>
@@ -16961,7 +16954,7 @@
 		<positron energy="877.24" intensity="0.00077" logFT="6"/>
 		<positron energy="1752.95" intensity="0.00135" logFT="7"/>
 		<positron energy="2926.00" intensity="0.972" logFT="5.2"/>
-		<!-- cascade-match: SD-unmatched[keV]: 3271.40(I=7.14e-06,neartol) 3861.70(I=2.75e-06,neartol); G4-unclaimed-on-populated[keV]: 968.13(rI=11.6) 1221.29(rI=97.7) 3269.97(rI=23.3) 1321.30(rI=12.8); -->
+		<!-- cascade-match: SD-unmatched[keV]: 3861.70(I=2.75e-06,neartol); G4-unclaimed-on-populated[keV]: 968.13(rI=11.6) 1221.29(rI=97.7) 1321.30(rI=12.8); -->
 	</transition>
 	<transition branchRatio="0.385" child="Zn64" mode="b-" parent="Cu64">
 		<beta energy="577.8" intensity="9.9984E-01" logFT="5.301"/>
@@ -17049,14 +17042,14 @@
 			<coincidentGamma id="8" intensity="0.68969464439201611"/>
 			<coincidentGamma id="4" intensity="0.00258919669338045" a2="-0.0714286" a4="-0"/>
 			<coincidentGamma id="3" intensity="0.002251363260280013"/>
-			<coincidentGamma id="16" intensity="0.08263393702278031"/>
+			<coincidentGamma id="16" intensity="0.08263393702278031" a2="-0.0714286" a4="-0"/>
 		</gamma>
 		<gamma energy="483.35" intensity="0.00048888">
 			<coincidentGamma id="10" intensity="0.787783176626" a2="0.0893652" a4="-0"/>
 			<coincidentGamma id="8" intensity="0.68969464439201611"/>
 			<coincidentGamma id="4" intensity="0.00258919669338045" a2="0.25" a4="-0"/>
 			<coincidentGamma id="3" intensity="0.002251363260280013"/>
-			<coincidentGamma id="16" intensity="0.08263393702278031"/>
+			<coincidentGamma id="16" intensity="0.08263393702278031" a2="0.25" a4="-0"/>
 		</gamma>
 		<gamma energy="577.8" id="3" intensity="0.01746">
 			<coincidentGamma id="8" intensity="0.873" a2="0.357143" a4="1.14286"/>
@@ -17116,7 +17109,7 @@
 		<beta energy="4600" intensity="0.32" logFT="5.79"/>
 		<gamma energy="1675.70" intensity="1.3095E-02"/>
 		<gamma energy="1743.70" intensity="1.7460E-02"/>
-		<!-- cascade-match: SD-unmatched[keV]: 1659.00(I=6.98e-05,absent) 2339.50(I=0.0131,neartol) 1675.70(I=0.0131,neartol); G4-unclaimed-on-populated[keV]: 1673.39(rI=100) 2109.23(rI=100); -->
+		<!-- cascade-match: SD-unmatched[keV]: 1659.00(I=6.98e-05,absent) 1675.70(I=0.0131,neartol); G4-unclaimed-on-populated[keV]: 1673.39(rI=100) 2109.23(rI=100); -->
 	</transition>
 	<transition branchRatio="0.16" child="Zn68" mode="b-" parent="Cu68m">
 		<gamma energy="151.6" intensity="0.3445">
@@ -17135,14 +17128,14 @@
 			<coincidentGamma id="8" intensity="0.15714285714285714" a2="-0.0714286" a4="-0"/>
 			<coincidentGamma id="15" intensity="29.189659863945575"/>
 			<coincidentGamma id="18" intensity="4.7142857142857144" a2="-0.0255329" a4="-0"/>
-			<coincidentGamma id="25" intensity="0.4285714285714286"/>
+			<coincidentGamma id="25" intensity="0.4285714285714286" a2="-0.0714286" a4="-0"/>
 			<coincidentGamma id="5" intensity="0.79319727891156466"/>
 		</gamma>
 		<gamma energy="483.35" id="3" intensity="0.000583">
 			<coincidentGamma id="8" intensity="0.15714285714285714" a2="0.25" a4="-0"/>
 			<coincidentGamma id="15" intensity="29.189659863945575"/>
 			<coincidentGamma id="18" intensity="4.7142857142857144" a2="0.0893652" a4="-0"/>
-			<coincidentGamma id="25" intensity="0.4285714285714286"/>
+			<coincidentGamma id="25" intensity="0.4285714285714286" a2="0.25" a4="-0"/>
 			<coincidentGamma id="5" intensity="0.79319727891156466"/>
 		</gamma>
 		<gamma energy="534.22" id="4" intensity="0.00424">
@@ -17162,7 +17155,7 @@
 			<coincidentGamma id="8" intensity="0.15714285714285714" a2="-0.0714286" a4="-0"/>
 			<coincidentGamma id="15" intensity="29.189659863945575"/>
 			<coincidentGamma id="18" intensity="4.7142857142857144" a2="-0.0255329" a4="-0"/>
-			<coincidentGamma id="25" intensity="0.4285714285714286"/>
+			<coincidentGamma id="25" intensity="0.4285714285714286" a2="-0.0714286" a4="-0"/>
 			<coincidentGamma id="5" intensity="0.79319727891156466"/>
 		</gamma>
 		<gamma energy="682.57" id="8" intensity="0.00583">
@@ -17285,7 +17278,7 @@
 		<gamma energy="1675.70" intensity="1.5900E-02"/>
 		<gamma energy="1743.70" intensity="2.1200E-02"/>
 		<gamma energy="2110.10" intensity="9.5400E-02"/>
-		<!-- cascade-match: SD-unmatched[keV]: 1385.80(I=0.0212,neartol) 1659.00(I=0.00106,absent) 2339.50(I=0.0159,neartol) 806.90(I=0.0159,neartol) 1675.70(I=0.0159,neartol); G4-unclaimed-on-populated[keV]: 805.83(rI=68) 1673.39(rI=100) 542.09(rI=12) 1882.12(rI=100) 591.87(rI=5.7) 1126.07(rI=100) 1931.90(rI=11.7) 1387.34(rI=63); -->
+		<!-- cascade-match: SD-unmatched[keV]: 1385.80(I=0.0212,neartol) 1659.00(I=0.00106,absent) 806.90(I=0.0159,neartol) 1675.70(I=0.0159,neartol); G4-unclaimed-on-populated[keV]: 805.83(rI=68) 1673.39(rI=100) 542.09(rI=12) 1882.12(rI=100) 591.87(rI=5.7) 1126.07(rI=100) 1931.90(rI=11.7) 1387.34(rI=63); -->
 	</transition>
 	<transition branchRatio="0.84" child="Cu68" mode="it" parent="Cu68m">
 		<gamma energy="84.6" id="0" intensity="0.82935"/>
@@ -17925,7 +17918,7 @@
 		<gamma energy="3348.40" intensity="2.4490E-02"/>
 		<gamma energy="3706.90" intensity="1.7380E-02"/>
 		<gamma energy="3941.60" intensity="1.1060E-02"/>
-		<!-- cascade-match: SD-unmatched[keV]: 1918.50(I=0.0102,neartol) 2006.00(I=0.0218,neartol) 2408.00(I=0.0326,neartol) 2206.70(I=0.0126,neartol); G4-unclaimed-on-populated[keV]: 2207.75(rI=70); -->
+		<!-- cascade-match: SD-unmatched[keV]: 1918.50(I=0.0102,neartol) 2006.00(I=0.0218,neartol); -->
 	</transition>
 	<transition branchRatio="1" child="Zn73" mode="b-" parent="Cu73">
 		<gamma energy="307.2" intensity="0.0564"/>
@@ -18396,7 +18389,7 @@
 		<positron energy="3644.90" intensity="0.0047" logFT="7.08"/>
 		<positron energy="4140.02" intensity="0.11" logFT="5.96"/>
 		<positron energy="4615.00" intensity="0.656" logFT="5.404"/>
-		<!-- cascade-match: SD-unmatched[keV]: 149.00(I=0.00172,absent) 604.50(I=0.000858,absent) 638.20(I=0.00078,absent) 1147.30(I=0.00156,absent) 1565.60(I=0.00109,absent) 2842.80(I=0.00248,neartol) 2931.80(I=0.000936,neartol); G4-unclaimed-on-populated[keV]: 340.42(rI=6.6) 338.29(rI=9.9) 762.51(rI=19.8) 962.45(rI=11.3) 1289.74(rI=5) 2840.53(rI=79.5) 2857.10(rI=100) 2932.56(rI=14) 2547.00(rI=100); -->
+		<!-- cascade-match: SD-unmatched[keV]: 149.00(I=0.00172,absent) 604.50(I=0.000858,absent) 638.20(I=0.00078,absent) 1147.30(I=0.00156,absent) 1565.60(I=0.00109,absent); G4-unclaimed-on-populated[keV]: 340.42(rI=6.6) 338.29(rI=9.9) 762.51(rI=19.8) 962.45(rI=11.3) 1289.74(rI=5) 2840.53(rI=79.5) 2857.10(rI=100) 2547.00(rI=100) 2407.00(rI=100); -->
 	</transition>
 	<transition branchRatio="1" child="Cu62" mode="ec" parent="Zn62">
 		<gamma energy="40.85" id="0" intensity="0.2548"/>
@@ -19311,7 +19304,7 @@
 		<xray energy="10.35" intensity="9E-07" assignment="Kb5"/>
 		<xray energy="10.366" intensity="4.6E-06" assignment="Kb2"/>
 		<xray energy="10.367" intensity="2.1E-07" assignment="Kb4"/>
-		<!-- cascade-match: SD-unmatched[keV]: 1190.60(I=0.000112,neartol) 1409.10(I=6.51e-05,absent) 1503.80(I=0.000121,absent) 2489.40(I=4.65e-05,neartol); G4-unclaimed-on-populated[keV]: 398.60(rI=7.9) 430.57(rI=16.1) 883.70(rI=11.2) 907.86(rI=95.7) 368.51(rI=5.82) 1012.24(rI=71.6) 518.42(rI=14.6) 472.75(rI=100); -->
+		<!-- cascade-match: SD-unmatched[keV]: 1190.60(I=0.000112,neartol) 1409.10(I=6.51e-05,absent) 1503.80(I=0.000121,absent); G4-unclaimed-on-populated[keV]: 398.60(rI=7.9) 430.57(rI=16.1) 883.70(rI=11.2) 907.86(rI=95.7) 368.51(rI=5.82) 1012.24(rI=71.6) 518.42(rI=14.6) 472.75(rI=100); -->
 	</transition>
 	<transition branchRatio="1" child="Ga72" mode="b-" parent="Zn72">
 		<gamma energy="16.4" id="0" intensity="8.2780E-02"/>
@@ -23081,7 +23074,7 @@
 		<positron energy="3538.05" intensity="0.0026" logFT="7.5"/>
 		<positron energy="4236.95" intensity="0.007" logFT="7.500"/>
 		<positron energy="6050.00" intensity="0.29" logFT="6.580"/>
-		<!-- cascade-match: SD-unmatched[keV]: 427.10(I=7.82e-05,neartol) 2240.00(I=0.00184,absent) 2632.00(I=0.00138,absent) 3869.00(I=0.00092,absent) 4215.00(I=0.00046,absent) 4712.00(I=0.000184,neartol) 4749.00(I=0.00023,absent) 5190.00(I=0.000184,absent) 5310.00(I=9.2e-05,absent); G4-unclaimed-on-populated[keV]: 1295.23(rI=19) 2103.63(rI=100) 4713.15(rI=11); -->
+		<!-- cascade-match: SD-unmatched[keV]: 427.10(I=7.82e-05,neartol) 2240.00(I=0.00184,absent) 2632.00(I=0.00138,absent) 3869.00(I=0.00092,absent) 4215.00(I=0.00046,absent) 4749.00(I=0.00023,absent) 5190.00(I=0.000184,absent) 5310.00(I=9.2e-05,absent); G4-unclaimed-on-populated[keV]: 1295.23(rI=19) 2103.63(rI=100); -->
 	</transition>
 	<transition branchRatio="1" child="Zn65" mode="ec" parent="Ga65">
 		<gamma energy="53.93" id="0" intensity="0.0486"/>
@@ -23338,7 +23331,7 @@
 		<positron energy="2025.95" intensity="0.102" logFT="5.6"/>
 		<positron energy="2117.78" intensity="0.58" logFT="4.94"/>
 		<positron energy="2178.97" intensity="0.1" logFT="5.74"/>
-		<!-- cascade-match: SD-unmatched[keV]: 1247.80(I=4.86e-05,absent) 1368.00(I=7.02e-05,neartol) 1408.90(I=0.000319,neartol) 1502.50(I=9.72e-05,absent) 1887.80(I=8.64e-05,neartol) 2009.70(I=5.94e-05,absent) 2081.40(I=7.02e-05,absent) 2163.70(I=0.000146,absent) 2251.80(I=4.86e-05,neartol) 2289.80(I=7.02e-05,absent) 2343.10(I=0.000119,absent) 2404.30(I=0.000243,absent) 2458.40(I=8.64e-05,absent) 2468.60(I=2.16e-05,absent) 2526.00(I=3.24e-05,absent) 2570.80(I=4.32e-05,absent) 2583.90(I=1.94e-05,absent) 2627.60(I=2.32e-05,absent) 2635.70(I=4.86e-05,absent) 2648.70(I=1.57e-05,absent) 2679.40(I=4.86e-05,absent) 2685.60(I=1.94e-05,absent) 2722.00(I=1.35e-05,absent) 2792.40(I=4.86e-05,absent) 2801.60(I=2.32e-05,absent) ...; G4-unclaimed-on-populated[keV]: 749.08(rI=18.2) 819.38(rI=14.7) 1472.95(rI=33) 1292.35(rI=100) 440.80(rI=7) 826.90(rI=19) 1278.50(rI=100) 1836.10(rI=18) 505.40(rI=100) 1655.70(rI=63); -->
+		<!-- cascade-match: SD-unmatched[keV]: 1247.80(I=4.86e-05,absent) 1368.00(I=7.02e-05,neartol) 1408.90(I=0.000319,neartol) 1502.50(I=9.72e-05,absent) 2009.70(I=5.94e-05,absent) 2081.40(I=7.02e-05,absent) 2163.70(I=0.000146,absent) 2251.80(I=4.86e-05,neartol) 2289.80(I=7.02e-05,absent) 2343.10(I=0.000119,absent) 2404.30(I=0.000243,absent) 2458.40(I=8.64e-05,absent) 2468.60(I=2.16e-05,absent) 2526.00(I=3.24e-05,absent) 2570.80(I=4.32e-05,absent) 2583.90(I=1.94e-05,absent) 2627.60(I=2.32e-05,absent) 2635.70(I=4.86e-05,absent) 2648.70(I=1.57e-05,absent) 2679.40(I=4.86e-05,absent) 2685.60(I=1.94e-05,absent) 2722.00(I=1.35e-05,absent) 2792.40(I=4.86e-05,absent) 2801.60(I=2.32e-05,absent) 2835.50(I=0.000135,absent) ...; G4-unclaimed-on-populated[keV]: 749.08(rI=18.2) 819.38(rI=14.7) 1472.95(rI=33) 1292.35(rI=100) 440.80(rI=7) 826.90(rI=19) 1278.50(rI=100) 1836.10(rI=18) 505.40(rI=100) 1655.70(rI=63); -->
 	</transition>
 	<transition branchRatio="1" child="Zn66" mode="ec" parent="Ga66">
 		<gamma energy="171.9" intensity="1.0360E-04"/>
@@ -24545,7 +24538,7 @@
 			<coincidentGamma id="57" intensity="1.15072835406e-05"/>
 			<coincidentGamma id="7" intensity="0.000623014070127"/>
 			<coincidentGamma id="3" intensity="8.7420888069e-05"/>
-			<coincidentGamma id="84" intensity="0.00015706117076"/>
+			<coincidentGamma id="84" intensity="0.00015706117076" a2="-0.0714286" a4="-0"/>
 		</gamma>
 		<gamma energy="317.87" intensity="2.0904E-04">
 			<coincidentGamma id="37" intensity="0.258577277285"/>
@@ -24606,7 +24599,7 @@
 			<coincidentGamma id="65" intensity="0.467801724138" a2="-0.15" a4="0"/>
 			<coincidentGamma id="26" intensity="0.0275655172414" a2="0.1875" a4="0"/>
 			<coincidentGamma id="21" intensity="9.46316973226e-05"/>
-			<coincidentGamma id="81" intensity="0.0111081896552"/>
+			<coincidentGamma id="81" intensity="0.0111081896552" a2="0.375" a4="0"/>
 			<coincidentGamma id="27" intensity="0.367704065853"/>
 			<coincidentGamma id="47" intensity="0.0119268655714"/>
 			<coincidentGamma id="41" intensity="0.349706896552"/>
@@ -24625,7 +24618,7 @@
 		</gamma>
 		<gamma energy="428.64" id="10" intensity="2.1572E-03">
 			<coincidentGamma id="24" intensity="0.782738169792"/>
-			<coincidentGamma id="72" intensity="0.0214204380169"/>
+			<coincidentGamma id="72" intensity="0.0214204380169" a2="0.375" a4="0"/>
 			<coincidentGamma id="42" intensity="0.00149563233595"/>
 			<coincidentGamma id="37" intensity="0.581041432905" a2="-0.364513" a4="0"/>
 			<coincidentGamma id="11" intensity="0.00920251007771" a2="0.1875" a4="0"/>
@@ -24703,7 +24696,7 @@
 		</gamma>
 		<gamma energy="520.85" id="14" intensity="5.8225E-04">
 			<coincidentGamma id="24" intensity="0.782738169792"/>
-			<coincidentGamma id="72" intensity="0.0214204380169"/>
+			<coincidentGamma id="72" intensity="0.0214204380169" a2="-0.3" a4="0"/>
 			<coincidentGamma id="42" intensity="0.00149563233595"/>
 			<coincidentGamma id="37" intensity="0.581041432905" a2="0.29161" a4="0"/>
 			<coincidentGamma id="11" intensity="0.00920251007771" a2="-0.15" a4="0"/>
@@ -24759,7 +24752,7 @@
 		</gamma>
 		<gamma energy="810.33" intensity="2.0865E-02">
 			<coincidentGamma id="24" intensity="0.782738169792"/>
-			<coincidentGamma id="72" intensity="0.0214204380169"/>
+			<coincidentGamma id="72" intensity="0.0214204380169" a2="0.375" a4="0"/>
 			<coincidentGamma id="42" intensity="0.00149563233595"/>
 			<coincidentGamma id="37" intensity="0.581041432905" a2="-0.364513" a4="0"/>
 			<coincidentGamma id="11" intensity="0.00920251007771" a2="0.1875" a4="0"/>
@@ -24854,7 +24847,7 @@
 		</gamma>
 		<gamma energy="940.5" intensity="0">
 			<coincidentGamma id="24" intensity="0.782738169792"/>
-			<coincidentGamma id="72" intensity="0.0214204380169"/>
+			<coincidentGamma id="72" intensity="0.0214204380169" a2="-0.3" a4="0"/>
 			<coincidentGamma id="42" intensity="0.00149563233595"/>
 			<coincidentGamma id="37" intensity="0.581041432905" a2="0.29161" a4="0"/>
 			<coincidentGamma id="11" intensity="0.00920251007771" a2="-0.15" a4="0"/>
@@ -24938,7 +24931,7 @@
 		</gamma>
 		<gamma energy="1163.12" intensity="9.4496E-04">
 			<coincidentGamma id="24" intensity="0.782738169792"/>
-			<coincidentGamma id="72" intensity="0.0214204380169"/>
+			<coincidentGamma id="72" intensity="0.0214204380169" a2="-0.3" a4="0"/>
 			<coincidentGamma id="42" intensity="0.00149563233595"/>
 			<coincidentGamma id="37" intensity="0.581041432905" a2="0.29161" a4="0"/>
 			<coincidentGamma id="11" intensity="0.00920251007771" a2="-0.15" a4="0"/>
@@ -24963,7 +24956,7 @@
 		</gamma>
 		<gamma energy="1192.24" intensity="4.7725E-05">
 			<coincidentGamma id="24" intensity="0.782738169792"/>
-			<coincidentGamma id="72" intensity="0.0214204380169"/>
+			<coincidentGamma id="72" intensity="0.0214204380169" a2="-0.3" a4="0"/>
 			<coincidentGamma id="42" intensity="0.00149563233595"/>
 			<coincidentGamma id="37" intensity="0.581041432905" a2="0.29161" a4="0"/>
 			<coincidentGamma id="11" intensity="0.00920251007771" a2="-0.15" a4="0"/>
@@ -25211,7 +25204,7 @@
 		<xray energy="11.074" intensity="4.4E-07" assignment="Kb5"/>
 		<xray energy="11.101" intensity="5.5E-06" assignment="Kb2"/>
 		<xray energy="11.103" intensity="1.87E-07" assignment="Kb4"/>
-		<!-- cascade-match: SD-unmatched[keV]: 1032.30(I=0.000649,absent) 1291.30(I=0.000563,absent) 1541.20(I=0.000162,absent) 2404.30(I=0.000153,neartol) 2515.86(I=0.00258,neartol) 2897.10(I=4.77e-05,absent) 2942.40(I=0.000258,neartol) 3034.60(I=4.58e-05,neartol) 3067.00(I=2.86e-05,absent) 2582.39(I=0.000127,neartol); G4-unclaimed-on-populated[keV]: 2402.30(rI=6.3) 1043.73(rI=100) 1475.97(rI=79.6) 2105.95(rI=100) 2248.53(rI=49.6) 2116.39(rI=100) 1029.25(rI=23.5); -->
+		<!-- cascade-match: SD-unmatched[keV]: 1032.30(I=0.000649,absent) 1291.30(I=0.000563,absent) 1541.20(I=0.000162,absent) 2404.30(I=0.000153,neartol) 2897.10(I=4.77e-05,absent) 3067.00(I=2.86e-05,absent); G4-unclaimed-on-populated[keV]: 2402.30(rI=6.3) 1043.73(rI=100) 1475.97(rI=79.6) 2105.95(rI=100) 2248.53(rI=49.6) 2116.39(rI=100) 1029.25(rI=23.5); -->
 	</transition>
 	<transition branchRatio="0.984464888018237" child="Ge73m" mode="b-" parent="Ga73">
 		<gamma energy="297.32" id="0" intensity="8.1059E-01"/>
@@ -25878,10 +25871,10 @@
 			<coincidentGamma id="0" intensity="0.013605928509154314"/>
 		</gamma>
 		<gamma energy="2074.14" intensity="0.0026622">
-			<coincidentGamma id="61" intensity="0.69438461538461549"/>
-			<coincidentGamma id="14" intensity="0.76072020220384629" a2="0.102041" a4="0.00907029"/>
+			<coincidentGamma id="61" intensity="0.69438461538461549" a2="0.106795" a4="0"/>
+			<coincidentGamma id="14" intensity="0.76072020220384629"/>
 			<coincidentGamma id="39" intensity="0.070992294230769235"/>
-			<coincidentGamma id="42" intensity="0.22361538461538461"/>
+			<coincidentGamma id="42" intensity="0.22361538461538461" a2="0.12" a4="0"/>
 			<coincidentGamma id="16" intensity="0.134290355769"/>
 		</gamma>
 		<gamma energy="2097.91" id="69" intensity="0.0086292">
@@ -26100,7 +26093,7 @@
 		<xray energy="11.074" intensity="1.3E-07" assignment="Kb5"/>
 		<xray energy="11.101" intensity="1.61E-06" assignment="Kb2"/>
 		<xray energy="11.103" intensity="5.5E-08" assignment="Kb4"/>
-		<!-- cascade-match: SD-unmatched[keV]: 365.00(I=0.000918,absent) 1024.30(I=0.00138,neartol) 1293.90(I=0.00248,absent) 1806.50(I=0.00275,neartol) 3036.10(I=0.000459,absent) 3109.90(I=0.000275,absent) 3706.90(I=0.000275,absent) 3762.22(I=0.000826,absent) 3818.00(I=0.000459,neartol) 3946.70(I=0.000275,absent) 3992.40(I=0.000275,neartol); G4-unclaimed-on-populated[keV]: 468.12(rI=6.5) 2197.93(rI=82) 972.48(rI=22) 1205.86(rI=74) 531.66(rI=8.3) 1233.16(rI=6) 770.22(rI=14) 808.21(rI=33) 545.01(rI=11.8) 916.06(rI=20) 1384.18(rI=57) 141.47(rI=21) 481.79(rI=56) 3211.80(rI=100) 429.81(rI=8) 942.06(rI=7) 3639.50(rI=160) 476.75(rI=23) 786.71(rI=13) 2631.07(rI=24) 1282.18(rI=100) 2278.72(rI=12) 3975.86(rI=50) 3995.05(rI=7) 1026.08(rI=21) ...; -->
+		<!-- cascade-match: SD-unmatched[keV]: 365.00(I=0.000918,absent) 1024.30(I=0.00138,neartol) 1293.90(I=0.00248,absent) 1806.50(I=0.00275,neartol) 3036.10(I=0.000459,absent) 3109.90(I=0.000275,absent) 3706.90(I=0.000275,absent) 3762.22(I=0.000826,absent) 3946.70(I=0.000275,absent) 3992.40(I=0.000275,neartol); G4-unclaimed-on-populated[keV]: 468.12(rI=6.5) 2197.93(rI=82) 531.66(rI=8.3) 1233.16(rI=6) 770.22(rI=14) 808.21(rI=33) 545.01(rI=11.8) 916.06(rI=20) 1384.18(rI=57) 141.47(rI=21) 481.79(rI=56) 3211.80(rI=100) 429.81(rI=8) 942.06(rI=7) 3639.50(rI=160) 476.75(rI=23) 786.71(rI=13) 2631.07(rI=24) 1282.18(rI=100) 2278.72(rI=12) 3975.86(rI=50) 3995.05(rI=7) 1026.08(rI=21) 999.12(rI=6.96) 1472.10(rI=72) ...; -->
 	</transition>
 	<transition branchRatio="0.75" child="Ga74" mode="it" parent="Ga74m">
 		<gamma energy="3.2" intensity="3E-06"/>
@@ -28881,7 +28874,7 @@
 		<xray energy="11.074" intensity="2.15E-07" assignment="Kb5"/>
 		<xray energy="11.101" intensity="2.67E-06" assignment="Kb2"/>
 		<xray energy="11.103" intensity="9.1E-08" assignment="Kb4"/>
-		<!-- cascade-match: SD-unmatched[keV]: 1203.17(I=0.0035,absent) 1339.83(I=0.00694,absent) 1770.52(I=0.00302,absent) 2343.15(I=0.00344,absent) 2650.35(I=0.00742,absent) 2754.77(I=0.0102,absent) 2845.80(I=0.00639,absent) 3061.70(I=0.00673,absent) 3169.22(I=0.00165,absent) 3448.64(I=0.00776,absent) 3539.97(I=0.00316,absent); G4-unclaimed-on-populated[keV]: 562.30(rI=16.5) 828.34(rI=100) 920.60(rI=13) 1137.09(rI=79) 1633.67(rI=100) 730.95(rI=98) 1667.55(rI=100) 1164.48(rI=19.4) 1189.16(rI=57) 2125.76(rI=100) 2310.18(rI=18) 1605.00(rI=14.4) 2541.60(rI=19) 1940.65(rI=84) 2180.68(rI=100) 2335.94(rI=8.5) 3489.03(rI=7.8); -->
+		<!-- cascade-match: SD-unmatched[keV]: 1203.17(I=0.0035,absent) 1339.83(I=0.00694,absent) 1770.52(I=0.00302,absent) 2343.15(I=0.00344,absent) 2650.35(I=0.00742,absent) 2754.77(I=0.0102,absent) 2845.80(I=0.00639,absent) 3061.70(I=0.00673,absent) 3169.22(I=0.00165,absent) 3448.64(I=0.00776,absent) 3539.97(I=0.00316,absent); G4-unclaimed-on-populated[keV]: 562.30(rI=16.5) 828.34(rI=100) 920.60(rI=13) 1137.09(rI=79) 1633.67(rI=100) 730.95(rI=98) 1667.55(rI=100) 1164.48(rI=19.4) 1189.16(rI=57) 2125.76(rI=100) 1605.00(rI=14.4) 2541.60(rI=19) 1940.65(rI=84) 2180.68(rI=100) 2335.94(rI=8.5) 3489.03(rI=7.8); -->
 	</transition>
 	<transition branchRatio="0.119" child="Ge80" mode="b-n" parent="Ga81">
 		<gamma energy="659.1" id="0" intensity="0.50715"/>
@@ -36699,7 +36692,7 @@
 		<xray energy="12.601" intensity="5.7E-08" assignment="Kb5"/>
 		<xray energy="12.652" intensity="1.59E-06" assignment="Kb2"/>
 		<xray energy="12.658" intensity="4.08E-08" assignment="Kb4"/>
-		<!-- cascade-match: SD-unmatched[keV]: 3024.00(I=0.00084,neartol); G4-unclaimed-on-populated[keV]: 783.08(rI=100) 1034.75(rI=40) 1575.82(rI=50) 3025.17(rI=30); -->
+		<!-- cascade-match: G4-unclaimed-on-populated[keV]: 783.08(rI=100) 1034.75(rI=40) 1575.82(rI=50); -->
 	</transition>
 	<transition branchRatio="0.0421999609049433" child="Se81m" mode="b-" parent="As81">
 		<gamma energy="388.1" id="0" intensity="2.0379E-01"/>
@@ -36755,7 +36748,7 @@
 		<xray energy="12.601" intensity="9.2E-08" assignment="Kb5"/>
 		<xray energy="12.652" intensity="2.5E-06" assignment="Kb2"/>
 		<xray energy="12.658" intensity="6.5E-08" assignment="Kb4"/>
-		<!-- cascade-match: SD-unmatched[keV]: 874.90(I=0.00138,absent) 2733.30(I=0.00208,neartol) 3118.20(I=0.00853,neartol); G4-unclaimed-on-populated[keV]: 103.00(rI=100) 491.06(rI=100) 156.37(rI=20.3) 758.45(rI=38) 938.59(rI=29) 1406.33(rI=100) 1864.99(rI=100) 2332.73(rI=58) 2102.44(rI=100) 2570.18(rI=47) 2302.02(rI=100) 1661.65(rI=100); -->
+		<!-- cascade-match: SD-unmatched[keV]: 874.90(I=0.00138,absent) 2733.30(I=0.00208,neartol); G4-unclaimed-on-populated[keV]: 103.00(rI=100) 491.06(rI=100) 156.37(rI=20.3) 758.45(rI=38) 938.59(rI=29) 1406.33(rI=100) 1864.99(rI=100) 2332.73(rI=58) 2102.44(rI=100) 2570.18(rI=47) 2302.02(rI=100) 1661.65(rI=100) 2731.64(rI=100); -->
 	</transition>
 	<transition branchRatio="0.957800039095057" child="Se81" mode="b-" parent="As81">
 		<gamma energy="156" id="0" intensity="2.9651E-03">
@@ -36881,7 +36874,7 @@
 		<beta energy="5860.37" intensity="0.017" logFT="7.44"/>
 		<beta energy="6615.57" intensity="0.1" logFT="6.91"/>
 		<beta energy="7270" intensity="0.81" logFT="6.19"/>
-		<!-- cascade-match: SD-unmatched[keV]: 186.10(I=0.00213,absent) 1549.80(I=0,absent) 1970.90(I=0.0149,neartol) 2353.40(I=0,neartol) 2441.20(I=0,absent) 2603.80(I=0,absent) 2722.70(I=0,neartol) 3668.80(I=0.00994,neartol) 3773.00(I=0,absent); G4-unclaimed-on-populated[keV]: 3102.29(rI=100); -->
+		<!-- cascade-match: SD-unmatched[keV]: 186.10(I=0.00213,absent) 1549.80(I=0,absent) 1970.90(I=0.0149,neartol) 2441.20(I=0,absent) 2603.80(I=0,absent) 3773.00(I=0,absent); G4-unclaimed-on-populated[keV]: 1646.93(rI=96) 3102.29(rI=100); -->
 	</transition>
 	<transition branchRatio="1" child="Se82" mode="b-" parent="As82m">
 		<gamma energy="343.5" id="0" intensity="0.576">
@@ -37211,7 +37204,7 @@
 		<beta energy="7972.32" intensity="1.1000E-01" logFT="6.580"/>
 		<beta energy="8639.55" intensity="0.25" logFT="6.380"/>
 		<beta energy="10094.00" intensity="0.05" logFT="7.4"/>
-		<!-- cascade-match: SD-unmatched[keV]: 1042.90(I=0.00258,absent) 1618.80(I=0.00418,absent) 1951.60(I=0.00579,absent) 1956.20(I=0.00507,absent) 1973.50(I=0.00409,absent) 2237.90(I=0.00641,absent) 2418.10(I=0.00765,absent) 2535.22(I=0.00846,absent) 2596.50(I=0.00463,absent) 2612.30(I=0.00329,absent) 3154.80(I=0.00454,absent) 4069.00(I=0.00463,absent) 4108.90(I=0.00436,absent) 4280.90(I=0.00596,neartol) 4575.70(I=0.00552,absent) 4637.00(I=0.004,absent) 4769.50(I=0.00383,absent) 4795.00(I=0.0049,absent) 4821.10(I=0.00392,absent) 4888.30(I=0.00338,absent) 5020.30(I=0.00347,absent); G4-unclaimed-on-populated[keV]: 4282.12(rI=27.9); -->
+		<!-- cascade-match: SD-unmatched[keV]: 1042.90(I=0.00258,absent) 1618.80(I=0.00418,absent) 1951.60(I=0.00579,absent) 1956.20(I=0.00507,absent) 1973.50(I=0.00409,absent) 2237.90(I=0.00641,absent) 2418.10(I=0.00765,absent) 2535.22(I=0.00846,absent) 2596.50(I=0.00463,absent) 2612.30(I=0.00329,absent) 3154.80(I=0.00454,absent) 4069.00(I=0.00463,absent) 4108.90(I=0.00436,absent) 4575.70(I=0.00552,absent) 4637.00(I=0.004,absent) 4769.50(I=0.00383,absent) 4795.00(I=0.0049,absent) 4821.10(I=0.00392,absent) 4888.30(I=0.00338,absent) 5020.30(I=0.00347,absent); -->
 	</transition>
 	<transition branchRatio="1" child="Se85" mode="b-" parent="As85">
 		<gamma energy="461.5" intensity="0.00696"/>
@@ -40702,7 +40695,7 @@
 		<xray energy="12.601" intensity="1.1E-05" assignment="Kb5"/>
 		<xray energy="12.652" intensity="0.00029" assignment="Kb2"/>
 		<xray energy="12.658" intensity="7.6E-06" assignment="Kb4"/>
-		<!-- cascade-match: SD-unmatched[keV]: 2432.70(I=0.0126,neartol) 2465.00(I=0.00983,absent); G4-unclaimed-on-populated[keV]: 1117.08(rI=25) 2433.76(rI=33) 1089.52(rI=88); -->
+		<!-- cascade-match: SD-unmatched[keV]: 2465.00(I=0.00983,absent); G4-unclaimed-on-populated[keV]: 1117.08(rI=25) 1089.52(rI=88); -->
 	</transition>
 	<transition branchRatio="1" child="Se73m" mode="ec" parent="Br73">
 		<gamma energy="65" id="0" intensity="0.37"/>
@@ -41184,7 +41177,7 @@
 		<xray energy="12.601" intensity="1.29E-05" assignment="Kb5"/>
 		<xray energy="12.652" intensity="0.000359" assignment="Kb2"/>
 		<xray energy="12.658" intensity="9.2E-06" assignment="Kb4"/>
-		<!-- cascade-match: SD-unmatched[keV]: 1145.00(I=0.0032,absent) 1339.20(I=0.00641,absent) 1512.80(I=0.0173,absent) 2087.40(I=0.0141,neartol) 2950.80(I=0.00641,absent) 2975.60(I=0.0141,absent) 3412.00(I=0.00705,neartol) 3895.00(I=0.00962,absent) 4222.00(I=0.00449,absent) 4538.00(I=0.00128,neartol) 4649.50(I=0.00385,absent); G4-unclaimed-on-populated[keV]: 521.07(rI=10) 744.79(rI=40) 838.95(rI=100) 1473.22(rI=25) 1623.48(rI=95) 4536.49(rI=9) 445.50(rI=17) 1007.01(rI=100); -->
+		<!-- cascade-match: SD-unmatched[keV]: 1145.00(I=0.0032,absent) 1339.20(I=0.00641,absent) 1512.80(I=0.0173,absent) 2087.40(I=0.0141,neartol) 2950.80(I=0.00641,absent) 2975.60(I=0.0141,absent) 3412.00(I=0.00705,neartol) 3895.00(I=0.00962,absent) 4222.00(I=0.00449,absent) 4649.50(I=0.00385,absent); G4-unclaimed-on-populated[keV]: 521.07(rI=10) 744.79(rI=40) 838.95(rI=100) 1473.22(rI=25) 1623.48(rI=95) 445.50(rI=17) 1007.01(rI=100); -->
 	</transition>
 	<transition branchRatio="1" child="Se74" mode="ec" parent="Br74m">
 		<gamma energy="219" id="0" intensity="0.05016">
@@ -41534,7 +41527,7 @@
 			<coincidentGamma id="21" intensity="0.17371428571428571"/>
 		</gamma>
 		<gamma energy="2028.2" id="58" intensity="0.00456">
-			<coincidentGamma id="5" intensity="0.912"/>
+			<coincidentGamma id="5" intensity="0.912" a2="0.178571" a4="-0.004329"/>
 		</gamma>
 		<gamma energy="2028.2" intensity="0.00456">
 			<coincidentGamma id="2" intensity="0.0026637552941176468"/>
@@ -41631,7 +41624,7 @@
 			<coincidentGamma id="38" intensity="0.14739393939393938"/>
 		</gamma>
 		<gamma energy="2478.4" intensity="0.00456">
-			<coincidentGamma id="5" intensity="0.912"/>
+			<coincidentGamma id="5" intensity="0.912" a2="0.25" a4="-0"/>
 		</gamma>
 		<gamma energy="2478.4" intensity="0.00456">
 			<coincidentGamma id="12" intensity="0.51587878787878783"/>
@@ -41890,7 +41883,7 @@
 		<xray energy="12.601" intensity="1.31E-05" assignment="Kb5"/>
 		<xray energy="12.652" intensity="0.000363" assignment="Kb2"/>
 		<xray energy="12.658" intensity="9.3E-06" assignment="Kb4"/>
-		<!-- cascade-match: SD-unmatched[keV]: 1145.80(I=0.00511,absent) 1515.70(I=0.00264,absent) 1769.90(I=0.00155,absent) 2167.40(I=0.00638,absent) 2228.60(I=0.00264,absent) 2558.00(I=0.00365,absent) 2679.80(I=0.0073,absent) 2754.50(I=0.00274,absent) 2825.10(I=0,neartol) 3032.30(I=0.000912,absent) 3633.20(I=0.000912,neartol) 3684.60(I=0.00173,absent) 3786.70(I=0.00228,neartol) 3910.00(I=0.000274,absent) 4200.40(I=0.00119,absent) 4344.00(I=0.000912,neartol); G4-unclaimed-on-populated[keV]: 511.01(rI=14) 1109.58(rI=50) 1524.76(rI=28) 1743.85(rI=100) 2378.59(rI=28) 2027.24(rI=71.4) 481.90(rI=15) 798.25(rI=100) 2477.56(rI=10) 722.47(rI=50) 850.51(rI=100) 1981.10(rI=18) 2396.28(rI=38) 2615.37(rI=100) 3250.11(rI=83) 1310.41(rI=9) 2355.45(rI=14) 2770.63(rI=37) 2989.72(rI=6) 3295.82(rI=53) 2088.66(rI=14) 2703.89(rI=67) 3119.07(rI=39) 3338.16(rI=19) 2946.00(rI=60) ...; -->
+		<!-- cascade-match: SD-unmatched[keV]: 1145.80(I=0.00511,absent) 1515.70(I=0.00264,absent) 1769.90(I=0.00155,absent) 2167.40(I=0.00638,absent) 2228.60(I=0.00264,absent) 2558.00(I=0.00365,absent) 2679.80(I=0.0073,absent) 2754.50(I=0.00274,absent) 2825.10(I=0,neartol) 3032.30(I=0.000912,absent) 3684.60(I=0.00173,absent) 3910.00(I=0.000274,absent) 4200.40(I=0.00119,absent); G4-unclaimed-on-populated[keV]: 511.01(rI=14) 1109.58(rI=50) 1524.76(rI=28) 1743.85(rI=100) 2378.59(rI=28) 481.90(rI=15) 798.25(rI=100) 722.47(rI=50) 850.51(rI=100) 1981.10(rI=18) 2396.28(rI=38) 2615.37(rI=100) 3250.11(rI=83) 1310.41(rI=9) 2355.45(rI=14) 2770.63(rI=37) 2989.72(rI=6) 1409.68(rI=16) 1474.22(rI=27) 1949.62(rI=37) 2130.80(rI=71) 2519.26(rI=14) 2934.44(rI=19) 3295.82(rI=53) 2088.66(rI=14) ...; -->
 	</transition>
 	<transition branchRatio="1" child="Se75" mode="ec" parent="Br75">
 		<gamma energy="6.53" id="0" intensity="0.001584">
@@ -43361,7 +43354,7 @@
 		<xray energy="12.601" intensity="4.8E-05" assignment="Kb5"/>
 		<xray energy="12.652" intensity="0.00133" assignment="Kb2"/>
 		<xray energy="12.658" intensity="3.42E-05" assignment="Kb4"/>
-		<!-- cascade-match: SD-unmatched[keV]: 281.40(I=0.00163,absent) 399.50(I=0.0034,neartol) 498.00(I=0.00163,absent) 546.50(I=0.00163,neartol) 636.00(I=0.00074,absent) 812.50(I=0.00141,neartol) 913.00(I=0.000518,neartol) 1145.00(I=0.000592,neartol) 1253.00(I=0.000814,neartol) 1308.00(I=0.00185,absent) 1324.00(I=0.000444,absent) 1538.00(I=0.0017,neartol) 1642.00(I=0.00133,neartol) 1661.00(I=0.00141,neartol) 1868.40(I=0.00141,neartol) 1883.00(I=0.00133,absent) 1901.00(I=0.00118,absent) 1991.00(I=0.000814,absent) 2082.00(I=0.00118,absent) 2170.00(I=0.000962,absent) 2235.00(I=0.00133,absent) 2309.60(I=0.00104,neartol) 2658.00(I=0.00133,neartol) 2690.00(I=0.00355,absent) 2757.00(I=0.00074,neartol) ...; G4-unclaimed-on-populated[keV]: 575.28(rI=100) 1232.33(rI=13.6) 335.79(rI=6.7) 339.57(rI=19.8) 954.42(rI=15.7) 931.55(rI=100) 723.24(rI=6.5) 2655.38(rI=7.3) 383.00(rI=22.4) 1123.16(rI=27.1) 1481.26(rI=9.6) 1595.98(rI=100) 2253.03(rI=27) 540.35(rI=48.2) 2472.47(rI=100) 1774.61(rI=33.8) 1889.33(rI=31) 1502.70(rI=100) 1860.80(rI=17) 2632.57(rI=13.4) 790.30(rI=38) 1888.56(rI=17.4) 2660.32(rI=100) 309.64(rI=46.2) 613.32(rI=11.9) ...; -->
+		<!-- cascade-match: SD-unmatched[keV]: 281.40(I=0.00163,absent) 399.50(I=0.0034,neartol) 498.00(I=0.00163,absent) 546.50(I=0.00163,neartol) 636.00(I=0.00074,absent) 812.50(I=0.00141,neartol) 913.00(I=0.000518,neartol) 1145.00(I=0.000592,neartol) 1253.00(I=0.000814,neartol) 1308.00(I=0.00185,absent) 1324.00(I=0.000444,absent) 1538.00(I=0.0017,neartol) 1642.00(I=0.00133,neartol) 1661.00(I=0.00141,neartol) 1868.40(I=0.00141,neartol) 1883.00(I=0.00133,absent) 1901.00(I=0.00118,absent) 1991.00(I=0.000814,absent) 2082.00(I=0.00118,absent) 2170.00(I=0.000962,absent) 2235.00(I=0.00133,absent) 2658.00(I=0.00133,neartol) 2690.00(I=0.00355,absent) 2757.00(I=0.00074,neartol) 2837.00(I=0.00111,neartol) ...; G4-unclaimed-on-populated[keV]: 575.28(rI=100) 1232.33(rI=13.6) 335.79(rI=6.7) 339.57(rI=19.8) 954.42(rI=15.7) 931.55(rI=100) 723.24(rI=6.5) 2655.38(rI=7.3) 383.00(rI=22.4) 1123.16(rI=27.1) 1481.26(rI=9.6) 1595.98(rI=100) 2253.03(rI=27) 1653.19(rI=51.7) 2869.34(rI=23.1) 540.35(rI=48.2) 2472.47(rI=100) 1774.61(rI=33.8) 1889.33(rI=31) 1502.70(rI=100) 1860.80(rI=17) 2632.57(rI=13.4) 790.30(rI=38) 1888.56(rI=17.4) 2660.32(rI=100) ...; -->
 	</transition>
 	<transition branchRatio="0.997" child="Br76" mode="it" parent="Br76m">
 		<gamma energy="45.48" id="0" intensity="0.485"/>
@@ -43950,7 +43943,7 @@
 		<xray energy="12.601" intensity="7.9E-06" assignment="Kb5"/>
 		<xray energy="12.652" intensity="0.000219" assignment="Kb2"/>
 		<xray energy="12.658" intensity="5.6E-06" assignment="Kb4"/>
-		<!-- cascade-match: SD-unmatched[keV]: 2899.50(I=3.4e-06,neartol); G4-unclaimed-on-populated[keV]: 497.30(rI=11) 687.25(rI=57) 1018.68(rI=6.1) 2327.33(rI=8) 1026.60(rI=10.8) 285.62(rI=15) 320.14(rI=11) 651.58(rI=43) 793.54(rI=14.2) 390.81(rI=5) 902.23(rI=11) 2898.13(rI=6.94); -->
+		<!-- cascade-match: G4-unclaimed-on-populated[keV]: 497.30(rI=11) 687.25(rI=57) 1018.68(rI=6.1) 2327.33(rI=8) 1026.60(rI=10.8) 285.62(rI=15) 320.14(rI=11) 651.58(rI=43) 793.54(rI=14.2) 390.81(rI=5) 902.23(rI=11); -->
 	</transition>
 	<transition branchRatio="1" child="Br78" mode="it" parent="Br78m">
 		<gamma energy="32.3" id="0" intensity="3.8500E-01"/>
@@ -44926,7 +44919,7 @@
 		<beta energy="6061.39" intensity="0.1" logFT="7.1"/>
 		<beta energy="7626" forbiddenness="1u" intensity="0.15" logFT="9.7"/>
 		<gamma energy="1769.60" intensity="1.1700E-02"/>
-		<!-- cascade-match: SD-unmatched[keV]: 499.20(I=0.0123,neartol) 749.50(I=0.00715,absent) 803.30(I=0.0286,absent) 5518.60(I=0.0267,neartol) 6161.50(I=0.000715,neartol) 6210.40(I=0.0065,neartol) 6722.00(I=0.000455,neartol) 1769.60(I=0.0117,absent); G4-unclaimed-on-populated[keV]: 501.25(rI=22.2) 2479.94(rI=7.1) 3758.87(rI=100); -->
+		<!-- cascade-match: SD-unmatched[keV]: 499.20(I=0.0123,neartol) 749.50(I=0.00715,absent) 803.30(I=0.0286,absent) 1769.60(I=0.0117,absent); G4-unclaimed-on-populated[keV]: 501.25(rI=22.2) 2479.94(rI=7.1) 2418.57(rI=22) 3758.87(rI=100); -->
 	</transition>
 	<transition branchRatio="1" child="Kr87" mode="b-" parent="Br87">
 		<gamma energy="93.54" intensity="0.0013"/>
@@ -46630,7 +46623,7 @@
 		<gamma energy="1429.00" intensity="2.7720E-03"/>
 		<gamma energy="3278.61" intensity="2.1120E-02"/>
 		<gamma energy="3635.30" intensity="6.6000E-04"/>
-		<!-- cascade-match: SD-unmatched[keV]: 1552.55(I=0.00508,neartol) 5019.93(I=0.0158,neartol) 3278.61(I=0.0211,neartol); G4-unclaimed-on-populated[keV]: 1328.49(rI=13) 2651.21(rI=15) 1554.70(rI=100) 5018.70(rI=100) 3279.73(rI=100); -->
+		<!-- cascade-match: SD-unmatched[keV]: 1552.55(I=0.00508,neartol); G4-unclaimed-on-populated[keV]: 1328.49(rI=13) 2651.21(rI=15) 1554.70(rI=100); -->
 	</transition>
 	<transition branchRatio="0.064" child="Kr87" mode="b-n" parent="Br88">
 		<gamma energy="532.12" intensity="0.041"/>
@@ -47342,7 +47335,7 @@
 		<gamma energy="3735" intensity="0"/>
 		<gamma energy="3775" intensity="0"/>
 		<gamma energy="3853" intensity="0"/>
-		<!-- cascade-match: SD-unmatched[keV]: 185.60(I=0.3,absent) 262.70(I=1,absent) 364.80(I=0.4,absent) 803.30(I=0.8,absent) 821.00(I=0,neartol) 3472.00(I=0,neartol) 3674.00(I=0,neartol); G4-unclaimed-on-populated[keV]: 361.10(rI=100) 819.50(rI=100); -->
+		<!-- cascade-match: SD-unmatched[keV]: 185.60(I=0.3,absent) 262.70(I=1,absent) 364.80(I=0.4,absent) 803.30(I=0.8,absent) 821.00(I=0,neartol); G4-unclaimed-on-populated[keV]: 361.10(rI=100) 819.50(rI=100); -->
 	</transition>
 	<transition branchRatio="1" child="Kr92" mode="b-" parent="Br92">
 		<gamma energy="358" intensity="0.00047">
@@ -56909,7 +56902,7 @@
 		<beta energy="4986" intensity="0.23" logFT="7.02"/>
 		<gamma energy="2487.80" intensity="2.4120E-04"/>
 		<gamma energy="2630.10" intensity="1.3869E-03"/>
-		<!-- cascade-match: SD-unmatched[keV]: 74.90(I=0.000121,absent) 76.00(I=8.04e-05,absent) 435.80(I=0.000965,neartol) 660.50(I=0.000482,neartol) 844.70(I=0.00523,absent) 886.30(I=0.00201,absent) 887.90(I=0.00643,neartol) 895.30(I=0.00301,absent) 897.00(I=0.00482,absent) 902.80(I=0.00804,neartol) 976.40(I=0.00482,neartol) 1038.30(I=0.000302,absent) 1115.00(I=0.00161,neartol) 1241.50(I=0.000884,absent) 1455.30(I=0.000523,neartol) 1468.50(I=0.00189,neartol) 1571.80(I=0.000683,neartol) 1735.50(I=0.000563,absent) 1827.30(I=0.000643,absent) 1837.50(I=0.00119,neartol) 1886.50(I=0.000342,absent) 1927.50(I=0.00111,neartol) 2079.30(I=0.000302,absent) 2239.80(I=0.000523,absent) 2249.00(I=0.000844,absent) ...; G4-unclaimed-on-populated[keV]: 4367.37(rI=32) 1116.99(rI=120) 1470.27(rI=140) 4487.80(rI=100) 2489.90(rI=21) 2632.70(rI=121); -->
+		<!-- cascade-match: SD-unmatched[keV]: 74.90(I=0.000121,absent) 76.00(I=8.04e-05,absent) 435.80(I=0.000965,neartol) 660.50(I=0.000482,neartol) 844.70(I=0.00523,absent) 886.30(I=0.00201,absent) 887.90(I=0.00643,neartol) 895.30(I=0.00301,absent) 897.00(I=0.00482,absent) 902.80(I=0.00804,neartol) 976.40(I=0.00482,neartol) 1038.30(I=0.000302,absent) 1115.00(I=0.00161,neartol) 1241.50(I=0.000884,absent) 1455.30(I=0.000523,neartol) 1468.50(I=0.00189,neartol) 1571.80(I=0.000683,neartol) 1735.50(I=0.000563,absent) 1827.30(I=0.000643,absent) 1837.50(I=0.00119,neartol) 1886.50(I=0.000342,absent) 1927.50(I=0.00111,neartol) 2079.30(I=0.000302,absent) 2239.80(I=0.000523,absent) 2249.00(I=0.000844,absent) ...; G4-unclaimed-on-populated[keV]: 1116.99(rI=120) 1470.27(rI=140) 2489.90(rI=21) 2632.70(rI=121); -->
 	</transition>
 	<transition branchRatio="0.130844363341186" child="Rb90m" mode="b-" parent="Kr90">
 		<gamma energy="120.92" id="0" intensity="2.6826E-01"/>
@@ -65332,7 +65325,7 @@
 		<gamma energy="2169.7" intensity="0.0001386"/>
 		<gamma energy="2175.1" intensity="0.0001155"/>
 		<gamma energy="2183.7" intensity="1.5078E-05">
-			<coincidentGamma id="4" intensity="0.00832042003733"/>
+			<coincidentGamma id="4" intensity="0.00832042003733" a2="-0.16" a4="0"/>
 			<coincidentGamma id="6" intensity="3.40248737978e-05"/>
 			<coincidentGamma id="0" intensity="2.39724620701e-06"/>
 			<coincidentGamma id="8" intensity="0.000436458631081"/>
@@ -67715,9 +67708,9 @@
 			<coincidentGamma id="15" intensity="0.99370473160495509"/>
 		</gamma>
 		<gamma energy="891.3" id="4" intensity="0.00022">
-			<coincidentGamma id="12" intensity="0.674846625766871"/>
+			<coincidentGamma id="12" intensity="0.674846625766871" a2="0.175" a4="0"/>
 			<coincidentGamma id="15" intensity="0.67484662576687116"/>
-			<coincidentGamma id="26" intensity="0.32515337423312884"/>
+			<coincidentGamma id="26" intensity="0.32515337423312884" a2="0.25" a4="-0"/>
 		</gamma>
 		<gamma energy="898.03" id="5" intensity="0.1468">
 			<coincidentGamma id="15" intensity="1" a2="-0.0714286" a4="-0"/>
@@ -67755,7 +67748,7 @@
 			<coincidentGamma id="15" intensity="0.99370473160495509"/>
 		</gamma>
 		<gamma energy="1687.3" id="12" intensity="0.00011">
-			<coincidentGamma id="15" intensity="1"/>
+			<coincidentGamma id="15" intensity="1" a2="0.25" a4="-0"/>
 		</gamma>
 		<gamma energy="1779.87" id="13" intensity="0.00237">
 			<coincidentGamma id="5" intensity="0.99370473160495509" a2="0.12" a4="0"/>
@@ -67820,7 +67813,7 @@
 		<xray energy="15.971" intensity="1.7E-08" assignment="Kb5"/>
 		<xray energy="16.085" intensity="7.9E-07" assignment="Kb2"/>
 		<xray energy="16.105" intensity="1.35E-07" assignment="Kb4"/>
-		<!-- cascade-match: SD-unmatched[keV]: 3524.00(I=5.3e-05,neartol); G4-unclaimed-on-populated[keV]: 1686.68(rI=100) 3522.77(rI=57) 2199.43(rI=19) 4413.96(rI=7) 1524.01(rI=18) 1095.41(rI=47) 2588.25(rI=85); -->
+		<!-- cascade-match: G4-unclaimed-on-populated[keV]: 2199.43(rI=19) 4413.96(rI=7) 1524.01(rI=18); -->
 	</transition>
 	<transition branchRatio="1" child="Rb88" mode="it" parent="Rb88m">
 		<gamma energy="27.513" intensity="0"/>
@@ -68112,7 +68105,7 @@
 		<xray energy="15.971" intensity="1.32E-07" assignment="Kb5"/>
 		<xray energy="16.085" intensity="6.2E-06" assignment="Kb2"/>
 		<xray energy="16.105" intensity="1.05E-06" assignment="Kb4"/>
-		<!-- cascade-match: SD-unmatched[keV]: 1160.47(I=0.000377,absent) 1211.70(I=0.000126,absent) 1429.60(I=0.000126,absent) 1596.20(I=0.000189,absent) 2231.30(I=0.000252,absent) 2685.60(I=0.000315,absent) 2818.10(I=0.000126,absent) 3037.50(I=0.000126,absent) 3141.70(I=0.000566,absent) 3263.60(I=0.000189,absent) 3781.80(I=0.000126,absent) 3989.10(I=0.000189,neartol); G4-unclaimed-on-populated[keV]: 511.45(rI=76) 3303.10(rI=25) 1419.63(rI=63) 3699.82(rI=27) 3987.80(rI=75) 2055.39(rI=17) 4335.58(rI=40) 3482.19(rI=14) 3923.54(rI=29); -->
+		<!-- cascade-match: SD-unmatched[keV]: 1160.47(I=0.000377,absent) 1211.70(I=0.000126,absent) 1429.60(I=0.000126,absent) 1596.20(I=0.000189,absent) 2231.30(I=0.000252,absent) 2685.60(I=0.000315,absent) 2818.10(I=0.000126,absent) 3037.50(I=0.000126,absent) 3141.70(I=0.000566,absent) 3263.60(I=0.000189,absent) 3781.80(I=0.000126,absent); G4-unclaimed-on-populated[keV]: 511.45(rI=76) 3303.10(rI=25) 1419.63(rI=63) 3699.82(rI=27) 2055.39(rI=17) 4335.58(rI=40) 3482.19(rI=14) 3923.54(rI=29); -->
 	</transition>
 	<transition branchRatio="1" child="Sr90" mode="b-" parent="Rb90">
 		<gamma energy="196.8" intensity="0.0009576">
@@ -69997,7 +69990,7 @@
 		<xray energy="15.971" intensity="1.54E-07" assignment="Kb5"/>
 		<xray energy="16.085" intensity="7.2E-06" assignment="Kb2"/>
 		<xray energy="16.105" intensity="1.22E-06" assignment="Kb4"/>
-		<!-- cascade-match: SD-unmatched[keV]: 96.70(I=0.00162,absent) 1789.20(I=0.00396,absent) 3670.80(I=0.00429,neartol) 4240.40(I=0.0033,neartol) 4427.90(I=0.0129,absent) 5248.70(I=0.0109,absent) 5376.60(I=0.00594,absent) 5497.70(I=0.00825,absent) 5573.70(I=0.00825,absent) 5632.20(I=0.0198,absent) 5879.40(I=0.00693,absent) 6114.80(I=0.00825,neartol); G4-unclaimed-on-populated[keV]: 3669.01(rI=54) 4238.82(rI=42) 6116.10(rI=100); -->
+		<!-- cascade-match: SD-unmatched[keV]: 96.70(I=0.00162,absent) 1789.20(I=0.00396,absent) 4427.90(I=0.0129,absent) 5248.70(I=0.0109,absent) 5376.60(I=0.00594,absent) 5497.70(I=0.00825,absent) 5573.70(I=0.00825,absent) 5632.20(I=0.0198,absent) 5879.40(I=0.00693,absent); -->
 	</transition>
 	<transition branchRatio="1" child="Sr93" mode="b-" parent="Rb93">
 		<gamma energy="163.4" id="0" intensity="0.0013332">
@@ -71574,7 +71567,7 @@
 		<xray energy="15.971" intensity="1.42E-06" assignment="Kb5"/>
 		<xray energy="16.085" intensity="6.6E-05" assignment="Kb2"/>
 		<xray energy="16.105" intensity="1.12E-05" assignment="Kb4"/>
-		<!-- cascade-match: SD-unmatched[keV]: 2037.00(I=0.000788,absent) 2451.70(I=0.00188,absent) 3129.20(I=0.00101,absent) 4890.00(I=0.000303,absent) 4971.80(I=0.000384,absent) 4996.80(I=0.000586,absent) 5137.90(I=0.00103,absent) 5154.60(I=0.000263,absent) 5164.80(I=0.000222,absent) 5396.70(I=0.000343,neartol) 5409.00(I=0.000465,absent); G4-unclaimed-on-populated[keV]: 5395.50(rI=31); -->
+		<!-- cascade-match: SD-unmatched[keV]: 2037.00(I=0.000788,absent) 2451.70(I=0.00188,absent) 3129.20(I=0.00101,absent) 4890.00(I=0.000303,absent) 4971.80(I=0.000384,absent) 4996.80(I=0.000586,absent) 5137.90(I=0.00103,absent) 5154.60(I=0.000263,absent) 5164.80(I=0.000222,absent) 5409.00(I=0.000465,absent); -->
 	</transition>
 	<transition branchRatio="0.0139" child="Sr92" mode="b-n" parent="Rb93">
 		<gamma energy="393.5" intensity="0.01393">
@@ -72128,7 +72121,7 @@
 		<xray energy="15.971" intensity="2.91E-07" assignment="Kb5"/>
 		<xray energy="16.085" intensity="1.36E-05" assignment="Kb2"/>
 		<xray energy="16.105" intensity="2.31E-06" assignment="Kb4"/>
-		<!-- cascade-match: SD-unmatched[keV]: 332.60(I=0.000435,absent) 453.60(I=0.00104,absent) 871.00(I=0.00087,absent) 888.30(I=0.00087,absent) 1019.00(I=0.00148,absent) 1208.50(I=0.00209,absent) 1324.00(I=0.00087,absent) 1460.20(I=0.000435,absent) 1485.60(I=0.000783,absent) 1522.20(I=0.00218,absent) 1742.70(I=0.00087,absent) 1755.80(I=0.00348,neartol) 1964.60(I=0.000522,absent) 1976.00(I=0.000783,absent) 2338.80(I=0.00183,absent) 2373.10(I=0.00087,absent) 2433.90(I=0.00157,absent) 2484.30(I=0.00131,absent) 2574.90(I=0.0027,absent) 2606.20(I=0.00139,absent) 2633.80(I=0.00139,absent) 2659.80(I=0.000957,absent) 2663.50(I=0.00087,absent) 2733.10(I=0.00191,absent) 2748.50(I=0.000783,absent) ...; G4-unclaimed-on-populated[keV]: 3077.70(rI=41) 1754.09(rI=100); -->
+		<!-- cascade-match: SD-unmatched[keV]: 332.60(I=0.000435,absent) 453.60(I=0.00104,absent) 871.00(I=0.00087,absent) 888.30(I=0.00087,absent) 1019.00(I=0.00148,absent) 1208.50(I=0.00209,absent) 1324.00(I=0.00087,absent) 1460.20(I=0.000435,absent) 1485.60(I=0.000783,absent) 1522.20(I=0.00218,absent) 1742.70(I=0.00087,absent) 1755.80(I=0.00348,neartol) 1964.60(I=0.000522,absent) 1976.00(I=0.000783,absent) 2338.80(I=0.00183,absent) 2373.10(I=0.00087,absent) 2433.90(I=0.00157,absent) 2484.30(I=0.00131,absent) 2574.90(I=0.0027,absent) 2606.20(I=0.00139,absent) 2633.80(I=0.00139,absent) 2659.80(I=0.000957,absent) 2663.50(I=0.00087,absent) 2733.10(I=0.00191,absent) 2748.50(I=0.000783,absent) ...; G4-unclaimed-on-populated[keV]: 1754.09(rI=100); -->
 	</transition>
 	<transition branchRatio="0.1001" child="Sr93" mode="b-n" parent="Rb94">
 		<gamma energy="213.4" id="0" intensity="0.29736"/>
@@ -73999,7 +73992,7 @@
 		<xray energy="15.971" intensity="1.15E-06" assignment="Kb5"/>
 		<xray energy="16.085" intensity="5.3E-05" assignment="Kb2"/>
 		<xray energy="16.105" intensity="9.1E-06" assignment="Kb4"/>
-		<!-- cascade-match: SD-unmatched[keV]: 374.50(I=0.00148,absent) 522.70(I=0.00195,absent) 968.10(I=0.00172,absent) 1027.90(I=0.00203,absent) 1131.00(I=0.00117,absent) 1220.20(I=0.00164,absent) 1252.80(I=0.00179,absent) 1439.20(I=0.00179,absent) 1650.10(I=0.00265,absent) 1756.50(I=0.00328,absent) 1770.80(I=0.00179,absent) 1964.40(I=0.00172,absent) 1999.90(I=0.00211,absent) 2034.90(I=0.000702,absent) 2146.70(I=0.00452,absent) 2323.90(I=0.00148,absent) 2476.60(I=0.00569,absent) 2493.60(I=0.00359,absent) 2512.00(I=0.00351,absent) 2541.40(I=0.00203,absent) 2751.40(I=0.00858,absent) 2815.60(I=0.00406,absent) 3021.80(I=0.00195,absent) 3047.20(I=0.00312,absent) 3050.30(I=0.00398,absent) ...; G4-unclaimed-on-populated[keV]: 327.30(rI=10) 5168.50(rI=29); -->
+		<!-- cascade-match: SD-unmatched[keV]: 374.50(I=0.00148,absent) 522.70(I=0.00195,absent) 968.10(I=0.00172,absent) 1027.90(I=0.00203,absent) 1131.00(I=0.00117,absent) 1220.20(I=0.00164,absent) 1252.80(I=0.00179,absent) 1439.20(I=0.00179,absent) 1650.10(I=0.00265,absent) 1756.50(I=0.00328,absent) 1770.80(I=0.00179,absent) 1964.40(I=0.00172,absent) 1999.90(I=0.00211,absent) 2034.90(I=0.000702,absent) 2146.70(I=0.00452,absent) 2323.90(I=0.00148,absent) 2476.60(I=0.00569,absent) 2493.60(I=0.00359,absent) 2512.00(I=0.00351,absent) 2541.40(I=0.00203,absent) 2751.40(I=0.00858,absent) 2815.60(I=0.00406,absent) 3021.80(I=0.00195,absent) 3047.20(I=0.00312,absent) 3050.30(I=0.00398,absent) ...; G4-unclaimed-on-populated[keV]: 327.30(rI=10); -->
 	</transition>
 	<transition branchRatio="0.133" child="Sr95" mode="b-n" parent="Rb96">
 		<gamma energy="204" id="0" intensity="0.161">
@@ -78976,7 +78969,7 @@
 		<xray energy="16.88" intensity="3.5E-05" assignment="Kb5"/>
 		<xray energy="17.013" intensity="0.00162" assignment="Kb2"/>
 		<xray energy="17.036" intensity="0.000275" assignment="Kb4"/>
-		<!-- cascade-match: SD-unmatched[keV]: 831.30(I=0.000734,absent) 837.85(I=0.00182,neartol) 1200.50(I=0.000399,absent) 1609.77(I=0.00304,absent) 1652.20(I=0.000546,absent) 1899.50(I=0.000546,absent) 1935.60(I=0.000525,absent) 1952.40(I=0.00153,absent) 1978.20(I=0.000409,neartol) 2054.68(I=0.0021,absent) 2076.60(I=0.000923,absent) 2094.10(I=0.00115,absent) 2104.78(I=0.00483,absent) 2172.00(I=0.0011,absent) 2203.50(I=0.00136,absent) 2222.00(I=0.00063,absent) 2472.70(I=0.00118,absent) 2614.70(I=0.00138,absent) 2688.65(I=0.0328,neartol) 2765.30(I=0.00064,absent) 2781.60(I=0.000797,absent) 2811.30(I=0.000325,absent) 2828.54(I=0.00264,absent) 2983.50(I=0.000692,absent) 2985.72(I=0.00304,absent); G4-unclaimed-on-populated[keV]: 377.25(rI=20) 888.32(rI=100) 1093.95(rI=100) 1332.63(rI=19) 1334.55(rI=28.8) 1816.26(rI=6.9) 1928.83(rI=33.7) 2687.55(rI=61); -->
+		<!-- cascade-match: SD-unmatched[keV]: 831.30(I=0.000734,absent) 837.85(I=0.00182,neartol) 1200.50(I=0.000399,absent) 1609.77(I=0.00304,absent) 1652.20(I=0.000546,absent) 1899.50(I=0.000546,absent) 1935.60(I=0.000525,absent) 1952.40(I=0.00153,absent) 1978.20(I=0.000409,neartol) 2054.68(I=0.0021,absent) 2076.60(I=0.000923,absent) 2094.10(I=0.00115,absent) 2104.78(I=0.00483,absent) 2172.00(I=0.0011,absent) 2203.50(I=0.00136,absent) 2222.00(I=0.00063,absent) 2472.70(I=0.00118,absent) 2614.70(I=0.00138,absent) 2765.30(I=0.00064,absent) 2781.60(I=0.000797,absent) 2811.30(I=0.000325,absent) 2828.54(I=0.00264,absent) 2983.50(I=0.000692,absent) 2985.72(I=0.00304,absent); G4-unclaimed-on-populated[keV]: 377.25(rI=20) 888.32(rI=100) 1093.95(rI=100) 1332.63(rI=19) 1334.55(rI=28.8) 1816.26(rI=6.9) 1928.83(rI=33.7); -->
 	</transition>
 	<transition branchRatio="1" child="Y94" mode="b-" parent="Sr94">
 		<gamma energy="102.1" id="0" intensity="6.594E-05">
@@ -82915,7 +82908,7 @@
 		<xray energy="15.971" intensity="0.000135" assignment="Kb5"/>
 		<xray energy="16.085" intensity="0.0063" assignment="Kb2"/>
 		<xray energy="16.105" intensity="0.00107" assignment="Kb4"/>
-		<!-- cascade-match: SD-unmatched[keV]: 434.60(I=0.000772,neartol) 781.50(I=0,absent) 1154.40(I=0,neartol) 1508.20(I=0.000707,absent) 1540.10(I=0.000302,neartol) 1640.10(I=0.000624,absent) 1819.90(I=0,absent) 1826.30(I=0,absent) 1855.00(I=0.00107,absent) 1872.00(I=0,absent) 1909.60(I=0,neartol) 1973.00(I=0.00036,absent) 2068.00(I=0.000598,absent) 2096.30(I=0.000354,absent) 2126.10(I=0.000399,absent) 2147.00(I=0.000225,absent) 2153.90(I=0,absent) 2178.70(I=0.000778,absent) 2224.50(I=0.000322,absent) 2250.00(I=0.000257,absent) 2260.40(I=0.000347,absent) 2317.40(I=0.000604,absent) 2368.00(I=0.000129,absent) 2393.80(I=0.000418,absent) 2400.00(I=0.000231,absent) ...; G4-unclaimed-on-populated[keV]: 489.92(rI=100) 391.66(rI=100) 618.26(rI=9.7) 721.17(rI=16.8) 1264.59(rI=36) 1928.63(rI=32) 574.00(rI=100) 1649.00(rI=100) 1530.10(rI=100) 1964.00(rI=100); -->
+		<!-- cascade-match: SD-unmatched[keV]: 434.60(I=0.000772,neartol) 781.50(I=0,absent) 1154.40(I=0,neartol) 1508.20(I=0.000707,absent) 1540.10(I=0.000302,neartol) 1640.10(I=0.000624,absent) 1819.90(I=0,absent) 1826.30(I=0,absent) 1855.00(I=0.00107,absent) 1872.00(I=0,absent) 1909.60(I=0,neartol) 1973.00(I=0.00036,absent) 2068.00(I=0.000598,absent) 2096.30(I=0.000354,absent) 2126.10(I=0.000399,absent) 2147.00(I=0.000225,absent) 2153.90(I=0,absent) 2178.70(I=0.000778,absent) 2224.50(I=0.000322,absent) 2250.00(I=0.000257,absent) 2260.40(I=0.000347,absent) 2317.40(I=0.000604,absent) 2368.00(I=0.000129,absent) 2393.80(I=0.000418,absent) 2400.00(I=0.000231,absent) ...; G4-unclaimed-on-populated[keV]: 489.92(rI=100) 391.66(rI=100) 618.26(rI=9.7) 721.17(rI=16.8) 1264.59(rI=36) 574.00(rI=100) 1530.10(rI=100) 1964.00(rI=100); -->
 	</transition>
 	<transition branchRatio="0.6" child="Sr83m" mode="b+" parent="Y83m">
 		<gamma energy="421.8" intensity="0.32436"/>
@@ -83037,7 +83030,7 @@
 		<xray energy="15.971" intensity="2.57E-06" assignment="Kb5"/>
 		<xray energy="16.085" intensity="0.00012" assignment="Kb2"/>
 		<xray energy="16.105" intensity="2.04E-05" assignment="Kb4"/>
-		<!-- cascade-match: SD-unmatched[keV]: 635.00(I=0.0295,absent) 658.30(I=0.0442,neartol) 705.80(I=0.0374,neartol) 1154.90(I=0.00688,absent) 1185.10(I=0.00492,absent) 1270.70(I=0.00885,absent) 1280.80(I=0.00216,neartol) 1362.80(I=0.00197,absent) 1411.10(I=0.00688,neartol) 1463.30(I=0.00393,neartol) 1520.20(I=0.00393,absent) 1628.00(I=0.00983,absent) 1711.00(I=0.0147,absent) 2052.90(I=0.00492,neartol) 2807.80(I=0.00128,absent) 2908.00(I=0.00295,absent) 2945.00(I=0.00197,absent) 2968.00(I=0.00197,absent) 3315.00(I=0.000983,absent); G4-unclaimed-on-populated[keV]: 679.18(rI=100) 1040.18(rI=100) 290.80(rI=37) 718.89(rI=100) 2051.89(rI=26) 1464.55(rI=6) 1331.12(rI=100) 808.35(rI=100) 996.87(rI=30) 414.91(rI=100) 831.09(rI=12) 1266.75(rI=100); -->
+		<!-- cascade-match: SD-unmatched[keV]: 635.00(I=0.0295,absent) 658.30(I=0.0442,neartol) 705.80(I=0.0374,neartol) 1154.90(I=0.00688,absent) 1185.10(I=0.00492,absent) 1270.70(I=0.00885,absent) 1280.80(I=0.00216,neartol) 1362.80(I=0.00197,absent) 1411.10(I=0.00688,neartol) 1463.30(I=0.00393,neartol) 1520.20(I=0.00393,absent) 1628.00(I=0.00983,absent) 1711.00(I=0.0147,absent) 2807.80(I=0.00128,absent) 2908.00(I=0.00295,absent) 2945.00(I=0.00197,absent) 2968.00(I=0.00197,absent) 3315.00(I=0.000983,absent); G4-unclaimed-on-populated[keV]: 679.18(rI=100) 1040.18(rI=100) 290.80(rI=37) 718.89(rI=100) 1464.55(rI=6) 1331.12(rI=100) 808.35(rI=100) 996.87(rI=30) 414.91(rI=100) 831.09(rI=12) 1266.75(rI=100); -->
 	</transition>
 	<transition branchRatio="1" child="Sr84" mode="ec" parent="Y84m2">
 		<gamma energy="462.7" intensity="0.097614">
@@ -84152,7 +84145,7 @@
 		</gamma>
 		<gamma energy="503" id="19" intensity="0.0009075">
 			<coincidentGamma id="72" intensity="0.77690582959641263" a2="0.154545" a4="0"/>
-			<coincidentGamma id="89" intensity="0.048094170403587447"/>
+			<coincidentGamma id="89" intensity="0.048094170403587447" a2="0.220779" a4="-0.017982"/>
 			<coincidentGamma id="48" intensity="0.64094730941704037"/>
 		</gamma>
 		<gamma energy="512.42" intensity="0">
@@ -84831,7 +84824,7 @@
 		<xray energy="15.971" intensity="0.00013" assignment="Kb5"/>
 		<xray energy="16.085" intensity="0.00606" assignment="Kb2"/>
 		<xray energy="16.105" intensity="0.00103" assignment="Kb4"/>
-		<!-- cascade-match: SD-unmatched[keV]: 702.20(I=0.00248,neartol) 1294.90(I=0.00289,neartol) 1969.10(I=0.000495,absent) 2790.00(I=0.000107,neartol) 2827.70(I=0.000577,absent) 2862.00(I=9.07e-05,neartol); G4-unclaimed-on-populated[keV]: 2788.90(rI=6) 2863.78(rI=22); -->
+		<!-- cascade-match: SD-unmatched[keV]: 702.20(I=0.00248,neartol) 1294.90(I=0.00289,neartol) 1969.10(I=0.000495,absent) 2827.70(I=0.000577,absent) 2862.00(I=9.07e-05,neartol); G4-unclaimed-on-populated[keV]: 2863.78(rI=22); -->
 	</transition>
 	<transition branchRatio="0.9931" child="Y86" mode="it" parent="Y86m">
 		<gamma energy="10.2" intensity="4.2735E-07"/>
@@ -85089,7 +85082,7 @@
 		<xray energy="17.816" intensity="1.19E-07" assignment="Kb5"/>
 		<xray energy="17.969" intensity="5.4E-06" assignment="Kb2"/>
 		<xray energy="17.995" intensity="1.14E-06" assignment="Kb4"/>
-		<!-- cascade-match: SD-unmatched[keV]: 3263.90(I=1.11e-05,neartol); G4-unclaimed-on-populated[keV]: 700.04(rI=23.8); -->
+		<!-- cascade-match: G4-unclaimed-on-populated[keV]: 700.04(rI=23.8) 2328.11(rI=100); -->
 	</transition>
 	<transition branchRatio="1" child="Zr93" mode="b-" parent="Y93">
 		<gamma energy="266.9" id="0" intensity="0.068"/>
@@ -85682,7 +85675,7 @@
 			<coincidentGamma id="18" intensity="1.7639032632082829E-06"/>
 			<coincidentGamma id="0" intensity="1.6353624327656669E-06"/>
 			<coincidentGamma id="13" intensity="0.000748901098901099" a2="-0.175" a4="0"/>
-			<coincidentGamma id="26" intensity="0.000748901098901099"/>
+			<coincidentGamma id="26" intensity="0.000748901098901099" a2="-0.25" a4="-0"/>
 		</gamma>
 		<gamma energy="1699.6" intensity="0.000282">
 			<coincidentGamma id="18" intensity="0.00235"/>
@@ -85796,7 +85789,7 @@
 		<xray energy="17.816" intensity="1.56E-06" assignment="Kb5"/>
 		<xray energy="17.969" intensity="7.1E-05" assignment="Kb2"/>
 		<xray energy="17.995" intensity="1.49E-05" assignment="Kb4"/>
-		<!-- cascade-match: SD-unmatched[keV]: 3212.90(I=6.82e-05,neartol) 3257.40(I=8.46e-05,neartol) 4334.20(I=2.59e-05,neartol) 4839.20(I=0.000237,neartol) 6141.60(I=3.53e-05,neartol); G4-unclaimed-on-populated[keV]: 442.97(rI=6.4) 3211.84(rI=64) 1283.31(rI=33) 1758.66(rI=17) 3256.11(rI=36) 4837.75(rI=100) 4333.06(rI=19) 6143.60(rI=100); -->
+		<!-- cascade-match: G4-unclaimed-on-populated[keV]: 442.97(rI=6.4) 1283.31(rI=33) 1758.66(rI=17); -->
 	</transition>
 	<transition branchRatio="1" child="Zr96" mode="b-" parent="Y96m2">
 		<gamma energy="132.9" id="0" intensity="0.0088">
@@ -87258,7 +87251,7 @@
 		<xray energy="17.816" intensity="3.7E-05" assignment="Kb5"/>
 		<xray energy="17.969" intensity="0.0017" assignment="Kb2"/>
 		<xray energy="17.995" intensity="0.00035" assignment="Kb4"/>
-		<!-- cascade-match: SD-unmatched[keV]: 297.30(I=0,absent) 386.10(I=0.009,absent) 547.50(I=0.009,absent) 600.00(I=0.009,absent) 671.20(I=0.0018,absent) 734.90(I=0.009,neartol) 887.90(I=0.0018,neartol) 936.30(I=0.0018,absent) 991.60(I=0.00252,neartol) 1762.70(I=0.0194,absent) 3064.40(I=0.0238,neartol) 3203.70(I=0.0234,absent) 3227.90(I=0.0493,neartol) 3310.00(I=0.072,neartol) 3375.70(I=0.0198,absent) 3468.60(I=0.0198,absent) 4450.20(I=0.0893,neartol); G4-unclaimed-on-populated[keV]: 215.40(rI=6.7) 204.30(rI=14) 456.93(rI=11) 824.80(rI=28) 1386.47(rI=11.1) 3311.12(rI=52.4); -->
+		<!-- cascade-match: SD-unmatched[keV]: 297.30(I=0,absent) 386.10(I=0.009,absent) 547.50(I=0.009,absent) 600.00(I=0.009,absent) 671.20(I=0.0018,absent) 734.90(I=0.009,neartol) 887.90(I=0.0018,neartol) 936.30(I=0.0018,absent) 991.60(I=0.00252,neartol) 1762.70(I=0.0194,absent) 3203.70(I=0.0234,absent) 3227.90(I=0.0493,neartol) 3375.70(I=0.0198,absent) 3468.60(I=0.0198,absent) 4450.20(I=0.0893,neartol); G4-unclaimed-on-populated[keV]: 215.40(rI=6.7) 204.30(rI=14) 456.93(rI=11) 824.80(rI=28) 1259.43(rI=100) 1386.47(rI=11.1); -->
 	</transition>
 	<transition branchRatio="0.00331" child="Zr97" mode="b-n" parent="Y98">
 		<xray energy="15.466" intensity="4.3E-07" assignment="Ka3"/>
@@ -93193,7 +93186,7 @@
 		<xray energy="17.816" intensity="5.9E-05" assignment="Kb5"/>
 		<xray energy="17.969" intensity="0.0027" assignment="Kb2"/>
 		<xray energy="17.995" intensity="0.00057" assignment="Kb4"/>
-		<!-- cascade-match: SD-unmatched[keV]: 361.00(I=0.000887,absent) 657.80(I=0.00071,absent) 794.00(I=0.000426,neartol) 1412.00(I=0.000177,absent) 2221.50(I=0.00124,neartol) 2279.00(I=0.000355,absent) 2714.00(I=0.000355,absent) 2740.00(I=0.000284,absent) 2753.50(I=0.00461,neartol) 173.10(I=0.000636,neartol); G4-unclaimed-on-populated[keV]: 507.09(rI=100) 532.35(rI=15.5) 738.80(rI=6.8) 648.61(rI=34) 785.21(rI=31.2) 845.77(rI=68.8) 846.57(rI=69) 2297.80(rI=100) 937.37(rI=36) 1293.69(rI=36) 1303.56(rI=15) 2754.79(rI=22) 171.11(rI=40) 796.10(rI=20) 1641.45(rI=6.4); -->
+		<!-- cascade-match: SD-unmatched[keV]: 361.00(I=0.000887,absent) 657.80(I=0.00071,absent) 794.00(I=0.000426,neartol) 1412.00(I=0.000177,absent) 2221.50(I=0.00124,neartol) 2279.00(I=0.000355,absent) 2714.00(I=0.000355,absent) 2740.00(I=0.000284,absent) 173.10(I=0.000636,neartol); G4-unclaimed-on-populated[keV]: 507.09(rI=100) 532.35(rI=15.5) 738.80(rI=6.8) 648.61(rI=34) 785.21(rI=31.2) 845.77(rI=68.8) 846.57(rI=69) 2297.80(rI=100) 937.37(rI=36) 1293.69(rI=36) 1303.56(rI=15) 171.11(rI=40) 796.10(rI=20) 1641.45(rI=6.4); -->
 	</transition>
 	<transition branchRatio="0.995" child="Zr89m" mode="ec" parent="Nb89m">
 		<gamma energy="507.4" id="0" intensity="8.1234E-01"/>
@@ -105058,7 +105051,7 @@
 			<coincidentGamma id="2" intensity="0.066" a2="0.357143" a4="1.14286"/>
 		</gamma>
 		<gamma energy="1558.90" intensity="7.2600E-05">
-			<coincidentGamma id="2" intensity="0.066"/>
+			<coincidentGamma id="2" intensity="0.066" a2="0.25" a4="-0"/>
 		</gamma>
 		<gamma energy="1701" intensity="1.3200E-05">
 			<coincidentGamma id="2" intensity="0.066" a2="0.25" a4="-0"/>
@@ -105096,7 +105089,7 @@
 		<xray energy="21.836" intensity="1.83E-07" assignment="Kb5"/>
 		<xray energy="22.074" intensity="7.2E-06" assignment="Kb2"/>
 		<xray energy="22.115" intensity="1.5E-06" assignment="Kb4"/>
-		<!-- cascade-match: G4-unclaimed-on-populated[keV]: 686.96(rI=100) 502.94(rI=14.1) 638.64(rI=18) 1559.59(rI=100) 1014.34(rI=25) 1110.50(rI=8.3) 288.12(rI=360) 1051.69(rI=14.1) 561.04(rI=12.3) 1535.98(rI=63) 709.52(rI=100) 722.54(rI=6.7) 1475.54(rI=9.3); -->
+		<!-- cascade-match: G4-unclaimed-on-populated[keV]: 502.94(rI=14.1) 638.64(rI=18) 1014.34(rI=25) 1110.50(rI=8.3) 288.12(rI=360) 1051.69(rI=14.1) 561.04(rI=12.3) 1535.98(rI=63) 1475.54(rI=9.3); -->
 	</transition>
 	<transition branchRatio="1.8E-05" child="Mo100" mode="ec" parent="Tc100">
 		<electronCapture energy="168.00" intensity="1.0000E+00" logFT="4.400"/>
@@ -118642,7 +118635,7 @@
 		<xray energy="21.836" intensity="0.00035" assignment="Kb5"/>
 		<xray energy="22.074" intensity="0.0137" assignment="Kb2"/>
 		<xray energy="22.115" intensity="0.00286" assignment="Kb4"/>
-		<!-- cascade-match: SD-unmatched[keV]: 104.20(I=1.85e-05,absent) 480.33(I=3.22e-05,neartol) 501.79(I=0.000177,neartol) 1232.25(I=0.000105,neartol) 1935.24(I=0.000235,absent) 2885.80(I=1.61e-05,absent) 3464.80(I=4.11e-05,neartol); G4-unclaimed-on-populated[keV]: 499.79(rI=50) 1014.34(rI=25) 288.12(rI=360) 345.53(rI=5) 413.31(rI=16.6) 1150.24(rI=10) 1285.94(rI=12.4) 295.39(rI=32) 655.15(rI=8.9) 1174.03(rI=5.6) 1413.40(rI=46) 1254.97(rI=35) 561.04(rI=12.3) 1535.98(rI=63) 247.93(rI=100) 712.53(rI=20) 920.44(rI=19.8) 3463.43(rI=98); -->
+		<!-- cascade-match: SD-unmatched[keV]: 104.20(I=1.85e-05,absent) 480.33(I=3.22e-05,neartol) 501.79(I=0.000177,neartol) 1232.25(I=0.000105,neartol) 1935.24(I=0.000235,absent) 2885.80(I=1.61e-05,absent); G4-unclaimed-on-populated[keV]: 499.79(rI=50) 1014.34(rI=25) 288.12(rI=360) 345.53(rI=5) 413.31(rI=16.6) 1150.24(rI=10) 1285.94(rI=12.4) 295.39(rI=32) 655.15(rI=8.9) 1174.03(rI=5.6) 1413.40(rI=46) 1254.97(rI=35) 561.04(rI=12.3) 1535.98(rI=63) 247.93(rI=100) 712.53(rI=20) 920.44(rI=19.8); -->
 	</transition>
 	<transition branchRatio="0.017" child="Ru100" mode="ec" parent="Rh100m2">
 		<gamma energy="262.3" intensity="0.03663">
@@ -122973,7 +122966,7 @@
 		<xray energy="22.911" intensity="0.000249" assignment="Kb5"/>
 		<xray energy="23.172" intensity="0.0096" assignment="Kb2"/>
 		<xray energy="23.217" intensity="0.00183" assignment="Kb4"/>
-		<!-- cascade-match: SD-unmatched[keV]: 1982.50(I=0.000601,neartol) 2394.00(I=0.000451,neartol) 2550.80(I=0.000301,neartol) 2574.50(I=0.000301,neartol) 2633.60(I=0.000977,neartol) 2661.40(I=0.000421,neartol) 2671.20(I=0.000105,neartol); G4-unclaimed-on-populated[keV]: 740.10(rI=12.8) 1100.10(rI=40) 1527.60(rI=11.1) 1679.20(rI=100) 653.60(rI=100) 1753.70(rI=9) 2181.20(rI=21) 1393.80(rI=20) 2553.50(rI=17) 2575.60(rI=14) 2635.50(rI=100) 2396.10(rI=50) 2659.70(rI=47); -->
+		<!-- cascade-match: SD-unmatched[keV]: 1982.50(I=0.000601,neartol) 2394.00(I=0.000451,neartol) 2550.80(I=0.000301,neartol) 2633.60(I=0.000977,neartol) 2661.40(I=0.000421,neartol); G4-unclaimed-on-populated[keV]: 740.10(rI=12.8) 1100.10(rI=40) 1527.60(rI=11.1) 1679.20(rI=100) 653.60(rI=100) 1753.70(rI=9) 2181.20(rI=21) 1393.80(rI=20) 2553.50(rI=17) 2635.50(rI=100) 2396.10(rI=50) 2659.70(rI=47); -->
 	</transition>
 	<transition branchRatio="0.0330730372282781" child="Rh99" mode="b+" parent="Pd99">
 		<gamma energy="368" id="0" intensity="2.7292E-03">
@@ -126624,7 +126617,7 @@
 			<coincidentGamma id="314" intensity="0.14551333872271627"/>
 			<coincidentGamma id="398" intensity="0.034963159189668663"/>
 			<coincidentGamma id="429" intensity="0.29102667744543254" a2="0.190476" a4="0"/>
-			<coincidentGamma id="424" intensity="0.022635408245755866"/>
+			<coincidentGamma id="424" intensity="0.022635408245755866" a2="-0.142857" a4="0"/>
 			<coincidentGamma id="240" intensity="0.033298246847303488"/>
 			<coincidentGamma id="465" intensity="0.015205155561412359"/>
 			<coincidentGamma id="441" intensity="0.038383439741818869"/>
@@ -127267,7 +127260,7 @@
 			<coincidentGamma id="314" intensity="0.14551333872271627"/>
 			<coincidentGamma id="398" intensity="0.034963159189668663"/>
 			<coincidentGamma id="429" intensity="0.29102667744543254" a2="0.190476" a4="0"/>
-			<coincidentGamma id="424" intensity="0.022635408245755866"/>
+			<coincidentGamma id="424" intensity="0.022635408245755866" a2="-0.142857" a4="0"/>
 			<coincidentGamma id="240" intensity="0.033298246847303488"/>
 			<coincidentGamma id="465" intensity="0.015205155561412359"/>
 			<coincidentGamma id="441" intensity="0.038383439741818869"/>
@@ -131539,7 +131532,7 @@
 		<xray energy="24.013" intensity="1.89E-05" assignment="Kb5"/>
 		<xray energy="24.299" intensity="0.000682" assignment="Kb2"/>
 		<xray energy="24.349" intensity="0.000144" assignment="Kb4"/>
-		<!-- cascade-match: SD-unmatched[keV]: 2000.70(I=0.0004,neartol) 2045.10(I=0.00028,neartol); G4-unclaimed-on-populated[keV]: 2495.98(rI=100) 413.63(rI=100) 586.27(rI=29.8) 3353.75(rI=59.2) 2044.37(rI=7.8) 1622.12(rI=82); -->
+		<!-- cascade-match: SD-unmatched[keV]: 2000.70(I=0.0004,neartol); G4-unclaimed-on-populated[keV]: 2495.98(rI=100) 413.63(rI=100) 586.27(rI=29.8) 3353.75(rI=59.2) 2044.37(rI=7.8) 1622.12(rI=82); -->
 	</transition>
 	<transition branchRatio="1" child="Ag97" mode="it" parent="Ag97m">
 		<gamma energy="259" intensity="0"/>
@@ -134753,7 +134746,7 @@
 			<coincidentGamma id="50" intensity="1"/>
 		</gamma>
 		<gamma energy="3018.8" intensity="0.0021">
-			<coincidentGamma id="26" intensity="1"/>
+			<coincidentGamma id="26" intensity="1" a2="-0.0714286" a4="-0"/>
 			<coincidentGamma id="50" intensity="1"/>
 		</gamma>
 		<gamma energy="3055.3" intensity="0.00035">
@@ -135475,7 +135468,7 @@
 		<xray energy="24.013" intensity="1.73E-05" assignment="Kb5"/>
 		<xray energy="24.299" intensity="0.000622" assignment="Kb2"/>
 		<xray energy="24.349" intensity="0.000132" assignment="Kb4"/>
-		<!-- cascade-match: G4-unclaimed-on-populated[keV]: 1352.41(rI=18.8) 3018.20(rI=58) 1425.76(rI=70); -->
+		<!-- cascade-match: G4-unclaimed-on-populated[keV]: 1352.41(rI=18.8) 1425.76(rI=70); -->
 	</transition>
 	<transition branchRatio="1" child="Pd99" mode="b+" parent="Ag99">
 		<gamma energy="219.9" id="0" intensity="0.04095"/>
@@ -146604,7 +146597,7 @@
 		<xray energy="25.144" intensity="0.00044" assignment="Kb5"/>
 		<xray energy="25.455" intensity="0.015" assignment="Kb2"/>
 		<xray energy="25.511" intensity="0.00318" assignment="Kb4"/>
-		<!-- cascade-match: SD-unmatched[keV]: 296.70(I=0.00461,neartol) 530.86(I=0.00515,neartol) 681.60(I=0.00129,absent) 789.71(I=0.0014,absent) 825.50(I=0.00692,neartol) 883.10(I=0.000936,neartol) 906.40(I=0.00129,absent) 1646.40(I=0.0014,absent) 1718.65(I=0.00421,neartol) 1955.90(I=0.00199,neartol) 2365.70(I=0.00199,neartol) 2688.80(I=0.0109,neartol) 2753.21(I=0.00403,neartol) 2811.17(I=0.00187,absent) 2829.52(I=0.00725,absent) 2912.80(I=0.000585,absent) 3043.40(I=0.00117,absent) 3056.60(I=0.00117,absent) 3066.00(I=0.00117,absent) 3245.00(I=0.000936,absent); G4-unclaimed-on-populated[keV]: 27.54(rI=100) 134.45(rI=100) 1461.80(rI=100) 1552.00(rI=100) 625.27(rI=71) 1114.60(rI=36) 1705.18(rI=34) 330.90(rI=65) 970.80(rI=100) 265.05(rI=12) 1822.01(rI=100) 858.69(rI=12.3) 878.06(rI=15.3) 1930.43(rI=100) 1957.97(rI=15.3) 912.79(rI=5.5) 1984.53(rI=45) 2012.07(rI=100) 463.57(rI=59) 532.03(rI=44) 1009.08(rI=21) 298.23(rI=6.4) 642.41(rI=21) 647.37(rI=11) 723.14(rI=82) ...; -->
+		<!-- cascade-match: SD-unmatched[keV]: 296.70(I=0.00461,neartol) 530.86(I=0.00515,neartol) 681.60(I=0.00129,absent) 789.71(I=0.0014,absent) 825.50(I=0.00692,neartol) 883.10(I=0.000936,neartol) 906.40(I=0.00129,absent) 1646.40(I=0.0014,absent) 1718.65(I=0.00421,neartol) 1955.90(I=0.00199,neartol) 2365.70(I=0.00199,neartol) 2688.80(I=0.0109,neartol) 2811.17(I=0.00187,absent) 2829.52(I=0.00725,absent) 2912.80(I=0.000585,absent) 3043.40(I=0.00117,absent) 3056.60(I=0.00117,absent) 3066.00(I=0.00117,absent) 3245.00(I=0.000936,absent); G4-unclaimed-on-populated[keV]: 27.54(rI=100) 134.45(rI=100) 1461.80(rI=100) 1552.00(rI=100) 625.27(rI=71) 1114.60(rI=36) 1705.18(rI=34) 330.90(rI=65) 970.80(rI=100) 265.05(rI=12) 1822.01(rI=100) 858.69(rI=12.3) 878.06(rI=15.3) 1930.43(rI=100) 1957.97(rI=15.3) 912.79(rI=5.5) 1984.53(rI=45) 2012.07(rI=100) 463.57(rI=59) 532.03(rI=44) 1009.08(rI=21) 298.23(rI=6.4) 642.41(rI=21) 647.37(rI=11) 723.14(rI=82) ...; -->
 	</transition>
 	<transition branchRatio="0.812587296754291" child="Ag103" mode="ec" parent="Cd103">
 		<gamma energy="27.56" id="0" intensity="1.4620E-02"/>
@@ -154465,7 +154458,7 @@
 		<xray energy="26.304" intensity="1.84E-05" assignment="Kb5"/>
 		<xray energy="26.644" intensity="0.00061" assignment="Kb2"/>
 		<xray energy="26.702" intensity="0.00014" assignment="Kb4"/>
-		<!-- cascade-match: SD-unmatched[keV]: 995.50(I=0.0027,neartol) 1002.50(I=0.00124,neartol) 1040.40(I=0.0144,neartol) 1152.20(I=0.0038,neartol) 1152.20(I=0.00118,neartol) 1165.90(I=0.0012,neartol) 1171.00(I=0.001,neartol) 1185.80(I=0.0015,neartol) 1336.60(I=0.0022,neartol) 1395.10(I=0.0015,neartol) 1416.60(I=0.005,neartol) 1460.90(I=0.0018,neartol) 1465.20(I=0.00048,neartol) 1471.60(I=0.00088,neartol) 1557.00(I=0.00046,neartol) 1623.80(I=0.0041,neartol) 1789.60(I=0.001,neartol) 1813.30(I=0.0055,neartol) 1881.10(I=0.00066,neartol) 2082.20(I=0.00032,neartol) 2095.90(I=0.0011,neartol) 2120.00(I=0.00094,neartol) 2193.00(I=0.0003,neartol) 2300.00(I=0.0013,neartol) 2334.80(I=8e-05,neartol) ...; G4-unclaimed-on-populated[keV]: 1258.65(rI=27) 367.60(rI=100) 952.00(rI=100) 683.40(rI=24.7) 883.70(rI=100) 1241.70(rI=100) 1387.00(rI=100) 1062.37(rI=13) 1414.47(rI=45) 1811.77(rI=50) 499.10(rI=20) 677.76(rI=78) 1149.20(rI=17.3) 1164.70(rI=9) 1516.80(rI=16) 1001.90(rI=16.4) 1925.30(rI=19) 2786.65(rI=5.9) 1169.90(rI=100) 1033.60(rI=48) 1250.10(rI=15) 1999.50(rI=100) 1667.70(rI=28) 1353.70(rI=29) 2964.45(rI=20) ...; -->
+		<!-- cascade-match: SD-unmatched[keV]: 995.50(I=0.0027,neartol) 1002.50(I=0.00124,neartol) 1040.40(I=0.0144,neartol) 1152.20(I=0.0038,neartol) 1152.20(I=0.00118,neartol) 1165.90(I=0.0012,neartol) 1171.00(I=0.001,neartol) 1185.80(I=0.0015,neartol) 1336.60(I=0.0022,neartol) 1395.10(I=0.0015,neartol) 1416.60(I=0.005,neartol) 1460.90(I=0.0018,neartol) 1471.60(I=0.00088,neartol) 1557.00(I=0.00046,neartol) 1623.80(I=0.0041,neartol) 1789.60(I=0.001,neartol) 1813.30(I=0.0055,neartol) 1881.10(I=0.00066,neartol) 2082.20(I=0.00032,neartol) 2095.90(I=0.0011,neartol) 2120.00(I=0.00094,neartol) 2193.00(I=0.0003,neartol) 2300.00(I=0.0013,neartol) 2334.80(I=8e-05,neartol) 2353.00(I=0.0013,neartol) ...; G4-unclaimed-on-populated[keV]: 1258.65(rI=27) 367.60(rI=100) 952.00(rI=100) 683.40(rI=24.7) 883.70(rI=100) 1241.70(rI=100) 1387.00(rI=100) 1062.37(rI=13) 1414.47(rI=45) 1811.77(rI=50) 499.10(rI=20) 677.76(rI=78) 1149.20(rI=17.3) 1164.70(rI=9) 1516.80(rI=16) 1001.90(rI=16.4) 1925.30(rI=19) 1169.90(rI=100) 1033.60(rI=48) 1250.10(rI=15) 1999.50(rI=100) 1667.70(rI=28) 1353.70(rI=29) 2964.45(rI=20) 700.10(rI=100) ...; -->
 	</transition>
 	<transition branchRatio="1" child="Cd103" mode="ec" parent="In103">
 		<gamma energy="156.7" id="0" intensity="0.0016975">
@@ -156484,7 +156477,7 @@
 			<coincidentGamma id="92" intensity="0.0010763043596708135"/>
 			<coincidentGamma id="31" intensity="7.1653657512792449E-05"/>
 			<coincidentGamma id="37" intensity="0.062365771812080528" a2="0.190476" a4="0"/>
-			<coincidentGamma id="126" intensity="0.027718120805369121"/>
+			<coincidentGamma id="126" intensity="0.027718120805369121" a2="-0.142857" a4="0"/>
 			<coincidentGamma id="70" intensity="0.00095461047148058173"/>
 			<coincidentGamma id="57" intensity="0.00017496957913599656"/>
 			<coincidentGamma id="75" intensity="0.0036922587617819989"/>
@@ -156702,7 +156695,7 @@
 			<coincidentGamma id="89" intensity="0.00038289625635141473"/>
 			<coincidentGamma id="33" intensity="0.0013164025918439555"/>
 			<coincidentGamma id="4" intensity="0.016572182089578984"/>
-			<coincidentGamma id="127" intensity="0.060185929648241196"/>
+			<coincidentGamma id="127" intensity="0.060185929648241196" a2="-0.142857" a4="0"/>
 			<coincidentGamma id="51" intensity="0.046695979899497489"/>
 			<coincidentGamma id="85" intensity="1.3326939631765906E-05"/>
 			<coincidentGamma id="94" intensity="0.00076579251270282947"/>
@@ -157235,7 +157228,7 @@
 		<xray energy="26.304" intensity="0.000195" assignment="Kb5"/>
 		<xray energy="26.644" intensity="0.0065" assignment="Kb2"/>
 		<xray energy="26.702" intensity="0.00149" assignment="Kb4"/>
-		<!-- cascade-match: SD-unmatched[keV]: 154.15(I=0.00281,absent) 156.30(I=0.00281,absent) 725.30(I=0.00289,neartol) 754.50(I=0.00496,neartol) 866.87(I=0.00454,absent) 875.60(I=0.00966,absent) 911.40(I=0.00578,absent) 960.90(I=0.00248,neartol) 1033.04(I=0.00363,neartol) 1057.07(I=0.00487,neartol) 1161.00(I=0.00537,neartol) 1698.40(I=0.00372,absent) 1770.30(I=0.0038,absent) 1990.20(I=0.00289,absent) 1998.00(I=0.00372,absent) 2259.00(I=0.00223,absent) 2364.30(I=0.00165,neartol) 2371.00(I=0.00479,neartol) 2523.90(I=0.00289,absent) 2551.00(I=0.00277,absent) 3115.40(I=0.00244,absent) 1176.90(I=0.00211,neartol) 1216.30(I=0.00281,neartol) 2016.00(I=0.00219,neartol) 2596.70(I=0.00116,neartol); G4-unclaimed-on-populated[keV]: 330.12(rI=100) 1031.46(rI=10.3) 723.57(rI=100) 1179.32(rI=12) 779.05(rI=14) 807.87(rI=100) 962.38(rI=22) 1056.26(rI=100) 1218.34(rI=58) 756.14(rI=63) 1163.00(rI=100) 2017.46(rI=41) 2365.47(rI=43) 792.93(rI=23) 2371.75(rI=30) 793.55(rI=51) 2598.26(rI=24) 808.70(rI=100) 904.90(rI=100); -->
+		<!-- cascade-match: SD-unmatched[keV]: 154.15(I=0.00281,absent) 156.30(I=0.00281,absent) 725.30(I=0.00289,neartol) 754.50(I=0.00496,neartol) 866.87(I=0.00454,absent) 875.60(I=0.00966,absent) 911.40(I=0.00578,absent) 960.90(I=0.00248,neartol) 1033.04(I=0.00363,neartol) 1057.07(I=0.00487,neartol) 1161.00(I=0.00537,neartol) 1698.40(I=0.00372,absent) 1770.30(I=0.0038,absent) 1990.20(I=0.00289,absent) 1998.00(I=0.00372,absent) 2259.00(I=0.00223,absent) 2523.90(I=0.00289,absent) 2551.00(I=0.00277,absent) 3115.40(I=0.00244,absent) 1176.90(I=0.00211,neartol) 1216.30(I=0.00281,neartol) 2016.00(I=0.00219,neartol) 2596.70(I=0.00116,neartol); G4-unclaimed-on-populated[keV]: 330.12(rI=100) 1031.46(rI=10.3) 723.57(rI=100) 1179.32(rI=12) 779.05(rI=14) 807.87(rI=100) 962.38(rI=22) 1056.26(rI=100) 1218.34(rI=58) 756.14(rI=63) 1163.00(rI=100) 2017.46(rI=41) 792.93(rI=23) 793.55(rI=51) 2598.26(rI=24) 808.70(rI=100) 904.90(rI=100); -->
 	</transition>
 	<transition branchRatio="1" child="In105" mode="it" parent="In105m">
 		<gamma energy="674.1" intensity="9.4197E-01"/>
@@ -159032,7 +159025,7 @@
 		<xray energy="26.304" intensity="0.000391" assignment="Kb5"/>
 		<xray energy="26.644" intensity="0.0129" assignment="Kb2"/>
 		<xray energy="26.702" intensity="0.00298" assignment="Kb4"/>
-		<!-- cascade-match: SD-unmatched[keV]: 403.30(I=0.0026,neartol) 558.80(I=0.00493,neartol) 672.40(I=0.00589,neartol) 964.90(I=0.00123,neartol) 996.10(I=0.0074,neartol) 1050.20(I=0.00343,neartol) 1063.50(I=0.00603,neartol) 1681.10(I=0.00164,neartol) 1784.00(I=0.00397,neartol) 2414.80(I=0.00411,neartol) 2440.80(I=0.00301,absent); G4-unclaimed-on-populated[keV]: 1601.83(rI=92) 1087.66(rI=100) 311.59(rI=96) 1280.43(rI=100) 637.38(rI=8.4) 1529.75(rI=100) 2162.74(rI=6.7) 1732.79(rI=100) 2365.78(rI=18.3) 772.74(rI=18) 353.02(rI=12) 953.40(rI=33) 1922.24(rI=100) 1987.03(rI=100) 499.77(rI=5) 2012.63(rI=12) 1230.25(rI=100) 2105.73(rI=14) 397.05(rI=5) 560.62(rI=11) 616.98(rI=14) 1161.00(rI=100) 2129.84(rI=35.5) 551.44(rI=9) 510.11(rI=12) ...; -->
+		<!-- cascade-match: SD-unmatched[keV]: 403.30(I=0.0026,neartol) 558.80(I=0.00493,neartol) 672.40(I=0.00589,neartol) 964.90(I=0.00123,neartol) 996.10(I=0.0074,neartol) 1050.20(I=0.00343,neartol) 1063.50(I=0.00603,neartol) 1681.10(I=0.00164,neartol) 2440.80(I=0.00301,absent); G4-unclaimed-on-populated[keV]: 1601.83(rI=92) 1087.66(rI=100) 311.59(rI=96) 1280.43(rI=100) 637.38(rI=8.4) 1529.75(rI=100) 2162.74(rI=6.7) 1732.79(rI=100) 2365.78(rI=18.3) 772.74(rI=18) 353.02(rI=12) 953.40(rI=33) 1922.24(rI=100) 1987.03(rI=100) 499.77(rI=5) 2012.63(rI=12) 1230.25(rI=100) 2105.73(rI=14) 397.05(rI=5) 560.62(rI=11) 616.98(rI=14) 1161.00(rI=100) 2129.84(rI=35.5) 551.44(rI=9) 510.11(rI=12) ...; -->
 	</transition>
 	<transition branchRatio="1" child="Cd108" mode="ec" parent="In108m">
 		<gamma energy="156.2" intensity="0.0016044"/>
@@ -159164,7 +159157,7 @@
 		<xray energy="26.304" intensity="0.000227" assignment="Kb5"/>
 		<xray energy="26.644" intensity="0.0075" assignment="Kb2"/>
 		<xray energy="26.702" intensity="0.00173" assignment="Kb4"/>
-		<!-- cascade-match: SD-unmatched[keV]: 156.20(I=0.0016,absent) 171.40(I=0.00787,absent) 391.30(I=0.00359,neartol) 1475.00(I=0.00588,neartol) 2112.40(I=0.00252,absent) 2224.20(I=0.0138,neartol) 2316.90(I=0.00306,neartol) 2413.20(I=0.0145,neartol) 2681.30(I=0.00764,neartol) 3046.80(I=0.0244,neartol) 3452.20(I=0.0917,neartol) 3689.40(I=0.0107,neartol) 3825.50(I=0.0237,neartol) 4052.00(I=0.00611,absent) 4342.80(I=0.00764,absent); G4-unclaimed-on-populated[keV]: 544.02(rI=13.8) 637.38(rI=8.4) 2162.74(rI=6.7) 772.74(rI=18) 1741.58(rI=100) 1853.32(rI=100) 1230.25(rI=100) 2105.73(rI=14) 450.73(rI=19) 614.30(rI=38) 653.77(rI=16) 670.66(rI=45) 2183.52(rI=100) 2415.55(rI=59.4) 2415.55(rI=62) 3048.54(rI=100) 605.98(rI=10) 852.94(rI=22) 1490.46(rI=100) 2459.30(rI=26) 1079.55(rI=7) 1291.38(rI=7) 2821.13(rI=8) 3454.12(rI=100) 2209.87(rI=12.7) ...; -->
+		<!-- cascade-match: SD-unmatched[keV]: 156.20(I=0.0016,absent) 171.40(I=0.00787,absent) 391.30(I=0.00359,neartol) 1475.00(I=0.00588,neartol) 2112.40(I=0.00252,absent) 2224.20(I=0.0138,neartol) 2316.90(I=0.00306,neartol) 2413.20(I=0.0145,neartol) 2681.30(I=0.00764,neartol) 3046.80(I=0.0244,neartol) 3452.20(I=0.0917,neartol) 3825.50(I=0.0237,neartol) 4052.00(I=0.00611,absent) 4342.80(I=0.00764,absent); G4-unclaimed-on-populated[keV]: 544.02(rI=13.8) 637.38(rI=8.4) 2162.74(rI=6.7) 772.74(rI=18) 1741.58(rI=100) 1853.32(rI=100) 1230.25(rI=100) 2105.73(rI=14) 450.73(rI=19) 614.30(rI=38) 653.77(rI=16) 670.66(rI=45) 2183.52(rI=100) 2415.55(rI=59.4) 2415.55(rI=62) 3048.54(rI=100) 605.98(rI=10) 852.94(rI=22) 1490.46(rI=100) 2459.30(rI=26) 1079.55(rI=7) 1291.38(rI=7) 2821.13(rI=8) 3454.12(rI=100) 2209.87(rI=12.7) ...; -->
 	</transition>
 	<transition branchRatio="0.0405664351423159" child="Cd109m" mode="ec" parent="In109">
 		<gamma energy="74.8" intensity="0.02205"/>
@@ -159432,7 +159425,7 @@
 		<xray energy="26.304" intensity="0.00054" assignment="Kb5"/>
 		<xray energy="26.644" intensity="0.0178" assignment="Kb2"/>
 		<xray energy="26.702" intensity="0.00411" assignment="Kb4"/>
-		<!-- cascade-match: SD-unmatched[keV]: 74.80(I=0.023,absent) 84.10(I=0.0306,absent) 619.80(I=0.00199,neartol) 1186.80(I=0.00306,neartol) 1860.60(I=0.0153,neartol); G4-unclaimed-on-populated[keV]: 287.91(rI=75) 613.81(rI=100) 464.83(rI=7.6) 831.65(rI=100) 207.71(rI=48) 305.50(rI=13.1) 502.96(rI=18) 929.38(rI=100) 997.50(rI=21.8) 244.05(rI=7.9) 679.41(rI=15.5) 902.43(rI=43) 764.68(rI=40) 1185.16(rI=40) 1128.18(rI=7) 1112.95(rI=60) 1335.97(rI=54) 1045.20(rI=100) 287.70(rI=14) 415.00(rI=10) 481.60(rI=100) 1168.40(rI=13) 542.00(rI=11) 609.30(rI=7.1); -->
+		<!-- cascade-match: SD-unmatched[keV]: 74.80(I=0.023,absent) 84.10(I=0.0306,absent) 619.80(I=0.00199,neartol) 1186.80(I=0.00306,neartol); G4-unclaimed-on-populated[keV]: 287.91(rI=75) 613.81(rI=100) 464.83(rI=7.6) 831.65(rI=100) 207.71(rI=48) 305.50(rI=13.1) 502.96(rI=18) 929.38(rI=100) 997.50(rI=21.8) 244.05(rI=7.9) 679.41(rI=15.5) 902.43(rI=43) 764.68(rI=40) 1185.16(rI=40) 1128.18(rI=7) 1112.95(rI=60) 1335.97(rI=54) 958.84(rI=75) 998.58(rI=40) 1717.16(rI=100) 1045.20(rI=100) 287.70(rI=14) 415.00(rI=10) 481.60(rI=100) 1168.40(rI=13) ...; -->
 	</transition>
 	<transition branchRatio="1" child="In109" mode="it" parent="In109m">
 		<gamma energy="650.1" intensity="0.937"/>
@@ -159452,7 +159445,7 @@
 		<gamma energy="673.5" intensity="1">
 			<coincidentGamma id="2" intensity="0.22088040514218932"/>
 			<coincidentGamma id="0" intensity="0.218153486560187" a2="-0.0667196" a4="5.62898E-05"/>
-			<coincidentGamma id="3" intensity="0.77911959485781068"/>
+			<coincidentGamma id="3" intensity="0.77911959485781068" a2="-0.125" a4="0"/>
 		</gamma>
 		<gamma energy="1025.3" id="2" intensity="0.25"/>
 		<gamma energy="1427.5" id="3" intensity="0.75"/>
@@ -159464,7 +159457,7 @@
 		<xray energy="27.493" intensity="1.55E-05" assignment="Kb5"/>
 		<xray energy="27.862" intensity="0.000497" assignment="Kb2"/>
 		<xray energy="27.924" intensity="0.0001" assignment="Kb4"/>
-		<!-- cascade-match: SD-unmatched[keV]: 1427.50(I=0.75,neartol); G4-unclaimed-on-populated[keV]: 1026.39(rI=100) 1428.36(rI=100) 865.80(rI=100); -->
+		<!-- cascade-match: G4-unclaimed-on-populated[keV]: 1026.39(rI=100) 1428.36(rI=100) 865.80(rI=100); -->
 	</transition>
 	<transition branchRatio="1" child="Cd110" mode="ec" parent="In110">
 		<gamma energy="121.17" intensity="0.0039316"/>
@@ -159964,7 +159957,7 @@
 		<xray energy="26.304" intensity="0.000199" assignment="Kb5"/>
 		<xray energy="26.644" intensity="0.00661" assignment="Kb2"/>
 		<xray energy="26.702" intensity="0.00152" assignment="Kb4"/>
-		<!-- cascade-match: SD-unmatched[keV]: 1387.22(I=0.000324,neartol) 2243.30(I=0.000412,absent) 2891.88(I=0.000824,absent) 2939.44(I=0.000118,absent) 3043.97(I=0.00124,neartol) 3059.20(I=0.000167,absent) 3280.85(I=0.000324,neartol) 3467.10(I=2.94e-05,absent) 3596.99(I=0.00112,neartol) 3771.70(I=0.000608,neartol); G4-unclaimed-on-populated[keV]: 255.52(rI=11.3) 602.76(rI=15.4) 1420.79(rI=100) 620.36(rI=20.5) 649.75(rI=29) 890.80(rI=9) 937.49(rI=100) 1090.76(rI=42) 305.88(rI=16) 236.08(rI=23.1) 356.26(rI=100) 356.32(rI=50) 1441.81(rI=100) 184.28(rI=77) 1030.60(rI=50) 1838.54(rI=50) 3314.33(rI=35) 290.11(rI=10.4) 466.62(rI=100) 627.45(rI=65.8) 654.07(rI=100); -->
+		<!-- cascade-match: SD-unmatched[keV]: 1387.22(I=0.000324,neartol) 2243.30(I=0.000412,absent) 2891.88(I=0.000824,absent) 2939.44(I=0.000118,absent) 3059.20(I=0.000167,absent) 3280.85(I=0.000324,neartol) 3467.10(I=2.94e-05,absent); G4-unclaimed-on-populated[keV]: 255.52(rI=11.3) 602.76(rI=15.4) 1420.79(rI=100) 620.36(rI=20.5) 649.75(rI=29) 890.80(rI=9) 937.49(rI=100) 1090.76(rI=42) 305.88(rI=16) 236.08(rI=23.1) 356.26(rI=100) 356.32(rI=50) 1441.81(rI=100) 2385.10(rI=18.3) 184.28(rI=77) 1030.60(rI=50) 1838.54(rI=50) 3314.33(rI=35) 290.11(rI=10.4) 466.62(rI=100) 627.45(rI=65.8) 654.07(rI=100) 3115.01(rI=30); -->
 	</transition>
 	<transition branchRatio="4.99975001249937e-05" child="Cd111m" mode="ec" parent="In111">
 		<electronCapture energy="465.84" intensity="1.0000E+00" logFT="9"/>
@@ -164165,7 +164158,7 @@
 		<xray energy="28.711" intensity="5.2E-07" assignment="Kb5"/>
 		<xray energy="29.111" intensity="1.62E-05" assignment="Kb2"/>
 		<xray energy="29.176" intensity="2.8E-06" assignment="Kb4"/>
-		<!-- cascade-match: SD-unmatched[keV]: 4242.50(I=0.0002,neartol); G4-unclaimed-on-populated[keV]: 302.88(rI=50) 329.00(rI=100) 474.09(rI=50); -->
+		<!-- cascade-match: G4-unclaimed-on-populated[keV]: 4575.80(rI=100) 302.88(rI=50) 329.00(rI=100) 474.09(rI=50); -->
 	</transition>
 	<transition branchRatio="0.99" child="Sn131m" mode="b-" parent="In131m2">
 		<gamma energy="158.38" intensity="0.1499958">
@@ -171168,7 +171161,7 @@
 		<beta energy="3420" intensity="0"/>
 		<beta energy="3850" intensity="0"/>
 		<beta energy="4638" forbiddenness="1u" intensity="0.06" logFT="9"/>
-		<!-- cascade-match: SD-unmatched[keV]: 197.80(I=0.024,absent) 203.20(I=0.01,absent) 213.90(I=0.026,absent) 217.19(I=0.025,absent) 266.89(I=0.02,absent) 359.60(I=0.008,absent) 692.30(I=0.041,absent) 815.30(I=0.044,absent) 1036.90(I=0.007,absent) 1236.30(I=0.041,absent) 1375.70(I=0.013,absent) 1890.40(I=0.014,absent) 1942.60(I=0.016,absent) 1951.20(I=0.015,absent) 2092.80(I=0.023,absent) 2121.50(I=0.012,absent) 2150.40(I=0.026,absent) 2722.00(I=0.016,absent) 2833.90(I=0.01,absent) 3267.50(I=0.033,neartol); G4-unclaimed-on-populated[keV]: 278.54(rI=25) 82.33(rI=404) 185.89(rI=14.6) 190.59(rI=123) 1205.58(rI=9) 1072.01(rI=47.6) 520.21(rI=55.2) 910.96(rI=72.4) 1419.47(rI=10) 2561.14(rI=10) 545.99(rI=40) 1066.20(rI=23) 1735.49(rI=11.5) 703.39(rI=29.2) 1059.31(rI=35) 2262.41(rI=50) 207.71(rI=32) 3268.61(rI=75) 1391.96(rI=47); -->
+		<!-- cascade-match: SD-unmatched[keV]: 197.80(I=0.024,absent) 203.20(I=0.01,absent) 213.90(I=0.026,absent) 217.19(I=0.025,absent) 266.89(I=0.02,absent) 359.60(I=0.008,absent) 692.30(I=0.041,absent) 815.30(I=0.044,absent) 1036.90(I=0.007,absent) 1236.30(I=0.041,absent) 1375.70(I=0.013,absent) 1890.40(I=0.014,absent) 1942.60(I=0.016,absent) 1951.20(I=0.015,absent) 2092.80(I=0.023,absent) 2121.50(I=0.012,absent) 2150.40(I=0.026,absent) 2722.00(I=0.016,absent) 2833.90(I=0.01,absent); G4-unclaimed-on-populated[keV]: 278.54(rI=25) 82.33(rI=404) 185.89(rI=14.6) 190.59(rI=123) 1205.58(rI=9) 1072.01(rI=47.6) 520.21(rI=55.2) 910.96(rI=72.4) 1419.47(rI=10) 2561.14(rI=10) 545.99(rI=40) 1066.20(rI=23) 1735.49(rI=11.5) 703.39(rI=29.2) 1059.31(rI=35) 2262.41(rI=50) 207.71(rI=32) 1391.96(rI=47); -->
 	</transition>
 	<transition branchRatio="1" child="Sb131" mode="b-" parent="Sn131m">
 		<gamma energy="49.83" id="0" intensity="0.011">
@@ -171981,7 +171974,7 @@
 		<beta energy="3420" intensity="0"/>
 		<beta energy="3850" intensity="0"/>
 		<beta energy="4879.8" forbiddenness="1u" intensity="0.06" logFT="9"/>
-		<!-- cascade-match: SD-unmatched[keV]: 197.80(I=0.024,absent) 203.20(I=0.01,absent) 213.90(I=0.026,absent) 217.19(I=0.025,absent) 266.89(I=0.02,absent) 359.60(I=0.008,absent) 692.30(I=0.041,absent) 815.30(I=0.044,absent) 1036.90(I=0.007,absent) 1236.30(I=0.041,absent) 1375.70(I=0.013,absent) 1890.40(I=0.014,absent) 1942.60(I=0.016,absent) 1951.20(I=0.015,absent) 2092.80(I=0.023,absent) 2121.50(I=0.012,absent) 2150.40(I=0.026,absent) 2722.00(I=0.016,absent) 2833.90(I=0.01,absent) 3267.50(I=0.033,neartol); G4-unclaimed-on-populated[keV]: 278.54(rI=25) 82.33(rI=404) 185.89(rI=14.6) 190.59(rI=123) 1205.58(rI=9) 1072.01(rI=47.6) 520.21(rI=55.2) 910.96(rI=72.4) 1419.47(rI=10) 2561.14(rI=10) 545.99(rI=40) 1066.20(rI=23) 1735.49(rI=11.5) 703.39(rI=29.2) 1059.31(rI=35) 2262.41(rI=50) 207.71(rI=32) 3268.61(rI=75) 1391.96(rI=47); -->
+		<!-- cascade-match: SD-unmatched[keV]: 197.80(I=0.024,absent) 203.20(I=0.01,absent) 213.90(I=0.026,absent) 217.19(I=0.025,absent) 266.89(I=0.02,absent) 359.60(I=0.008,absent) 692.30(I=0.041,absent) 815.30(I=0.044,absent) 1036.90(I=0.007,absent) 1236.30(I=0.041,absent) 1375.70(I=0.013,absent) 1890.40(I=0.014,absent) 1942.60(I=0.016,absent) 1951.20(I=0.015,absent) 2092.80(I=0.023,absent) 2121.50(I=0.012,absent) 2150.40(I=0.026,absent) 2722.00(I=0.016,absent) 2833.90(I=0.01,absent); G4-unclaimed-on-populated[keV]: 278.54(rI=25) 82.33(rI=404) 185.89(rI=14.6) 190.59(rI=123) 1205.58(rI=9) 1072.01(rI=47.6) 520.21(rI=55.2) 910.96(rI=72.4) 1419.47(rI=10) 2561.14(rI=10) 545.99(rI=40) 1066.20(rI=23) 1735.49(rI=11.5) 703.39(rI=29.2) 1059.31(rI=35) 2262.41(rI=50) 207.71(rI=32) 1391.96(rI=47); -->
 	</transition>
 	<transition branchRatio="1" child="Sb132" mode="b-" parent="Sn132">
 		<gamma energy="85.58" id="0" intensity="0.47824"/>
@@ -172159,7 +172152,7 @@
 		<beta energy="5122.2" intensity="0.0011" logFT="7.48"/>
 		<beta energy="6870" intensity="0.12" logFT="6.01"/>
 		<beta energy="7830" intensity="0.85" logFT="5.41"/>
-		<!-- cascade-match: SD-unmatched[keV]: 2707.70(I=0.0015,absent) 3173.20(I=0.0004,absent) 3249.77(I=0.0013,absent) 3330.10(I=0.0008,neartol) 3451.20(I=0.0007,absent) 4555.50(I=0.0003,absent) 4803.40(I=0.001,neartol) 5558.50(I=0.0012,neartol) 5601.90(I=0.0007,neartol); G4-unclaimed-on-populated[keV]: 2685.09(rI=22) 855.56(rI=10.3) 2358.27(rI=13.1) 4520.92(rI=32.4) 5560.06(rI=82) 2820.95(rI=13.9) 3205.78(rI=8.2) 3089.95(rI=21) 5921.30(rI=5.2) 3332.61(rI=100); -->
+		<!-- cascade-match: SD-unmatched[keV]: 2707.70(I=0.0015,absent) 3173.20(I=0.0004,absent) 3249.77(I=0.0013,absent) 3330.10(I=0.0008,neartol) 3451.20(I=0.0007,absent) 4555.50(I=0.0003,absent); G4-unclaimed-on-populated[keV]: 3838.75(rI=15.4) 2685.09(rI=22) 855.56(rI=10.3) 2358.27(rI=13.1) 4520.92(rI=32.4) 2820.95(rI=13.9) 3205.78(rI=8.2) 3089.95(rI=21) 5921.30(rI=5.2) 3332.61(rI=100); -->
 	</transition>
 	<transition branchRatio="1" child="Sb135" mode="b-" parent="Sn135">
 		<gamma energy="281.7" id="0" intensity="2.3000E-01"/>
@@ -172257,7 +172250,7 @@
 		<gamma energy="2463.00" intensity="7.1300E-04"/>
 		<gamma energy="2764.00" intensity="1.6100E-03"/>
 		<gamma energy="3263.00" intensity="1.1500E-03"/>
-		<!-- cascade-match: SD-unmatched[keV]: 923.40(I=0.099,neartol) 2179.00(I=0.000851,neartol) 2463.00(I=0.000713,neartol); -->
+		<!-- cascade-match: SD-unmatched[keV]: 923.40(I=0.099,neartol) 2179.00(I=0.000851,neartol); G4-unclaimed-on-populated[keV]: 2180.10(rI=100); -->
 	</transition>
 	<transition branchRatio="0.21" child="Sb134m" mode="b-n" parent="Sn135"/>
 	<transition branchRatio="0.21" child="Sb134" mode="b-n" parent="Sn135"/>
@@ -173168,7 +173161,7 @@
 		<xray energy="28.711" intensity="6.1E-05" assignment="Kb5"/>
 		<xray energy="29.111" intensity="0.0019" assignment="Kb2"/>
 		<xray energy="29.176" intensity="0.000331" assignment="Kb4"/>
-		<!-- cascade-match: SD-unmatched[keV]: 446.20(I=0.000413,absent) 921.50(I=0.000701,absent) 1154.40(I=0.00202,neartol) 1170.60(I=0.00192,absent) 1421.20(I=0.000278,absent) 1426.00(I=0.000365,absent) 1477.80(I=0.00259,absent) 1534.70(I=0.000298,absent) 1555.10(I=0.00117,absent) 1582.40(I=0.000192,absent) 1620.70(I=0.00112,absent) 1631.00(I=0.00024,neartol) 1804.30(I=0.000413,absent) 1879.20(I=0.00023,absent) 1926.10(I=0.000336,absent) 1986.00(I=0.000384,absent) 2092.90(I=0.000912,absent) 2247.40(I=0.000643,absent) 2449.00(I=0.000269,absent) 2454.80(I=0.00025,absent) 2610.70(I=0.000902,absent) 2670.10(I=0.000115,absent) 2737.30(I=0.000384,absent) 2755.20(I=0.000154,absent) 2775.10(I=0.00023,absent) ...; G4-unclaimed-on-populated[keV]: 665.68(rI=100) 901.89(rI=24) 894.48(rI=27) 1121.44(rI=27) 744.93(rI=100) 883.30(rI=40) 851.30(rI=100) 875.90(rI=100); -->
+		<!-- cascade-match: SD-unmatched[keV]: 446.20(I=0.000413,absent) 921.50(I=0.000701,absent) 1154.40(I=0.00202,neartol) 1170.60(I=0.00192,absent) 1421.20(I=0.000278,absent) 1426.00(I=0.000365,absent) 1477.80(I=0.00259,absent) 1534.70(I=0.000298,absent) 1555.10(I=0.00117,absent) 1582.40(I=0.000192,absent) 1620.70(I=0.00112,absent) 1631.00(I=0.00024,neartol) 1804.30(I=0.000413,absent) 1879.20(I=0.00023,absent) 1926.10(I=0.000336,absent) 1986.00(I=0.000384,absent) 2092.90(I=0.000912,absent) 2247.40(I=0.000643,absent) 2449.00(I=0.000269,absent) 2454.80(I=0.00025,absent) 2610.70(I=0.000902,absent) 2670.10(I=0.000115,absent) 2737.30(I=0.000384,absent) 2755.20(I=0.000154,absent) 2775.10(I=0.00023,absent) ...; G4-unclaimed-on-populated[keV]: 665.68(rI=100) 901.89(rI=24) 894.48(rI=27) 1121.44(rI=27) 2096.41(rI=9) 744.93(rI=100) 883.30(rI=40) 851.30(rI=100) 875.90(rI=100); -->
 	</transition>
 	<transition parent="Sb113" child="Sn113m" mode="ec" branchRatio="0.195562814965049">
 		<gamma energy="88.25" intensity="0.0272" id="0">
@@ -173952,7 +173945,7 @@
 		<xray energy="28.711" intensity="0.000136" assignment="Kb5"/>
 		<xray energy="29.111" intensity="0.00424" assignment="Kb2"/>
 		<xray energy="29.176" intensity="0.00074" assignment="Kb4"/>
-		<!-- cascade-match: SD-unmatched[keV]: 787.10(I=0.000464,neartol) 1140.30(I=0.00103,neartol) 1364.50(I=0.000266,absent) 1623.90(I=0.000484,absent) 1778.60(I=0.000503,absent) 1819.40(I=0.000405,absent) 1868.80(I=0.00116,absent) 1950.80(I=0.000622,neartol) 1991.00(I=0.000395,neartol) 2041.10(I=0.000553,absent) 2095.70(I=0.000207,absent) 2192.90(I=0.0011,absent) 2265.60(I=0.000197,absent) 2285.10(I=0.000207,absent) 2295.70(I=0.00107,absent) 2329.70(I=0.000109,absent) 2350.10(I=0.000276,absent) 2397.30(I=0.000375,absent) 2421.00(I=8.88e-05,absent) 2718.40(I=0.000582,absent) 2829.20(I=0.000148,absent) 3059.90(I=0.000128,absent) 3082.90(I=0.000128,absent) 3107.40(I=6.91e-05,absent) 3142.60(I=0.000178,absent) ...; G4-unclaimed-on-populated[keV]: 550.80(rI=100) 526.41(rI=5.5) 540.16(rI=10.5) 521.76(rI=7) 334.64(rI=100) 962.19(rI=90) 1001.32(rI=24) 1373.23(rI=76) 3326.50(rI=71) 573.85(rI=41) 3478.85(rI=9.5) 320.31(rI=100); -->
+		<!-- cascade-match: SD-unmatched[keV]: 787.10(I=0.000464,neartol) 1140.30(I=0.00103,neartol) 1364.50(I=0.000266,absent) 1623.90(I=0.000484,absent) 1778.60(I=0.000503,absent) 1819.40(I=0.000405,absent) 1868.80(I=0.00116,absent) 1950.80(I=0.000622,neartol) 1991.00(I=0.000395,neartol) 2041.10(I=0.000553,absent) 2095.70(I=0.000207,absent) 2192.90(I=0.0011,absent) 2265.60(I=0.000197,absent) 2285.10(I=0.000207,absent) 2295.70(I=0.00107,absent) 2329.70(I=0.000109,absent) 2350.10(I=0.000276,absent) 2397.30(I=0.000375,absent) 2421.00(I=8.88e-05,absent) 2718.40(I=0.000582,absent) 2829.20(I=0.000148,absent) 3059.90(I=0.000128,absent) 3082.90(I=0.000128,absent) 3107.40(I=6.91e-05,absent) 3142.60(I=0.000178,absent) ...; G4-unclaimed-on-populated[keV]: 550.80(rI=100) 526.41(rI=5.5) 540.16(rI=10.5) 521.76(rI=7) 334.64(rI=100) 962.19(rI=90) 1001.32(rI=24) 1911.85(rI=28) 1373.23(rI=76) 3326.50(rI=71) 573.85(rI=41) 320.31(rI=100) 1404.82(rI=46); -->
 	</transition>
 	<transition branchRatio="1" child="Sb114" mode="it" parent="Sb114m">
 		<gamma energy="37.7" intensity="0"/>
@@ -174789,7 +174782,7 @@
 		<xray energy="28.711" intensity="0.00016" assignment="Kb5"/>
 		<xray energy="29.111" intensity="0.00498" assignment="Kb2"/>
 		<xray energy="29.176" intensity="0.00087" assignment="Kb4"/>
-		<!-- cascade-match: SD-unmatched[keV]: 2044.00(I=7.5e-05,neartol) 2327.00(I=0.000107,neartol); G4-unclaimed-on-populated[keV]: 2042.88(rI=92.2) 285.14(rI=5.1) 2328.02(rI=23.4); -->
+		<!-- cascade-match: SD-unmatched[keV]: 2044.00(I=7.5e-05,neartol); G4-unclaimed-on-populated[keV]: 2042.88(rI=92.2) 285.14(rI=5.1); -->
 	</transition>
 	<transition branchRatio="1" child="Sn118" mode="ec" parent="Sb118m">
 		<gamma energy="40.8" id="0" intensity="0.2997">
@@ -191527,7 +191520,7 @@
 		<xray energy="31.237" intensity="0.000144" assignment="Kb5"/>
 		<xray energy="31.704" intensity="0.00454" assignment="Kb2"/>
 		<xray energy="31.774" intensity="0.0007" assignment="Kb4"/>
-		<!-- cascade-match: SD-unmatched[keV]: 477.90(I=0.00195,absent) 485.10(I=0.00195,absent) 659.00(I=0,absent) 733.00(I=0.00139,neartol) 752.00(I=0.00278,neartol) 874.70(I=0.00146,neartol) 908.50(I=0.00264,absent) 979.60(I=0.00369,absent) 1085.90(I=0.00139,absent) 1158.00(I=0.00418,absent) 1168.80(I=0.00557,absent) 1222.00(I=0,absent) 1325.00(I=0,neartol) 1383.00(I=0.00487,absent) 1404.20(I=0.0167,neartol) 1419.00(I=0,absent) 1428.00(I=0,absent) 1441.10(I=0.00209,absent) 1492.00(I=0.00383,absent) 1540.00(I=0.00557,absent) 1543.00(I=0.0111,absent) 1547.50(I=0.0087,absent) 1552.20(I=0.00348,absent) 1605.00(I=0.00696,absent) 1663.60(I=0.00348,absent) ...; G4-unclaimed-on-populated[keV]: 614.67(rI=100) 651.87(rI=100) 531.40(rI=11) 704.78(rI=58) 1358.34(rI=24) 2376.36(rI=98) 921.22(rI=23) 1346.47(rI=100) 721.23(rI=100) 2464.63(rI=100) 542.80(rI=46) 686.65(rI=64); -->
+		<!-- cascade-match: SD-unmatched[keV]: 477.90(I=0.00195,absent) 485.10(I=0.00195,absent) 659.00(I=0,absent) 733.00(I=0.00139,neartol) 752.00(I=0.00278,neartol) 874.70(I=0.00146,neartol) 908.50(I=0.00264,absent) 979.60(I=0.00369,absent) 1085.90(I=0.00139,absent) 1158.00(I=0.00418,absent) 1168.80(I=0.00557,absent) 1222.00(I=0,absent) 1325.00(I=0,neartol) 1383.00(I=0.00487,absent) 1404.20(I=0.0167,neartol) 1419.00(I=0,absent) 1428.00(I=0,absent) 1441.10(I=0.00209,absent) 1492.00(I=0.00383,absent) 1540.00(I=0.00557,absent) 1543.00(I=0.0111,absent) 1547.50(I=0.0087,absent) 1552.20(I=0.00348,absent) 1605.00(I=0.00696,absent) 1663.60(I=0.00348,absent) ...; G4-unclaimed-on-populated[keV]: 614.67(rI=100) 651.87(rI=100) 531.40(rI=11) 704.78(rI=58) 1358.34(rI=24) 921.22(rI=23) 1346.47(rI=100) 721.23(rI=100) 2464.63(rI=100) 542.80(rI=46) 686.65(rI=64); -->
 	</transition>
 	<transition branchRatio="1" child="Te120" mode="ec" parent="I120m">
 		<gamma energy="385" id="0" intensity="0.0036">
@@ -193154,7 +193147,7 @@
 		<xray energy="31.237" intensity="0.0005" assignment="Kb5"/>
 		<xray energy="31.704" intensity="0.0156" assignment="Kb2"/>
 		<xray energy="31.774" intensity="0.00239" assignment="Kb4"/>
-		<!-- cascade-match: SD-unmatched[keV]: 478.70(I=0.00027,neartol) 1479.00(I=0,absent) 1658.00(I=3.77e-07,neartol) 1685.00(I=0,neartol) 2021.00(I=6.29e-05,neartol) 2275.80(I=6.29e-05,absent); G4-unclaimed-on-populated[keV]: 632.39(rI=7.65) 1436.57(rI=54.3) 2039.42(rI=56.8) 2091.60(rI=29.4) 997.44(rI=5) 2454.07(rI=23) 443.94(rI=100) 1234.78(rI=45.5) 990.94(rI=14.3) 1489.32(rI=100) 1330.96(rI=8.9) 1662.73(rI=9.8) 547.05(rI=12.5) 678.17(rI=31.3) 1043.22(rI=12.5) 1730.99(rI=16) 1807.92(rI=29); -->
+		<!-- cascade-match: SD-unmatched[keV]: 478.70(I=0.00027,neartol) 1479.00(I=0,absent) 1685.00(I=0,neartol) 2021.00(I=6.29e-05,neartol) 2275.80(I=6.29e-05,absent); G4-unclaimed-on-populated[keV]: 632.39(rI=7.65) 1436.57(rI=54.3) 2039.42(rI=56.8) 2091.60(rI=29.4) 997.44(rI=5) 2454.07(rI=23) 443.94(rI=100) 1234.78(rI=45.5) 990.94(rI=14.3) 1489.32(rI=100) 1330.96(rI=8.9) 1662.73(rI=9.8) 547.05(rI=12.5) 678.17(rI=31.3) 1043.22(rI=12.5) 1730.99(rI=16) 1807.92(rI=29); -->
 	</transition>
 	<transition branchRatio="1" child="Te125" mode="ec" parent="I125">
 		<gamma energy="35.49" intensity="0.0668"/>
@@ -197574,7 +197567,7 @@
 		<beta energy="2339.39" intensity="6.0000E-04" logFT="7.600"/>
 		<gamma energy="1995.00" intensity="1.0000E-03"/>
 		<gamma energy="2943.12" intensity="5.0000E-04"/>
-		<!-- cascade-match: SD-unmatched[keV]: 377.77(I=0.00032,absent) 408.31(I=0.00052,absent) 431.82(I=0.00052,absent) 442.40(I=0.00027,absent) 527.92(I=0.00075,absent) 620.71(I=0.00032,absent) 647.91(I=0.00057,absent) 673.36(I=0.00043,absent) 678.07(I=0.0005,absent) 746.24(I=0.00066,absent) 777.92(I=0.00055,absent) 786.14(I=0.00048,absent) 796.09(I=0.001,absent) 830.70(I=0.00057,neartol) 863.27(I=0.00089,absent) 909.33(I=0.0011,neartol) 978.18(I=0.00087,absent) 1019.32(I=0.00073,absent) 1123.87(I=0.00032,absent) 1136.06(I=0.00043,absent) 1205.13(I=0.0017,absent) 1242.95(I=0.00018,absent) 1268.48(I=0.00039,absent) 1275.27(I=0.00048,absent) 1330.40(I=0.00062,absent) ...; G4-unclaimed-on-populated[keV]: 1114.50(rI=46) 267.92(rI=60) 949.85(rI=100) 2676.30(rI=29) 3276.72(rI=28) 1999.24(rI=20); -->
+		<!-- cascade-match: SD-unmatched[keV]: 377.77(I=0.00032,absent) 408.31(I=0.00052,absent) 431.82(I=0.00052,absent) 442.40(I=0.00027,absent) 527.92(I=0.00075,absent) 620.71(I=0.00032,absent) 647.91(I=0.00057,absent) 673.36(I=0.00043,absent) 678.07(I=0.0005,absent) 746.24(I=0.00066,absent) 777.92(I=0.00055,absent) 786.14(I=0.00048,absent) 796.09(I=0.001,absent) 830.70(I=0.00057,neartol) 863.27(I=0.00089,absent) 909.33(I=0.0011,neartol) 978.18(I=0.00087,absent) 1019.32(I=0.00073,absent) 1123.87(I=0.00032,absent) 1136.06(I=0.00043,absent) 1205.13(I=0.0017,absent) 1242.95(I=0.00018,absent) 1268.48(I=0.00039,absent) 1275.27(I=0.00048,absent) 1330.40(I=0.00062,absent) ...; G4-unclaimed-on-populated[keV]: 1114.50(rI=46) 267.92(rI=60) 949.85(rI=100) 2676.30(rI=29) 1999.24(rI=20); -->
 	</transition>
 	<transition branchRatio="0.0697" child="Xe136" mode="b-n" parent="I137"/>
 	<transition branchRatio="1" child="Xe138" mode="b-" parent="I138">
@@ -203784,7 +203777,7 @@
 		<xray energy="35.252" intensity="2.98E-06" assignment="Kb5"/>
 		<xray energy="35.818" intensity="8.71E-05" assignment="Kb2"/>
 		<xray energy="35.907" intensity="1.8E-05" assignment="Kb4"/>
-		<!-- cascade-match: SD-unmatched[keV]: 1009.90(I=4.03e-05,absent) 1677.20(I=9.92e-06,absent) 1713.20(I=7.44e-06,absent) 1843.00(I=1.43e-05,absent) 2043.60(I=1.77e-05,absent) 2119.40(I=1.71e-05,absent) 3135.60(I=3.72e-06,absent) 3194.00(I=8.99e-06,absent) 3250.00(I=1.05e-05,absent) 3458.30(I=1.27e-05,absent) 3476.30(I=8.68e-06,absent) 3940.70(I=2.48e-06,neartol); G4-unclaimed-on-populated[keV]: 3938.80(rI=18); -->
+		<!-- cascade-match: SD-unmatched[keV]: 1009.90(I=4.03e-05,absent) 1677.20(I=9.92e-06,absent) 1713.20(I=7.44e-06,absent) 1843.00(I=1.43e-05,absent) 2043.60(I=1.77e-05,absent) 2119.40(I=1.71e-05,absent) 3135.60(I=3.72e-06,absent) 3194.00(I=8.99e-06,absent) 3250.00(I=1.05e-05,absent) 3458.30(I=1.27e-05,absent) 3476.30(I=8.68e-06,absent); -->
 	</transition>
 	<transition branchRatio="1" child="Cs138" mode="b-" parent="Xe138">
 		<gamma energy="4.85" id="0" intensity="0.0019215">
@@ -217789,7 +217782,7 @@
 		<xray energy="33.881" intensity="0.00049" assignment="Kb5"/>
 		<xray energy="34.419" intensity="0.0145" assignment="Kb2"/>
 		<xray energy="34.496" intensity="0.0028" assignment="Kb4"/>
-		<!-- cascade-match: SD-unmatched[keV]: 780.00(I=0.00217,neartol) 865.00(I=0.00304,neartol) 1060.00(I=0.00183,neartol) 1228.00(I=0.00155,absent) 1783.00(I=0.00217,absent) 1855.00(I=0.00186,neartol) 2116.00(I=0.00806,absent) 2201.00(I=0.00124,absent) 2269.00(I=0.00124,absent) 2371.00(I=0,absent) 2523.00(I=0.00124,neartol) 2545.00(I=0.000248,neartol) 2623.00(I=0.000465,absent) 2726.00(I=0.000465,absent) 1212.00(I=0.00341,neartol); G4-unclaimed-on-populated[keV]: 43.28(rI=12) 184.10(rI=100) 223.58(rI=6) 148.35(rI=13) 371.93(rI=100) 414.58(rI=21.5) 414.58(rI=8) 204.76(rI=5) 375.81(rI=34) 599.39(rI=100) 426.30(rI=100) 484.24(rI=29) 154.53(rI=72) 291.21(rI=7) 496.75(rI=100) 509.71(rI=83) 225.53(rI=7) 294.55(rI=7) 430.29(rI=9) 500.09(rI=100) 765.66(rI=47) 784.24(rI=100) 509.70(rI=58) 620.07(rI=100) 2154.90(rI=100) ...; -->
+		<!-- cascade-match: SD-unmatched[keV]: 780.00(I=0.00217,neartol) 865.00(I=0.00304,neartol) 1060.00(I=0.00183,neartol) 1228.00(I=0.00155,absent) 1783.00(I=0.00217,absent) 1855.00(I=0.00186,neartol) 2116.00(I=0.00806,absent) 2201.00(I=0.00124,absent) 2269.00(I=0.00124,absent) 2371.00(I=0,absent) 2523.00(I=0.00124,neartol) 2623.00(I=0.000465,absent) 2726.00(I=0.000465,absent) 1212.00(I=0.00341,neartol); G4-unclaimed-on-populated[keV]: 43.28(rI=12) 184.10(rI=100) 223.58(rI=6) 148.35(rI=13) 371.93(rI=100) 414.58(rI=21.5) 414.58(rI=8) 204.76(rI=5) 375.81(rI=34) 599.39(rI=100) 426.30(rI=100) 484.24(rI=29) 154.53(rI=72) 291.21(rI=7) 496.75(rI=100) 509.71(rI=83) 225.53(rI=7) 294.55(rI=7) 430.29(rI=9) 500.09(rI=100) 765.66(rI=47) 784.24(rI=100) 509.70(rI=58) 620.07(rI=100) 2154.90(rI=100) ...; -->
 	</transition>
 	<transition branchRatio="1" child="Xe126" mode="ec" parent="Cs126">
 		<gamma energy="360.86" id="0" intensity="1.1477E-03">
@@ -219470,7 +219463,7 @@
 		<xray energy="33.881" intensity="0.000389" assignment="Kb5"/>
 		<xray energy="34.419" intensity="0.0116" assignment="Kb2"/>
 		<xray energy="34.496" intensity="0.00224" assignment="Kb4"/>
-		<!-- cascade-match: SD-unmatched[keV]: 2016.00(I=4e-05,neartol) 2151.20(I=0.000121,neartol) 2503.60(I=1.95e-05,neartol); G4-unclaimed-on-populated[keV]: 162.70(rI=35) 1181.59(rI=7.4) 2502.21(rI=25.3) 457.76(rI=100) 821.22(rI=18) 996.81(rI=12) 1424.78(rI=8.8); -->
+		<!-- cascade-match: SD-unmatched[keV]: 2016.00(I=4e-05,neartol) 2503.60(I=1.95e-05,neartol); G4-unclaimed-on-populated[keV]: 162.70(rI=35) 1181.59(rI=7.4) 2502.21(rI=25.3) 457.76(rI=100) 821.22(rI=18) 996.81(rI=12) 1424.78(rI=8.8); -->
 	</transition>
 	<transition branchRatio="0.9984" child="Cs130" mode="it" parent="Cs130m">
 		<gamma energy="14.9" intensity="2.499E-08">
@@ -225837,7 +225830,7 @@
 		<beta energy="8628.25" intensity="0"/>
 		<beta energy="9185.95" intensity="0"/>
 		<beta energy="9300" intensity="0"/>
-		<!-- cascade-match: SD-unmatched[keV]: 808.80(I=0.01,absent) 847.30(I=0.007,neartol) 861.60(I=0.005,neartol) 1158.70(I=0.023,neartol) 1300.30(I=0.009,neartol) 1546.20(I=0.003,absent) 1597.80(I=0.04,neartol) 1813.00(I=0.014,neartol) 1983.40(I=0.009,neartol) 2188.00(I=0.006,absent) 2444.00(I=0.013,neartol) 2567.00(I=0.008,absent); G4-unclaimed-on-populated[keV]: 1309.25(rI=7) 1398.65(rI=100) 524.26(rI=100) 1330.02(rI=31) 1511.06(rI=17) 1632.30(rI=10) 1637.63(rI=16) 1668.87(rI=12) 1682.86(rI=10) 894.19(rI=8) 943.88(rI=100) 1815.21(rI=97) 2162.10(rI=15) 2209.00(rI=25) 253.02(rI=23) 1000.85(rI=23); -->
+		<!-- cascade-match: SD-unmatched[keV]: 808.80(I=0.01,absent) 847.30(I=0.007,neartol) 861.60(I=0.005,neartol) 1158.70(I=0.023,neartol) 1300.30(I=0.009,neartol) 1546.20(I=0.003,absent) 1597.80(I=0.04,neartol) 1813.00(I=0.014,neartol) 1983.40(I=0.009,neartol) 2188.00(I=0.006,absent) 2567.00(I=0.008,absent); G4-unclaimed-on-populated[keV]: 1309.25(rI=7) 1398.65(rI=100) 524.26(rI=100) 1330.02(rI=31) 1511.06(rI=17) 1632.30(rI=10) 1637.63(rI=16) 1668.87(rI=12) 1682.86(rI=10) 894.19(rI=8) 943.88(rI=100) 1815.21(rI=97) 2162.10(rI=15) 2209.00(rI=25) 253.02(rI=23) 1000.85(rI=23) 413.59(rI=44) 665.36(rI=100) 960.33(rI=28); -->
 	</transition>
 	<transition branchRatio="1" child="Ba147" mode="b-" parent="Cs147">
 		<gamma energy="24.40" id="0" intensity="7.0000E-03">
@@ -246060,7 +246053,7 @@
 			<coincidentGamma id="139" intensity="0.0133209331361"/>
 			<coincidentGamma id="142" intensity="0.0023379152641"/>
 			<coincidentGamma id="168" intensity="0.00017918699187" a2="-0.05" a4="0"/>
-			<coincidentGamma id="224" intensity="0.0022243902439"/>
+			<coincidentGamma id="224" intensity="0.0022243902439" a2="-0.05" a4="0"/>
 			<coincidentGamma id="49" intensity="0.000292239408012"/>
 			<coincidentGamma id="92" intensity="0.000281227878242"/>
 			<coincidentGamma id="63" intensity="0.00150816408778"/>
@@ -249388,7 +249381,7 @@
 			<coincidentGamma id="139" intensity="0.0133209331361"/>
 			<coincidentGamma id="142" intensity="0.0023379152641"/>
 			<coincidentGamma id="168" intensity="0.00017918699187" a2="0.175" a4="0"/>
-			<coincidentGamma id="224" intensity="0.0022243902439"/>
+			<coincidentGamma id="224" intensity="0.0022243902439" a2="0.175" a4="0"/>
 			<coincidentGamma id="49" intensity="0.000292239408012"/>
 			<coincidentGamma id="92" intensity="0.000281227878242"/>
 			<coincidentGamma id="63" intensity="0.00150816408778"/>
@@ -249720,7 +249713,7 @@
 			<coincidentGamma id="93" intensity="0.0055456698866"/>
 		</gamma>
 		<gamma energy="1824.08" id="224" intensity="5.4720E-03">
-			<coincidentGamma id="60" intensity="0.76"/>
+			<coincidentGamma id="60" intensity="0.76" a2="0.25" a4="-0"/>
 		</gamma>
 		<gamma energy="1824.1" id="225" intensity="0.67">
 			<coincidentGamma id="80" intensity="0.102555410691" a2="-0.0160007" a4="-0"/>
@@ -250459,7 +250452,7 @@
 		<xray energy="36.652" intensity="0.000496" assignment="Kb5"/>
 		<xray energy="37.255" intensity="0.0135" assignment="Kb2"/>
 		<xray energy="37.349" intensity="0.00302" assignment="Kb4"/>
-		<!-- cascade-match: SD-unmatched[keV]: 295.20(I=0,neartol) 3527.80(I=0,neartol) 3665.50(I=0.000129,neartol) 3718.70(I=0,neartol) 457.10(I=0.00175,neartol) 581.50(I=0.000608,neartol) 596.50(I=0.000175,neartol) 618.00(I=0.000274,neartol) 632.77(I=0.000395,neartol) 673.50(I=0.000137,neartol) 748.80(I=0.000266,neartol) 874.71(I=0.00057,neartol) 959.80(I=0.000167,absent) 1007.77(I=0.000882,neartol) 1056.65(I=0.000403,absent) 1060.90(I=0.00022,absent) 1237.00(I=0.00132,absent) 1253.34(I=0.000441,neartol) 1270.65(I=0.000722,neartol) 1274.20(I=0.000418,neartol) 1307.00(I=0.000631,neartol) 1322.10(I=0.000638,absent) 1378.15(I=0.000988,absent) 1407.51(I=0.00365,absent) 1447.30(I=0.000608,absent) ...; G4-unclaimed-on-populated[keV]: 316.89(rI=80.8) 360.48(rI=5.77) 535.14(rI=73.1) 918.62(rI=100) 1014.81(rI=23) 1581.97(rI=12.7) 1823.47(rI=100) 295.44(rI=35) 360.55(rI=15.9) 626.33(rI=19) 935.11(rI=100) 386.69(rI=47) 621.80(rI=87) 747.24(rI=67) 287.74(rI=10) 1187.99(rI=120) 1516.18(rI=16) 1877.28(rI=84.2) 2059.40(rI=9.21) 912.35(rI=49) 1143.12(rI=100) 462.41(rI=100) 296.25(rI=10) 1030.63(rI=100) 169.96(rI=100) ...; -->
+		<!-- cascade-match: SD-unmatched[keV]: 295.20(I=0,neartol) 3665.50(I=0.000129,neartol) 457.10(I=0.00175,neartol) 581.50(I=0.000608,neartol) 596.50(I=0.000175,neartol) 618.00(I=0.000274,neartol) 632.77(I=0.000395,neartol) 673.50(I=0.000137,neartol) 748.80(I=0.000266,neartol) 874.71(I=0.00057,neartol) 959.80(I=0.000167,absent) 1007.77(I=0.000882,neartol) 1056.65(I=0.000403,absent) 1060.90(I=0.00022,absent) 1237.00(I=0.00132,absent) 1253.34(I=0.000441,neartol) 1270.65(I=0.000722,neartol) 1274.20(I=0.000418,neartol) 1307.00(I=0.000631,neartol) 1322.10(I=0.000638,absent) 1378.15(I=0.000988,absent) 1407.51(I=0.00365,absent) 1447.30(I=0.000608,absent) 1458.70(I=0.000289,absent) 1495.62(I=0.000616,neartol) ...; G4-unclaimed-on-populated[keV]: 316.89(rI=80.8) 360.48(rI=5.77) 535.14(rI=73.1) 918.62(rI=100) 1014.81(rI=23) 1581.97(rI=12.7) 295.44(rI=35) 360.55(rI=15.9) 626.33(rI=19) 935.11(rI=100) 386.69(rI=47) 621.80(rI=87) 747.24(rI=67) 287.74(rI=10) 1187.99(rI=120) 1516.18(rI=16) 1877.28(rI=84.2) 2059.40(rI=9.21) 912.35(rI=49) 1143.12(rI=100) 462.41(rI=100) 296.25(rI=10) 1030.63(rI=100) 169.96(rI=100) 857.61(rI=59) ...; -->
 	</transition>
 	<transition branchRatio="0.76" child="La132" mode="it" parent="La132m">
 		<gamma energy="52.8" intensity="0.0005265">
@@ -255920,7 +255913,7 @@
 		<xray energy="39.551" intensity="4.67E-05" assignment="Kb5"/>
 		<xray energy="40.228" intensity="0.0012" assignment="Kb2"/>
 		<xray energy="40.333" intensity="0.00034" assignment="Kb4"/>
-		<!-- cascade-match: SD-unmatched[keV]: 1581.40(I=0.00121,neartol) 1685.50(I=0.000828,absent) 1803.80(I=0.0021,absent) 1826.60(I=0.000382,neartol) 2054.10(I=0.00261,neartol) 2291.10(I=0.000701,absent) 2293.00(I=0.00166,neartol) 2411.00(I=0.00172,absent) 2559.00(I=0.00134,absent) 2910.30(I=0.00115,absent) 2998.20(I=0.00134,neartol); G4-unclaimed-on-populated[keV]: 313.62(rI=11) 444.32(rI=12.6) 666.58(rI=24) 275.84(rI=6) 586.24(rI=19) 630.96(rI=34) 1140.07(rI=100) 405.13(rI=27.1) 773.28(rI=100) 784.91(rI=42) 1287.88(rI=38) 221.02(rI=97) 860.08(rI=95) 1403.41(rI=16) 1473.27(rI=78) 522.68(rI=100) 1231.53(rI=70) 571.34(rI=56) 1843.83(rI=69) 1583.11(rI=35) 1368.88(rI=38) 2779.50(rI=100) 1625.37(rI=50) 1881.02(rI=100) 3164.60(rI=38) ...; -->
+		<!-- cascade-match: SD-unmatched[keV]: 1581.40(I=0.00121,neartol) 1685.50(I=0.000828,absent) 1803.80(I=0.0021,absent) 1826.60(I=0.000382,neartol) 2054.10(I=0.00261,neartol) 2291.10(I=0.000701,absent) 2293.00(I=0.00166,neartol) 2411.00(I=0.00172,absent) 2559.00(I=0.00134,absent) 2910.30(I=0.00115,absent); G4-unclaimed-on-populated[keV]: 313.62(rI=11) 444.32(rI=12.6) 666.58(rI=24) 275.84(rI=6) 586.24(rI=19) 630.96(rI=34) 1140.07(rI=100) 405.13(rI=27.1) 773.28(rI=100) 784.91(rI=42) 1287.88(rI=38) 221.02(rI=97) 860.08(rI=95) 1403.41(rI=16) 1473.27(rI=78) 522.68(rI=100) 1231.53(rI=70) 571.34(rI=56) 1843.83(rI=69) 1583.11(rI=35) 1368.88(rI=38) 2779.50(rI=100) 1625.37(rI=50) 1881.02(rI=100) 3164.60(rI=38) ...; -->
 	</transition>
 	<transition branchRatio="1" child="Ce146" mode="b-" parent="La146m">
 		<gamma energy="81.2" id="0" intensity="0.00285">
@@ -267686,7 +267679,7 @@
 		<xray energy="39.551" intensity="0.000414" assignment="Kb5"/>
 		<xray energy="40.228" intensity="0.0107" assignment="Kb2"/>
 		<xray energy="40.333" intensity="0.00302" assignment="Kb4"/>
-		<!-- cascade-match: SD-unmatched[keV]: 221.87(I=0.00136,absent) 590.41(I=0.00131,absent) 1489.00(I=0.00115,absent) 1501.60(I=0.00252,neartol) 1537.70(I=0.00262,absent) 1547.10(I=0.000996,absent) 1632.80(I=0.00152,absent) 1639.00(I=0.00126,absent) 1646.80(I=0.000943,absent) 1748.70(I=0.00157,absent) 1971.00(I=0.000786,absent) 2021.10(I=0.0011,absent) 2059.00(I=0.00183,absent) 2113.20(I=0.00262,absent) 2131.50(I=0.0021,neartol) 2190.60(I=0.0021,neartol) 2216.20(I=0.00183,absent) 2242.50(I=0.00681,neartol) 2273.90(I=0.00236,neartol) 2291.70(I=0.00157,absent) 2370.00(I=0.00147,absent) 2463.50(I=0.00472,absent) 2559.20(I=0.00152,absent) 2596.90(I=0.00314,neartol) 2683.50(I=0.00131,neartol) ...; G4-unclaimed-on-populated[keV]: 761.69(rI=100) 1203.36(rI=22.2) 1281.46(rI=17.9) 1503.32(rI=34) 1368.26(rI=85) 2129.95(rI=100) 2682.00(rI=62) 2275.75(rI=54) 3264.10(rI=100) 2188.72(rI=100) 2728.55(rI=62) 3280.60(rI=30) 609.80(rI=100) 1072.60(rI=100) 632.10(rI=100); -->
+		<!-- cascade-match: SD-unmatched[keV]: 221.87(I=0.00136,absent) 590.41(I=0.00131,absent) 1489.00(I=0.00115,absent) 1501.60(I=0.00252,neartol) 1537.70(I=0.00262,absent) 1547.10(I=0.000996,absent) 1632.80(I=0.00152,absent) 1639.00(I=0.00126,absent) 1646.80(I=0.000943,absent) 1748.70(I=0.00157,absent) 1971.00(I=0.000786,absent) 2021.10(I=0.0011,absent) 2059.00(I=0.00183,absent) 2113.20(I=0.00262,absent) 2131.50(I=0.0021,neartol) 2190.60(I=0.0021,neartol) 2216.20(I=0.00183,absent) 2242.50(I=0.00681,neartol) 2291.70(I=0.00157,absent) 2370.00(I=0.00147,absent) 2463.50(I=0.00472,absent) 2559.20(I=0.00152,absent) 2596.90(I=0.00314,neartol) 2683.50(I=0.00131,neartol) 2730.30(I=0.00131,neartol) ...; G4-unclaimed-on-populated[keV]: 761.69(rI=100) 1722.45(rI=28.7) 1203.36(rI=22.2) 1281.46(rI=17.9) 1503.32(rI=34) 1368.26(rI=85) 2129.95(rI=100) 2682.00(rI=62) 2275.75(rI=54) 2188.72(rI=100) 2728.55(rI=62) 3280.60(rI=30) 609.80(rI=100) 1072.60(rI=100) 632.10(rI=100); -->
 	</transition>
 	<transition branchRatio="1" child="Ce137" mode="ec" parent="Pr137">
 		<gamma energy="160.32" id="0" intensity="0.00968"/>
@@ -269440,7 +269433,7 @@
 		<xray energy="42.58" intensity="8.6E-06" assignment="Kb5"/>
 		<xray energy="43.335" intensity="0.000208" assignment="Kb2"/>
 		<xray energy="43.451" intensity="7.7E-05" assignment="Kb4"/>
-		<!-- cascade-match: SD-unmatched[keV]: 1164.80(I=0.00126,neartol) 1338.60(I=0.0013,absent) 1411.10(I=0.000811,neartol) 1529.80(I=0.00125,absent) 1940.10(I=0.000749,absent) 1961.30(I=0.000413,neartol) 2126.90(I=0.000898,absent) 2245.90(I=0.000403,absent) 2322.00(I=0.000298,absent) 2477.60(I=0.000422,neartol) 2779.00(I=0.000336,neartol) 3386.20(I=0.000149,absent); G4-unclaimed-on-populated[keV]: 734.22(rI=57.8) 2143.56(rI=28.1) 1695.11(rI=59) 314.45(rI=43) 1030.43(rI=90) 1176.82(rI=58) 2265.97(rI=38) 979.17(rI=19) 2355.95(rI=100) 1167.25(rI=100) 1313.64(rI=81) 1903.01(rI=32) 479.40(rI=95) 764.90(rI=14) 807.05(rI=80) 1362.60(rI=100) 584.98(rI=84) 2597.90(rI=100) 2376.06(rI=18); -->
+		<!-- cascade-match: SD-unmatched[keV]: 1164.80(I=0.00126,neartol) 1338.60(I=0.0013,absent) 1411.10(I=0.000811,neartol) 1529.80(I=0.00125,absent) 1940.10(I=0.000749,absent) 1961.30(I=0.000413,neartol) 2126.90(I=0.000898,absent) 2245.90(I=0.000403,absent) 2322.00(I=0.000298,absent) 2779.00(I=0.000336,neartol) 3386.20(I=0.000149,absent); G4-unclaimed-on-populated[keV]: 734.22(rI=57.8) 2143.56(rI=28.1) 1695.11(rI=59) 314.45(rI=43) 1030.43(rI=90) 1176.82(rI=58) 2265.97(rI=38) 979.17(rI=19) 2355.95(rI=100) 1167.25(rI=100) 1313.64(rI=81) 1903.01(rI=32) 479.40(rI=95) 764.90(rI=14) 807.05(rI=80) 1362.60(rI=100) 584.98(rI=84) 2597.90(rI=100) 2376.06(rI=18); -->
 	</transition>
 	<transition branchRatio="1" child="Nd147" mode="b-" parent="Pr147">
 		<gamma energy="49.88" id="0" intensity="4.1934E-02"/>
@@ -289598,7 +289591,7 @@
 		<xray energy="45.741" intensity="3.43E-05" assignment="Kb5"/>
 		<xray energy="46.578" intensity="0.000766" assignment="Kb2"/>
 		<xray energy="46.705" intensity="0.00029" assignment="Kb4"/>
-		<!-- cascade-match: SD-unmatched[keV]: 218.10(I=6.8e-05,neartol) 259.30(I=6.8e-05,absent) 812.10(I=0.000952,absent) 1120.80(I=0.000884,neartol) 1269.30(I=0.00068,absent) 1296.10(I=0.00068,absent) 1358.50(I=0.000612,absent) 1865.20(I=0.00068,absent) 1874.10(I=0.00068,absent) 1893.20(I=0.000476,absent) 2371.00(I=0.000748,absent) 2453.10(I=0.000136,absent) 2546.10(I=0.00034,absent) 2623.50(I=0.000408,absent) 2651.70(I=0.000204,absent) 2699.80(I=0.000544,absent) 2855.80(I=6.8e-05,absent) 2883.30(I=0.000272,absent) 2932.20(I=2.04e-05,absent) 2941.00(I=2.04e-05,absent) 3079.80(I=0.000136,neartol) 3090.50(I=6.8e-05,neartol) 3187.80(I=3.4e-05,absent) 2691.00(I=6.8e-05,neartol); G4-unclaimed-on-populated[keV]: 1046.15(rI=8.1) 612.76(rI=54) 638.01(rI=8) 722.89(rI=24) 1794.30(rI=100) 402.16(rI=15.1) 461.80(rI=15.9) 625.67(rI=5.98) 748.10(rI=100) 773.36(rI=11.7) 1485.56(rI=36.7) 2678.34(rI=70) 2689.74(rI=6) 304.05(rI=10) 615.21(rI=100) 3080.90(rI=18) 1125.68(rI=71) 3089.40(rI=7) 382.60(rI=16); -->
+		<!-- cascade-match: SD-unmatched[keV]: 218.10(I=6.8e-05,neartol) 259.30(I=6.8e-05,absent) 812.10(I=0.000952,absent) 1120.80(I=0.000884,neartol) 1269.30(I=0.00068,absent) 1296.10(I=0.00068,absent) 1358.50(I=0.000612,absent) 1865.20(I=0.00068,absent) 1874.10(I=0.00068,absent) 1893.20(I=0.000476,absent) 2371.00(I=0.000748,absent) 2453.10(I=0.000136,absent) 2546.10(I=0.00034,absent) 2623.50(I=0.000408,absent) 2651.70(I=0.000204,absent) 2699.80(I=0.000544,absent) 2855.80(I=6.8e-05,absent) 2883.30(I=0.000272,absent) 2932.20(I=2.04e-05,absent) 2941.00(I=2.04e-05,absent) 3187.80(I=3.4e-05,absent); G4-unclaimed-on-populated[keV]: 1046.15(rI=8.1) 612.76(rI=54) 638.01(rI=8) 722.89(rI=24) 1794.30(rI=100) 402.16(rI=15.1) 461.80(rI=15.9) 625.67(rI=5.98) 748.10(rI=100) 773.36(rI=11.7) 1485.56(rI=36.7) 2678.34(rI=70) 304.05(rI=10) 615.21(rI=100) 1125.68(rI=71) 382.60(rI=16); -->
 	</transition>
 	<transition branchRatio="1" child="Sm151" mode="b-" parent="Pm151">
 		<gamma energy="4.82" id="0" intensity="0.0006075"/>
@@ -296693,7 +296686,6 @@
 		<xray energy="44.145" intensity="0.00061" assignment="Kb5"/>
 		<xray energy="44.942" intensity="0.014" assignment="Kb2"/>
 		<xray energy="45.064" intensity="0.00527" assignment="Kb4"/>
-		<!-- cascade-match: SD-unmatched[keV]: 2904.00(I=1.33e-05,neartol); G4-unclaimed-on-populated[keV]: 2905.30(rI=23); -->
 	</transition>
 	<transition branchRatio="0.9976" child="Sm143" mode="it" parent="Sm143m">
 		<gamma energy="754.4" intensity="0.901"/>
@@ -308674,7 +308666,7 @@
 		<gamma energy="2186.76" intensity="0.039"/>
 		<gamma energy="2205.51" intensity="0.0098"/>
 		<gamma energy="2205.4" intensity="0">
-			<coincidentGamma id="0" intensity="0.019675456389452336"/>
+			<coincidentGamma id="0" intensity="0.019675456389452336" a2="-0.25" a4="-0"/>
 		</gamma>
 		<gamma energy="2211.83" intensity="0.00098358">
 			<coincidentGamma id="0" intensity="0.019675456389452336" a2="-0.25" a4="-0"/>
@@ -309827,7 +309819,7 @@
 		<xray energy="49.038" intensity="0.00032" assignment="Kb5"/>
 		<xray energy="49.959" intensity="0.0067" assignment="Kb2"/>
 		<xray energy="50.099" intensity="0.0026" assignment="Kb4"/>
-		<!-- cascade-match: SD-unmatched[keV]: 1130.20(I=0.00018,neartol) 1166.50(I=0.00015,absent) 1245.10(I=0.0003,absent) 1250.40(I=0.00033,absent) 1492.50(I=0.00024,absent) 1552.00(I=0.00033,absent) 1563.80(I=0.00027,absent) 1657.30(I=0.00018,neartol) 2139.00(I=0.00264,neartol) 2163.40(I=0.00042,absent) 2194.20(I=0.00033,absent) 2268.20(I=0.00063,neartol) 2273.70(I=0.00051,absent) 2402.70(I=0.00048,neartol) 2464.00(I=0.00012,absent) 2514.00(I=0.00108,neartol) 2640.00(I=0.000111,neartol) 2673.00(I=0.00012,neartol) 2764.00(I=0.000186,neartol) 2824.00(I=0.00033,neartol) 2873.00(I=4.8e-05,absent) 2967.00(I=4.8e-05,neartol); G4-unclaimed-on-populated[keV]: 282.72(rI=5.1) 1263.52(rI=66) 475.84(rI=5.6) 592.80(rI=9.8) 669.17(rI=13) 832.62(rI=14.6) 1633.12(rI=5) 1774.24(rI=47) 2035.70(rI=9) 423.73(rI=60) 472.38(rI=95) 698.04(rI=100) 956.11(rI=39) 2419.71(rI=5.6) 2670.70(rI=19) 2761.96(rI=15) 1617.95(rI=31) 2822.70(rI=50) 2964.30(rI=100); -->
+		<!-- cascade-match: SD-unmatched[keV]: 1130.20(I=0.00018,neartol) 1166.50(I=0.00015,absent) 1245.10(I=0.0003,absent) 1250.40(I=0.00033,absent) 1492.50(I=0.00024,absent) 1552.00(I=0.00033,absent) 1563.80(I=0.00027,absent) 1657.30(I=0.00018,neartol) 2139.00(I=0.00264,neartol) 2163.40(I=0.00042,absent) 2194.20(I=0.00033,absent) 2273.70(I=0.00051,absent) 2402.70(I=0.00048,neartol) 2464.00(I=0.00012,absent) 2640.00(I=0.000111,neartol) 2673.00(I=0.00012,neartol) 2764.00(I=0.000186,neartol) 2873.00(I=4.8e-05,absent) 2967.00(I=4.8e-05,neartol); G4-unclaimed-on-populated[keV]: 282.72(rI=5.1) 1263.52(rI=66) 475.84(rI=5.6) 592.80(rI=9.8) 669.17(rI=13) 832.62(rI=14.6) 1633.12(rI=5) 1774.24(rI=47) 2035.70(rI=9) 423.73(rI=60) 472.38(rI=95) 698.04(rI=100) 956.11(rI=39) 2187.65(rI=54) 2419.71(rI=5.6) 2670.70(rI=19) 2761.96(rI=15) 1617.95(rI=31) 2964.30(rI=100); -->
 	</transition>
 	<transition branchRatio="0.471017512007132" child="Gd159m" mode="b-" parent="Eu159">
 		<gamma energy="51" intensity="7.5900E-02"/>
@@ -312257,7 +312249,7 @@
 			<coincidentGamma id="20" intensity="1"/>
 		</gamma>
 		<gamma energy="3626.2" intensity="0.00025">
-			<coincidentGamma id="10" intensity="1"/>
+			<coincidentGamma id="10" intensity="1" a2="0" a4="0"/>
 		</gamma>
 		<gamma energy="3632.7" intensity="0.00015">
 			<coincidentGamma id="3" intensity="1" a2="-0.153061" a4="-0"/>
@@ -312610,7 +312602,7 @@
 		<xray energy="47.373" intensity="0.00082" assignment="Kb5"/>
 		<xray energy="48.249" intensity="0.0178" assignment="Kb2"/>
 		<xray energy="48.386" intensity="0.0071" assignment="Kb4"/>
-		<!-- cascade-match: SD-unmatched[keV]: 305.50(I=7e-05,neartol) 310.10(I=0.00011,neartol) 1082.40(I=0.00029,neartol) 1755.00(I=0.00046,neartol) 1788.50(I=0.00075,neartol) 2056.70(I=0.0008,neartol) 2083.90(I=0.00027,neartol) 2149.00(I=0.0007,neartol) 2508.00(I=0.00023,neartol) 2700.90(I=0.00021,neartol) 2831.00(I=0.00024,neartol) 3188.00(I=0.0008,neartol) 3239.40(I=0.00027,neartol) 3266.00(I=0.0012,neartol) 3324.90(I=6e-05,neartol) 3626.20(I=0.00025,neartol) 4012.30(I=7e-05,neartol) 4155.00(I=6e-05,neartol) 4307.30(I=0.00078,neartol) 1648.90(I=0.00024,neartol) 2073.90(I=0.00018,neartol) 2539.00(I=0.0001,absent); G4-unclaimed-on-populated[keV]: 885.20(rI=100) 1765.80(rI=17) 1080.67(rI=8.5) 3238.00(rI=30) 3267.20(rI=100) 3190.08(rI=100) 1514.00(rI=81) 1651.30(rI=29) 2146.94(rI=100) 2075.38(rI=26) 2058.68(rI=100) 2082.28(rI=100) 4014.10(rI=6) 3323.07(rI=7.8) 4156.70(rI=26) 1756.60(rI=26) 2542.80(rI=13) 4308.60(rI=100) 2510.08(rI=44) 3627.77(rI=13) 1791.00(rI=100) 2829.28(rI=32); -->
+		<!-- cascade-match: SD-unmatched[keV]: 305.50(I=7e-05,neartol) 310.10(I=0.00011,neartol) 1082.40(I=0.00029,neartol) 1755.00(I=0.00046,neartol) 1788.50(I=0.00075,neartol) 2056.70(I=0.0008,neartol) 2083.90(I=0.00027,neartol) 2508.00(I=0.00023,neartol) 2831.00(I=0.00024,neartol) 3188.00(I=0.0008,neartol) 3324.90(I=6e-05,neartol) 1648.90(I=0.00024,neartol) 2073.90(I=0.00018,neartol) 2539.00(I=0.0001,absent); G4-unclaimed-on-populated[keV]: 885.20(rI=100) 1765.80(rI=17) 1080.67(rI=8.5) 3190.08(rI=100) 1514.00(rI=81) 1651.30(rI=29) 2146.94(rI=100) 2075.38(rI=26) 2058.68(rI=100) 2082.28(rI=100) 3323.07(rI=7.8) 1756.60(rI=26) 2542.80(rI=13) 2510.08(rI=44) 1791.00(rI=100) 2829.28(rI=32); -->
 	</transition>
 	<transition branchRatio="0.943" child="Gd145" mode="it" parent="Gd145m">
 		<gamma energy="27.3" id="0" intensity="4.7850E-02"/>
@@ -316303,7 +316295,7 @@
 		<xray energy="49.038" intensity="0.000457" assignment="Kb5"/>
 		<xray energy="49.959" intensity="0.0097" assignment="Kb2"/>
 		<xray energy="50.099" intensity="0.00376" assignment="Kb4"/>
-		<!-- cascade-match: SD-unmatched[keV]: 841.59(I=0.00265,neartol) 1167.00(I=0.00109,absent) 1215.00(I=0.00168,neartol) 1679.00(I=0.00277,absent) 1988.70(I=0.00328,absent) 2168.00(I=0.00311,absent) 2247.32(I=0.00328,absent) 2288.10(I=0.00403,absent) 2331.92(I=0.00512,absent) 2362.90(I=0.00571,absent) 2485.94(I=0.00529,absent) 2593.30(I=0.0026,absent) 2858.50(I=0.00277,absent) 2871.80(I=0.00378,absent) 3552.90(I=0.00294,absent) 3644.90(I=0.0037,absent) 3685.80(I=0.00504,absent) 3983.70(I=0.00294,absent) 4066.80(I=0.00134,neartol); G4-unclaimed-on-populated[keV]: 271.13(rI=8.8) 665.73(rI=7.2) 959.92(rI=100) 4068.22(rI=43); -->
+		<!-- cascade-match: SD-unmatched[keV]: 841.59(I=0.00265,neartol) 1167.00(I=0.00109,absent) 1215.00(I=0.00168,neartol) 1679.00(I=0.00277,absent) 1988.70(I=0.00328,absent) 2168.00(I=0.00311,absent) 2247.32(I=0.00328,absent) 2288.10(I=0.00403,absent) 2331.92(I=0.00512,absent) 2362.90(I=0.00571,absent) 2485.94(I=0.00529,absent) 2593.30(I=0.0026,absent) 2858.50(I=0.00277,absent) 2871.80(I=0.00378,absent) 3552.90(I=0.00294,absent) 3644.90(I=0.0037,absent) 3685.80(I=0.00504,absent) 3983.70(I=0.00294,absent); G4-unclaimed-on-populated[keV]: 271.13(rI=8.8) 665.73(rI=7.2) 959.92(rI=100); -->
 	</transition>
 	<transition branchRatio="1" child="Gd148" mode="ec" parent="Tb148m">
 		<gamma energy="123" intensity="0.0007">
@@ -321242,7 +321234,7 @@
 		<xray energy="49.038" intensity="0.00083" assignment="Kb5"/>
 		<xray energy="49.959" intensity="0.0176" assignment="Kb2"/>
 		<xray energy="50.099" intensity="0.0068" assignment="Kb4"/>
-		<!-- cascade-match: SD-unmatched[keV]: 99.50(I=0.00036,absent) 122.00(I=0.000216,absent) 126.00(I=0.000144,absent) 165.00(I=0.00072,neartol) 191.10(I=0.000576,absent) 229.30(I=0.000288,absent) 241.00(I=0.000432,absent) 257.00(I=0.000144,absent) 297.00(I=0.000576,absent) 311.20(I=0.000288,neartol) 324.00(I=0.00144,neartol) 380.00(I=0.00072,neartol) 399.00(I=0.000504,absent) 406.00(I=0.000288,neartol) 427.00(I=0.000432,absent) 450.00(I=0.000432,neartol) 478.00(I=0.000216,absent) 507.00(I=0.00072,absent) 583.00(I=0.00072,absent) 600.00(I=0.00072,neartol) 608.00(I=0.00072,neartol) 641.00(I=0.00072,neartol) 672.00(I=0.000576,absent) 680.90(I=0.000504,absent) 714.70(I=0.000216,neartol) ...; G4-unclaimed-on-populated[keV]: 451.63(rI=5) 562.25(rI=17.5) 792.19(rI=75) 946.31(rI=30) 274.80(rI=8) 604.99(rI=100) 1327.05(rI=7.1) 1008.84(rI=19) 1363.77(rI=16) 1777.82(rI=27.8) 1594.23(rI=100) 1128.39(rI=20) 1600.39(rI=78) 3134.13(rI=58) 734.06(rI=100) 1350.98(rI=42) 1517.73(rI=85.1) 3325.59(rI=67) 4143.80(rI=67) 3568.86(rI=52) 3608.16(rI=43) 4258.00(rI=14) 3767.26(rI=70) 4529.40(rI=9) 634.20(rI=100) ...; -->
+		<!-- cascade-match: SD-unmatched[keV]: 99.50(I=0.00036,absent) 122.00(I=0.000216,absent) 126.00(I=0.000144,absent) 165.00(I=0.00072,neartol) 191.10(I=0.000576,absent) 229.30(I=0.000288,absent) 241.00(I=0.000432,absent) 257.00(I=0.000144,absent) 297.00(I=0.000576,absent) 311.20(I=0.000288,neartol) 324.00(I=0.00144,neartol) 380.00(I=0.00072,neartol) 399.00(I=0.000504,absent) 406.00(I=0.000288,neartol) 427.00(I=0.000432,absent) 450.00(I=0.000432,neartol) 478.00(I=0.000216,absent) 507.00(I=0.00072,absent) 583.00(I=0.00072,absent) 600.00(I=0.00072,neartol) 608.00(I=0.00072,neartol) 641.00(I=0.00072,neartol) 672.00(I=0.000576,absent) 680.90(I=0.000504,absent) 714.70(I=0.000216,neartol) ...; G4-unclaimed-on-populated[keV]: 451.63(rI=5) 562.25(rI=17.5) 792.19(rI=75) 946.31(rI=30) 274.80(rI=8) 604.99(rI=100) 1327.05(rI=7.1) 1008.84(rI=19) 1363.77(rI=16) 1777.82(rI=27.8) 1594.23(rI=100) 1128.39(rI=20) 1600.39(rI=78) 3134.13(rI=58) 734.06(rI=100) 1350.98(rI=42) 1517.73(rI=85.1) 3325.59(rI=67) 634.20(rI=100) 703.80(rI=100) 780.00(rI=100); -->
 	</transition>
 	<transition branchRatio="7E-06" child="Eu146m" mode="a" parent="Tb150">
 		<alpha energy="3492" intensity="1"/>
@@ -326798,16 +326790,16 @@
 		</gamma>
 		<gamma energy="2093.3" intensity="0.00143">
 			<coincidentGamma id="37" intensity="0.00078498809409106645"/>
-			<coincidentGamma id="16" intensity="0.0022419921156443066" a2="0.25" a4="-0"/>
+			<coincidentGamma id="16" intensity="0.0022419921156443066"/>
 			<coincidentGamma id="19" intensity="0.0045672034565298414"/>
 			<coincidentGamma id="7" intensity="0.0044958409025215628"/>
 			<coincidentGamma id="8" intensity="0.00028545021603311509"/>
 			<coincidentGamma id="2" intensity="7.1727329049059474E-06"/>
 			<coincidentGamma id="5" intensity="1.5547564871313709E-06"/>
-			<coincidentGamma id="11" intensity="0.00045961345567841323"/>
+			<coincidentGamma id="11" intensity="0.00045961345567841323" a2="0" a4="0"/>
 			<coincidentGamma id="73" intensity="6.3091567593736791E-05"/>
 			<coincidentGamma id="12" intensity="2.9968494607024976E-05"/>
-			<coincidentGamma id="10" intensity="0.00463856601053812"/>
+			<coincidentGamma id="10" intensity="0.00463856601053812" a2="0" a4="0"/>
 			<coincidentGamma id="20" intensity="5.1625531854215394E-05"/>
 			<coincidentGamma id="59" intensity="0.00028796125321596636"/>
 			<coincidentGamma id="51" intensity="0.000108487585187"/>
@@ -332446,7 +332438,7 @@
 		<xray energy="49.038" intensity="0.00121" assignment="Kb5"/>
 		<xray energy="49.959" intensity="0.0257" assignment="Kb2"/>
 		<xray energy="50.099" intensity="0.01" assignment="Kb4"/>
-		<!-- cascade-match: SD-unmatched[keV]: 429.82(I=0.00532,neartol) 489.00(I=0.00227,absent) 789.50(I=0.00263,absent) 863.20(I=0.00178,absent) 1175.00(I=0.00234,neartol) 1370.20(I=0.00142,neartol) 1481.20(I=0.00227,absent) 2402.50(I=0.00241,neartol) 2525.10(I=0.00178,absent) 2575.10(I=0.000781,absent) 2711.70(I=0.00114,neartol) 2716.00(I=0.000284,absent) 2770.50(I=0.000639,absent) 2820.70(I=0.000405,absent) 2940.50(I=0.000568,absent) 3085.00(I=0.000142,absent) 3103.00(I=0.000142,absent) 3137.90(I=0.000568,absent) 3280.00(I=0.000213,absent) 3381.40(I=0.000142,absent) 3435.00(I=6.39e-05,absent) 3467.90(I=9.23e-05,absent); G4-unclaimed-on-populated[keV]: 346.66(rI=100) 329.93(rI=5.6) 892.78(rI=100) 1140.71(rI=45.6) 370.57(rI=6.88) 1295.09(rI=18.9) 1418.16(rI=13.6) 403.50(rI=9.2) 535.05(rI=7) 283.23(rI=17) 573.59(rI=12) 885.90(rI=8.9) 983.73(rI=92) 1330.39(rI=75) 1578.32(rI=9.2) 1593.05(rI=100) 1964.05(rI=33) 419.33(rI=9) 434.42(rI=6.9) 952.43(rI=100) 1362.57(rI=71) 1709.23(rI=47) 132.23(rI=11) 463.67(rI=21) 520.87(rI=41) ...; -->
+		<!-- cascade-match: SD-unmatched[keV]: 429.82(I=0.00532,neartol) 489.00(I=0.00227,absent) 789.50(I=0.00263,absent) 863.20(I=0.00178,absent) 1175.00(I=0.00234,neartol) 1370.20(I=0.00142,neartol) 1481.20(I=0.00227,absent) 2525.10(I=0.00178,absent) 2575.10(I=0.000781,absent) 2716.00(I=0.000284,absent) 2770.50(I=0.000639,absent) 2820.70(I=0.000405,absent) 2940.50(I=0.000568,absent) 3085.00(I=0.000142,absent) 3103.00(I=0.000142,absent) 3137.90(I=0.000568,absent) 3280.00(I=0.000213,absent) 3381.40(I=0.000142,absent) 3435.00(I=6.39e-05,absent) 3467.90(I=9.23e-05,absent); G4-unclaimed-on-populated[keV]: 346.66(rI=100) 329.93(rI=5.6) 892.78(rI=100) 1140.71(rI=45.6) 370.57(rI=6.88) 1295.09(rI=18.9) 1418.16(rI=13.6) 403.50(rI=9.2) 535.05(rI=7) 283.23(rI=17) 573.59(rI=12) 885.90(rI=8.9) 983.73(rI=92) 1330.39(rI=75) 1578.32(rI=9.2) 1593.05(rI=100) 1964.05(rI=33) 419.33(rI=9) 434.42(rI=6.9) 952.43(rI=100) 1362.57(rI=71) 1709.23(rI=47) 132.23(rI=11) 463.67(rI=21) 520.87(rI=41) ...; -->
 	</transition>
 	<transition parent="Tb154m2" child="Gd154" mode="ec" branchRatio="0.782">
 		<gamma energy="123.07" intensity="0.3875" id="0"/>
@@ -349273,7 +349265,6 @@
 		<xray energy="52.475" intensity="0.058" assignment="Kb5"/>
 		<xray energy="53.476" intensity="1.12" assignment="Kb2"/>
 		<xray energy="53.634" intensity="0.385" assignment="Kb4"/>
-		<!-- cascade-match: SD-unmatched[keV]: 2467.40(I=0.00174,neartol); G4-unclaimed-on-populated[keV]: 2466.23(rI=15); -->
 	</transition>
 	<transition branchRatio="1" child="Dy149" mode="ec" parent="Ho149m">
 		<gamma energy="94.3" intensity="0.032">
@@ -381966,7 +381957,7 @@
 		<beta energy="3068" intensity="0.16"/>
 		<beta energy="3911.42" intensity="0.14"/>
 		<beta energy="3990" intensity="0.36" logFT="5.79"/>
-		<!-- cascade-match: SD-unmatched[keV]: 1415.60(I=0.05,neartol) 1836.60(I=0.007,absent) 1876.30(I=0.008,absent) 2759.50(I=0.008,absent) 2789.20(I=0.012,neartol); G4-unclaimed-on-populated[keV]: 87.07(rI=16.4) 294.04(rI=19) 1044.43(rI=100) 390.24(rI=16.5) 405.70(rI=64) 456.24(rI=19.2) 482.21(rI=254) 1416.23(rI=86) 481.74(rI=79.6) 765.11(rI=100) 1091.73(rI=167) 1022.81(rI=100) 1059.08(rI=8.2) 2071.30(rI=21) 2054.38(rI=39) 2700.83(rI=100); -->
+		<!-- cascade-match: SD-unmatched[keV]: 1836.60(I=0.007,absent) 1876.30(I=0.008,absent) 2759.50(I=0.008,absent); G4-unclaimed-on-populated[keV]: 87.07(rI=16.4) 294.04(rI=19) 1044.43(rI=100) 390.24(rI=16.5) 405.70(rI=64) 456.24(rI=19.2) 482.21(rI=254) 1416.23(rI=86) 371.12(rI=5.6) 439.67(rI=24) 549.06(rI=23) 572.99(rI=100) 665.82(rI=20) 481.74(rI=79.6) 765.11(rI=100) 1091.73(rI=167) 1022.81(rI=100) 1059.08(rI=8.2) 2071.30(rI=21) 2054.38(rI=39) 2700.83(rI=100) 2711.71(rI=52); -->
 	</transition>
 	<transition branchRatio="1" child="Er171" mode="b-" parent="Ho171">
 		<gamma energy="61.2" intensity="0.04">
@@ -390511,7 +390502,7 @@
 		</gamma>
 		<gamma energy="1947.5" intensity="0.000284">
 			<coincidentGamma id="0" intensity="0.001340691489361702"/>
-			<coincidentGamma id="119" intensity="0.071"/>
+			<coincidentGamma id="119" intensity="0.071" a2="0.541667" a4="0.0134298"/>
 		</gamma>
 		<gamma energy="1959.25" intensity="0.005467">
 			<coincidentGamma id="0" intensity="0.018882978723404255"/>
@@ -390908,7 +390899,7 @@
 		<xray energy="56.054" intensity="0.000353" assignment="Kb5"/>
 		<xray energy="57.142" intensity="0.0062" assignment="Kb2"/>
 		<xray energy="57.313" intensity="0.00185" assignment="Kb4"/>
-		<!-- cascade-match: SD-unmatched[keV]: 178.60(I=0.000284,neartol) 380.20(I=0.00071,neartol) 432.50(I=0.000497,neartol) 524.02(I=0.000781,neartol) 533.70(I=0.000497,neartol) 645.71(I=0.00135,absent) 716.50(I=0.000923,absent) 909.40(I=0.00348,absent) 960.40(I=0.00121,absent) 1057.75(I=0.00192,absent) 1079.40(I=0.000568,absent) 1115.96(I=0.00234,absent) 1269.60(I=0.00178,absent) 1289.40(I=0.00156,neartol) 1380.70(I=0.000852,neartol) 1393.90(I=0.00263,absent) 1420.39(I=5.68e-05,absent) 1451.30(I=0.00206,absent) 1478.80(I=0.000426,absent) 1556.80(I=0.000994,absent) 1575.80(I=0.00142,neartol) 1580.90(I=0.00135,neartol) 1622.10(I=0.000994,neartol) 1633.70(I=0.00114,absent) 1640.40(I=0.000852,absent) ...; G4-unclaimed-on-populated[keV]: 461.43(rI=8.3) 1026.07(rI=27) 1429.79(rI=32) 506.13(rI=100) 1623.24(rI=15) 382.91(rI=43) 572.43(rI=7.2) 584.07(rI=5) 928.87(rI=26.1) 1358.89(rI=100) 2061.35(rI=27) 530.96(rI=8) 1037.09(rI=100) 2205.94(rI=29) 181.47(rI=93) 212.80(rI=100) 473.93(rI=28.3) 2268.46(rI=20) 3293.20(rI=60) 1342.38(rI=9.5) 1946.85(rI=12); -->
+		<!-- cascade-match: SD-unmatched[keV]: 178.60(I=0.000284,neartol) 380.20(I=0.00071,neartol) 432.50(I=0.000497,neartol) 524.02(I=0.000781,neartol) 533.70(I=0.000497,neartol) 645.71(I=0.00135,absent) 716.50(I=0.000923,absent) 909.40(I=0.00348,absent) 960.40(I=0.00121,absent) 1057.75(I=0.00192,absent) 1079.40(I=0.000568,absent) 1115.96(I=0.00234,absent) 1269.60(I=0.00178,absent) 1289.40(I=0.00156,neartol) 1380.70(I=0.000852,neartol) 1393.90(I=0.00263,absent) 1420.39(I=5.68e-05,absent) 1451.30(I=0.00206,absent) 1478.80(I=0.000426,absent) 1556.80(I=0.000994,absent) 1575.80(I=0.00142,neartol) 1580.90(I=0.00135,neartol) 1622.10(I=0.000994,neartol) 1633.70(I=0.00114,absent) 1640.40(I=0.000852,absent) ...; G4-unclaimed-on-populated[keV]: 461.43(rI=8.3) 1026.07(rI=27) 1429.79(rI=32) 506.13(rI=100) 1623.24(rI=15) 382.91(rI=43) 572.43(rI=7.2) 584.07(rI=5) 928.87(rI=26.1) 1358.89(rI=100) 2061.35(rI=27) 530.96(rI=8) 1037.09(rI=100) 2205.94(rI=29) 181.47(rI=93) 212.80(rI=100) 473.93(rI=28.3) 1342.38(rI=9.5); -->
 	</transition>
 	<transition branchRatio="0.18" child="Er162" mode="ec" parent="Tm162m">
 		<gamma energy="102" id="0" intensity="0.144"/>
@@ -394453,7 +394444,7 @@
 		<xray energy="56.054" intensity="0.00123" assignment="Kb5"/>
 		<xray energy="57.142" intensity="0.0217" assignment="Kb2"/>
 		<xray energy="57.313" intensity="0.0064" assignment="Kb4"/>
-		<!-- cascade-match: SD-unmatched[keV]: 113.62(I=0,absent) 318.60(I=0,neartol) 652.50(I=0.000268,neartol) 871.29(I=0.000335,neartol) 928.27(I=0.000536,neartol) 934.90(I=0.000469,absent) 1118.90(I=0.000201,absent) 1238.30(I=0.000335,absent) 1273.50(I=0.000268,absent) 1373.90(I=0.000536,absent) 1466.00(I=0.000268,absent) 1900.50(I=0.000335,absent) 1932.80(I=0.000402,neartol) 2010.70(I=0.000168,absent) 2052.50(I=0.000268,neartol) 2389.90(I=0.000201,absent) 2421.40(I=0.000469,absent) 2476.50(I=0.000127,absent) 2484.10(I=0.00114,neartol) 2489.70(I=0.000603,absent) 2518.20(I=0.000134,absent) 2531.30(I=0.000335,absent) 2690.50(I=0.000214,absent) 2881.70(I=0.000248,absent) 2958.70(I=0.000201,absent) ...; G4-unclaimed-on-populated[keV]: 1017.11(rI=10) 1332.07(rI=100) 1875.26(rI=37.5) 139.52(rI=32) 240.51(rI=100) 1370.67(rI=10.8) 1703.17(rI=39) 588.52(rI=133) 2025.77(rI=15) 354.04(rI=67) 1868.67(rI=43) 152.70(rI=17) 296.93(rI=100) 534.02(rI=100) 2548.82(rI=71) 2670.82(rI=93) 2050.89(rI=36) 1892.93(rI=50) 2351.62(rI=225) 505.50(rI=100) 1935.18(rI=100) 2352.02(rI=72) 2522.53(rI=32) 584.50(rI=100); -->
+		<!-- cascade-match: SD-unmatched[keV]: 113.62(I=0,absent) 318.60(I=0,neartol) 652.50(I=0.000268,neartol) 871.29(I=0.000335,neartol) 928.27(I=0.000536,neartol) 934.90(I=0.000469,absent) 1118.90(I=0.000201,absent) 1238.30(I=0.000335,absent) 1273.50(I=0.000268,absent) 1373.90(I=0.000536,absent) 1466.00(I=0.000268,absent) 1900.50(I=0.000335,absent) 1932.80(I=0.000402,neartol) 2010.70(I=0.000168,absent) 2052.50(I=0.000268,neartol) 2389.90(I=0.000201,absent) 2421.40(I=0.000469,absent) 2476.50(I=0.000127,absent) 2484.10(I=0.00114,neartol) 2489.70(I=0.000603,absent) 2518.20(I=0.000134,absent) 2531.30(I=0.000335,absent) 2690.50(I=0.000214,absent) 2881.70(I=0.000248,absent) 2958.70(I=0.000201,absent) ...; G4-unclaimed-on-populated[keV]: 1017.11(rI=10) 1332.07(rI=100) 1875.26(rI=37.5) 139.52(rI=32) 240.51(rI=100) 1370.67(rI=10.8) 1703.17(rI=39) 588.52(rI=133) 2025.77(rI=15) 354.04(rI=67) 1868.67(rI=43) 152.70(rI=17) 296.93(rI=100) 534.02(rI=100) 2548.82(rI=71) 2670.82(rI=93) 3041.82(rI=47) 2050.89(rI=36) 1892.93(rI=50) 2351.62(rI=225) 505.50(rI=100) 1935.18(rI=100) 2352.02(rI=72) 2522.53(rI=32) 584.50(rI=100); -->
 	</transition>
 	<transition branchRatio="0.2" child="Er164" mode="ec" parent="Tm164m">
 		<gamma energy="73" intensity="0.0095">
@@ -415372,7 +415363,7 @@
 			<coincidentGamma id="396" intensity="1.4049240440020955E-05" a2="-0.025" a4="0"/>
 			<coincidentGamma id="611" intensity="0.000262257726558" a2="-0.25" a4="0"/>
 			<coincidentGamma id="334" intensity="8.19539025667889E-06" a2="0.125" a4="0"/>
-			<coincidentGamma id="426" intensity="4.6830801466736511E-06"/>
+			<coincidentGamma id="426" intensity="4.6830801466736511E-06" a2="-0.25" a4="0"/>
 			<coincidentGamma id="144" intensity="3.2781561026715565E-06" a2="0.125" a4="0"/>
 			<coincidentGamma id="602" intensity="0.00015454164484023049" a2="-0.025" a4="0"/>
 		</gamma>
@@ -415403,7 +415394,7 @@
 			<coincidentGamma id="396" intensity="1.4049240440020955E-05" a2="-0.025" a4="0"/>
 			<coincidentGamma id="611" intensity="0.000262257726558" a2="-0.25" a4="0"/>
 			<coincidentGamma id="334" intensity="8.19539025667889E-06" a2="0.125" a4="0"/>
-			<coincidentGamma id="426" intensity="4.6830801466736511E-06"/>
+			<coincidentGamma id="426" intensity="4.6830801466736511E-06" a2="-0.25" a4="0"/>
 			<coincidentGamma id="144" intensity="3.2781561026715565E-06" a2="0.125" a4="0"/>
 			<coincidentGamma id="602" intensity="0.00015454164484023049" a2="-0.025" a4="0"/>
 		</gamma>
@@ -415481,7 +415472,7 @@
 			<coincidentGamma id="396" intensity="1.4049240440020955E-05" a2="-0.025" a4="0"/>
 			<coincidentGamma id="611" intensity="0.000262257726558" a2="-0.25" a4="0"/>
 			<coincidentGamma id="334" intensity="8.19539025667889E-06" a2="0.125" a4="0"/>
-			<coincidentGamma id="426" intensity="4.6830801466736511E-06"/>
+			<coincidentGamma id="426" intensity="4.6830801466736511E-06" a2="-0.25" a4="0"/>
 			<coincidentGamma id="144" intensity="3.2781561026715565E-06" a2="0.125" a4="0"/>
 			<coincidentGamma id="602" intensity="0.00015454164484023049" a2="-0.025" a4="0"/>
 		</gamma>
@@ -415710,7 +415701,7 @@
 			<coincidentGamma id="396" intensity="1.4049240440020955E-05" a2="-0.025" a4="0"/>
 			<coincidentGamma id="611" intensity="0.000262257726558" a2="-0.25" a4="0"/>
 			<coincidentGamma id="334" intensity="8.19539025667889E-06" a2="0.125" a4="0"/>
-			<coincidentGamma id="426" intensity="4.6830801466736511E-06"/>
+			<coincidentGamma id="426" intensity="4.6830801466736511E-06" a2="-0.25" a4="0"/>
 			<coincidentGamma id="144" intensity="3.2781561026715565E-06" a2="0.125" a4="0"/>
 			<coincidentGamma id="602" intensity="0.00015454164484023049" a2="-0.025" a4="0"/>
 		</gamma>
@@ -415732,7 +415723,7 @@
 			<coincidentGamma id="396" intensity="1.4049240440020955E-05" a2="-0.025" a4="0"/>
 			<coincidentGamma id="611" intensity="0.000262257726558" a2="-0.25" a4="0"/>
 			<coincidentGamma id="334" intensity="8.19539025667889E-06" a2="0.125" a4="0"/>
-			<coincidentGamma id="426" intensity="4.6830801466736511E-06"/>
+			<coincidentGamma id="426" intensity="4.6830801466736511E-06" a2="-0.25" a4="0"/>
 			<coincidentGamma id="144" intensity="3.2781561026715565E-06" a2="0.125" a4="0"/>
 			<coincidentGamma id="602" intensity="0.00015454164484023049" a2="-0.025" a4="0"/>
 		</gamma>
@@ -417322,7 +417313,7 @@
 		</gamma>
 		<gamma energy="1709.9" intensity="0"/>
 		<gamma energy="1714.4" id="426" intensity="0.0001788">
-			<coincidentGamma id="230" intensity="0.000447"/>
+			<coincidentGamma id="230" intensity="0.000447" a2="0" a4="0"/>
 		</gamma>
 		<gamma energy="1714.4" id="427" intensity="0.0001788">
 			<coincidentGamma id="215" intensity="0.000105" a2="-0.153061" a4="-0.0665155"/>
@@ -418121,7 +418112,7 @@
 		<xray energy="59.78" intensity="0.00187" assignment="Kb5"/>
 		<xray energy="60.962" intensity="0.031" assignment="Kb2"/>
 		<xray energy="61.141" intensity="0.0076" assignment="Kb4"/>
-		<!-- cascade-match: SD-unmatched[keV]: 223.40(I=0.000201,neartol) 275.40(I=4.47e-05,neartol) 297.70(I=3.8e-05,neartol) 461.20(I=0.000121,neartol) 486.80(I=0.000188,absent) 542.84(I=0,neartol) 558.90(I=0.000156,neartol) 563.00(I=0.000429,neartol) 582.30(I=0,neartol) 584.35(I=0.000118,neartol) 585.80(I=0.000152,neartol) 655.10(I=0.000101,neartol) 785.75(I=0.000277,neartol) 787.60(I=0.000536,absent) 815.70(I=0.000232,neartol) 952.55(I=0.000416,neartol) 973.40(I=0,neartol) 1031.30(I=0,neartol) 1124.70(I=0.00038,neartol) 1203.00(I=0.000201,neartol) 1370.40(I=0.000232,neartol) 1385.50(I=0.000447,neartol) 1393.20(I=0,neartol) 1445.10(I=0.000358,absent) 1490.50(I=0.000237,absent) ...; G4-unclaimed-on-populated[keV]: 1985.64(rI=13.3) 151.95(rI=100) 175.50(rI=93) 330.50(rI=100) 207.20(rI=100) 453.97(rI=100) 619.38(rI=5.9) 1666.12(rI=29) 1155.73(rI=20.5) 3213.27(rI=9.4) 1886.49(rI=118); -->
+		<!-- cascade-match: SD-unmatched[keV]: 223.40(I=0.000201,neartol) 275.40(I=4.47e-05,neartol) 297.70(I=3.8e-05,neartol) 461.20(I=0.000121,neartol) 486.80(I=0.000188,absent) 542.84(I=0,neartol) 558.90(I=0.000156,neartol) 563.00(I=0.000429,neartol) 582.30(I=0,neartol) 584.35(I=0.000118,neartol) 585.80(I=0.000152,neartol) 655.10(I=0.000101,neartol) 785.75(I=0.000277,neartol) 787.60(I=0.000536,absent) 815.70(I=0.000232,neartol) 952.55(I=0.000416,neartol) 973.40(I=0,neartol) 1031.30(I=0,neartol) 1124.70(I=0.00038,neartol) 1203.00(I=0.000201,neartol) 1370.40(I=0.000232,neartol) 1385.50(I=0.000447,neartol) 1393.20(I=0,neartol) 1445.10(I=0.000358,absent) 1490.50(I=0.000237,absent) ...; G4-unclaimed-on-populated[keV]: 1985.64(rI=13.3) 151.95(rI=100) 175.50(rI=93) 330.50(rI=100) 207.20(rI=100) 453.97(rI=100) 619.38(rI=5.9) 1666.12(rI=29) 1155.73(rI=20.5); -->
 	</transition>
 	<transition branchRatio="1" child="Lu170" mode="it" parent="Lu170m">
 		<gamma energy="44.52" id="0" intensity="0.00845"/>
@@ -426719,7 +426710,7 @@
 			<coincidentGamma id="72" intensity="0.029508535343848206"/>
 		</gamma>
 		<gamma energy="2031.9" intensity="0.00114">
-			<coincidentGamma id="7" intensity="0.055980593394289971"/>
+			<coincidentGamma id="7" intensity="0.055980593394289971" a2="0.162338" a4="0.0436107"/>
 			<coincidentGamma id="1" intensity="0.0028548770816812048"/>
 			<coincidentGamma id="0" intensity="3.4782608695652164E-05"/>
 		</gamma>
@@ -426946,7 +426937,7 @@
 		<xray energy="63.662" intensity="0.002" assignment="Kb5"/>
 		<xray energy="64.942" intensity="0.0315" assignment="Kb2"/>
 		<xray energy="65.132" intensity="0.0054" assignment="Kb4"/>
-		<!-- cascade-match: SD-unmatched[keV]: 220.44(I=0.000858,neartol) 628.86(I=0.000642,neartol) 657.05(I=0.000828,absent) 1316.70(I=0.000108,neartol) 1331.28(I=0.00108,neartol) 1597.23(I=0.00024,neartol) 1624.40(I=0.00036,absent) 1640.34(I=0.00252,absent) 1652.00(I=0.00069,absent) 1654.96(I=0.0012,absent) 1760.00(I=0.00108,absent) 1762.40(I=0.00096,absent) 1774.16(I=0.00072,absent) 1816.40(I=0.00072,absent) 1898.25(I=0.00108,absent) 1953.90(I=0.00084,absent) 1957.30(I=0.000432,absent) 1968.74(I=0.000156,absent) 1974.26(I=0.00104,absent) 1993.82(I=0.00012,absent) 2001.52(I=0.00015,absent) 2008.01(I=0.00108,absent) 2086.32(I=0.000474,absent) 2148.84(I=0.00051,absent) 2158.10(I=0.000276,absent) ...; G4-unclaimed-on-populated[keV]: 401.34(rI=100) 161.93(rI=40) 1017.74(rI=100) 1330.02(rI=100) 1022.24(rI=100) 195.04(rI=19) 369.10(rI=100) 407.16(rI=100) 2032.74(rI=83) 1422.44(rI=6.4) 2634.38(rI=16) 1429.49(rI=30) 2996.91(rI=10) 740.20(rI=100); -->
+		<!-- cascade-match: SD-unmatched[keV]: 220.44(I=0.000858,neartol) 628.86(I=0.000642,neartol) 657.05(I=0.000828,absent) 1316.70(I=0.000108,neartol) 1331.28(I=0.00108,neartol) 1597.23(I=0.00024,neartol) 1624.40(I=0.00036,absent) 1640.34(I=0.00252,absent) 1652.00(I=0.00069,absent) 1654.96(I=0.0012,absent) 1760.00(I=0.00108,absent) 1762.40(I=0.00096,absent) 1774.16(I=0.00072,absent) 1816.40(I=0.00072,absent) 1898.25(I=0.00108,absent) 1953.90(I=0.00084,absent) 1957.30(I=0.000432,absent) 1968.74(I=0.000156,absent) 1974.26(I=0.00104,absent) 1993.82(I=0.00012,absent) 2001.52(I=0.00015,absent) 2008.01(I=0.00108,absent) 2086.32(I=0.000474,absent) 2148.84(I=0.00051,absent) 2158.10(I=0.000276,absent) ...; G4-unclaimed-on-populated[keV]: 401.34(rI=100) 161.93(rI=40) 1017.74(rI=100) 1330.02(rI=100) 1022.24(rI=100) 195.04(rI=19) 369.10(rI=100) 407.16(rI=100) 1422.44(rI=6.4) 2634.38(rI=16) 1429.49(rI=30) 2996.91(rI=10) 740.20(rI=100); -->
 	</transition>
 	<transition branchRatio="1" child="Hf175" mode="ec" parent="Ta175">
 		<gamma energy="35.8" intensity="0">
@@ -452377,7 +452368,7 @@
 		<xray energy="71.875" intensity="0.00184" assignment="Kb5"/>
 		<xray energy="73.363" intensity="0.0264" assignment="Kb2"/>
 		<xray energy="73.59" intensity="0.00307" assignment="Kb4"/>
-		<!-- cascade-match: SD-unmatched[keV]: 329.67(I=0.00254,neartol) 384.67(I=0.0119,neartol) 687.43(I=0.0161,neartol) 783.20(I=0.0227,neartol) 858.65(I=0.00622,absent) 952.50(I=0.00432,absent) 1018.77(I=0.00584,absent) 1024.54(I=0.00559,neartol) 1039.13(I=0.00953,absent) 1095.50(I=0.00571,absent) 1114.70(I=0.0113,absent) 1127.10(I=0.00559,absent) 1316.70(I=0.0123,neartol) 1455.23(I=0.00914,absent) 1910.20(I=0.00749,absent) 2186.95(I=0.0343,neartol) 2207.30(I=0.00406,absent) 2224.10(I=0.0123,absent) 2275.80(I=0.00533,absent) 2472.08(I=0.00673,absent) 2508.80(I=0.00571,absent) 2517.40(I=0.00406,absent) 2725.10(I=0.0047,absent) 2793.10(I=0.00457,absent) 2797.80(I=0.00394,absent) ...; G4-unclaimed-on-populated[keV]: 541.83(rI=100) 420.80(rI=82) 622.34(rI=100) 1189.11(rI=357) 352.92(rI=19.4) 558.05(rI=29.8) 759.59(rI=33.4) 143.37(rI=100) 902.96(rI=17.5) 194.80(rI=34.1) 1737.36(rI=100); -->
+		<!-- cascade-match: SD-unmatched[keV]: 329.67(I=0.00254,neartol) 384.67(I=0.0119,neartol) 687.43(I=0.0161,neartol) 783.20(I=0.0227,neartol) 858.65(I=0.00622,absent) 952.50(I=0.00432,absent) 1018.77(I=0.00584,absent) 1024.54(I=0.00559,neartol) 1039.13(I=0.00953,absent) 1095.50(I=0.00571,absent) 1114.70(I=0.0113,absent) 1127.10(I=0.00559,absent) 1316.70(I=0.0123,neartol) 1455.23(I=0.00914,absent) 1910.20(I=0.00749,absent) 2207.30(I=0.00406,absent) 2224.10(I=0.0123,absent) 2275.80(I=0.00533,absent) 2472.08(I=0.00673,absent) 2508.80(I=0.00571,absent) 2517.40(I=0.00406,absent) 2725.10(I=0.0047,absent) 2793.10(I=0.00457,absent) 2797.80(I=0.00394,absent) 2904.70(I=0.00902,absent); G4-unclaimed-on-populated[keV]: 541.83(rI=100) 420.80(rI=82) 622.34(rI=100) 1189.11(rI=357) 352.92(rI=19.4) 558.05(rI=29.8) 759.59(rI=33.4) 143.37(rI=100) 902.96(rI=17.5) 194.80(rI=34.1) 1737.36(rI=100) 1751.06(rI=100); -->
 	</transition>
 	<transition branchRatio="1" child="Os187" mode="ec" parent="Ir187">
 		<gamma energy="9.75" id="0" intensity="1.9500E-03"/>
@@ -469068,7 +469059,7 @@
 			<coincidentGamma id="20" intensity="0.24059276268026367"/>
 		</gamma>
 		<gamma energy="2277.6" intensity="0.00693">
-			<coincidentGamma id="13" intensity="0.8703220191470844"/>
+			<coincidentGamma id="13" intensity="0.8703220191470844" a2="0.200437" a4="0.0926466"/>
 			<coincidentGamma id="6" intensity="0.73369565217391308"/>
 		</gamma>
 		<gamma energy="2288.9" intensity="0.0009"/>
@@ -469206,7 +469197,7 @@
 		<xray energy="76.233" intensity="0.0014" assignment="Kb5"/>
 		<xray energy="77.831" intensity="0.0194" assignment="Kb2"/>
 		<xray energy="78.073" intensity="0.00254" assignment="Kb4"/>
-		<!-- cascade-match: SD-unmatched[keV]: 383.20(I=0.0027,neartol) 398.00(I=0.00108,neartol) 436.00(I=0,absent) 586.70(I=0.00135,neartol) 634.00(I=0.00198,absent) 675.30(I=0.00288,absent) 779.00(I=0.00369,absent) 836.40(I=0.0018,absent) 869.20(I=0.00369,absent) 912.20(I=0.00117,absent) 977.00(I=0.0018,absent) 1154.20(I=0.00405,absent) 1161.00(I=0.00918,absent) 1345.80(I=0.00783,absent) 1475.00(I=0.00036,absent) 1500.90(I=0.00513,absent) 1528.10(I=0.00306,absent) 1622.90(I=0.00243,absent) 1636.50(I=0.00324,absent) 1638.70(I=0.00153,absent) 1664.10(I=0.00612,absent) 1738.90(I=0.0108,absent) 1772.80(I=0.00198,absent) 1821.10(I=0.00072,absent) 1836.00(I=0.011,absent) ...; G4-unclaimed-on-populated[keV]: 391.14(rI=27.9) 832.38(rI=7.1) 863.65(rI=16) 1600.67(rI=8) 2276.86(rI=11) 1672.17(rI=49) 795.90(rI=100); -->
+		<!-- cascade-match: SD-unmatched[keV]: 383.20(I=0.0027,neartol) 398.00(I=0.00108,neartol) 436.00(I=0,absent) 586.70(I=0.00135,neartol) 634.00(I=0.00198,absent) 675.30(I=0.00288,absent) 779.00(I=0.00369,absent) 836.40(I=0.0018,absent) 869.20(I=0.00369,absent) 912.20(I=0.00117,absent) 977.00(I=0.0018,absent) 1154.20(I=0.00405,absent) 1161.00(I=0.00918,absent) 1345.80(I=0.00783,absent) 1475.00(I=0.00036,absent) 1500.90(I=0.00513,absent) 1528.10(I=0.00306,absent) 1622.90(I=0.00243,absent) 1636.50(I=0.00324,absent) 1638.70(I=0.00153,absent) 1664.10(I=0.00612,absent) 1738.90(I=0.0108,absent) 1772.80(I=0.00198,absent) 1821.10(I=0.00072,absent) 1836.00(I=0.011,absent) ...; G4-unclaimed-on-populated[keV]: 391.14(rI=27.9) 832.38(rI=7.1) 863.65(rI=16) 1600.67(rI=8) 1672.17(rI=49) 795.90(rI=100); -->
 	</transition>
 	<transition branchRatio="0.100817895479022" child="Pt191m" mode="ec" parent="Au191">
 		<gamma energy="24.39" id="0" intensity="0.00320379629494655"/>
@@ -473485,7 +473476,7 @@
 		<xray energy="76.233" intensity="0.00229" assignment="Kb5"/>
 		<xray energy="77.831" intensity="0.0316" assignment="Kb2"/>
 		<xray energy="78.073" intensity="0.00414" assignment="Kb4"/>
-		<!-- cascade-match: SD-unmatched[keV]: 215.57(I=8.46e-05,absent) 671.16(I=0,neartol) 774.90(I=0.000483,neartol) 886.00(I=0.000121,absent) 932.40(I=0.000362,absent) 958.00(I=0.000604,absent) 1432.50(I=0.000701,neartol) 1510.90(I=0.000242,neartol) 2199.60(I=0.000121,absent) 2204.00(I=0.000121,absent) 2371.00(I=0.000121,absent) 2447.40(I=0.000121,absent) 2396.30(I=4.23e-05,neartol); G4-unclaimed-on-populated[keV]: 1512.00(rI=7.5) 304.59(rI=159) 1005.30(rI=46.1) 2003.66(rI=8.6) 1241.73(rI=10.8) 687.72(rI=100) 1319.84(rI=39.4) 1509.10(rI=49) 1802.65(rI=817) 2131.13(rI=6.5) 1734.04(rI=100) 2027.59(rI=8.95) 435.99(rI=35.1) 390.92(rI=64); -->
+		<!-- cascade-match: SD-unmatched[keV]: 215.57(I=8.46e-05,absent) 671.16(I=0,neartol) 774.90(I=0.000483,neartol) 886.00(I=0.000121,absent) 932.40(I=0.000362,absent) 958.00(I=0.000604,absent) 1432.50(I=0.000701,neartol) 1510.90(I=0.000242,neartol) 2199.60(I=0.000121,absent) 2204.00(I=0.000121,absent) 2371.00(I=0.000121,absent) 2447.40(I=0.000121,absent); G4-unclaimed-on-populated[keV]: 1512.00(rI=7.5) 304.59(rI=159) 1005.30(rI=46.1) 2003.66(rI=8.6) 1241.73(rI=10.8) 687.72(rI=100) 1319.84(rI=39.4) 1509.10(rI=49) 1802.65(rI=817) 2131.13(rI=6.5) 1734.04(rI=100) 2027.59(rI=8.95) 435.99(rI=35.1) 390.92(rI=64); -->
 	</transition>
 	<transition branchRatio="1" child="Au194" mode="it" parent="Au194m">
 		<gamma energy="26.9" intensity="0.0001296">
@@ -474358,7 +474349,7 @@
 		<xray energy="80.762" intensity="1.44E-05" assignment="Kb5"/>
 		<xray energy="82.473" intensity="0.00019" assignment="Kb2"/>
 		<xray energy="82.733" intensity="3.2E-05" assignment="Kb4"/>
-		<!-- cascade-match: SD-unmatched[keV]: 1853.00(I=0.00092,neartol); G4-unclaimed-on-populated[keV]: 129.27(rI=20) 351.59(rI=100) 872.02(rI=50) 540.69(rI=6.1) 892.28(rI=18) 1412.71(rI=100) 611.56(rI=40) 999.54(rI=72) 1519.97(rI=100) 104.62(rI=5.8) 554.82(rI=32) 783.93(rI=8) 1526.68(rI=100); -->
+		<!-- cascade-match: G4-unclaimed-on-populated[keV]: 129.27(rI=20) 351.59(rI=100) 872.02(rI=50) 540.69(rI=6.1) 892.28(rI=18) 1412.71(rI=100) 611.56(rI=40) 999.54(rI=72) 1519.97(rI=100) 104.62(rI=5.8) 554.82(rI=32) 783.93(rI=8) 1526.68(rI=100) 669.16(rI=100); -->
 	</transition>
 	<transition branchRatio="1" child="Hg203" mode="b-" parent="Au203">
 		<gamma energy="7.3" intensity="0"/>
@@ -503271,7 +503262,7 @@
 		<xray energy="85.47" intensity="0.00303" assignment="Kb5"/>
 		<xray energy="87.3" intensity="0.038" assignment="Kb2"/>
 		<xray energy="87.58" intensity="0.0086" assignment="Kb4"/>
-		<!-- cascade-match: SD-unmatched[keV]: 90.90(I=0.000238,absent) 92.20(I=0.000238,absent) 96.54(I=0.000318,absent) 139.60(I=0.00135,neartol) 145.40(I=0.000318,neartol) 149.60(I=0.000715,neartol) 211.20(I=0,neartol) 224.80(I=0.00119,neartol) 227.46(I=0.00214,absent) 340.59(I=0.00119,absent) 386.72(I=0.000635,absent) 958.77(I=0.00191,absent) 1021.93(I=0.00191,absent) 1060.11(I=0.00397,neartol) 1120.53(I=0.000357,absent) 1127.50(I=0.00254,absent) 1146.54(I=0.00167,absent) 1198.98(I=0.00238,absent) 1290.61(I=0.00183,absent) 1447.52(I=0.00214,neartol) 1453.29(I=0.000429,absent) 1466.36(I=0.00357,neartol) 1536.57(I=0.00413,absent) 1639.38(I=0.00373,absent) 1675.07(I=0.000635,absent) ...; G4-unclaimed-on-populated[keV]: 452.06(rI=28) 1351.23(rI=100) 289.29(rI=100) 918.38(rI=100) 911.75(rI=100) 990.29(rI=100) 147.12(rI=5.9) 176.09(rI=100) 368.91(rI=44) 222.28(rI=66) 1692.34(rI=100) 1721.43(rI=100) 438.56(rI=83) 405.82(rI=100) 654.83(rI=53) 1095.44(rI=87) 412.52(rI=13.7) 661.53(rI=100) 971.34(rI=10.3) 1102.14(rI=20) 1645.55(rI=27) 421.73(rI=9.9) 670.74(rI=100) 1111.35(rI=12.9) 765.30(rI=100) ...; -->
+		<!-- cascade-match: SD-unmatched[keV]: 90.90(I=0.000238,absent) 92.20(I=0.000238,absent) 96.54(I=0.000318,absent) 139.60(I=0.00135,neartol) 145.40(I=0.000318,neartol) 149.60(I=0.000715,neartol) 211.20(I=0,neartol) 224.80(I=0.00119,neartol) 227.46(I=0.00214,absent) 340.59(I=0.00119,absent) 386.72(I=0.000635,absent) 958.77(I=0.00191,absent) 1021.93(I=0.00191,absent) 1060.11(I=0.00397,neartol) 1120.53(I=0.000357,absent) 1127.50(I=0.00254,absent) 1146.54(I=0.00167,absent) 1198.98(I=0.00238,absent) 1290.61(I=0.00183,absent) 1447.52(I=0.00214,neartol) 1453.29(I=0.000429,absent) 1466.36(I=0.00357,neartol) 1536.57(I=0.00413,absent) 1639.38(I=0.00373,absent) 1675.07(I=0.000635,absent) ...; G4-unclaimed-on-populated[keV]: 452.06(rI=28) 1351.23(rI=100) 289.29(rI=100) 330.69(rI=100) 705.65(rI=53) 918.38(rI=100) 911.75(rI=100) 990.29(rI=100) 147.12(rI=5.9) 176.09(rI=100) 368.91(rI=44) 222.28(rI=66) 1692.34(rI=100) 1721.43(rI=100) 438.56(rI=83) 405.82(rI=100) 654.83(rI=53) 1095.44(rI=87) 412.52(rI=13.7) 661.53(rI=100) 971.34(rI=10.3) 1102.14(rI=20) 1645.55(rI=27) 421.73(rI=9.9) 670.74(rI=100) ...; -->
 	</transition>
 	<transition branchRatio="0.896384248145868" child="Pb204" mode="ec" parent="Bi204">
 		<gamma energy="6.26" intensity="4.9086E-08">
@@ -509797,7 +509788,7 @@
 		<xray energy="90.363" intensity="6.9E-05" assignment="Kb5"/>
 		<xray energy="92.317" intensity="0.00082" assignment="Kb2"/>
 		<xray energy="92.618" intensity="0.00023" assignment="Kb4"/>
-		<!-- cascade-match: SD-unmatched[keV]: 363.47(I=7.8e-05,absent) 375.59(I=4.6e-05,absent) 439.34(I=0.00012,absent) 989.34(I=0.0001,neartol) 1723.70(I=0,neartol) 3233.20(I=1e-06,absent) 3269.70(I=6e-07,absent); G4-unclaimed-on-populated[keV]: 933.93(rI=15) 1087.47(rI=70) 1320.92(rI=10) 1057.98(rI=8) 1108.63(rI=23) 1370.47(rI=67) 1062.30(rI=70) 1449.14(rI=100) 1483.25(rI=100) 2940.67(rI=16) 1676.20(rI=10.9) 2472.52(rI=38) 2484.68(rI=37) 1481.32(rI=70) 2574.38(rI=37); -->
+		<!-- cascade-match: SD-unmatched[keV]: 363.47(I=7.8e-05,absent) 375.59(I=4.6e-05,absent) 439.34(I=0.00012,absent) 989.34(I=0.0001,neartol) 1723.70(I=0,neartol) 3233.20(I=1e-06,absent) 3269.70(I=6e-07,absent); G4-unclaimed-on-populated[keV]: 933.93(rI=15) 1087.47(rI=70) 1320.92(rI=10) 1057.98(rI=8) 1108.63(rI=23) 1370.47(rI=67) 1062.30(rI=70) 1449.14(rI=100) 1483.25(rI=100) 2940.67(rI=16) 1638.38(rI=33) 1676.20(rI=10.9) 2472.52(rI=38) 2484.68(rI=37) 1481.32(rI=70) 2574.38(rI=37); -->
 	</transition>
 	<transition branchRatio="0.00021" child="Tl210" mode="a" parent="Bi214">
 		<gamma energy="62.5" intensity="0"/>
@@ -514494,7 +514485,7 @@
 		<xray energy="90.363" intensity="0.00213" assignment="Kb5"/>
 		<xray energy="92.317" intensity="0.0255" assignment="Kb2"/>
 		<xray energy="92.618" intensity="0.0071" assignment="Kb4"/>
-		<!-- cascade-match: SD-unmatched[keV]: 105.15(I=0.00103,neartol) 123.35(I=0.00137,absent) 165.70(I=0.0044,absent) 178.60(I=0.00196,absent) 275.60(I=0.00245,absent) 312.50(I=0.0103,neartol) 336.90(I=0.00342,neartol) 462.50(I=0.0088,absent) 506.20(I=0.00245,absent) 566.20(I=0.00685,neartol) 577.10(I=0.0088,absent) 587.04(I=0.00787,neartol) 595.43(I=0.00841,absent) 693.50(I=0.00347,neartol) 789.20(I=0.0205,absent) 819.49(I=0.0105,absent) 913.50(I=0.00215,absent) 936.03(I=0.00616,absent) 941.94(I=0.0067,absent) 947.45(I=0.00323,absent) 971.90(I=0.00381,absent) 993.30(I=0.00538,absent) 1013.70(I=0.01,absent) 1026.20(I=0.0147,absent) 1038.00(I=0.00245,absent) ...; G4-unclaimed-on-populated[keV]: 384.34(rI=100) 1497.15(rI=32) 3046.72(rI=14) 3170.90(rI=12) 210.40(rI=100); -->
+		<!-- cascade-match: SD-unmatched[keV]: 105.15(I=0.00103,neartol) 123.35(I=0.00137,absent) 165.70(I=0.0044,absent) 178.60(I=0.00196,absent) 275.60(I=0.00245,absent) 312.50(I=0.0103,neartol) 336.90(I=0.00342,neartol) 462.50(I=0.0088,absent) 506.20(I=0.00245,absent) 566.20(I=0.00685,neartol) 577.10(I=0.0088,absent) 587.04(I=0.00787,neartol) 595.43(I=0.00841,absent) 693.50(I=0.00347,neartol) 789.20(I=0.0205,absent) 819.49(I=0.0105,absent) 913.50(I=0.00215,absent) 936.03(I=0.00616,absent) 941.94(I=0.0067,absent) 947.45(I=0.00323,absent) 971.90(I=0.00381,absent) 993.30(I=0.00538,absent) 1013.70(I=0.01,absent) 1026.20(I=0.0147,absent) 1038.00(I=0.00245,absent) ...; G4-unclaimed-on-populated[keV]: 384.34(rI=100) 1497.15(rI=32) 210.40(rI=100); -->
 	</transition>
 	<transition branchRatio="0.1" child="Bi201" mode="a" parent="At205">
 		<alpha energy="5902" hindrance="1.4" intensity="1"/>
@@ -575190,7 +575181,7 @@
 		<xray energy="49.038" intensity="0.00097" assignment="Kb5"/>
 		<xray energy="49.959" intensity="0.0206" assignment="Kb2"/>
 		<xray energy="50.099" intensity="0.008" assignment="Kb4"/>
-		<!-- cascade-match: SD-unmatched[keV]: 461.61(I=0.00325,neartol) 660.35(I=0.0015,absent) 826.29(I=0.00175,absent) 857.20(I=0.00125,absent) 1214.30(I=0.00135,absent) 1237.50(I=0.002,neartol) 1370.20(I=0.001,neartol) 1377.60(I=0.000775,absent) 1387.76(I=0.00375,neartol) 1515.80(I=0.004,absent) 1618.90(I=0.005,absent) 1715.00(I=0.0005,neartol) 1721.00(I=0.00175,absent) 1887.00(I=0.0005,absent) 1905.00(I=0.002,neartol) 1931.00(I=0.0015,absent) 1949.00(I=0.0005,absent) 2054.20(I=0.00112,absent) 2251.80(I=0.001,neartol) 2295.90(I=0.004,absent) 2473.00(I=0.00075,absent) 2525.10(I=0.0005,absent) 2540.00(I=0.000225,absent) 2546.90(I=0.00035,neartol) 2559.60(I=0.00183,absent) ...; G4-unclaimed-on-populated[keV]: 426.78(rI=100) 318.29(rI=40.3) 648.22(rI=100) 994.88(rI=31.2) 1291.36(rI=100) 1414.43(rI=28) 370.57(rI=6.88) 1295.09(rI=18.9) 1418.16(rI=13.6) 168.81(rI=5) 714.93(rI=25.5) 403.50(rI=9.2) 535.05(rI=7) 1160.31(rI=19) 332.68(rI=56.8) 577.72(rI=85.3) 758.48(rI=100) 613.31(rI=16.4) 1537.83(rI=10.1) 464.41(rI=22.5) 474.76(rI=31.8) 588.25(rI=73) 719.79(rI=45) 1592.98(rI=75) 1716.05(rI=60) ...; -->
+		<!-- cascade-match: SD-unmatched[keV]: 461.61(I=0.00325,neartol) 660.35(I=0.0015,absent) 826.29(I=0.00175,absent) 857.20(I=0.00125,absent) 1214.30(I=0.00135,absent) 1237.50(I=0.002,neartol) 1370.20(I=0.001,neartol) 1377.60(I=0.000775,absent) 1387.76(I=0.00375,neartol) 1515.80(I=0.004,absent) 1618.90(I=0.005,absent) 1715.00(I=0.0005,neartol) 1721.00(I=0.00175,absent) 1887.00(I=0.0005,absent) 1905.00(I=0.002,neartol) 1931.00(I=0.0015,absent) 1949.00(I=0.0005,absent) 2054.20(I=0.00112,absent) 2251.80(I=0.001,neartol) 2295.90(I=0.004,absent) 2473.00(I=0.00075,absent) 2525.10(I=0.0005,absent) 2540.00(I=0.000225,absent) 2559.60(I=0.00183,absent) 2575.10(I=0.00137,absent) ...; G4-unclaimed-on-populated[keV]: 426.78(rI=100) 318.29(rI=40.3) 648.22(rI=100) 994.88(rI=31.2) 1291.36(rI=100) 1414.43(rI=28) 370.57(rI=6.88) 1295.09(rI=18.9) 1418.16(rI=13.6) 168.81(rI=5) 714.93(rI=25.5) 403.50(rI=9.2) 535.05(rI=7) 1160.31(rI=19) 332.68(rI=56.8) 577.72(rI=85.3) 758.48(rI=100) 613.31(rI=16.4) 1537.83(rI=10.1) 464.41(rI=22.5) 474.76(rI=31.8) 588.25(rI=73) 719.79(rI=45) 1592.98(rI=75) 1716.05(rI=60) ...; -->
 	</transition>
 	<transition branchRatio="0.218" child="Tb154" mode="it" parent="Tb154m"/>
 	<transition branchRatio="0.075" child="Ta155" mode="a" parent="Re159">

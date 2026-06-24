@@ -20,6 +20,18 @@ std::vector<GammaMatch> match_gammas(const G4LevelScheme& scheme,
   if (!scheme.loaded)
     return out;
 
+  // Per-gamma effective tolerances: max(fixed floor, rel_tol * energy).
+  auto eff = [&](double floor, double E) { return std::max(floor, p.rel_tol * E); };
+  std::vector<double> tol_wide(n), tol_tight(n), tol_widen(n), tol_accept(n), sig(n);
+  for (std::size_t g = 0; g < n; ++g) {
+    const double E = gammas[g].energy;
+    tol_wide[g]   = eff(p.wide_tol, E);
+    tol_tight[g]  = eff(p.tight_tol, E);
+    tol_widen[g]  = eff(p.widen_tol, E);
+    tol_accept[g] = eff(p.accept_tol, E);
+    sig[g]        = eff(p.energy_sigma, E);
+  }
+
   // Candidate G4 transition indices within the wide window, per gamma, sorted by
   // ascending |gap| (so candidates[g][0] is the nearest-energy choice).
   std::vector<std::vector<int>> cands(n);
@@ -29,7 +41,7 @@ std::vector<GammaMatch> match_gammas(const G4LevelScheme& scheme,
     std::vector<std::pair<double,int>> c;
     for (std::size_t t = 0; t < scheme.transitions.size(); ++t) {
       const double d = std::fabs(scheme.transitions[t].gamma_keV - gammas[g].energy);
-      if (d <= p.wide_tol) c.emplace_back(d, static_cast<int>(t));
+      if (d <= tol_wide[g]) c.emplace_back(d, static_cast<int>(t));
     }
     std::sort(c.begin(), c.end());
     for (auto& pr : c) cands[g].push_back(pr.second);
@@ -49,7 +61,7 @@ std::vector<GammaMatch> match_gammas(const G4LevelScheme& scheme,
       for (int c : cands[g]) {
         const G4Transition& tc = scheme.transitions[c];
         const double gap = gammas[g].energy - tc.gamma_keV;
-        double s = energy_score(gap, p.energy_sigma);
+        double s = energy_score(gap, sig[g]);
         for (int pidx : gammas[g].partners) {
           if (pidx < 0 || pidx >= static_cast<int>(n)) continue;
           const int pa = assign[pidx];
@@ -76,8 +88,8 @@ std::vector<GammaMatch> match_gammas(const G4LevelScheme& scheme,
     int n_tight = 0, n_widen = 0;
     for (int c : cands[g]) {
       const double d = std::fabs(scheme.transitions[c].gamma_keV - gammas[g].energy);
-      if (d <= p.tight_tol) ++n_tight;
-      if (d <= p.widen_tol) ++n_widen;
+      if (d <= tol_tight[g]) ++n_tight;
+      if (d <= tol_widen[g]) ++n_widen;
     }
     m.ambiguous = (n_tight >= 2);
 
@@ -91,9 +103,9 @@ std::vector<GammaMatch> match_gammas(const G4LevelScheme& scheme,
     }
 
     const double agap = std::fabs(gap);
-    const bool clean  = (agap <= p.tight_tol);
-    const bool widen_unique = (agap <= p.widen_tol && n_widen == 1);
-    const bool struct_ok = (agap <= p.accept_tol && supported);
+    const bool clean  = (agap <= tol_tight[g]);
+    const bool widen_unique = (agap <= tol_widen[g] && n_widen == 1);
+    const bool struct_ok = (agap <= tol_accept[g] && supported);
 
     m.accepted = clean || widen_unique || struct_ok;
     if (m.accepted) {
