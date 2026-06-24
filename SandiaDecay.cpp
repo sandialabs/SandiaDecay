@@ -641,7 +641,13 @@ RadParticle::RadParticle(ProductType p_type, float p_energy, float p_intensity)
     intensity( p_intensity ),
     hindrance( 0.0f ),
     logFT( 0.0f ),
-    forbiddenness( NoForbiddenness )
+    forbiddenness( NoForbiddenness ),
+    icc_total( 0.0f ),
+    icc_K( 0.0f ),
+    icc_L( 0.0f ),
+    multipole( 0 ),
+    mixing_ratio( 0.0f ),
+    ec_K( 0.0f ), ec_L( 0.0f ), ec_M( 0.0f ), ec_N( 0.0f )
     //, revision( RadParticle::NoRevision )
 {
 }
@@ -697,6 +703,29 @@ void RadParticle::set( const ::rapidxml::xml_node<char> *node )
   //if( revision_att )
   //  revision = revision_fromstr( revision_att->value() );
   //else revision = RadParticle::NoRevision;
+
+  // Cascade-detail enrichment attributes (optional; absent in pre-enrichment
+  // databases -> all default to 0). Long attribute names only; the minimizer is
+  // responsible for any short-name mapping.
+  const Attribute *iccTotal_att = node->first_attribute( "iccTotal", 8 );
+  const Attribute *iccK_att     = node->first_attribute( "iccK", 4 );
+  const Attribute *iccL_att     = node->first_attribute( "iccL", 4 );
+  const Attribute *mult_att     = node->first_attribute( "mult", 4 );
+  const Attribute *delta_att    = node->first_attribute( "delta", 5 );
+  const Attribute *ecK_att      = node->first_attribute( "ecK", 3 );
+  const Attribute *ecL_att      = node->first_attribute( "ecL", 3 );
+  const Attribute *ecM_att      = node->first_attribute( "ecM", 3 );
+  const Attribute *ecN_att      = node->first_attribute( "ecN", 3 );
+
+  icc_total    = iccTotal_att ? parse_float( iccTotal_att->value() ) : 0.0f;
+  icc_K        = iccK_att     ? parse_float( iccK_att->value() )     : 0.0f;
+  icc_L        = iccL_att     ? parse_float( iccL_att->value() )     : 0.0f;
+  multipole    = mult_att     ? std::atoi( mult_att->value() )       : 0;
+  mixing_ratio = delta_att    ? parse_float( delta_att->value() )    : 0.0f;
+  ec_K         = ecK_att      ? parse_float( ecK_att->value() )      : 0.0f;
+  ec_L         = ecL_att      ? parse_float( ecL_att->value() )      : 0.0f;
+  ec_M         = ecM_att      ? parse_float( ecM_att->value() )      : 0.0f;
+  ec_N         = ecN_att      ? parse_float( ecN_att->value() )      : 0.0f;
 }//void set( ::rapidxml::xml_node<char> *node )
 
 
@@ -848,6 +877,13 @@ void Transition::set( const ::rapidxml::xml_node<char> *node,
       bool found_partner = false;
       const float intensity = parse_float( intensity_val );
 
+      // Optional gamma-gamma angular-correlation coefficients (cascade-detail
+      // enrichment). Same short/long form regardless of ENABLE_SHORT_NAME.
+      const ::rapidxml::xml_attribute<char> *a2attr = coinc->first_attribute("a2",2);
+      const ::rapidxml::xml_attribute<char> *a4attr = coinc->first_attribute("a4",2);
+      const float corr_a2 = (a2attr && a2attr->value_size()) ? parse_float(a2attr->value()) : 0.0f;
+      const float corr_a4 = (a4attr && a4attr->value_size()) ? parse_float(a4attr->value()) : 0.0f;
+
 #if( ENABLE_SHORT_NAME )
       // Here we will optimistically assume the "id" value is a string representing an integer
       //  that gives the index of the matching particle - this assumes the input XML file was
@@ -872,7 +908,7 @@ void Transition::set( const ::rapidxml::xml_node<char> *node,
           
           if( rapidxml::internal::compare( id_val, id_len, trial_val, trial_len, true) )
           {
-            particle.coincidences.push_back( std::make_pair(trial_index,intensity) );
+            particle.coincidences.push_back( CoincidenceData(trial_index,intensity,corr_a2,corr_a4) );
             found_partner = true;
           }
         }//if( trial_index < new_particle_ids.size() )
@@ -888,7 +924,7 @@ void Transition::set( const ::rapidxml::xml_node<char> *node,
           
           if( rapidxml::internal::compare( id_val, id_len, trial_val, trial_len, true) )
           {
-            particle.coincidences.push_back( std::make_pair(j,intensity) );
+            particle.coincidences.push_back( CoincidenceData(j,intensity,corr_a2,corr_a4) );
             found_partner = true;
             break;
           }
@@ -1021,7 +1057,7 @@ size_t Nuclide::memsize() const
 
 size_t RadParticle::memsize() const
 {
-  return sizeof(RadParticle) + nelements(coincidences)*sizeof(std::pair<unsigned short int,float>);
+  return sizeof(RadParticle) + nelements(coincidences)*sizeof(CoincidenceData);
 }//size_t memsize() const
   
   

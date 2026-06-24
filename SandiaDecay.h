@@ -1081,6 +1081,32 @@ namespace SandiaDecay
     friend class SandiaDecayDataBase;
   };//class Nuclide
 
+  /** A single coincidence link between a particle and a partner product in the
+      same Transition.
+
+      Field names `first`/`second` are retained (matching the historical
+      std::pair<unsigned short int,float> this replaced) so existing consumer
+      code that reads `coincidences[i].first` / `.second` keeps working. The
+      added `a2`/`a4` carry the optional gamma-gamma angular-correlation Legendre
+      coefficients W(theta) = 1 + a2*P2(cos t) + a4*P4(cos t), measured between
+      this particle and the partner; both zero means isotropic (the default, and
+      the case for x-ray coincidences). These are populated from the
+      cascade-detail enrichment (GEANT4 PhotonEvaporation level data); they are
+      0 in databases generated before that enrichment.
+  */
+  struct CoincidenceData
+  {
+    unsigned short int first;  ///< index of the partner product within Transition::products
+    float second;              ///< coincidence fraction P(partner detected | this detected)
+    float a2;                  ///< angular-correlation P2 coefficient (0 => isotropic)
+    float a4;                  ///< angular-correlation P4 coefficient (0 => isotropic)
+
+    CoincidenceData() : first(0), second(0.0f), a2(0.0f), a4(0.0f) {}
+    CoincidenceData( unsigned short int partner, float frac,
+                     float p2 = 0.0f, float p4 = 0.0f )
+      : first(partner), second(frac), a2(p2), a4(p4) {}
+  };//struct CoincidenceData
+
   /** Represents information of a particle (of a given energy) given off during
       a nuclear transition.
   */
@@ -1110,16 +1136,35 @@ namespace SandiaDecay
      */
     ForbiddennessType forbiddenness;
 
+    /** Cascade-detail enrichment fields (from GEANT4 PhotonEvaporation /
+        RadioactiveDecay level data; 0 when the database predates the
+        enrichment or the datum is unavailable).
+
+        For GammaParticle / XrayParticle nuclear transitions:
+          icc_total    total internal conversion coefficient alpha = I_ce/I_gamma
+          icc_K        K-shell ICC (absolute, = f_K * alpha)
+          icc_L        total L-shell ICC (absolute)
+          multipole    GEANT4 multipolarity transition-type code (0 if unknown)
+          mixing_ratio multipole mixing ratio delta (0 if pure / unknown)
+        For CaptureElectronParticle (electron capture) particles:
+          ec_K, ec_L, ec_M, ec_N  normalized per-shell electron-capture fractions
+     */
+    float icc_total;
+    float icc_K;
+    float icc_L;
+    int   multipole;
+    float mixing_ratio;
+    float ec_K, ec_L, ec_M, ec_N;
+
     /** Other radiation particles expected to be detected when this particle
         is detected.  Useful for gamma spectroscopy where you have a chance
         of detecting two gammas as one detection event (thus you detect the
         summed energy).
-        Currently this information only includes gamma, and has not been well
-        tested.
-     
-        For each entry
+        Historically only gamma-gamma links were populated; the cascade-detail
+        enrichment additionally populates rigorous x-ray<->gamma links and the
+        a2/a4 angular-correlation coefficients (see CoincidenceData).
      */
-    std::vector< std::pair<unsigned short int,float> > coincidences;
+    std::vector< CoincidenceData > coincidences;
 
     /** Provides an _estimate_ of the memory taken up by this object, not what
         is actually allocated for it.  For development purposes only.

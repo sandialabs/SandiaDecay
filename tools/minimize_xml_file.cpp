@@ -519,8 +519,8 @@ void test_db_still_same( const string orig_xml_filename, const string final_xml_
         
         if( !coincidences_removed )
         {
-          const vector< pair<unsigned short int,float> > &oldcoinc = oldpart.coincidences;
-          const vector< pair<unsigned short int,float> > &newcoinc = newpart.coincidences;
+          const auto &oldcoinc = oldpart.coincidences;
+          const auto &newcoinc = newpart.coincidences;
           
           if( oldcoinc.size() != newcoinc.size() )
           {
