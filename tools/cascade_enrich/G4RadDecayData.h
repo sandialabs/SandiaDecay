@@ -19,6 +19,7 @@ namespace cascade_enrich {
 
 struct ECShellFractions {
   double daughter_ex_keV = 0.0;
+  double q_keV = 0.0;            ///< EC Q-value to this level (SandiaDecay keys EC on this)
   double fK = 0.0, fL = 0.0, fM = 0.0, fN = 0.0;  ///< normalized shell fractions (sum 1)
   double total_intensity = 0.0;  ///< sum of raw K+L+M+N intensities for this level
 };
@@ -33,6 +34,11 @@ struct G4ECData {
   /// EC shell fractions for the daughter level nearest `ex_keV` (within `tol`);
   /// falls back to the summary split when no per-level record matches.
   const ECShellFractions* for_level(double ex_keV, double tol = 0.6) const;
+
+  /// EC shell fractions for the level whose EC Q-value is nearest `q_keV`
+  /// (SandiaDecay's <electronCapture energy=...> is the Q to the level). Falls
+  /// back to the summary split when no per-level record matches.
+  const ECShellFractions* for_q(double q_keV, double tol = 1.0) const;
 };
 
 /// Load RadioactiveDecay z{Z}.a{A} (the PARENT nuclide's file; EC fractions live

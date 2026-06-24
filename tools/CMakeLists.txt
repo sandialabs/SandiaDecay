@@ -24,3 +24,6 @@ target_include_directories( decay_database_benchmark PUBLIC ${RAPID_XML_DIR} )
 add_executable( batch_edit_xml batch_edit_xml.cpp )
 target_link_libraries( batch_edit_xml SandiaDecay )
 target_include_directories( batch_edit_xml PUBLIC ${RAPID_XML_DIR} )
+
+# Cascade-detail enrichment tool (GEANT4 level data -> sandia.decay.xml).
+add_subdirectory( cascade_enrich )

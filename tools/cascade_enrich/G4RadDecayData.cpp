@@ -23,6 +23,21 @@ const ECShellFractions* G4ECData::for_level(double ex_keV, double tol) const {
   return has_summary ? &summary : nullptr;
 }
 
+const ECShellFractions* G4ECData::for_q(double q_keV, double tol) const {
+  const ECShellFractions* best = nullptr;
+  double best_d = tol;
+  for (const ECShellFractions& f : per_level) {
+    const double d = std::fabs(f.q_keV - q_keV);
+    if (d <= best_d) {
+      best_d = d;
+      best = &f;
+    }
+  }
+  if (best)
+    return best;
+  return has_summary ? &summary : nullptr;
+}
+
 namespace {
 
 std::vector<std::string> tokenize(const std::string& line) {
@@ -58,9 +73,10 @@ void add(Accum& a, char shell, double v) {
   }
 }
 
-ECShellFractions normalize(double ex, const Accum& a) {
+ECShellFractions normalize(double ex, double q, const Accum& a) {
   ECShellFractions f;
   f.daughter_ex_keV = ex;
+  f.q_keV = q;
   const double tot = a.K + a.L + a.M + a.N;
   f.total_intensity = tot;
   if (tot > 0.0) {
@@ -93,6 +109,7 @@ G4ECData load_ec_shell_fractions(int Zparent, int Aparent, const std::string& da
   // block is used.
   std::map<long, Accum> per_level_acc;       // key = round(daughter_ex*1000)
   std::map<long, double> per_level_ex;       // key -> representative ex
+  std::map<long, double> per_level_q;        // key -> representative Q
   Accum summary_acc;
   bool seen_ground_parent = false;
   bool past_ground_parent = false;
@@ -130,17 +147,20 @@ G4ECData load_ec_shell_fractions(int Zparent, int Aparent, const std::string& da
       // Per-level record: Mode daughterEx flag intensity(%) Q
       const double ex = std::atof(t[1].c_str());
       const double inten = std::atof(t[3].c_str());
+      const double q = std::atof(t[4].c_str());
       const long key = std::lround(ex * 1000.0);
       add(per_level_acc[key], shell, inten);
       per_level_ex[key] = ex;
+      per_level_q[key] = q;
     }
   }
 
   for (const auto& kv : per_level_acc)
-    data.per_level.push_back(normalize(per_level_ex[kv.first], kv.second));
+    data.per_level.push_back(
+        normalize(per_level_ex[kv.first], per_level_q[kv.first], kv.second));
 
   if (summary_acc.K + summary_acc.L + summary_acc.M + summary_acc.N > 0.0) {
-    data.summary = normalize(0.0, summary_acc);
+    data.summary = normalize(0.0, 0.0, summary_acc);
     data.has_summary = true;
   }
 
