@@ -20,7 +20,9 @@
 
 #include "AngularCorrelation.h"
 #include "G4LevelData.h"
-#include "G4RadDecayData.h"
+#include "StructureMatch.h"
+
+#include <set>
 
 #include <cmath>
 #include <cstdio>
@@ -40,9 +42,6 @@ using rapidxml::xml_node;
 using rapidxml::xml_attribute;
 
 namespace {
-
-const double kGammaMatchTolKeV = 0.6;
-const double kECQMatchTolKeV = 1.5;
 
 std::string env_or(const char* var, const std::string& fallback) {
   const char* v = std::getenv(var);
@@ -69,34 +68,17 @@ void set_attr(rapidxml::xml_document<char>& doc, xml_node<char>* node,
   }
 }
 
-void set_attr_int(rapidxml::xml_document<char>& doc, xml_node<char>* node,
-                  const char* name, int value) {
-  char buf[16];
-  std::snprintf(buf, sizeof(buf), "%d", value);
-  const char* val = doc.allocate_string(buf);
-  if (node->first_attribute(name))
-    node->first_attribute(name)->value(val);
-  else
-    node->append_attribute(doc.allocate_attribute(doc.allocate_string(name), val));
-}
-
 long zakey(int Z, int A) { return (static_cast<long>(Z) << 16) | A; }
 
-// Per-gamma resolution against the daughter G4 level scheme.
-struct GammaInfo {
-  xml_node<char>* node = nullptr;
-  double energy = 0.0;
-  int from_level = -1, to_level = -1;
-  bool matched = false;
-};
-
-const G4Transition* match_gamma(const G4LevelScheme& s, double e) {
+// Nearest G4 transition to energy e (any distance); for documenting misses.
+const G4Transition* nearest_g4(const G4LevelScheme& s, double e, double& gap) {
   const G4Transition* best = nullptr;
-  double bd = kGammaMatchTolKeV;
+  double bd = 1e18;
   for (const G4Transition& t : s.transitions) {
     const double d = std::fabs(t.gamma_keV - e);
-    if (d <= bd) { bd = d; best = &t; }
+    if (d < bd) { bd = d; best = &t; }
   }
+  gap = best ? (e - best->gamma_keV) : 0.0;
   return best;
 }
 
@@ -121,10 +103,6 @@ int main(int argc, char** argv) {
       ? argv[3]
       : env_or("G4LEVELGAMMADATA",
                "/Users/wcjohns/install/GEANT4-11.4.0/share/Geant4/data/PhotonEvaporation6.1.2");
-  const std::string raddecay = (argc > 4)
-      ? argv[4]
-      : env_or("G4RADIOACTIVEDATA",
-               "/Users/wcjohns/install/GEANT4-11.4.0/share/Geant4/data/RadioactiveDecay6.1.2");
 
   {
     std::ifstream test(out_path);
@@ -156,7 +134,6 @@ int main(int argc, char** argv) {
     }
 
     std::map<long, G4LevelScheme> level_cache;
-    std::map<long, G4ECData> ec_cache;
     auto get_scheme = [&](int Z, int A) -> const G4LevelScheme& {
       const long k = zakey(Z, A);
       auto it = level_cache.find(k);
@@ -164,16 +141,10 @@ int main(int argc, char** argv) {
         it = level_cache.emplace(k, load_photon_evaporation(Z, A, photoneva)).first;
       return it->second;
     };
-    auto get_ec = [&](int Z, int A) -> const G4ECData& {
-      const long k = zakey(Z, A);
-      auto it = ec_cache.find(k);
-      if (it == ec_cache.end())
-        it = ec_cache.emplace(k, load_ec_shell_fractions(Z, A, raddecay)).first;
-      return it->second;
-    };
 
-    long n_trans = 0, n_gamma = 0, n_gamma_matched = 0, n_icc = 0;
-    long n_coinc = 0, n_coinc_a2a4 = 0, n_ec = 0, n_ec_matched = 0;
+    long n_trans = 0, n_gamma = 0, n_accepted = 0, n_struct_changed = 0,
+         n_struct_used = 0, n_ambiguous = 0, n_coinc = 0, n_coinc_a2a4 = 0,
+         n_doc = 0;
 
     for (xml_node<char>* tr = root->first_node("transition"); tr;
          tr = tr->next_sibling("transition")) {
@@ -181,122 +152,145 @@ int main(int argc, char** argv) {
       xml_attribute<char>* pa = tr->first_attribute("parent");
       xml_attribute<char>* ca = tr->first_attribute("child");
       if (!pa || !ca) continue;
-      auto pit = sym_to_za.find(pa->value());
       auto cit = sym_to_za.find(ca->value());
-      if (pit == sym_to_za.end() || cit == sym_to_za.end()) continue;
-      const int Zp = pit->second.first, Ap = pit->second.second;
-      const int Zd = cit->second.first, Ad = cit->second.second;
+      if (cit == sym_to_za.end()) continue;
+      const G4LevelScheme& scheme = get_scheme(cit->second.first, cit->second.second);
 
-      const G4LevelScheme& scheme = get_scheme(Zd, Ad);
-
-      // Pass 1: gammas -> match to G4, write ICC, record level structure.
-      std::map<std::string, GammaInfo*> id_map;  // gamma id -> info
-      std::vector<GammaInfo> ginfos;
-      ginfos.reserve(16);
+      // Collect gammas (node, energy, intensity) and gamma-id -> index.
+      struct GNode { xml_node<char>* node; double energy; double intensity; };
+      std::vector<GNode> gs;
+      std::map<std::string, int> id_to_idx;
       for (xml_node<char>* g = tr->first_node("gamma"); g;
            g = g->next_sibling("gamma")) {
-        ++n_gamma;
-        GammaInfo info;
-        info.node = g;
-        bool has_e = false;
-        info.energy = attr_double(g, "energy", has_e);
-        if (!has_e) continue;
-        ginfos.push_back(info);
-      }
-      for (GammaInfo& info : ginfos) {
-        if (scheme.loaded) {
-          const G4Transition* t = match_gamma(scheme, info.energy);
-          if (t) {
-            info.matched = true;
-            info.from_level = t->from_level;
-            info.to_level = t->to_level;
-            ++n_gamma_matched;
-            set_attr(doc, info.node, "iccTotal", t->alpha_total);
-            set_attr(doc, info.node, "iccK", t->alpha_K());
-            set_attr(doc, info.node, "iccL", t->alpha_L());
-            set_attr_int(doc, info.node, "mult", t->multipole_code);
-            set_attr(doc, info.node, "delta", t->mixing_delta);
-            ++n_icc;
-          }
-        }
-        xml_attribute<char>* ida = info.node->first_attribute("id");
+        bool he; const double E = attr_double(g, "energy", he);
+        if (!he) continue;
+        bool hi; const double I = attr_double(g, "intensity", hi);
+        xml_attribute<char>* ida = g->first_attribute("id");
         if (ida && ida->value_size())
-          id_map[ida->value()] = &info;
+          id_to_idx[ida->value()] = static_cast<int>(gs.size());
+        gs.push_back({g, E, hi ? I : 0.0});
+      }
+      const std::size_t ng = gs.size();
+      n_gamma += static_cast<long>(ng);
+      if (ng == 0) continue;
+
+      // Resolve coincidence partners (by id) and run the structure-aware match.
+      std::vector<SdGamma> sg(ng);
+      for (std::size_t i = 0; i < ng; ++i) {
+        sg[i].energy = gs[i].energy;
+        for (xml_node<char>* cg = gs[i].node->first_node("coincidentGamma"); cg;
+             cg = cg->next_sibling("coincidentGamma")) {
+          xml_attribute<char>* ida = cg->first_attribute("id");
+          if (!ida) continue;
+          auto it = id_to_idx.find(ida->value());
+          if (it != id_to_idx.end()) sg[i].partners.push_back(it->second);
+        }
+      }
+      const std::vector<GammaMatch> mm = match_gammas(scheme, sg);
+
+      std::vector<int> from_lvl(ng, -1), to_lvl(ng, -1);
+      std::vector<const G4Transition*> gtr(ng, nullptr);
+      std::set<int> populated;
+      for (std::size_t i = 0; i < ng; ++i) {
+        if (mm[i].ambiguous) ++n_ambiguous;
+        if (!mm[i].accepted) continue;
+        ++n_accepted;
+        if (mm[i].structure_changed) ++n_struct_changed;
+        if (mm[i].structure_used) ++n_struct_used;
+        gtr[i] = &scheme.transitions[mm[i].g4];
+        from_lvl[i] = gtr[i]->from_level;
+        to_lvl[i] = gtr[i]->to_level;
+        populated.insert(gtr[i]->from_level);
+        populated.insert(gtr[i]->to_level);
       }
 
-      // Pass 2: gamma-gamma angular correlations on <coincidentGamma>.
-      if (scheme.loaded) {
-        for (GammaInfo& gi : ginfos) {
-          if (!gi.matched) continue;
-          for (xml_node<char>* cg = gi.node->first_node("coincidentGamma"); cg;
-               cg = cg->next_sibling("coincidentGamma")) {
-            ++n_coinc;
-            xml_attribute<char>* ida = cg->first_attribute("id");
-            if (!ida) continue;
-            auto pit2 = id_map.find(ida->value());
-            if (pit2 == id_map.end()) continue;
-            const GammaInfo& pj = *pit2->second;
-            if (!pj.matched) continue;
+      // a2/a4 on <coincidentGamma> for accepted, adjacent gamma pairs (lean: only
+      // the derived angular-correlation coefficients are written).
+      for (std::size_t i = 0; i < ng; ++i) {
+        if (!gtr[i]) continue;
+        for (xml_node<char>* cg = gs[i].node->first_node("coincidentGamma"); cg;
+             cg = cg->next_sibling("coincidentGamma")) {
+          ++n_coinc;
+          xml_attribute<char>* ida = cg->first_attribute("id");
+          if (!ida) continue;
+          auto it = id_to_idx.find(ida->value());
+          if (it == id_to_idx.end()) continue;
+          const int j = it->second;
+          if (j < 0 || !gtr[j]) continue;
 
-            // Determine the shared intermediate level (adjacent cascade only).
-            int twoJ_far_up = -1, twoJ_inter = -1, twoJ_far_low = -1;
-            int Lu0 = 0, Lup = 0, Ll0 = 0, Llp = 0;
-            double du = 0.0, dl = 0.0;
-            bool adjacent = false;
-            const G4Transition* tg = match_gamma(scheme, gi.energy);
-            const G4Transition* tp = match_gamma(scheme, pj.energy);
-            if (!tg || !tp) continue;
-
-            if (gi.to_level == pj.from_level) {
-              // gi is upper (from_up -> inter), pj is lower (inter -> far_low)
-              adjacent = true;
-              bool k1, k2, k3;
-              twoJ_far_up = level_twoJ(scheme, gi.from_level, k1);
-              twoJ_inter = level_twoJ(scheme, gi.to_level, k2);
-              twoJ_far_low = level_twoJ(scheme, pj.to_level, k3);
-              Lu0 = tg->L0; Lup = tg->Lp; du = tg->mixing_delta;
-              Ll0 = tp->L0; Llp = tp->Lp; dl = tp->mixing_delta;
-              if (!(k1 && k2 && k3)) adjacent = false;
-            } else if (pj.to_level == gi.from_level) {
-              // pj is upper, gi is lower
-              adjacent = true;
-              bool k1, k2, k3;
-              twoJ_far_up = level_twoJ(scheme, pj.from_level, k1);
-              twoJ_inter = level_twoJ(scheme, pj.to_level, k2);
-              twoJ_far_low = level_twoJ(scheme, gi.to_level, k3);
-              Lu0 = tp->L0; Lup = tp->Lp; du = tp->mixing_delta;
-              Ll0 = tg->L0; Llp = tg->Lp; dl = tg->mixing_delta;
-              if (!(k1 && k2 && k3)) adjacent = false;
-            }
-
-            if (!adjacent) continue;
-            AngularCorrCoeffs c = angular_correlation(
-                twoJ_far_up, Lu0, Lup, du, twoJ_inter, Ll0, Llp, dl, twoJ_far_low);
-            if (!c.valid) continue;
-            set_attr(doc, cg, "a2", c.a2);
-            set_attr(doc, cg, "a4", c.a4);
-            ++n_coinc_a2a4;
+          int twoJ_up = -1, twoJ_inter = -1, twoJ_low = -1;
+          int Lu0 = 0, Lup = 0, Ll0 = 0, Llp = 0;
+          double du = 0.0, dl = 0.0;
+          bool adj = false, k1 = false, k2 = false, k3 = false;
+          if (to_lvl[i] == from_lvl[j]) {
+            adj = true;
+            twoJ_up = level_twoJ(scheme, from_lvl[i], k1);
+            twoJ_inter = level_twoJ(scheme, to_lvl[i], k2);
+            twoJ_low = level_twoJ(scheme, to_lvl[j], k3);
+            Lu0 = gtr[i]->L0; Lup = gtr[i]->Lp; du = gtr[i]->mixing_delta;
+            Ll0 = gtr[j]->L0; Llp = gtr[j]->Lp; dl = gtr[j]->mixing_delta;
+          } else if (to_lvl[j] == from_lvl[i]) {
+            adj = true;
+            twoJ_up = level_twoJ(scheme, from_lvl[j], k1);
+            twoJ_inter = level_twoJ(scheme, to_lvl[j], k2);
+            twoJ_low = level_twoJ(scheme, to_lvl[i], k3);
+            Lu0 = gtr[j]->L0; Lup = gtr[j]->Lp; du = gtr[j]->mixing_delta;
+            Ll0 = gtr[i]->L0; Llp = gtr[i]->Lp; dl = gtr[i]->mixing_delta;
           }
+          if (!adj || !(k1 && k2 && k3)) continue;
+          const AngularCorrCoeffs c = angular_correlation(
+              twoJ_up, Lu0, Lup, du, twoJ_inter, Ll0, Llp, dl, twoJ_low);
+          if (!c.valid) continue;
+          set_attr(doc, cg, "a2", c.a2);
+          set_attr(doc, cg, "a4", c.a4);
+          ++n_coinc_a2a4;
         }
       }
 
-      // electronCapture shell fractions (matched by EC Q-value).
-      const G4ECData& ec = get_ec(Zp, Ap);
-      if (ec.loaded) {
-        for (xml_node<char>* e = tr->first_node("electronCapture"); e;
-             e = e->next_sibling("electronCapture")) {
-          ++n_ec;
-          bool has_e = false;
-          const double q = attr_double(e, "energy", has_e);
-          const ECShellFractions* f =
-              has_e ? ec.for_q(q, kECQMatchTolKeV) : ec.for_q(0.0, kECQMatchTolKeV);
-          if (!f) continue;
-          set_attr(doc, e, "ecK", f->fK);
-          set_attr(doc, e, "ecL", f->fL);
-          set_attr(doc, e, "ecM", f->fM);
-          set_attr(doc, e, "ecN", f->fN);
-          ++n_ec_matched;
+      // Documentation comment: SandiaDecay gammas with no accepted G4 match, and
+      // G4 transitions on populated cascade levels that no SD gamma claimed.
+      std::string doc_sd, doc_g4;
+      int nd = 0;
+      for (std::size_t i = 0; i < ng; ++i) {
+        if (mm[i].accepted) continue;
+        if (nd++ >= 25) { doc_sd += " ..."; break; }
+        const char* reason;
+        if (std::fabs(gs[i].energy - 510.999) < 1.0) {
+          reason = "annih511";
+        } else {
+          double gap = 0.0;
+          const G4Transition* nt =
+              scheme.loaded ? nearest_g4(scheme, gs[i].energy, gap) : nullptr;
+          reason = (nt && std::fabs(gap) <= 3.0) ? "neartol" : "absent";
         }
+        char b[96];
+        std::snprintf(b, sizeof(b), " %.2f(I=%.3g,%s)",
+                      gs[i].energy, gs[i].intensity, reason);
+        doc_sd += b;
+      }
+      if (scheme.loaded) {
+        int ng4 = 0;
+        for (const G4Transition& t : scheme.transitions) {
+          if (t.rel_intensity < 5.0 || !populated.count(t.from_level)) continue;
+          bool claimed = false;
+          for (std::size_t i = 0; i < ng; ++i)
+            if (gtr[i] == &t) { claimed = true; break; }
+          if (claimed) continue;
+          if (ng4++ >= 25) { doc_g4 += " ..."; break; }
+          char b[64];
+          std::snprintf(b, sizeof(b), " %.2f(rI=%.3g)", t.gamma_keV, t.rel_intensity);
+          doc_g4 += b;
+        }
+      }
+      if (!doc_sd.empty() || !doc_g4.empty()) {
+        std::string txt = " cascade-match:";
+        if (!scheme.loaded) txt += " (no G4 level file for daughter)";
+        if (!doc_sd.empty()) txt += " SD-unmatched[keV]:" + doc_sd + ";";
+        if (!doc_g4.empty()) txt += " G4-unclaimed-on-populated[keV]:" + doc_g4 + ";";
+        txt += " ";
+        tr->append_node(doc.allocate_node(rapidxml::node_comment, nullptr,
+                                          doc.allocate_string(txt.c_str())));
+        ++n_doc;
       }
     }
 
@@ -304,12 +298,15 @@ int main(int argc, char** argv) {
     if (!out) { std::cerr << "Cannot open output.\n"; return 1; }
     rapidxml::print<char>(out, doc, 0);
 
-    std::printf("Enriched %ld transitions:\n", n_trans);
-    std::printf("  gammas: %ld (%ld matched to G4, %ld ICC written)\n",
-                n_gamma, n_gamma_matched, n_icc);
-    std::printf("  coincidences: %ld (%ld got a2/a4)\n", n_coinc, n_coinc_a2a4);
-    std::printf("  electronCapture: %ld (%ld got shell fractions)\n",
-                n_ec, n_ec_matched);
+    const double pct = n_gamma ? 100.0 * n_accepted / n_gamma : 0.0;
+    std::printf("Enriched %ld transitions (%ld documented with miss comments):\n",
+                n_trans, n_doc);
+    std::printf("  gammas: %ld; accepted G4 matches: %ld (%.1f%%)\n",
+                n_gamma, n_accepted, pct);
+    std::printf("  ambiguous (2+ within tol): %ld; structure changed the pick: %ld; "
+                "accepted via structure only: %ld\n",
+                n_ambiguous, n_struct_changed, n_struct_used);
+    std::printf("  coincidences scanned: %ld; got a2/a4: %ld\n", n_coinc, n_coinc_a2a4);
     std::printf("Wrote %s\n", out_path.c_str());
   } catch (std::exception& e) {
     std::fprintf(stderr, "Error: %s\n", e.what());
