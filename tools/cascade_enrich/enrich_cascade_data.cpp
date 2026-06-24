@@ -20,6 +20,7 @@
 
 #include "AngularCorrelation.h"
 #include "G4LevelData.h"
+#include "G4RadDecayData.h"
 #include "StructureMatch.h"
 
 #include <set>
@@ -103,6 +104,10 @@ int main(int argc, char** argv) {
       ? argv[3]
       : env_or("G4LEVELGAMMADATA",
                "/Users/wcjohns/install/GEANT4-11.4.0/share/Geant4/data/PhotonEvaporation6.1.2");
+  const std::string raddecay = (argc > 4)
+      ? argv[4]
+      : env_or("G4RADIOACTIVEDATA",
+               "/Users/wcjohns/install/GEANT4-11.4.0/share/Geant4/data/RadioactiveDecay6.1.2");
 
   {
     std::ifstream test(out_path);
@@ -141,10 +146,18 @@ int main(int argc, char** argv) {
         it = level_cache.emplace(k, load_photon_evaporation(Z, A, photoneva)).first;
       return it->second;
     };
+    std::map<long, G4ECData> ec_cache;
+    auto get_ec = [&](int Z, int A) -> const G4ECData& {
+      const long k = zakey(Z, A);
+      auto it = ec_cache.find(k);
+      if (it == ec_cache.end())
+        it = ec_cache.emplace(k, load_ec_shell_fractions(Z, A, raddecay)).first;
+      return it->second;
+    };
 
     long n_trans = 0, n_gamma = 0, n_accepted = 0, n_struct_changed = 0,
          n_struct_used = 0, n_ambiguous = 0, n_coinc = 0, n_coinc_a2a4 = 0,
-         n_doc = 0;
+         n_icc = 0, n_ec = 0, n_ec_matched = 0, n_doc = 0;
 
     for (xml_node<char>* tr = root->first_node("transition"); tr;
          tr = tr->next_sibling("transition")) {
@@ -202,6 +215,14 @@ int main(int argc, char** argv) {
         to_lvl[i] = gtr[i]->to_level;
         populated.insert(gtr[i]->from_level);
         populated.insert(gtr[i]->to_level);
+        // Internal-conversion coefficients (raw inputs for the vacancy-level
+        // x-ray model). Written only when nonzero, on IC-active gammas.
+        if (gtr[i]->alpha_total > 0.0) {
+          set_attr(doc, gs[i].node, "iccTotal", gtr[i]->alpha_total);
+          set_attr(doc, gs[i].node, "iccK", gtr[i]->alpha_K());
+          set_attr(doc, gs[i].node, "iccL", gtr[i]->alpha_L());
+          ++n_icc;
+        }
       }
 
       // a2/a4 on <coincidentGamma> for accepted, adjacent gamma pairs (lean: only
@@ -292,6 +313,27 @@ int main(int argc, char** argv) {
                                           doc.allocate_string(txt.c_str())));
         ++n_doc;
       }
+
+      // electronCapture shell fractions (raw input for the vacancy-level x-ray
+      // model), matched by EC Q-value to the parent's RadioactiveDecay data.
+      auto pit = sym_to_za.find(pa->value());
+      if (pit != sym_to_za.end()) {
+        const G4ECData& ec = get_ec(pit->second.first, pit->second.second);
+        if (ec.loaded) {
+          for (xml_node<char>* e = tr->first_node("electronCapture"); e;
+               e = e->next_sibling("electronCapture")) {
+            ++n_ec;
+            bool he; const double q = attr_double(e, "energy", he);
+            const ECShellFractions* f = ec.for_q(he ? q : 0.0, 1.5);
+            if (!f) continue;
+            set_attr(doc, e, "ecK", f->fK);
+            set_attr(doc, e, "ecL", f->fL);
+            set_attr(doc, e, "ecM", f->fM);
+            set_attr(doc, e, "ecN", f->fN);
+            ++n_ec_matched;
+          }
+        }
+      }
     }
 
     std::ofstream out(out_path, std::ios::out | std::ios::binary);
@@ -307,6 +349,8 @@ int main(int argc, char** argv) {
                 "accepted via structure only: %ld\n",
                 n_ambiguous, n_struct_changed, n_struct_used);
     std::printf("  coincidences scanned: %ld; got a2/a4: %ld\n", n_coinc, n_coinc_a2a4);
+    std::printf("  gammas with ICC written: %ld; electronCapture with shell fractions: %ld/%ld\n",
+                n_icc, n_ec_matched, n_ec);
     std::printf("Wrote %s\n", out_path.c_str());
   } catch (std::exception& e) {
     std::fprintf(stderr, "Error: %s\n", e.what());
