@@ -51,6 +51,8 @@ struct G4Transition {
   double alpha_L() const {
     return alpha_total * (icc_shell[1] + icc_shell[2] + icc_shell[3]);
   }
+  /// Absolute per-subshell L ICC. sub = 1,2,3 for L1,L2,L3.
+  double alpha_Lsub(int sub) const { return alpha_total * icc_shell[sub]; }
 };
 
 struct G4LevelScheme {

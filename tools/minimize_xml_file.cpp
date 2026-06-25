@@ -822,10 +822,14 @@ void shrink_xml_elements( rapidxml::xml_node<char> *doc_node )
       // small integers -> left as-is.
       make_float_val_compact( gamma->first_attribute("iccTotal"), 4 );
       make_float_val_compact( gamma->first_attribute("iccK"), 4 );
-      make_float_val_compact( gamma->first_attribute("iccL"), 4 );
+      make_float_val_compact( gamma->first_attribute("iccL1"), 4 );
+      make_float_val_compact( gamma->first_attribute("iccL2"), 4 );
+      make_float_val_compact( gamma->first_attribute("iccL3"), 4 );
       rename_attrib( gamma, "iccTotal", "ic" );
       rename_attrib( gamma, "iccK", "ik" );
-      rename_attrib( gamma, "iccL", "il" );
+      rename_attrib( gamma, "iccL1", "il1" );
+      rename_attrib( gamma, "iccL2", "il2" );
+      rename_attrib( gamma, "iccL3", "il3" );
 
       XML_FOREACH_DAUGHTER( coinc, gamma, "coincidentGamma" )
       {

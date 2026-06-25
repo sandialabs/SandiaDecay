@@ -4,9 +4,9 @@
  * RadioactiveDecay level data, injects the extra per-transition / per-particle
  * data needed for high-fidelity true-coincidence-summing:
  *
- *   <gamma ... iccTotal= iccK= iccL= mult= delta=>   internal conversion + multipole
+ *   <gamma ... iccTotal= iccK= iccL1= iccL2= iccL3= mult= delta=>  IC + multipole
  *   <coincidentGamma ... a2= a4=>                    gamma-gamma angular correlation
- *   <electronCapture ... ecK= ecL= ecM= ecN=>        EC shell fractions
+ *   <electronCapture ... ecK= ecL=>                  EC shell fractions (K, L)
  *
  * a2/a4 are computed from the nuclear spin sequence + multipole mixing via the
  * F-coefficient (Racah) formalism (see AngularCorrelation). All injected
@@ -43,6 +43,18 @@ using rapidxml::xml_node;
 using rapidxml::xml_attribute;
 
 namespace {
+
+// Space-only gate (NOT a correctness guard): the 10 keV x-ray cut is enforced
+// downstream by the per-subshell L fluorescence table (sub-10-keV lines removed
+// -> empty subshells for light elements) and by the engine skipping <10 keV
+// lines, so no sub-10-keV L x-ray can ever be emitted regardless of this gate.
+// Its only purpose is to avoid writing dead iccL1/L2/L3 + ecL attributes onto
+// the many low-Z IC gammas whose L x-rays are all cut. It is set to the element
+// table's actual onset (Z=69, Tm: the lowest Z keeping any L line >= 10 keV after
+// the cut -- the L1->N Lgamma line) so it can never over-cut data the energy cut
+// would keep. Regenerate the onset from tools/extract_g4_xs --fluor-l if the cut
+// changes.
+constexpr int kLxrayMinZ = 69;
 
 std::string env_or(const char* var, const std::string& fallback) {
   const char* v = std::getenv(var);
@@ -189,6 +201,7 @@ int main(int argc, char** argv) {
       if (!pa || !ca) continue;
       auto cit = sym_to_za.find(ca->value());
       if (cit == sym_to_za.end()) continue;
+      const int daughter_Z = cit->second.first;
       const G4LevelScheme& scheme = get_scheme(cit->second.first, cit->second.second);
 
       // Collect gammas (node, energy, intensity) and gamma-id -> index.
@@ -239,10 +252,19 @@ int main(int argc, char** argv) {
         populated.insert(gtr[i]->to_level);
         // Internal-conversion coefficients (raw inputs for the vacancy-level
         // x-ray model). Written only when nonzero, on IC-active gammas.
+        // K is written for all Z (K x-rays are >10 keV for every EC/IC-relevant
+        // daughter). L is written per-subshell (iccL1/iccL2/iccL3) ONLY for
+        // daughters whose L x-rays clear the 10 keV file cut (Z >= kLxrayMinZ);
+        // below that the L x-rays are sub-10 keV and are not modelled, so the
+        // (space-costly) per-subshell L coefficients are omitted entirely.
         if (gtr[i]->alpha_total > 0.0) {
           set_attr(doc, gs[i].node, "iccTotal", gtr[i]->alpha_total);
           set_attr(doc, gs[i].node, "iccK", gtr[i]->alpha_K());
-          set_attr(doc, gs[i].node, "iccL", gtr[i]->alpha_L());
+          if (daughter_Z >= kLxrayMinZ) {
+            set_attr(doc, gs[i].node, "iccL1", gtr[i]->alpha_Lsub(1));
+            set_attr(doc, gs[i].node, "iccL2", gtr[i]->alpha_Lsub(2));
+            set_attr(doc, gs[i].node, "iccL3", gtr[i]->alpha_Lsub(3));
+          }
           ++n_icc;
         }
         // Level-scheme topology (G4 level indices) for the level-path cascade
@@ -352,10 +374,13 @@ int main(int argc, char** argv) {
             bool he; const double q = attr_double(e, "energy", he);
             const ECShellFractions* f = ec.for_q(he ? q : 0.0, 1.5);
             if (!f) continue;
+            // K vacancy fraction for all Z (K x-rays > 10 keV everywhere this
+            // matters). L only for daughters whose L x-rays clear the 10 keV cut;
+            // M/N x-rays are sub-10 keV for every element and are never modelled,
+            // so ecM/ecN are dropped entirely.
             set_attr(doc, e, "ecK", f->fK);
-            set_attr(doc, e, "ecL", f->fL);
-            set_attr(doc, e, "ecM", f->fM);
-            set_attr(doc, e, "ecN", f->fN);
+            if (daughter_Z >= kLxrayMinZ)
+              set_attr(doc, e, "ecL", f->fL);
             // Daughter level fed by this EC branch (index in the daughter scheme),
             // for the level-path cascade realization.
             const int lvl = scheme.loaded

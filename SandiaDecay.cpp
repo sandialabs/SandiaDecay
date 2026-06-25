@@ -644,7 +644,7 @@ RadParticle::RadParticle(ProductType p_type, float p_energy, float p_intensity)
     forbiddenness( NoForbiddenness ),
     icc_total( 0.0f ),
     icc_K( 0.0f ),
-    icc_L( 0.0f ),
+    icc_L1( 0.0f ), icc_L2( 0.0f ), icc_L3( 0.0f ),
     multipole( 0 ),
     mixing_ratio( 0.0f ),
     ec_K( 0.0f ), ec_L( 0.0f ), ec_M( 0.0f ), ec_N( 0.0f ),
@@ -708,12 +708,14 @@ void RadParticle::set( const ::rapidxml::xml_node<char> *node )
   // Cascade-detail enrichment attributes (optional; absent in pre-enrichment
   // databases -> all default to 0). In minimized databases the names are
   // shortened (see minimize_xml_file::shrink_xml_elements): iccTotal->ic,
-  // iccK->ik, iccL->il, ecK..ecN->ek..en, lvl->lv (fl/tl/a2/a4 are already
-  // minimal and unchanged).
+  // iccK->ik, iccL1/L2/L3->il1/il2/il3, ecK/ecL->ek/el, lvl->lv (fl/tl/a2/a4 are
+  // already minimal and unchanged).
 #if( ENABLE_SHORT_NAME )
   const Attribute *iccTotal_att = shortname ? node->first_attribute("ic",2) : node->first_attribute( "iccTotal", 8 );
   const Attribute *iccK_att     = shortname ? node->first_attribute("ik",2) : node->first_attribute( "iccK", 4 );
-  const Attribute *iccL_att     = shortname ? node->first_attribute("il",2) : node->first_attribute( "iccL", 4 );
+  const Attribute *iccL1_att    = shortname ? node->first_attribute("il1",3) : node->first_attribute( "iccL1", 5 );
+  const Attribute *iccL2_att    = shortname ? node->first_attribute("il2",3) : node->first_attribute( "iccL2", 5 );
+  const Attribute *iccL3_att    = shortname ? node->first_attribute("il3",3) : node->first_attribute( "iccL3", 5 );
   const Attribute *ecK_att      = shortname ? node->first_attribute("ek",2) : node->first_attribute( "ecK", 3 );
   const Attribute *ecL_att      = shortname ? node->first_attribute("el",2) : node->first_attribute( "ecL", 3 );
   const Attribute *ecM_att      = shortname ? node->first_attribute("em",2) : node->first_attribute( "ecM", 3 );
@@ -721,7 +723,9 @@ void RadParticle::set( const ::rapidxml::xml_node<char> *node )
 #else
   const Attribute *iccTotal_att = node->first_attribute( "iccTotal", 8 );
   const Attribute *iccK_att     = node->first_attribute( "iccK", 4 );
-  const Attribute *iccL_att     = node->first_attribute( "iccL", 4 );
+  const Attribute *iccL1_att    = node->first_attribute( "iccL1", 5 );
+  const Attribute *iccL2_att    = node->first_attribute( "iccL2", 5 );
+  const Attribute *iccL3_att    = node->first_attribute( "iccL3", 5 );
   const Attribute *ecK_att      = node->first_attribute( "ecK", 3 );
   const Attribute *ecL_att      = node->first_attribute( "ecL", 3 );
   const Attribute *ecM_att      = node->first_attribute( "ecM", 3 );
@@ -732,7 +736,9 @@ void RadParticle::set( const ::rapidxml::xml_node<char> *node )
 
   icc_total    = iccTotal_att ? parse_float( iccTotal_att->value() ) : 0.0f;
   icc_K        = iccK_att     ? parse_float( iccK_att->value() )     : 0.0f;
-  icc_L        = iccL_att     ? parse_float( iccL_att->value() )     : 0.0f;
+  icc_L1       = iccL1_att    ? parse_float( iccL1_att->value() )    : 0.0f;
+  icc_L2       = iccL2_att    ? parse_float( iccL2_att->value() )    : 0.0f;
+  icc_L3       = iccL3_att    ? parse_float( iccL3_att->value() )    : 0.0f;
   multipole    = mult_att     ? std::atoi( mult_att->value() )       : 0;
   mixing_ratio = delta_att    ? parse_float( delta_att->value() )    : 0.0f;
   ec_K         = ecK_att      ? parse_float( ecK_att->value() )      : 0.0f;

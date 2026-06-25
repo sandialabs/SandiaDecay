@@ -1143,15 +1143,18 @@ namespace SandiaDecay
         For GammaParticle / XrayParticle nuclear transitions:
           icc_total    total internal conversion coefficient alpha = I_ce/I_gamma
           icc_K        K-shell ICC (absolute, = f_K * alpha)
-          icc_L        total L-shell ICC (absolute)
+          icc_L1/L2/L3 per-subshell L ICC (absolute). Written only for daughters
+                       whose L x-rays clear the 10 keV cut (high Z); 0 otherwise.
           multipole    GEANT4 multipolarity transition-type code (0 if unknown)
           mixing_ratio multipole mixing ratio delta (0 if pure / unknown)
         For CaptureElectronParticle (electron capture) particles:
           ec_K, ec_L, ec_M, ec_N  normalized per-shell electron-capture fractions
+                       (ec_M/ec_N are dropped by current enrichment: their x-rays
+                       are sub-10 keV; they remain for older databases.)
      */
     float icc_total;
     float icc_K;
-    float icc_L;
+    float icc_L1, icc_L2, icc_L3;
     int   multipole;
     float mixing_ratio;
     float ec_K, ec_L, ec_M, ec_N;
