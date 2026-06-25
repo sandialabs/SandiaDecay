@@ -752,16 +752,27 @@ void shrink_xml_elements( rapidxml::xml_node<char> *doc_node )
     XML_FOREACH_DAUGHTER( child, trans, "electronCapture" )
     {
       child->name( "ec" );
-      
+
       remove_trailing_zeroes( child->first_attribute("energy") );
       remove_trailing_zeroes( child->first_attribute("intensity") );
       remove_trailing_zeroes( child->first_attribute("logFT") );
       remove_trailing_zeroes( child->first_attribute("forbiddenness") );
-      
+
       rename_attrib( child, "energy", "e" );
       rename_attrib( child, "intensity", "i" );
       rename_attrib( child, "logFT", "lft" );
       rename_attrib( child, "forbiddenness", "f" );
+
+      // Cascade-detail: electron-capture shell fractions + fed level index.
+      make_float_val_compact( child->first_attribute("ecK"), 4 );
+      make_float_val_compact( child->first_attribute("ecL"), 4 );
+      make_float_val_compact( child->first_attribute("ecM"), 4 );
+      make_float_val_compact( child->first_attribute("ecN"), 4 );
+      rename_attrib( child, "ecK", "ek" );
+      rename_attrib( child, "ecL", "el" );
+      rename_attrib( child, "ecM", "em" );
+      rename_attrib( child, "ecN", "en" );
+      rename_attrib( child, "lvl", "lv" );  // fed level index (integer)
     }
     
     XML_FOREACH_DAUGHTER( child, trans, "alpha" )
@@ -805,16 +816,31 @@ void shrink_xml_elements( rapidxml::xml_node<char> *doc_node )
       
       rename_attrib( gamma, "energy", "e" );
       rename_attrib( gamma, "intensity", "i" );
-      
+
+      // Cascade-detail: internal-conversion coefficients. 4 significant figures
+      // is far below the physical uncertainty on these. Level indices fl/tl are
+      // small integers -> left as-is.
+      make_float_val_compact( gamma->first_attribute("iccTotal"), 4 );
+      make_float_val_compact( gamma->first_attribute("iccK"), 4 );
+      make_float_val_compact( gamma->first_attribute("iccL"), 4 );
+      rename_attrib( gamma, "iccTotal", "ic" );
+      rename_attrib( gamma, "iccK", "ik" );
+      rename_attrib( gamma, "iccL", "il" );
+
       XML_FOREACH_DAUGHTER( coinc, gamma, "coincidentGamma" )
       {
         coinc->name("c");
-        
+
         remove_trailing_zeroes( coinc->first_attribute("energy") );
         remove_trailing_zeroes( coinc->first_attribute("intensity") );
-        
+
         rename_attrib( coinc, "energy", "e" );
         rename_attrib( coinc, "intensity", "i" );
+
+        // Cascade-detail: gamma-gamma angular-correlation coefficients (names a2,
+        // a4 are already minimal). 4 sig figs is ample.
+        make_float_val_compact( coinc->first_attribute("a2"), 4 );
+        make_float_val_compact( coinc->first_attribute("a4"), 4 );
       }
     }
   }//foreach( transition )

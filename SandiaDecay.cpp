@@ -706,17 +706,29 @@ void RadParticle::set( const ::rapidxml::xml_node<char> *node )
   //else revision = RadParticle::NoRevision;
 
   // Cascade-detail enrichment attributes (optional; absent in pre-enrichment
-  // databases -> all default to 0). Long attribute names only; the minimizer is
-  // responsible for any short-name mapping.
+  // databases -> all default to 0). In minimized databases the names are
+  // shortened (see minimize_xml_file::shrink_xml_elements): iccTotal->ic,
+  // iccK->ik, iccL->il, ecK..ecN->ek..en, lvl->lv (fl/tl/a2/a4 are already
+  // minimal and unchanged).
+#if( ENABLE_SHORT_NAME )
+  const Attribute *iccTotal_att = shortname ? node->first_attribute("ic",2) : node->first_attribute( "iccTotal", 8 );
+  const Attribute *iccK_att     = shortname ? node->first_attribute("ik",2) : node->first_attribute( "iccK", 4 );
+  const Attribute *iccL_att     = shortname ? node->first_attribute("il",2) : node->first_attribute( "iccL", 4 );
+  const Attribute *ecK_att      = shortname ? node->first_attribute("ek",2) : node->first_attribute( "ecK", 3 );
+  const Attribute *ecL_att      = shortname ? node->first_attribute("el",2) : node->first_attribute( "ecL", 3 );
+  const Attribute *ecM_att      = shortname ? node->first_attribute("em",2) : node->first_attribute( "ecM", 3 );
+  const Attribute *ecN_att      = shortname ? node->first_attribute("en",2) : node->first_attribute( "ecN", 3 );
+#else
   const Attribute *iccTotal_att = node->first_attribute( "iccTotal", 8 );
   const Attribute *iccK_att     = node->first_attribute( "iccK", 4 );
   const Attribute *iccL_att     = node->first_attribute( "iccL", 4 );
-  const Attribute *mult_att     = node->first_attribute( "mult", 4 );
-  const Attribute *delta_att    = node->first_attribute( "delta", 5 );
   const Attribute *ecK_att      = node->first_attribute( "ecK", 3 );
   const Attribute *ecL_att      = node->first_attribute( "ecL", 3 );
   const Attribute *ecM_att      = node->first_attribute( "ecM", 3 );
   const Attribute *ecN_att      = node->first_attribute( "ecN", 3 );
+#endif
+  const Attribute *mult_att     = node->first_attribute( "mult", 4 );
+  const Attribute *delta_att    = node->first_attribute( "delta", 5 );
 
   icc_total    = iccTotal_att ? parse_float( iccTotal_att->value() ) : 0.0f;
   icc_K        = iccK_att     ? parse_float( iccK_att->value() )     : 0.0f;
@@ -728,9 +740,13 @@ void RadParticle::set( const ::rapidxml::xml_node<char> *node )
   ec_M         = ecM_att      ? parse_float( ecM_att->value() )      : 0.0f;
   ec_N         = ecN_att      ? parse_float( ecN_att->value() )      : 0.0f;
 
-  const Attribute *fl_att  = node->first_attribute( "fl", 2 );
+  const Attribute *fl_att  = node->first_attribute( "fl", 2 );  // already minimal
   const Attribute *tl_att  = node->first_attribute( "tl", 2 );
+#if( ENABLE_SHORT_NAME )
+  const Attribute *lvl_att = shortname ? node->first_attribute("lv",2) : node->first_attribute( "lvl", 3 );
+#else
   const Attribute *lvl_att = node->first_attribute( "lvl", 3 );
+#endif
   from_level = fl_att  ? std::atoi( fl_att->value() )  : -1;
   to_level   = tl_att  ? std::atoi( tl_att->value() )  : -1;
   fed_level  = lvl_att ? std::atoi( lvl_att->value() ) : -1;
