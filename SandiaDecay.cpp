@@ -647,7 +647,8 @@ RadParticle::RadParticle(ProductType p_type, float p_energy, float p_intensity)
     icc_L( 0.0f ),
     multipole( 0 ),
     mixing_ratio( 0.0f ),
-    ec_K( 0.0f ), ec_L( 0.0f ), ec_M( 0.0f ), ec_N( 0.0f )
+    ec_K( 0.0f ), ec_L( 0.0f ), ec_M( 0.0f ), ec_N( 0.0f ),
+    from_level( -1 ), to_level( -1 ), fed_level( -1 )
     //, revision( RadParticle::NoRevision )
 {
 }
@@ -726,6 +727,13 @@ void RadParticle::set( const ::rapidxml::xml_node<char> *node )
   ec_L         = ecL_att      ? parse_float( ecL_att->value() )      : 0.0f;
   ec_M         = ecM_att      ? parse_float( ecM_att->value() )      : 0.0f;
   ec_N         = ecN_att      ? parse_float( ecN_att->value() )      : 0.0f;
+
+  const Attribute *fl_att  = node->first_attribute( "fl", 2 );
+  const Attribute *tl_att  = node->first_attribute( "tl", 2 );
+  const Attribute *lvl_att = node->first_attribute( "lvl", 3 );
+  from_level = fl_att  ? std::atoi( fl_att->value() )  : -1;
+  to_level   = tl_att  ? std::atoi( tl_att->value() )  : -1;
+  fed_level  = lvl_att ? std::atoi( lvl_att->value() ) : -1;
 }//void set( ::rapidxml::xml_node<char> *node )
 
 

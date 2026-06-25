@@ -1156,6 +1156,14 @@ namespace SandiaDecay
     float mixing_ratio;
     float ec_K, ec_L, ec_M, ec_N;
 
+    /** Level-scheme topology (daughter-nucleus level indices) for the level-path
+        cascade realization. For a gamma: the levels it connects (from_level ->
+        to_level). For an electron-capture particle: the level it feeds
+        (fed_level). -1 when not available. */
+    int from_level;
+    int to_level;
+    int fed_level;
+
     /** Other radiation particles expected to be detected when this particle
         is detected.  Useful for gamma spectroscopy where you have a chance
         of detecting two gammas as one detection event (thus you detect the

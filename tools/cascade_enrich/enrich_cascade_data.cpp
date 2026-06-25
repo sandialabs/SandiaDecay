@@ -69,7 +69,29 @@ void set_attr(rapidxml::xml_document<char>& doc, xml_node<char>* node,
   }
 }
 
+void set_attr_int(rapidxml::xml_document<char>& doc, xml_node<char>* node,
+                  const char* name, int value) {
+  char buf[16];
+  std::snprintf(buf, sizeof(buf), "%d", value);
+  const char* val = doc.allocate_string(buf);
+  if (node->first_attribute(name))
+    node->first_attribute(name)->value(val);
+  else
+    node->append_attribute(doc.allocate_attribute(doc.allocate_string(name), val));
+}
+
 long zakey(int Z, int A) { return (static_cast<long>(Z) << 16) | A; }
+
+// Index of the level in `s` nearest `ex_keV` (within tol), else -1.
+int level_index_for_energy(const G4LevelScheme& s, double ex_keV, double tol = 1.5) {
+  int best = -1;
+  double bd = tol;
+  for (const G4Level& l : s.levels) {
+    const double d = std::fabs(l.excitation_keV - ex_keV);
+    if (d <= bd) { bd = d; best = l.index; }
+  }
+  return best;
+}
 
 // Nearest G4 transition to energy e (any distance); for documenting misses.
 const G4Transition* nearest_g4(const G4LevelScheme& s, double e, double& gap) {
@@ -223,6 +245,10 @@ int main(int argc, char** argv) {
           set_attr(doc, gs[i].node, "iccL", gtr[i]->alpha_L());
           ++n_icc;
         }
+        // Level-scheme topology (G4 level indices) for the level-path cascade
+        // realization: which daughter levels this gamma connects.
+        set_attr_int(doc, gs[i].node, "fl", gtr[i]->from_level);
+        set_attr_int(doc, gs[i].node, "tl", gtr[i]->to_level);
       }
 
       // a2/a4 on <coincidentGamma> for accepted, adjacent gamma pairs (lean: only
@@ -330,6 +356,11 @@ int main(int argc, char** argv) {
             set_attr(doc, e, "ecL", f->fL);
             set_attr(doc, e, "ecM", f->fM);
             set_attr(doc, e, "ecN", f->fN);
+            // Daughter level fed by this EC branch (index in the daughter scheme),
+            // for the level-path cascade realization.
+            const int lvl = scheme.loaded
+                ? level_index_for_energy(scheme, f->daughter_ex_keV) : -1;
+            if (lvl >= 0) set_attr_int(doc, e, "lvl", lvl);
             ++n_ec_matched;
           }
         }
