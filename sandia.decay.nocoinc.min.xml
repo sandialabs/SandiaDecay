@@ -1,5 +1,46 @@
 <?xml version="1.0"?>
 <document xmlns="sandia.decay.xsd">
+	<!--
+XML element/attribute names have been renamed to minimize file size, with the following mappings:
+	'transition'      to 't'
+	'branchRatio'     to 'br'
+	'child'           to 'c'
+	'mode'            to 'm'
+	'parent'          to 'p'
+	'beta'            to 'b'
+	'energy'          to 'e'
+	'intensity'       to 'i'
+	'logFT'           to 'lft'
+	'forbiddenness'   to 'f'
+	'electronCapture' to 'ec'
+	'alpha'           to 'a'
+	'gamma'           to 'g'
+	'coincidentGamma' to 'c'
+	'element'         to 'el'
+	'atomicNumber'    to 'an'
+	'name'            to 'n'
+	'symbol'          to 's'
+	'xray'            to 'x'
+	'relintensity'    to 'i'
+	'abundance'       to 'a'
+
+Field meanings (for readers not familiar with nuclear decay data):
+  e   = energy in keV.
+  i   = intensity: absolute emission probability per decay of the parent
+        nuclide (for <x> x-rays, relative to that atom's strongest line).
+  hl  = half-life in seconds ("INF" = stable); iso = isomer number
+        (0 = ground state, 1 = first metastable isomer).
+  an  = atomic number Z; mn = mass number A.
+  br  = branch ratio: fraction of parent decays taking this transition;
+  m   = decay mode (b-, b+, ec, alpha, it).
+  lft = logFT: log10 of the beta/EC comparative half-life (ft); a smaller
+        value means a more allowed (faster) branch.
+  f   = forbiddenness class ("" allowed, "1U" first forbidden unique).
+The GEANT4-derived cascade-detail attributes (internal conversion, EC shells,
+level indices, angular correlations) and the per-transition cascade-match
+audit comments are omitted from this coincidence-free file to keep it lean;
+both are available in the full sandia.decay.xml.
+-->
 	<reference type="fluorescence xray">sandia.xray.xml</reference>
 	<reference type="decay xray">LBNL ToRI database</reference>
 	<n am="1.008664915" an="0" hl="613.9" iso="0" mn="1" s="n1"/>
@@ -3866,10 +3907,8 @@
 	<n am="279.158861" an="110" hl="0.18" iso="0" mn="279" s="Ds279"/>
 	<n am="281.162061" an="110" hl="9.6" iso="0" mn="281" s="Ds281"/>
 	<n am="272.153615" an="111" hl="0.0038" iso="0" mn="272" s="Rg272"/>
-	<n am="274.155713" an="111" iso="0" mn="274" s="Rg274"/>
 	<n am="279.162468" an="111" hl="0.17" iso="0" mn="279" s="Rg279"/>
 	<n am="280.164473" an="111" hl="3.6" iso="0" mn="280" s="Rg280"/>
-	<n am="277.163943" an="112" hl="0.00069" iso="0" mn="277" s="Cn277"/>
 	<n am="282.169765" an="112" hl="0.0005" iso="0" mn="282" s="Cn282"/>
 	<n am="283.171792" an="112" hl="4" iso="0" mn="283" s="Cn283"/>
 	<n am="284.172384" an="112" hl="0.101" iso="0" mn="284" s="Cn284"/>
@@ -173535,9 +173574,6 @@
 	</el>
 	<el an="21" n="scandium" s="Sc">
 		<iso a="1" s="Sc45"/>
-		<x e="4.09" i="0.5"/>
-		<x e="4.09" i="1"/>
-		<x e="4.46" i="0.19725"/>
 	</el>
 	<el an="22" n="titanium" s="Ti">
 		<iso a="0.08" s="Ti46"/>
@@ -173545,9 +173581,6 @@
 		<iso a="0.738" s="Ti48"/>
 		<iso a="0.055" s="Ti49"/>
 		<iso a="0.054" s="Ti50"/>
-		<x e="4.51" i="0.5"/>
-		<x e="4.51" i="1"/>
-		<x e="4.93" i="0.20046"/>
 	</el>
 	<el an="23" n="vanadium" s="V">
 		<iso a="0.0025" s="V50"/>
@@ -173558,30 +173591,18 @@
 		<iso a="0.83789" s="Cr52"/>
 		<iso a="0.09501" s="Cr53"/>
 		<iso a="0.02365" s="Cr54"/>
-		<x e="5.41" i="0.5023"/>
-		<x e="5.41" i="1"/>
-		<x e="5.95" i="0.20323"/>
 	</el>
 	<el an="25" n="manganese" s="Mn">
 		<iso a="1" s="Mn55"/>
-		<x e="5.89" i="0.5023"/>
-		<x e="5.9" i="1"/>
-		<x e="6.49" i="0.20323"/>
 	</el>
 	<el an="26" n="iron" s="Fe">
 		<iso a="0.058" s="Fe54"/>
 		<iso a="0.9172" s="Fe56"/>
 		<iso a="0.022" s="Fe57"/>
 		<iso a="0.0028" s="Fe58"/>
-		<x e="6.39" i="0.5023"/>
-		<x e="6.4" i="1"/>
-		<x e="7.06" i="0.20323"/>
 	</el>
 	<el an="27" n="cobalt" s="Co">
 		<iso a="1" s="Co59"/>
-		<x e="6.91" i="0.5023"/>
-		<x e="6.93" i="1"/>
-		<x e="7.65" i="0.20323"/>
 	</el>
 	<el an="28" n="nickel" s="Ni">
 		<iso a="0.68077" s="Ni58"/>
@@ -173589,16 +173610,10 @@
 		<iso a="0.0114" s="Ni61"/>
 		<iso a="0.03634" s="Ni62"/>
 		<iso a="0.00926" s="Ni64"/>
-		<x e="7.46" i="0.50926"/>
-		<x e="7.48" i="1"/>
-		<x e="8.26" i="0.2037"/>
 	</el>
 	<el an="29" n="copper" s="Cu">
 		<iso a="0.6917" s="Cu63"/>
 		<iso a="0.3083" s="Cu65"/>
-		<x e="8.03" i="0.50926"/>
-		<x e="8.05" i="1"/>
-		<x e="8.91" i="0.20556"/>
 	</el>
 	<el an="30" n="zinc" s="Zn">
 		<iso a="0.486" s="Zn64"/>
@@ -173606,15 +173621,10 @@
 		<iso a="0.041" s="Zn67"/>
 		<iso a="0.188" s="Zn68"/>
 		<iso a="0.006" s="Zn70"/>
-		<x e="8.62" i="0.51163"/>
-		<x e="8.64" i="1"/>
-		<x e="9.57" i="0.20837"/>
 	</el>
 	<el an="31" n="gallium" s="Ga">
 		<iso a="0.60108" s="Ga69"/>
 		<iso a="0.39892" s="Ga71"/>
-		<x e="9.23" i="0.50935"/>
-		<x e="9.26" i="1"/>
 		<x e="10.26" i="0.21542"/>
 	</el>
 	<el an="32" n="germanium" s="Ge">
@@ -173623,8 +173633,6 @@
 		<iso a="0.0773" s="Ge73"/>
 		<iso a="0.3594" s="Ge74"/>
 		<iso a="0.0744" s="Ge76"/>
-		<x e="9.85" i="0.50935"/>
-		<x e="9.89" i="1"/>
 		<x e="10.98" i="0.2215"/>
 	</el>
 	<el an="33" n="arsenic" s="As">
@@ -174426,18 +174434,11 @@
 	<n am="274.14244" an="107" hl="5.4E+01" iso="0" mn="274" s="Bh274"/>
 	<n am="274.147492" an="109" hl="4.5E-01" iso="0" mn="274" s="Mt274"/>
 	<n am="278.154812" an="109" hl="7.6" iso="0" mn="278" s="Mt278"/>
-	<n am="272.153615" an="111" hl="3.8E-03" iso="0" mn="272" s="Rg272"/>
 	<n am="274.155713" an="111" hl="6.4E-03" iso="0" mn="274" s="Rg274"/>
 	<n am="278.161604" an="111" hl="4.2E-03" iso="0" mn="278" s="Rg278"/>
-	<n am="279.162468" an="111" hl="1.7E-01" iso="0" mn="279" s="Rg279"/>
-	<n am="280.164473" an="111" hl="3.6" iso="0" mn="280" s="Rg280"/>
 	<n am="281.165372" an="111" hl="2.6E+01" iso="0" mn="281" s="Rg281"/>
 	<n am="282.167486" an="111" hl="5E-01" iso="0" mn="282" s="Rg282"/>
 	<n am="277.163943" an="112" hl="6.9E-04" iso="0" mn="277" s="Cn277"/>
-	<n am="282.169765" an="112" hl="5E-04" iso="0" mn="282" s="Cn282"/>
-	<n am="283.171792" an="112" hl="4" iso="0" mn="283" s="Cn283"/>
-	<n am="284.172384" an="112" hl="1.01E-01" iso="0" mn="284" s="Cn284"/>
-	<n am="285.174105" an="112" hl="3.4E+01" iso="0" mn="285" s="Cn285"/>
 	<n an="113" hl="7.3E-02" iso="0" mn="282" s="Uut282"/>
 	<n am="285.178732" an="113" hl="5.5" iso="0" mn="285" s="Uut285"/>
 	<n am="286.180481" an="113" hl="2E+01" iso="0" mn="286" s="Uut286"/>
@@ -179759,3 +179760,4 @@
 		<a e="6134.6" h="2.83" i="1"/>
 	</t>
 </document>
+

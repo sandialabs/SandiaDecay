@@ -49,8 +49,9 @@ using namespace std;
 
 //forward declarations
 void remove_id_attrib( rapidxml::xml_node<char> *node );
+void remove_cascade_detail_attribs( rapidxml::xml_node<char> *node );
 void check_revision_attrib( rapidxml::xml_attribute<char> *att );
-void shrink_xml_elements( rapidxml::xml_node<char> *doc_node );
+void shrink_xml_elements( rapidxml::xml_node<char> *doc_node, bool cascade_detail_present );
 void test_db_still_same( const string orig_xml_filename,
                          const string final_xml_filename,
                          const bool coincidences_removed,
@@ -241,7 +242,13 @@ int main( int argc, char **argv )
             if( attrib )
               child->remove_attribute( attrib );
           }
-          
+
+          // With coincidences removed there is no cascade summing, so the
+          // per-gamma / per-electronCapture cascade-detail attributes are unused;
+          // strip them so the nocoinc file stays lean.
+          if( do_remove_coincidence_gamma )
+            remove_cascade_detail_attribs( child );
+
           vector<rapidxml::xml_node<char> *> gchild_to_delete;
           for( rapidxml::xml_node<char> *gchild = child->first_node();
               gchild;
@@ -376,7 +383,7 @@ int main( int argc, char **argv )
     }
     
     if( do_shrink_tag_names )
-      shrink_xml_elements( doc_node );
+      shrink_xml_elements( doc_node, !do_remove_coincidence_gamma );
       
     printf( "There were %i transitions; removed %i xml elements, and %i missing coincidences.\n",
            ntrans, nodes_removed, num_missing_uuid );
@@ -632,6 +639,25 @@ void rename_attrib( rapidxml::xml_node<char> *node, const char *oldname, const c
     att->name( newname );
 }
 
+void remove_cascade_detail_attribs( rapidxml::xml_node<char> *node )
+{
+  // Cascade-detail enrichment (internal-conversion coefficients, electron-capture
+  // shell fractions, and level-scheme indices) only feeds the coincidence-summing
+  // / cascade x-ray model. When coincidences are removed there is nothing to sum,
+  // so this data is dead weight -- strip it to keep the nocoinc file lean. Handles
+  // the long attribute names (this runs before shrink_xml_elements renames them).
+  static const char * const kAttribs[] = {
+    "iccTotal", "iccK", "iccL1", "iccL2", "iccL3", "fl", "tl", // <gamma>
+    "ecK", "ecL", "ecM", "ecN", "lvl"                          // <electronCapture>
+  };
+  for( const char *name : kAttribs )
+  {
+    rapidxml::xml_attribute<char> *att = node->first_attribute( name );
+    if( att )
+      node->remove_attribute( att );
+  }
+}
+
 void remove_trailing_zeroes( rapidxml::xml_attribute<char> *n )
 {
   //"1.0000E-03" -> "1E-03"
@@ -690,7 +716,7 @@ void remove_trailing_zeroes( rapidxml::xml_attribute<char> *n )
 }//void remove_trailing_zeroes(...)
 
 
-void shrink_xml_elements( rapidxml::xml_node<char> *doc_node )
+void shrink_xml_elements( rapidxml::xml_node<char> *doc_node, bool cascade_detail_present )
 {
   XML_FOREACH_DAUGHTER( nuc, doc_node, "nuclide" )
   {
@@ -876,7 +902,11 @@ void shrink_xml_elements( rapidxml::xml_node<char> *doc_node )
     }
   }//foreach( element )
   
-  const char *desc = "\nXML element names have been renamed to minimize file size, with the following mappings:\n"
+  // Header comment: name mappings + a plain-language field glossary so a reader
+  // who is not a nuclear-data expert can interpret the minimized file. (XML
+  // comments may not contain a double hyphen, so only single hyphens are used.)
+  std::string desc =
+  "\nXML element/attribute names have been renamed to minimize file size, with the following mappings:\n"
   "\t'transition'      to 't'\n"
   "\t'branchRatio'     to 'br'\n"
   "\t'child'           to 'c'\n"
@@ -892,14 +922,69 @@ void shrink_xml_elements( rapidxml::xml_node<char> *doc_node )
   "\t'gamma'           to 'g'\n"
   "\t'coincidentGamma' to 'c'\n"
   "\t'element'         to 'el'\n"
-  "\t'an'              to 'atomicNumber'\n"
+  "\t'atomicNumber'    to 'an'\n"
   "\t'name'            to 'n'\n"
   "\t'symbol'          to 's'\n"
   "\t'xray'            to 'x'\n"
   "\t'relintensity'    to 'i'\n"
   "\t'abundance'       to 'a'\n";
-   
-  const char *doc_desc = doc_node->document()->allocate_string(desc);
+
+  if( cascade_detail_present )
+  {
+    desc +=
+    "  Cascade-detail attributes (present only in this coincidence-bearing file), from\n"
+    "  GEANT4 11.4.0 PhotonEvaporation/RadioactiveDecay data (derived from ENSDF):\n"
+    "\t'iccTotal'        to 'ic'\n"
+    "\t'iccK'            to 'ik'\n"
+    "\t'iccL1'           to 'il1'\n"
+    "\t'iccL2'           to 'il2'\n"
+    "\t'iccL3'           to 'il3'\n"
+    "\t'ecK'             to 'ek'\n"
+    "\t'ecL'             to 'el'\n"
+    "\t'lvl'             to 'lv'\n"
+    "\t('fl','tl','a2','a4' are kept as-is)\n";
+  }
+
+  desc +=
+  "\nField meanings (for readers not familiar with nuclear decay data):\n"
+  "  e   = energy in keV.\n"
+  "  i   = intensity: absolute emission probability per decay of the parent\n"
+  "        nuclide (for <x> x-rays, relative to that atom's strongest line).\n"
+  "  hl  = half-life in seconds (\"INF\" = stable); iso = isomer number\n"
+  "        (0 = ground state, 1 = first metastable isomer).\n"
+  "  an  = atomic number Z; mn = mass number A.\n"
+  "  br  = branch ratio: fraction of parent decays taking this transition;\n"
+  "  m   = decay mode (b-, b+, ec, alpha, it).\n"
+  "  lft = logFT: log10 of the beta/EC comparative half-life (ft); a smaller\n"
+  "        value means a more allowed (faster) branch.\n"
+  "  f   = forbiddenness class (\"\" allowed, \"1U\" first forbidden unique).\n";
+
+  if( cascade_detail_present )
+  {
+    desc +=
+    "  Cascade detail (supports true-coincidence summing and post-decay x-rays):\n"
+    "  ic  = total internal-conversion coefficient (IC electrons)/(gammas);\n"
+    "        ik = K-shell part; il1,il2,il3 = L1/L2/L3 subshell parts (on <g>).\n"
+    "  fl,tl = 'from level' / 'to level' indices in the GEANT4 progeny level\n"
+    "        scheme that a gamma connects (the cascade topology, on <g>).\n"
+    "  ek,el = electron-capture K/L shell fractions; lv = progeny level fed by\n"
+    "        an EC branch (on <ec>).\n"
+    "  a2,a4 = gamma-gamma angular-correlation coefficients, on <c>, in\n"
+    "        W(theta) = 1 + a2*P2(cos theta) + a4*P4(cos theta) (0 = isotropic).\n"
+    "The full human-readable sandia.decay.xml has the long-form glossary and the\n"
+    "per-transition \"cascade-match:\" audit comments (recording where the GEANT4\n"
+    "cascade match was incomplete); those audit comments are stripped here.\n";
+  }
+  else
+  {
+    desc +=
+    "The GEANT4-derived cascade-detail attributes (internal conversion, EC shells,\n"
+    "level indices, angular correlations) and the per-transition cascade-match\n"
+    "audit comments are omitted from this coincidence-free file to keep it lean;\n"
+    "both are available in the full sandia.decay.xml.\n";
+  }
+
+  const char *doc_desc = doc_node->document()->allocate_string(desc.c_str());
   rapidxml::xml_node<char> *desc_node = doc_node->document()->allocate_node(rapidxml::node_comment, "", doc_desc );
   doc_node->insert_node( doc_node->first_node(), desc_node );
 }//void shrink_xml_elements( )
