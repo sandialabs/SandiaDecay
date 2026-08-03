@@ -171,7 +171,51 @@ constexpr GammaIntensityOverride kGammaIntensityOverrides[] = {
   // https://www.nndc.bnl.gov/nudat3/getdecaydataset.jsp?dsid=235u+a+decay+%287.04eP8+y%29&nucleus=231TH
   {"U235", "Th231", "a", 1.0, 19.59, 0.61, 0.00583,
    19.5941, 114.7, 5, 4},
+  // Same evaluation (NNDC ENSDF 235U alpha decay, NDS 185, 560 (2022), cutoff
+  // 31-Aug-2022). The 452.189-keV Th-231 level lists G 64.45(5), %IG=0.0017(14),
+  // [M1+E2], alpha=52, to the 387.824-keV level. Per parent decay that is
+  // 1.7e-5(1.4e-5); SandiaDecay carried 0.0065, a factor 382 high, unchanged
+  // since the 2019 InterSpec import and with no recorded provenance. The
+  // conversion coefficient already agreed exactly (52), and the G4 edge
+  // (level 30 -> 26, 64.364 keV) matches the ENSDF level pair to 0.004 keV, so
+  // only the photon intensity was wrong.
+  //
+  // The stated ENSDF uncertainty is 82% of the value, so this is a weakly
+  // determined line -- but the correction is a factor 382, far outside it.
+  // https://www.nndc.bnl.gov/nudat3/getdecaydataset.jsp?dsid=235u+a+decay+%287.04eP8+y%29&nucleus=231TH
+  {"U235", "Th231", "a", 1.0, 64.35, 0.0065, 1.7e-5,
+   64.364, 52.0, 30, 26},
 };
+
+// REVIEWED REMOVAL, applied directly to the delivered XML (2026-08-03).
+//
+// This one is recorded here rather than mechanised. A removal cannot use the
+// override table's "fires exactly once" gate, because the delivered XML is both
+// this tool's input and its output: once the record is gone, a regeneration
+// finds nothing to remove. Deleting it from the delivered file is sufficient --
+// enrichment is idempotent on that file, and the intensity is data this tool
+// never generates. Re-enriching an OLDER base (e.g. the upstream sandialabs
+// file) would reintroduce it; that is a Stage-6 concern, where the ENSDF join
+// replaces energy-proximity matching altogether and can drop unsupported
+// records systematically instead of one at a time.
+//
+// U235 -> Th231, 26.55 keV, intensity 0.0054, alpha 192. Deleted because:
+//   - NNDC ENSDF 235U alpha decay (NDS 185, 560 (2022), cutoff 31-Aug-2022)
+//     lists NO gamma at 26.55 keV; below 45 keV it has only 19.55, 31.6, 34.7,
+//     41.1 and 42.02 (plus an unplaced 15.784).
+//   - The record carried intensity 0.0054 with alpha=192, i.e. an occurrence of
+//     1.042 per decay: one record consuming an entire decay's worth of flux,
+//     which by itself rejected the whole U-235 level scheme.
+//   - It was matched to the G4 edge level 11 -> 6 (247.5867 -> 221.3966 keV),
+//     whose energy is 26.19 keV -- 0.36 keV from the Sandia energy, a loose
+//     match. That nuclear transition is real and heavily converted (alpha=192,
+//     so only 1 photon per 193 transitions); what is unsupported is a
+//     detectable PHOTON line at this energy and intensity.
+//   - Microcalorimeter spectra examined by the maintainer show no evidence of
+//     this line. The value is unchanged since the 2019 InterSpec import with no
+//     recorded provenance.
+//   If the topology edge is ever needed, it should return as a 26.19 keV record
+//   with an evaluated intensity -- not as this line.
 
 const GammaIntensityOverride* gamma_intensity_override(
     const char* parent, const char* child, const char* mode, double branch_ratio,
@@ -1758,10 +1802,11 @@ int main(int argc, char** argv) {
       throw std::runtime_error(
           "Reviewed Eu152->Sm152 product-intensity correction did not match exactly once");
     if (n_u235_parent_branch &&
-        (n_u235_parent_branch != 1 || n_intensity_fixed != 1 ||
+        (n_u235_parent_branch != 1 || n_intensity_fixed != 2 ||
          n_u235_alpha_feed_fixed != 1))
       throw std::runtime_error(
-          "Reviewed U235->Th231 gamma and alpha/feed corrections did not match exactly once");
+          "Reviewed U235->Th231 gamma (19.59, 64.35) and alpha/feed corrections "
+          "did not each match exactly once");
     if (n_th234_parent_branch &&
         (n_th234_parent_branch != 1 || n_th234_gamma_normalized != 1))
       throw std::runtime_error(
