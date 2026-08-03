@@ -551634,17 +551634,45 @@
 	</transition>
 	<transition branchRatio="3.8E-14" mode="sf" parent="Th230"/>
 	<transition branchRatio="1" child="Pa231" mode="b-" parent="Th231">
-		<gamma energy="9.2" intensity="0.00033" iccTotal="1181" iccK="0" iccL1="0" iccL2="0" iccL3="0" mult="3" fl="1" tl="0"/>
-		<gamma energy="10.25" intensity="0.0005016"/>
-		<gamma energy="19.1" intensity="0.002442" iccTotal="136.3" iccK="0" iccL1="0" iccL2="0" iccL3="2.5529" mult="3" fl="3" tl="2">
+		<gamma energy="17.195" intensity="2.80000E-03" iccTotal="166" iccK="0" iccL1="0" iccL2="0" iccL3="0" mult="3" fl="5" tl="4"/>
+		<gamma energy="18.055" intensity="9.50000E-04" iccTotal="218" iccK="0" iccL1="0" iccL2="0" iccL3="32.9616" mult="304" delta="0.04" fl="6" tl="4"/>
+		<gamma energy="42.81" intensity="6.05000E-04" iccTotal="1.136" iccK="0" iccL1="0.24867" iccL2="0.284114" iccL3="0.320466" mult="2" fl="5" tl="2"/>
+		<gamma energy="44.08" intensity="7.50000E-06" iccTotal="330" iccK="0" iccL1="19.206" iccL2="118.371" iccL3="104.214" mult="304" fl="15" tl="11"/>
+		<gamma energy="53.2" intensity="4.80000E-03" iccTotal="0.64" iccK="0" iccL1="0.163648" iccL2="0.154368" iccL3="0.16352" mult="2" fl="7" tl="2"/>
+		<gamma energy="63.86" intensity="2.30000E-04" iccTotal="39" iccK="0" iccL1="8.1042" iccL2="11.817" iccL3="8.8413" mult="304" delta="0.6" fl="16" tl="12"/>
+		<gamma energy="68.5" intensity="5.98000E-05" iccTotal="73.3" iccK="0" iccL1="1.05699" iccL2="29.3273" iccL3="23.1335" mult="4" fl="3" tl="1"/>
+		<gamma energy="73.0" intensity="6.80000E-05" iccTotal="0.277" iccK="0" iccL1="0.0859254" iccL2="0.0623527" iccL3="0.0604968" mult="2" fl="16" tl="11"/>
+		<gamma energy="77.69" intensity="4.30000E-05" iccTotal="25" iccK="0" iccL1="3.3025" iccL2="8.71" iccL3="6.345" mult="304" fl="3" tl="0"/>
+		<gamma energy="93.02" intensity="4.80000E-04" iccTotal="0.1463" iccK="0" iccL1="0.0513952" iccL2="0.0309132" iccL3="0.0280311" mult="2" fl="6" tl="1"/>
+		<gamma energy="105.79" intensity="8.00000E-05" iccTotal="0.1043" iccK="0" iccL1="0.0388622" iccL2="0.0212355" iccL3="0.0185967" mult="2" fl="12" tl="3"/>
+		<gamma energy="115.63" intensity="1.02000E-05" iccTotal="10" iccK="5.452" iccL1="1.011" iccL2="1.461" iccL3="0.8827" mult="304" fl="11" tl="2"/>
+		<gamma energy="116.83" intensity="2.28000E-04" iccTotal="0.342" iccK="0.261459" iccL1="0.0313169" iccL2="0.0159064" iccL3="0.0135466" mult="2" fl="15" tl="5"/>
+		<gamma energy="124.927" intensity="5.98000E-04" iccTotal="0.294" iccK="0.226233" iccL1="0.0270715" iccL2="0.0131095" iccL3="0.0109662" mult="2" fl="12" tl="2"/>
+		<gamma energy="136.75" intensity="4.49000E-05" iccTotal="0.237" iccK="0.183485" iccL1="0.0221453" iccL2="0.0100535" iccL3="0.00819783" mult="2" fl="26" tl="12"/>
+		<gamma energy="140.54" intensity="7.50000E-06" iccTotal="5.3" iccK="3.21392" iccL1="0.57505" iccL2="0.62805" iccL3="0.339624" mult="304" fl="15" tl="3"/>
+		<gamma energy="145.06" intensity="5.92000E-05" iccTotal="2.46" iccK="0.236357" iccL1="0.0807372" iccL2="0.9717" iccL3="0.571212" mult="4" fl="16" tl="6"/>
+		<gamma energy="165.0" intensity="3.54000E-05" iccTotal="1.464" iccK="0.20862" iccL1="0.0577841" iccL2="0.553538" iccL3="0.30583" mult="4" fl="11" tl="1"/>
+		<gamma energy="169.65" intensity="1.36000E-05" iccTotal="0.1421" iccK="0.11125" iccL1="0.0137837" iccL2="0.00538417" iccL3="0.00413369" mult="2" fl="16" tl="3"/>
+		<gamma energy="174.15" intensity="1.82000E-04" iccTotal="2.7" iccK="1.77552" iccL1="0.31158" iccL2="0.254556" iccL3="0.119718" mult="304" fl="11" tl="0"/>
+		<gamma energy="188.76" intensity="3.33000E-05" iccTotal="0.1105" iccK="0.0868972" iccL1="0.010913" iccL2="0.00396253" iccL3="0.00295145" mult="2" fl="16" tl="2"/>
+		<gamma energy="236.04" intensity="9.50000E-05" iccTotal="0.0657" iccK="0.0520935" iccL1="0.00672111" iccL2="0.00209583" iccL3="0.00146642" mult="2" fl="26" tl="4"/>
+		<gamma energy="240.27" intensity="3.06000E-06" iccTotal="0.063" iccK="0.0499779" iccL1="0.0064638" iccL2="0.00199017" iccL3="0.00138537" mult="2" fl="25" tl="3"/>
+		<gamma energy="242.51" intensity="8.60000E-06" iccTotal="1" iccK="0.7126" iccL1="0.1229" iccL2="0.06688" iccL3="0.02452" mult="304" fl="26" tl="3"/>
+		<gamma energy="308.78" intensity="4.40000E-06" iccTotal="0.0358" iccK="0.0286185" iccL1="0.00380554" iccL2="0.000985932" iccL3="0.000640104" mult="2" fl="25" tl="1"/>
+		<gamma energy="311.0" intensity="3.20000E-05" iccTotal="0.61" iccK="0.467931" iccL1="0.079483" iccL2="0.021899" iccL3="0.00529968" mult="304" delta="0.7" fl="26" tl="1"/>
+		<gamma energy="317.87" intensity="1.02000E-06" iccTotal="0.0336" iccK="0.0268834" iccL1="0.00358512" iccL2="0.000909888" iccL3="0.000585984" mult="2" fl="25" tl="0"/>
+		<gamma energy="320.15" intensity="1.60000E-06" iccTotal="0.5" iccK="0.3711" iccL1="0.06335" iccL2="0.02566" iccL3="0.00743" mult="304" fl="26" tl="0"/>
+		<gamma energy="9.2" intensity="0" iccTotal="1181" iccK="0" iccL1="0" iccL2="0" iccL3="0" mult="3" fl="1" tl="0"/>
+		<gamma energy="10.25" intensity="0"/>
+		<gamma energy="19.1" intensity="0" iccTotal="136.3" iccK="0" iccL1="0" iccL2="0" iccL3="2.5529" mult="3" fl="3" tl="2">
 			<coincidentGamma id="8" intensity="0.00041250000000000005" a2="-0.153061" a4="-0"/>
 		</gamma>
-		<gamma energy="25.646" id="5" intensity="0.14124" iccTotal="4.37" iccK="0" iccL1="0.605682" iccL2="1.14101" iccL3="1.50809" mult="2" fl="4" tl="2">
+		<gamma energy="25.646" id="5" intensity="1.37400E-01" iccTotal="4.37" iccK="0" iccL1="0.605682" iccL2="1.14101" iccL3="1.50809" mult="2" fl="4" tl="2">
 			<coincidentGamma id="8" intensity="0.00041250000000000005" a2="-0.153061" a4="-0"/>
 		</gamma>
-		<gamma energy="58.57" id="8" intensity="0.0048" iccTotal="155.5" iccK="0" iccL1="2.09303" iccL2="61.0026" iccL3="50.4908" mult="4" fl="2" tl="0"/>
-		<gamma energy="72.751" intensity="0.00251" iccTotal="0.28" iccK="0" iccL1="0.08666" iccL2="0.063084" iccL3="0.061264" mult="2" fl="11" tl="5"/>
-		<gamma energy="81.227" intensity="0.008976" iccTotal="7.66" iccK="0" iccL1="5.13909" iccL2="0.610962" iccL3="0.0319575" mult="304" fl="12" tl="6">
+		<gamma energy="58.57" id="8" intensity="4.71000E-03" iccTotal="155.5" iccK="0" iccL1="2.09303" iccL2="61.0026" iccL3="50.4908" mult="4" fl="2" tl="0"/>
+		<gamma energy="72.751" intensity="2.60000E-03" iccTotal="0.28" iccK="0" iccL1="0.08666" iccL2="0.063084" iccL3="0.061264" mult="2" fl="11" tl="5"/>
+		<gamma energy="81.227" intensity="9.04000E-03" iccTotal="7.66" iccK="0" iccL1="5.13909" iccL2="0.610962" iccL3="0.0319575" mult="304" fl="12" tl="6">
 			<coincidentGamma id="19" intensity="0.0016008216567766594" a2="-0.04" a4="0"/>
 			<coincidentGamma id="3" intensity="7.9919991941951232E-05"/>
 			<coincidentGamma id="15" intensity="0.00027824940689149353"/>
@@ -551652,34 +551680,34 @@
 			<coincidentGamma id="17" intensity="0.00017194907357207689"/>
 			<coincidentGamma id="5" intensity="0.00059545373074779617"/>
 		</gamma>
-		<gamma energy="82.087" intensity="0.004" iccTotal="7.47" iccK="0" iccL1="4.97875" iccL2="0.612465" iccL3="0.0460003" mult="304" delta="0.04" fl="12" tl="5"/>
-		<gamma energy="84.216" id="15" intensity="0.066" iccTotal="2.17" iccK="0" iccL1="0.725865" iccL2="0.47089" iccL3="0.439208" mult="2" fl="4" tl="0"/>
+		<gamma energy="82.087" intensity="4.22000E-03" iccTotal="7.47" iccK="0" iccL1="4.97875" iccL2="0.612465" iccL3="0.0460003" mult="304" delta="0.04" fl="12" tl="5"/>
+		<gamma energy="84.216" id="15" intensity="6.80000E-02" iccTotal="2.17" iccK="0" iccL1="0.725865" iccL2="0.47089" iccL3="0.439208" mult="2" fl="4" tl="0"/>
 		<gamma energy="89.96" intensity="0.0102" iccTotal="0.1598" iccK="0" iccL1="0.0552269" iccL2="0.0340694" iccL3="0.0312089" mult="2" fl="11" tl="4">
 			<coincidentGamma id="15" intensity="0.0043465662126919739" a2="-0.16" a4="0"/>
 			<coincidentGamma id="8" intensity="2.0949645030425962E-05"/>
 			<coincidentGamma id="5" intensity="0.0093016516951608223" a2="-0.0571429" a4="0"/>
 		</gamma>
-		<gamma energy="99.279" intensity="0.0013068" iccTotal="5.2" iccK="0" iccL1="2.58544" iccL2="0.88712" iccL3="0.417612" mult="304" delta="0.35" fl="12" tl="4">
+		<gamma energy="99.279" intensity="1.35000E-03" iccTotal="5.2" iccK="0" iccL1="2.58544" iccL2="0.88712" iccL3="0.417612" mult="304" delta="0.35" fl="12" tl="4">
 			<coincidentGamma id="15" intensity="0.0043465662126919739" a2="-0.253065" a4="-0"/>
 			<coincidentGamma id="8" intensity="2.0949645030425962E-05"/>
 			<coincidentGamma id="5" intensity="0.0093016516951608223" a2="-0.0903804" a4="-0"/>
 		</gamma>
-		<gamma energy="102.268" id="19" intensity="0.0043626" iccTotal="0.1141" iccK="0" iccL1="0.0418861" iccL2="0.023459" iccL3="0.020732" mult="2" fl="6" tl="0"/>
-		<gamma energy="106.587" intensity="0.00017622" iccTotal="0.1023" iccK="0" iccL1="0.03825" iccL2="0.0207771" iccL3="0.018148" mult="2" fl="15" tl="7"/>
-		<gamma energy="134.025" intensity="0.00025014" iccTotal="0.249" iccK="0.192527" iccL1="0.0231869" iccL2="0.0106821" iccL3="0.00875733" mult="2" fl="15" tl="4">
+		<gamma energy="102.268" id="19" intensity="4.49000E-03" iccTotal="0.1141" iccK="0" iccL1="0.0418861" iccL2="0.023459" iccL3="0.020732" mult="2" fl="6" tl="0"/>
+		<gamma energy="106.587" intensity="1.82000E-04" iccTotal="0.1023" iccK="0" iccL1="0.03825" iccL2="0.0207771" iccL3="0.018148" mult="2" fl="15" tl="7"/>
+		<gamma energy="134.025" intensity="2.58000E-04" iccTotal="0.249" iccK="0.192527" iccL1="0.0231869" iccL2="0.0106821" iccL3="0.00875733" mult="2" fl="15" tl="4">
 			<coincidentGamma id="15" intensity="0.0043465662126919739" a2="0.05" a4="0"/>
 			<coincidentGamma id="8" intensity="2.0949645030425962E-05"/>
 			<coincidentGamma id="5" intensity="0.0093016516951608223" a2="0.0178571" a4="0"/>
 		</gamma>
-		<gamma energy="135.667" intensity="0.0007854" iccTotal="8.5" iccK="6.74135" iccL1="1.15855" iccL2="0.15334" iccL3="0.014705" mult="304" delta="0.1" fl="16" tl="7"/>
-		<gamma energy="145.912" intensity="0.0003168" iccTotal="5.2" iccK="3.5074" iccL1="0.6162" iccL2="0.428584" iccL3="0.212888" mult="304" delta="0.78" fl="16" tl="5"/>
-		<gamma energy="163.105" intensity="0.0015378" iccTotal="5.1" iccK="4.06266" iccL1="0.69411" iccL2="0.084711" iccL3="0.0040086" mult="304" fl="16" tl="4">
+		<gamma energy="135.667" intensity="8.09000E-04" iccTotal="8.5" iccK="6.74135" iccL1="1.15855" iccL2="0.15334" iccL3="0.014705" mult="304" delta="0.1" fl="16" tl="7"/>
+		<gamma energy="145.912" intensity="3.26000E-04" iccTotal="5.2" iccK="3.5074" iccL1="0.6162" iccL2="0.428584" iccL3="0.212888" mult="304" delta="0.78" fl="16" tl="5"/>
+		<gamma energy="163.105" intensity="1.58000E-03" iccTotal="5.1" iccK="4.06266" iccL1="0.69411" iccL2="0.084711" iccL3="0.0040086" mult="304" fl="16" tl="4">
 			<coincidentGamma id="15" intensity="0.0043465662126919739" a2="0.05" a4="0"/>
 			<coincidentGamma id="8" intensity="2.0949645030425962E-05"/>
 			<coincidentGamma id="5" intensity="0.0093016516951608223" a2="0.0178571" a4="0"/>
 		</gamma>
-		<gamma energy="183.495" intensity="0.00033" iccTotal="0.1181" iccK="0.0927675" iccL1="0.0116104" iccL2="0.00429648" iccL3="0.00322649" mult="2" fl="12" tl="0"/>
-		<gamma energy="217.94" intensity="0.0004" iccTotal="0.0789" iccK="0.0623862" iccL1="0.00797679" iccL2="0.002625" iccL3="0.00187861" mult="2" fl="26" tl="6">
+		<gamma energy="183.495" intensity="3.40000E-04" iccTotal="0.1181" iccK="0.0927675" iccL1="0.0116104" iccL2="0.00429648" iccL3="0.00322649" mult="2" fl="12" tl="0"/>
+		<gamma energy="217.94" intensity="4.08000E-04" iccTotal="0.0789" iccK="0.0623862" iccL1="0.00797679" iccL2="0.002625" iccL3="0.00187861" mult="2" fl="26" tl="6">
 			<coincidentGamma id="19" intensity="0.0016008216567766594" a2="0.16" a4="0"/>
 			<coincidentGamma id="3" intensity="7.9919991941951232E-05"/>
 			<coincidentGamma id="15" intensity="0.00027824940689149353"/>
@@ -551721,7 +551749,7 @@
 		<xray energy="109.072" intensity="5.8E-05" assignment="Kb5"/>
 		<xray energy="111.486" intensity="0.00062" assignment="Kb2"/>
 		<xray energy="111.87" intensity="0.000216" assignment="Kb4"/>
-		<!-- cascade-match: SD-unmatched-above-threshold[keV]: 10.25(I=0.000502,neartol); G4-listed-not-in-SD[keV]: 68.51(rI=100) 77.69(rI=72) 17.19(rI=460) 42.84(rI=100) 18.05(rI=21) 93.09(rI=10.6) 53.08(rI=100) 124.93(rI=6.62) 116.84(rI=89) 63.82(rI=14.6) 136.71(rI=11) 235.99(rI=23.3) 311.02(rI=7.8); -->
+		<!-- cascade-match: 1 SD gammas with I=0 (not emitted, suppressed); -->
 		<levelFeed lvl="0" probability="0.0002245706899" q="391.5"/>
 		<levelFeed lvl="1" probability="0.0002245706899" q="382.317" forbiddenness="1u"/>
 		<levelFeed lvl="2" probability="0.003368510349" q="332.9304"/>
