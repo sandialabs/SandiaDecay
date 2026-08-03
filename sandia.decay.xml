@@ -567903,7 +567903,7 @@
 			<coincidentGamma id="33" intensity="0.17401526693941946" a2="0.05" a4="0"/>
 			<coincidentGamma id="50" intensity="0.0064450098866451651"/>
 		</gamma>
-		<gamma energy="72.7" intensity="0.0011" iccTotal="50.8" iccK="0" iccL1="0.725424" iccL2="20.3962" iccL3="16.0376" mult="4" fl="14" tl="5">
+		<gamma energy="72.7" intensity="3.0888E-03" iccTotal="50.8" iccK="0" iccL1="0.725424" iccL2="20.3962" iccL3="16.0376" mult="4" fl="14" tl="5">
 			<coincidentGamma id="34" intensity="8.2121183416466479E-06" a2="-0.0714286" a4="-0"/>
 			<coincidentGamma id="26" intensity="8.3268585180768415E-06" a2="0.0952381" a4="-0"/>
 			<coincidentGamma id="17" intensity="2.5242838814642393E-06" a2="-0.0333333" a4="-0"/>
@@ -568081,6 +568081,8 @@
 		<gamma energy="115.45" intensity="2.5282E-04" iccTotal="0.348" iccK="0.267438" iccL1="0.0316541" iccL2="0.0156461" iccL3="0.0135755" mult="2" fl="14" tl="3"/>
 		<gamma energy="136.55" intensity="2.5568E-04" iccTotal="5.3" iccK="3.18424" iccL1="0.56233" iccL2="0.64289" iccL3="0.361036" mult="304" fl="22" tl="10"/>
 		<gamma energy="150.937" intensity="7.3216E-04" iccTotal="3.9" iccK="2.44764" iccL1="0.42783" iccL2="0.42471" iccL3="0.224445" mult="304" fl="26" tl="8"/>
+		<gamma energy="120.35" intensity="2.1736E-04" iccTotal="5.04" iccK="0.255931" iccL1="0.125194" iccL2="2.04271" iccL3="1.33006" mult="4" fl="3" tl="1"/>
+		<gamma energy="179.297" intensity="1.2584E-04" iccTotal="3.4" iccK="2.68158" iccL1="0.45288" iccL2="0.074936" iccL3="0.0139298" mult="304" delta="0.25" fl="13" tl="2"/>
 		<xray energy="11.118" intensity="0.01" assignment="Ll" l1intensity="0.0117" l2intensity="0.00216" l3intensity="0.02"/>
 		<xray energy="12.809" intensity="0.016" assignment="La2" l1intensity="0.0201" l2intensity="0.0037" l3intensity="0.0342"/>
 		<xray energy="12.968" intensity="0.15" assignment="La1" l1intensity="0.179" l2intensity="0.033" l3intensity="0.306"/>
@@ -568103,7 +568105,7 @@
 		<xray energy="108.583" intensity="0.009" assignment="Kb2"/>
 		<xray energy="108.955" intensity="0.0033" assignment="Kb4"/>
 		<!-- intensity-fix: U235->Th231 19.59-keV gamma intensity 0.61 -> 0.00583; NNDC ENSDF NDS 185 (2022), evaluated Aug-2022, %IG=0.583(11), alpha=114.7(19); energy unchanged. -->
-		<!-- cascade-match: 7 SD gammas below detectable threshold T=0.000572/decay: 291.6 291.6 310.7 517.2 742.5 97.5 371.2; 1 SD gammas with I=0 (not emitted, suppressed); G4-listed-not-in-SD[keV]: 120.16(rI=100) 144.47(rI=100) 179.30(rI=40) 80.35(rI=51) 259.79(rI=36) 441.57(rI=5) 528.04(rI=100); -->
+		<!-- cascade-match: 7 SD gammas below detectable threshold T=0.000572/decay: 291.6 291.6 310.7 517.2 742.5 97.5 371.2; 1 SD gammas with I=0 (not emitted, suppressed); G4-listed-not-in-SD[keV]: 144.47(rI=100) 80.35(rI=51) 259.79(rI=36) 441.57(rI=5) 528.04(rI=100); -->
 		<!-- intensity-fix: U235->Th231 alpha products and level feeds are the G4-topology-backed normalized projection of Aug-2022 ENSDF (NDS 185, 2022); 20 represented probabilities sum to one; emitted alpha energies and hindrances updated; omitted unmapped/tentative ENSDF rows 4042 keV (~0.007%, no G4 level), 4212 keV (0.0131%, no RDM feed), and 4296 keV (0.00915%, no RDM feed); RDM level/Q topology and gamma products unchanged. -->
 		<levelFeed lvl="0" probability="0.047121041" q="4678.1"/>
 		<levelFeed lvl="1" probability="0.03773603283" q="4636.148"/>
