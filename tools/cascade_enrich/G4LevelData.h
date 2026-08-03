@@ -5,10 +5,13 @@
 //
 // These files describe the nuclear de-excitation scheme of a daughter nucleus:
 // a series of levels, each followed by its gamma transitions to lower levels.
-// We extract, per transition, the multipole orders + mixing ratio (for
-// gamma-gamma angular correlations) and the total + subshell internal-conversion
-// coefficients (for rigorous x-ray cascade coincidences), and per level the spin
-// (2J) needed by the F-coefficient formalism.
+// We extract, per transition, the GEANT4 multipole code + mixing ratio (advisory
+// inputs for gamma-gamma angular correlations) and the total + subshell
+// internal-conversion coefficients (for rigorous x-ray cascade coincidences),
+// and per level the spin (2J) needed by the F-coefficient formalism. The raw
+// multipole code is not primary-evaluation provenance: code 1 records can have
+// zero or finite alpha and can correspond to tabulated measured gamma lines.
+// Consumers must not use code 1 alone to classify a transition as pure E0.
 //
 // File format (PhotonEvaporation6.1.2 README):
 //   Level line   : index floatFlag Eexc(keV) halflife(s) JPi nGammas
@@ -25,6 +28,7 @@ namespace cascade_enrich {
 
 struct G4Level {
   int index = 0;
+  std::string floating_flag;     ///< "-" for fixed, or +X/+Y/... floating family
   double excitation_keV = 0.0;
   double halflife_s = -1.0;   ///< -1 => stable ground state
   int twoJ = -1;              ///< 2*J; -1 if unknown (JPi == 99)
@@ -37,7 +41,7 @@ struct G4Transition {
   int to_level = -1;          ///< daughter (lower) level index
   double gamma_keV = 0.0;
   double rel_intensity = 0.0; ///< relative gamma emission intensity within the level
-  int multipole_code = 0;     ///< raw PhotonEvaporation code (0 => unknown)
+  int multipole_code = 0;     ///< raw advisory PhotonEvaporation code (0 => unknown)
   int L0 = 0;                 ///< lower multipole angular-momentum order
   int Lp = 0;                 ///< higher multipole order (== L0 when pure)
   double mixing_delta = 0.0;  ///< multipole mixing ratio delta

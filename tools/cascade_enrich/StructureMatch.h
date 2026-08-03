@@ -32,6 +32,7 @@ struct GammaMatch {
   bool ambiguous = false;      ///< 2+ candidates within the tight tolerance
   bool structure_used = false; ///< accepted on structural support (>=1 chaining partner)
   bool structure_changed = false; ///< final pick differs from the nearest-energy candidate
+  bool collision_rejected = false; ///< rejected because another accepted gamma owned same edge
 };
 
 struct MatchParams {
@@ -57,7 +58,10 @@ inline bool adjacent(const G4Transition& a, const G4Transition& b) {
 }
 
 /// Match each SandiaDecay gamma to a G4 transition using energy + coincidence
-/// structure. Returns one GammaMatch per input gamma (same order).
+/// structure. Accepted matches are injective within the Sandia transition. If
+/// multiple otherwise-accepted records select one G4 edge, the entire collision
+/// is rejected: lack of a second G4 edge is not evidence either photon is a
+/// duplicate. Returns one GammaMatch per input gamma (same order).
 std::vector<GammaMatch> match_gammas(const G4LevelScheme& scheme,
                                      const std::vector<SdGamma>& gammas,
                                      const MatchParams& p = {});

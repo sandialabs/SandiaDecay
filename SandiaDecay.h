@@ -1136,9 +1136,10 @@ namespace SandiaDecay
      */
     ForbiddennessType forbiddenness;
 
-    /** Cascade-detail enrichment fields (from GEANT4 PhotonEvaporation /
-        RadioactiveDecay level data; 0 when the database predates the
-        enrichment or the datum is unavailable).
+    /** Cascade-detail enrichment fields (mostly from GEANT4 PhotonEvaporation /
+        RadioactiveDecay level data; e0_verified is the documented primary-data
+        exception). Numeric fields are 0 and e0_verified is false when the
+        database predates the enrichment or the datum is unavailable.
 
         For GammaParticle / XrayParticle nuclear transitions:
           icc_total    total internal conversion coefficient alpha = I_ce/I_gamma
@@ -1146,7 +1147,13 @@ namespace SandiaDecay
           icc_L1/L2/L3 per-subshell L ICC (absolute). Written only for daughters
                        whose L x-rays clear the 10 keV cut (high Z); 0 otherwise.
           multipole    GEANT4 multipolarity transition-type code (0 if unknown)
+                       This is advisory metadata, not proof of a pure E0.
           mixing_ratio multipole mixing ratio delta (0 if pure / unknown)
+          e0_verified  true only when a reviewed primary nuclear-data evaluation
+                       explicitly identifies this transition as pure E0. It is
+                       independent of multipole and false when the optional XML
+                       provenance flag is absent. This controls physical emission
+                       mode and therefore survives coincidence-data stripping.
         For CaptureElectronParticle (electron capture) particles:
           ec_K, ec_L, ec_M, ec_N  normalized per-shell electron-capture fractions
                        (ec_M/ec_N are dropped by current enrichment: their x-rays
@@ -1157,12 +1164,13 @@ namespace SandiaDecay
     float icc_L1, icc_L2, icc_L3;
     int   multipole;
     float mixing_ratio;
+    bool  e0_verified;
     float ec_K, ec_L, ec_M, ec_N;
 
     /** Level-scheme topology (daughter-nucleus level indices) for the level-path
         cascade realization. For a gamma: the levels it connects (from_level ->
-        to_level). For an electron-capture particle: the level it feeds
-        (fed_level). -1 when not available. */
+        to_level). For an electron-capture or positron particle: the level it
+        feeds (fed_level). -1 when not available. */
     int from_level;
     int to_level;
     int fed_level;
@@ -1189,6 +1197,26 @@ namespace SandiaDecay
 
     friend struct Transition;
   };//struct RadParticle
+
+  /** Probability that an alpha or beta-minus decay transition initially
+      populates a particular daughter level. Probabilities are conditional on
+      the owning Transition (Transition::branchRatio remains external), include
+      an explicit level-0 ground-state outcome, and sum to one. The optional
+      vector is populated only when every positive GEANT4 RadioactiveDecay feed
+      record was mapped exactly to a PhotonEvaporation level; an empty vector
+      means the enrichment deliberately failed closed. */
+  struct LevelFeed
+  {
+    int level;
+    float probability;
+    float q_keV;  ///< RDM final Q: beta endpoint; total alpha-decay Q, not alpha KE
+    ForbiddennessType forbiddenness;  ///< beta spectral-shape class
+
+    LevelFeed() : level(-1), probability(0.0f), q_keV(0.0f),
+                  forbiddenness(NoForbiddenness) {}
+    LevelFeed( int l, float p, float q, ForbiddennessType f )
+      : level(l), probability(p), q_keV(q), forbiddenness(f) {}
+  };
   
 
   /** Information representing the nuclear transition (decay channel) for
@@ -1217,6 +1245,11 @@ namespace SandiaDecay
         takes place.
      */
     std::vector<RadParticle> products;
+
+    /** Complete transition-conditional daughter-level feed law for alpha or
+        beta-minus decay. Empty when unavailable or when enrichment validation
+        could not establish an exact, closed mapping. */
+    std::vector<LevelFeed> level_feeds;
 
     /** Provides an _estimate_ of the memory taken up by this object, not what
         is actually allocated for it.  For development purposes only.

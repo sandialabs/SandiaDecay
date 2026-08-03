@@ -190,6 +190,9 @@ int main( int argc, char **argv )
           child;
           child = child->next_sibling() )
       {
+        if( rapidxml::internal::compare( child->name(), child->name_size(),
+                                         "levelFeed", 9, true ) )
+          continue; // metadata, not a particle: never shifts coincidence indices
         if( rapidxml::internal::compare( child->name(), child->name_size(), "gamma", 5, true ) )
         {
           rapidxml::xml_attribute<char> *attrib = child->first_attribute("id");
@@ -211,6 +214,13 @@ int main( int argc, char **argv )
           child;
           child = child->next_sibling() )
       {
+        if( rapidxml::internal::compare( child->name(), child->name_size(),
+                                         "levelFeed", 9, true ) )
+        {
+          // Direct alpha/beta-minus source physics, not coincidence-only data.
+          // It must survive --remove-coinc.
+          continue;
+        }
         if( do_remove_id_attrib )
           remove_id_attrib( child );
         
@@ -410,6 +420,9 @@ int main( int argc, char **argv )
   }catch( std::exception &e )
   {
     fprintf( stderr, "Error: %s\n", e.what() );
+    // Validation and output errors are delivery failures. Falling through to
+    // EXIT_SUCCESS lets automation accept a bad generated database.
+    return EXIT_FAILURE;
   }//try / catch
   
   
@@ -497,6 +510,29 @@ void test_db_still_same( const string orig_xml_filename, const string final_xml_
       
       if( oldtran->branchRatio != newtran->branchRatio )
         throw runtime_error( "Transition branchRatio not equal" );
+
+      if( oldtran->level_feeds.size() != newtran->level_feeds.size() )
+        throw runtime_error( "Transition level-feed count changed" );
+      for( size_t feed_index = 0; feed_index < oldtran->level_feeds.size(); ++feed_index )
+      {
+        const LevelFeed &oldfeed = oldtran->level_feeds[feed_index];
+        const LevelFeed &newfeed = newtran->level_feeds[feed_index];
+        const double pscale = std::max( std::fabs(static_cast<double>(oldfeed.probability)),
+                                        std::fabs(static_cast<double>(newfeed.probability)) );
+        const double qscale = std::max( std::fabs(static_cast<double>(oldfeed.q_keV)),
+                                        std::fabs(static_cast<double>(newfeed.q_keV)) );
+        if( oldfeed.level != newfeed.level ||
+            oldfeed.forbiddenness != newfeed.forbiddenness ||
+            (oldfeed.probability != newfeed.probability &&
+             (pscale == 0.0 ||
+              std::fabs(static_cast<double>(oldfeed.probability) -
+                        static_cast<double>(newfeed.probability)) > 1.1e-6 * pscale)) ||
+            (oldfeed.q_keV != newfeed.q_keV &&
+             (qscale == 0.0 ||
+              std::fabs(static_cast<double>(oldfeed.q_keV) -
+                        static_cast<double>(newfeed.q_keV)) > 1.1e-6 * qscale)) )
+          throw runtime_error( "Transition level-feed data changed" );
+      }
       
       if( oldtran->products.size() != newtran->products.size() )
         throw runtime_error( "Transition number of products not the same size" );
@@ -523,6 +559,98 @@ void test_db_still_same( const string orig_xml_filename, const string final_xml_
         
         if( oldpart.forbiddenness != newpart.forbiddenness )
           throw runtime_error( "Particle forbiddenness does not match" );
+
+        // Verified pure-E0 provenance controls whether a photon physically
+        // exists; it must survive every minimized form, including --remove-coinc.
+        if( oldpart.e0_verified != newpart.e0_verified )
+          throw runtime_error( "Particle verified-E0 provenance does not match" );
+
+        // ICC and EC coefficients are compacted to nominally four significant
+        // digits below. The legacy float-based compactor can truncate one
+        // additional unit near a rounding edge, so validate their round trip
+        // with the same bounded tolerance in both minimized output modes.
+        const auto compact_equal = []( const float a, const float b ) {
+          if( a == b ) return true;
+          const double scale = std::max( std::fabs(static_cast<double>(a)),
+                                         std::fabs(static_cast<double>(b)) );
+          return scale > 0.0 &&
+                 std::fabs(static_cast<double>(a) - static_cast<double>(b))
+                     <= 1.1e-3 * scale;
+        };
+
+        // Cascade-detail fields are part of the parsed database contract too.
+        // In a coincidence-bearing minimized file they must survive long->short
+        // renaming (notably positron/electronCapture lvl->lv). In a --remove-coinc
+        // file its topology must be absent/defaulted, while physical gamma ICC
+        // and EC shell fractions must remain available to fallback consumers.
+        if( !coincidences_removed )
+        {
+          if( oldpart.from_level != newpart.from_level
+             || oldpart.to_level != newpart.to_level
+             || oldpart.fed_level != newpart.fed_level
+             || oldpart.multipole != newpart.multipole
+             || oldpart.mixing_ratio != newpart.mixing_ratio
+             || !compact_equal(oldpart.icc_total, newpart.icc_total)
+             || !compact_equal(oldpart.icc_K, newpart.icc_K)
+             || !compact_equal(oldpart.icc_L1, newpart.icc_L1)
+             || !compact_equal(oldpart.icc_L2, newpart.icc_L2)
+             || !compact_equal(oldpart.icc_L3, newpart.icc_L3)
+             || !compact_equal(oldpart.ec_K, newpart.ec_K)
+             || !compact_equal(oldpart.ec_L, newpart.ec_L)
+             || !compact_equal(oldpart.ec_M, newpart.ec_M)
+             || !compact_equal(oldpart.ec_N, newpart.ec_N) )
+            throw runtime_error( "Particle cascade detail does not match" );
+        }
+        else if( newpart.from_level != -1 || newpart.to_level != -1
+                 || newpart.fed_level != -1 || newpart.mixing_ratio != 0.0f )
+        {
+          throw runtime_error( "Cascade detail survived --remove-coinc" );
+        }
+
+        if( coincidences_removed )
+        {
+          if( oldpart.type == GammaParticle )
+          {
+            if( oldpart.multipole != newpart.multipole
+                || !compact_equal(oldpart.icc_total, newpart.icc_total)
+                || !compact_equal(oldpart.icc_K, newpart.icc_K)
+                || !compact_equal(oldpart.icc_L1, newpart.icc_L1)
+                || !compact_equal(oldpart.icc_L2, newpart.icc_L2)
+                || !compact_equal(oldpart.icc_L3, newpart.icc_L3) )
+            {
+              std::ostringstream msg;
+              msg << "Gamma physical-emission metadata changed in --remove-coinc for "
+                  << (oldtran->parent ? oldtran->parent->symbol : string("?"))
+                  << "->" << (oldtran->child ? oldtran->child->symbol : string("?"))
+                  << " at " << oldpart.energy << " keV: mult "
+                  << oldpart.multipole << "->" << newpart.multipole
+                  << ", ICC " << oldpart.icc_total << "->" << newpart.icc_total
+                  << ", K " << oldpart.icc_K << "->" << newpart.icc_K
+                  << ", L1 " << oldpart.icc_L1 << "->" << newpart.icc_L1
+                  << ", L2 " << oldpart.icc_L2 << "->" << newpart.icc_L2
+                  << ", L3 " << oldpart.icc_L3 << "->" << newpart.icc_L3;
+              throw runtime_error( msg.str() );
+            }
+          }
+          else if( oldpart.type == CaptureElectronParticle )
+          {
+            if( !compact_equal(oldpart.ec_K, newpart.ec_K)
+                || !compact_equal(oldpart.ec_L, newpart.ec_L)
+                || !compact_equal(oldpart.ec_M, newpart.ec_M)
+                || !compact_equal(oldpart.ec_N, newpart.ec_N) )
+              throw runtime_error(
+                  "Electron-capture shell fractions changed in --remove-coinc" );
+          }
+          else if( newpart.multipole != 0 || newpart.icc_total != 0.0f
+                   || newpart.icc_K != 0.0f || newpart.icc_L1 != 0.0f
+                   || newpart.icc_L2 != 0.0f || newpart.icc_L3 != 0.0f
+                   || newpart.ec_K != 0.0f || newpart.ec_L != 0.0f
+                   || newpart.ec_M != 0.0f || newpart.ec_N != 0.0f )
+          {
+            throw runtime_error(
+                "Gamma physical-emission metadata leaked onto another particle" );
+          }
+        }
         
         if( !coincidences_removed )
         {
@@ -620,7 +748,7 @@ void test_db_still_same( const string orig_xml_filename, const string final_xml_
     }//for( loop over xrays )
   }//for( loop over elements )
   
-  printf( "Parsing of old XML file and new XML file result in identical SandiaDecayDataBase objects\n" );
+  printf( "Old and new XML agree over all validated SandiaDecayDataBase fields\n" );
 }//void test_db_still_same()
 
 
@@ -641,14 +769,16 @@ void rename_attrib( rapidxml::xml_node<char> *node, const char *oldname, const c
 
 void remove_cascade_detail_attribs( rapidxml::xml_node<char> *node )
 {
-  // Cascade-detail enrichment (internal-conversion coefficients, electron-capture
-  // shell fractions, and level-scheme indices) only feeds the coincidence-summing
-  // / cascade x-ray model. When coincidences are removed there is nothing to sum,
-  // so this data is dead weight -- strip it to keep the nocoinc file lean. Handles
-  // the long attribute names (this runs before shrink_xml_elements renames them).
+  // Coincidence-only enrichment (level topology and multipole mixing ratio) is
+  // dead weight when coincidences are removed, so strip it to keep the nocoinc
+  // file lean. Gamma ICC, multipole, e0Verified, and electron-capture shell
+  // fractions are deliberately NOT in this list: together they determine
+  // whether a photon physically exists and the physical IC/EC vacancy yield,
+  // even for a consumer using the fallback rather than a level graph. Handles
+  // long names (this runs before shrink_xml_elements).
   static const char * const kAttribs[] = {
-    "iccTotal", "iccK", "iccL1", "iccL2", "iccL3", "fl", "tl", // <gamma>
-    "ecK", "ecL", "ecM", "ecN", "lvl"                          // <electronCapture>
+    "fl", "tl", "delta",                                      // <gamma>
+    "lvl"                                              // <electronCapture>/<positron>
   };
   for( const char *name : kAttribs )
   {
@@ -744,6 +874,16 @@ void shrink_xml_elements( rapidxml::xml_node<char> *doc_node, bool cascade_detai
     rename_attrib( trans, "child", "c" );
     rename_attrib( trans, "mode", "m" );
     rename_attrib( trans, "parent", "p" );
+
+    XML_FOREACH_DAUGHTER( feed, trans, "levelFeed" )
+    {
+      feed->name( "lf" );
+      make_float_val_compact( feed->first_attribute("probability"), 8 );
+      make_float_val_compact( feed->first_attribute("q"), 8 );
+      rename_attrib( feed, "lvl", "l" );
+      rename_attrib( feed, "probability", "p" );
+      rename_attrib( feed, "forbiddenness", "f" );
+    }
     
     XML_FOREACH_DAUGHTER( child, trans, "beta" )
     {
@@ -773,6 +913,7 @@ void shrink_xml_elements( rapidxml::xml_node<char> *doc_node, bool cascade_detai
       rename_attrib( child, "intensity", "i" );
       rename_attrib( child, "logFT", "lft" );
       rename_attrib( child, "forbiddenness", "f" );
+      rename_attrib( child, "lvl", "lv" );  // fed level index (integer)
     }
     
     XML_FOREACH_DAUGHTER( child, trans, "electronCapture" )
@@ -856,6 +997,7 @@ void shrink_xml_elements( rapidxml::xml_node<char> *doc_node, bool cascade_detai
       rename_attrib( gamma, "iccL1", "il1" );
       rename_attrib( gamma, "iccL2", "il2" );
       rename_attrib( gamma, "iccL3", "il3" );
+      rename_attrib( gamma, "e0Verified", "e0" );
 
       XML_FOREACH_DAUGHTER( coinc, gamma, "coincidentGamma" )
       {
@@ -912,6 +1054,7 @@ void shrink_xml_elements( rapidxml::xml_node<char> *doc_node, bool cascade_detai
   "\t'child'           to 'c'\n"
   "\t'mode'            to 'm'\n"
   "\t'parent'          to 'p'\n"
+  "\t'productIntensityBasis' kept as-is (reviewed product-intensity provenance)\n"
   "\t'beta'            to 'b'\n"
   "\t'energy'          to 'e'\n"
   "\t'intensity'       to 'i'\n"
@@ -932,8 +1075,10 @@ void shrink_xml_elements( rapidxml::xml_node<char> *doc_node, bool cascade_detai
   if( cascade_detail_present )
   {
     desc +=
-    "  Cascade-detail attributes (present only in this coincidence-bearing file), from\n"
-    "  GEANT4 11.4.0 PhotonEvaporation/RadioactiveDecay data (derived from ENSDF):\n"
+    "  Cascade-detail attributes (present only in this coincidence-bearing file).\n"
+    "  ICC, topology and angular data are from GEANT4 11.4.0\n"
+    "  PhotonEvaporation/RadioactiveDecay; verified-E0 provenance is separately\n"
+    "  curated from the primary NNDC ENSDF evaluation:\n"
     "\t'iccTotal'        to 'ic'\n"
     "\t'iccK'            to 'ik'\n"
     "\t'iccL1'           to 'il1'\n"
@@ -941,19 +1086,37 @@ void shrink_xml_elements( rapidxml::xml_node<char> *doc_node, bool cascade_detai
     "\t'iccL3'           to 'il3'\n"
     "\t'ecK'             to 'ek'\n"
     "\t'ecL'             to 'el'\n"
-    "\t'lvl'             to 'lv'\n"
+    "\t'lvl'             to 'lv' (on electronCapture and positron)\n"
+    "\t'levelFeed'       to 'lf'; lvl/probability/forbiddenness to l/p/f\n"
+    "\t'e0Verified'      to 'e0' (reviewed pure-E0 provenance on gamma)\n"
     "\t('fl','tl','a2','a4' are kept as-is)\n";
+  }
+  else
+  {
+    // Compact physical gamma-emission metadata remains in the
+    // coincidence-free file even though topology/correlation detail is gone.
+    desc +=
+    "  Physical gamma-emission attributes retained in this file:\n"
+    "\t'iccTotal'        to 'ic'\n"
+    "\t'iccK'            to 'ik'\n"
+    "\t'iccL1'           to 'il1'\n"
+    "\t'iccL2'           to 'il2'\n"
+    "\t'iccL3'           to 'il3'\n"
+    "\t'e0Verified'      to 'e0' (reviewed pure-E0 provenance on gamma)\n"
+    "\t'mult'            kept as-is (advisory GEANT4 multipolarity)\n";
   }
 
   desc +=
   "\nField meanings (for readers not familiar with nuclear decay data):\n"
   "  e   = energy in keV.\n"
-  "  i   = intensity: absolute emission probability per decay of the parent\n"
-  "        nuclide (for <x> x-rays, relative to that atom's strongest line).\n"
+  "  i   = intensity conditional on this decay transition; multiply by br for\n"
+  "        probability per parent decay (<x> is relative to the strongest line).\n"
   "  hl  = half-life in seconds (\"INF\" = stable); iso = isomer number\n"
   "        (0 = ground state, 1 = first metastable isomer).\n"
   "  an  = atomic number Z; mn = mass number A.\n"
   "  br  = branch ratio: fraction of parent decays taking this transition;\n"
+  "  productIntensityBasis=transitionConditional means reviewed EC/beta-plus/x-ray i values\n"
+  "        are conditional on this transition and are multiplied by br once.\n"
   "  m   = decay mode (b-, b+, ec, alpha, it).\n"
   "  lft = logFT: log10 of the beta/EC comparative half-life (ft); a smaller\n"
   "        value means a more allowed (faster) branch.\n"
@@ -967,8 +1130,14 @@ void shrink_xml_elements( rapidxml::xml_node<char> *doc_node, bool cascade_detai
     "        ik = K-shell part; il1,il2,il3 = L1/L2/L3 subshell parts (on <g>).\n"
     "  fl,tl = 'from level' / 'to level' indices in the GEANT4 progeny level\n"
     "        scheme that a gamma connects (the cascade topology, on <g>).\n"
+    "  e0  = 1 only when a reviewed primary evaluation verifies a pure E0; it\n"
+    "        is independent of the advisory GEANT4 multipolarity code.\n"
     "  ek,el = electron-capture K/L shell fractions; lv = progeny level fed by\n"
-    "        an EC branch (on <ec>).\n"
+    "        an EC or beta-plus branch (on <ec> or <p>).\n"
+    "  <lf l=... p=... q=... f=...> = complete alpha/beta-minus daughter-level\n"
+    "        population law, conditional on the transition; entries include\n"
+    "        ground l=0. q is the RDM final Q (beta endpoint; not alpha KE), and\n"
+    "        optional f is the beta forbiddenness/shape class.\n"
     "  a2,a4 = gamma-gamma angular-correlation coefficients, on <c>, in\n"
     "        W(theta) = 1 + a2*P2(cos theta) + a4*P4(cos theta) (0 = isotropic).\n"
     "The full human-readable sandia.decay.xml has the long-form glossary and the\n"
@@ -978,10 +1147,17 @@ void shrink_xml_elements( rapidxml::xml_node<char> *doc_node, bool cascade_detai
   else
   {
     desc +=
-    "The GEANT4-derived cascade-detail attributes (internal conversion, EC shells,\n"
-    "level indices, angular correlations) and the per-transition cascade-match\n"
-    "audit comments are omitted from this coincidence-free file to keep it lean;\n"
-    "both are available in the full sandia.decay.xml.\n";
+    "  ic  = total internal-conversion coefficient (IC electrons)/(gammas);\n"
+    "        ik = K-shell part; il1,il2,il3 = L1/L2/L3 subshell parts (on <g>).\n"
+    "  mult = advisory GEANT4 multipolarity; it is not verified E0 provenance.\n"
+    "  e0  = 1 only when a reviewed primary evaluation verifies a pure E0; it\n"
+    "        is independent of the advisory GEANT4 multipolarity code.\n"
+    "Gamma ICC, mult and e0 are retained because they control physical emission.\n"
+    "Direct alpha/beta-minus level-feed laws are retained for the same reason.\n"
+    "EC fed-level data, gamma topology/angular detail, and per-transition\n"
+    "cascade-match audit comments are omitted from this coincidence-free file;\n"
+    "EC shell fractions are retained because they control physical x-ray yield.\n"
+    "those topology/audit details are available in the full sandia.decay.xml.\n";
   }
 
   const char *doc_desc = doc_node->document()->allocate_string(desc.c_str());

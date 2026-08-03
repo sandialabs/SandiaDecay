@@ -115,6 +115,25 @@ std::vector<GammaMatch> match_gammas(const G4LevelScheme& scheme,
       m.g4 = -1;  // reject -> behaves as un-enriched (no worse than baseline)
     }
   }
+
+  // Enforce the graph invariant required by every downstream consumer: one
+  // Sandia gamma may own a G4 transition edge, never two. A full global solve
+  // would still need nuclear-data evidence to distinguish close candidate
+  // edges with materially different ICCs, so conservatively reject every
+  // member of an accepted-edge collision. In particular, do not keep the first
+  // record and call the remainder duplicates merely because G4 has one edge.
+  std::vector<std::vector<std::size_t>> owners(scheme.transitions.size());
+  for (std::size_t g = 0; g < n; ++g)
+    if (out[g].accepted && out[g].g4 >= 0)
+      owners[static_cast<std::size_t>(out[g].g4)].push_back(g);
+  for (const std::vector<std::size_t>& collision : owners) {
+    if (collision.size() < 2) continue;
+    for (const std::size_t g : collision) {
+      out[g].accepted = false;
+      out[g].collision_rejected = true;
+      out[g].g4 = -1;
+    }
+  }
   return out;
 }
 

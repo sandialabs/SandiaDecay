@@ -647,6 +647,7 @@ RadParticle::RadParticle(ProductType p_type, float p_energy, float p_intensity)
     icc_L1( 0.0f ), icc_L2( 0.0f ), icc_L3( 0.0f ),
     multipole( 0 ),
     mixing_ratio( 0.0f ),
+    e0_verified( false ),
     ec_K( 0.0f ), ec_L( 0.0f ), ec_M( 0.0f ), ec_N( 0.0f ),
     from_level( -1 ), to_level( -1 ), fed_level( -1 )
     //, revision( RadParticle::NoRevision )
@@ -708,8 +709,8 @@ void RadParticle::set( const ::rapidxml::xml_node<char> *node )
   // Cascade-detail enrichment attributes (optional; absent in pre-enrichment
   // databases -> all default to 0). In minimized databases the names are
   // shortened (see minimize_xml_file::shrink_xml_elements): iccTotal->ic,
-  // iccK->ik, iccL1/L2/L3->il1/il2/il3, ecK/ecL->ek/el, lvl->lv (fl/tl/a2/a4 are
-  // already minimal and unchanged).
+  // iccK->ik, iccL1/L2/L3->il1/il2/il3, e0Verified->e0, ecK/ecL->ek/el,
+  // lvl->lv (on EC and positron; fl/tl/a2/a4 are already minimal and unchanged).
 #if( ENABLE_SHORT_NAME )
   const Attribute *iccTotal_att = shortname ? node->first_attribute("ic",2) : node->first_attribute( "iccTotal", 8 );
   const Attribute *iccK_att     = shortname ? node->first_attribute("ik",2) : node->first_attribute( "iccK", 4 );
@@ -720,6 +721,7 @@ void RadParticle::set( const ::rapidxml::xml_node<char> *node )
   const Attribute *ecL_att      = shortname ? node->first_attribute("el",2) : node->first_attribute( "ecL", 3 );
   const Attribute *ecM_att      = shortname ? node->first_attribute("em",2) : node->first_attribute( "ecM", 3 );
   const Attribute *ecN_att      = shortname ? node->first_attribute("en",2) : node->first_attribute( "ecN", 3 );
+  const Attribute *e0_att       = shortname ? node->first_attribute("e0",2) : node->first_attribute( "e0Verified", 10 );
 #else
   const Attribute *iccTotal_att = node->first_attribute( "iccTotal", 8 );
   const Attribute *iccK_att     = node->first_attribute( "iccK", 4 );
@@ -730,6 +732,7 @@ void RadParticle::set( const ::rapidxml::xml_node<char> *node )
   const Attribute *ecL_att      = node->first_attribute( "ecL", 3 );
   const Attribute *ecM_att      = node->first_attribute( "ecM", 3 );
   const Attribute *ecN_att      = node->first_attribute( "ecN", 3 );
+  const Attribute *e0_att       = node->first_attribute( "e0Verified", 10 );
 #endif
   const Attribute *mult_att     = node->first_attribute( "mult", 4 );
   const Attribute *delta_att    = node->first_attribute( "delta", 5 );
@@ -741,6 +744,9 @@ void RadParticle::set( const ::rapidxml::xml_node<char> *node )
   icc_L3       = iccL3_att    ? parse_float( iccL3_att->value() )    : 0.0f;
   multipole    = mult_att     ? std::atoi( mult_att->value() )       : 0;
   mixing_ratio = delta_att    ? parse_float( delta_att->value() )    : 0.0f;
+  // Fail closed: only the exact canonical token "1" carries reviewed E0
+  // provenance. Optional malformed/future values must not suppress a photon.
+  e0_verified  = e0_att && e0_att->value_size() == 1 && e0_att->value()[0] == '1';
   ec_K         = ecK_att      ? parse_float( ecK_att->value() )      : 0.0f;
   ec_L         = ecL_att      ? parse_float( ecL_att->value() )      : 0.0f;
   ec_M         = ecM_att      ? parse_float( ecM_att->value() )      : 0.0f;
@@ -780,6 +786,7 @@ void Transition::set( const ::rapidxml::xml_node<char> *node,
                       const vector<const Nuclide *> &nuclides )
 {
   products.clear();
+  level_feeds.clear();
 
   //Note: assumes ::rapidxml::parse_no_string_terminators has NOT been used
   using ::rapidxml::internal::compare;
@@ -829,6 +836,81 @@ void Transition::set( const ::rapidxml::xml_node<char> *node,
   if( branchRatio_att ) branchRatio = parse_float( branchRatio_att->value() );
   else                  branchRatio = 0.0f;
 
+  // Optional complete alpha/beta-minus daughter-level feed law. This is a
+  // transition child rather than a RadParticle: it describes which nuclear
+  // state the decay entered, not another emitted particle. Reject malformed or
+  // partial-looking metadata instead of silently normalizing it in the parser.
+  for( const ::rapidxml::xml_node<char> *feed = node->first_node(); feed;
+       feed = feed->next_sibling() )
+  {
+    const bool long_feed = compare( feed->name(), feed->name_size(),
+                                    "levelFeed", 9, true );
+    const bool short_feed = compare( feed->name(), feed->name_size(),
+                                     "lf", 2, true );
+    if( !long_feed && !short_feed )
+      continue;
+
+    const Attribute *level_att = long_feed
+        ? feed->first_attribute( "lvl", 3 ) : feed->first_attribute( "l", 1 );
+    const Attribute *prob_att = long_feed
+        ? feed->first_attribute( "probability", 11 ) : feed->first_attribute( "p", 1 );
+    const Attribute *q_att = feed->first_attribute( "q", 1 );
+    const Attribute *forbidden_att = long_feed
+        ? feed->first_attribute( "forbiddenness", 13 )
+        : feed->first_attribute( "f", 1 );
+    if( !level_att || !prob_att || !q_att )
+      throw runtime_error( "Malformed levelFeed: lvl/probability/q required" );
+    const auto parse_feed_float = []( const Attribute *attribute,
+                                      const char *field ) {
+      const std::string token( attribute->value(), attribute->value_size() );
+      char *end = NULL;
+      errno = 0;
+      const float value = strtof( token.c_str(), &end );
+      if( errno || end != token.c_str() + token.size() || !std::isfinite(value) )
+        throw runtime_error( std::string("Malformed levelFeed: invalid ") + field );
+      return value;
+    };
+    const std::string level_token( level_att->value(), level_att->value_size() );
+    if( level_token.empty() ||
+        !std::all_of(level_token.begin(), level_token.end(),
+                     [](char c) { return c >= '0' && c <= '9'; }) )
+      throw runtime_error( "Malformed levelFeed: invalid level" );
+    errno = 0;
+    char *level_end = NULL;
+    const long parsed_level = strtol( level_token.c_str(), &level_end, 10 );
+    if( errno || level_end != level_token.c_str() + level_token.size() ||
+        parsed_level > std::numeric_limits<int>::max() )
+      throw runtime_error( "Malformed levelFeed: invalid level" );
+    const int level = static_cast<int>( parsed_level );
+    const float probability = parse_feed_float( prob_att, "probability" );
+    const float q_keV = parse_feed_float( q_att, "q" );
+    ForbiddennessType forbiddenness = NoForbiddenness;
+    if( forbidden_att )
+    {
+      const std::string token( forbidden_att->value(), forbidden_att->value_size() );
+      if( token != "1" && token != "2" && token != "1u" &&
+          token != "2u" && token != "3u" )
+        throw runtime_error( "Malformed levelFeed: unknown forbiddenness" );
+      forbiddenness = forbiddenness_fromstr( token.c_str() );
+    }
+    if( level < 0 || !std::isfinite(probability) || probability <= 0.0f ||
+        !std::isfinite(q_keV) || q_keV <= 0.0f )
+      throw runtime_error( "Malformed levelFeed: invalid level/probability/q" );
+    for( const LevelFeed &existing : level_feeds )
+      if( existing.level == level )
+        throw runtime_error( "Malformed levelFeed: duplicate daughter level" );
+    level_feeds.push_back( LevelFeed(level, probability, q_keV, forbiddenness) );
+  }
+  if( !level_feeds.empty() )
+  {
+    if( mode != AlphaDecay && mode != BetaDecay )
+      throw runtime_error( "Malformed levelFeed: unsupported decay mode" );
+    double total = 0.0;
+    for( const LevelFeed &feed : level_feeds ) total += feed.probability;
+    if( std::fabs(total - 1.0) > 2.0e-4 )
+      throw runtime_error( "Malformed levelFeed: probabilities do not sum to one" );
+  }
+
   //In order to link coincidences correctly, we will need to loop over decay
   //  products twice since we're using a index based mecahnism.
   std::vector<RadParticle> new_particles;
@@ -839,6 +921,9 @@ void Transition::set( const ::rapidxml::xml_node<char> *node,
       particle;
       particle = particle->next_sibling() )
   {
+    if( compare( particle->name(), particle->name_size(), "levelFeed", 9, true )
+        || compare( particle->name(), particle->name_size(), "lf", 2, true ) )
+      continue;
     if( compare( particle->name(), particle->name_size(), "edit", 4, true )
         || compare( particle->name(), particle->name_size(), "insertion", 9, true ) )
       continue;
@@ -1094,6 +1179,7 @@ size_t RadParticle::memsize() const
 size_t Transition::memsize() const
 {
   size_t size = sizeof(Transition) + nelements(products)*sizeof(RadParticle);
+  size += nelements(level_feeds)*sizeof(LevelFeed);
   
   for( size_t i = 0; i < products.size(); ++i )
     size += (products[i].memsize()-sizeof(products[i]));
@@ -2036,6 +2122,15 @@ vector<EnergyRatePair> NuclideMixture::decayParticle( double time,
         const RadParticle &particle = transition->products[productNum];
         if( particle.type == type )
         {
+          // Pure E0 transitions carry their conversion/topology data in a
+          // GammaParticle record, but physically emit no single photon.  Keep
+          // the raw record available to cascade consumers and suppress it only
+          // in the public emitted-particle stream.  `e0_verified` is reviewed
+          // provenance; advisory multipolarity or ICC values are not sufficient
+          // to apply this veto.
+          if( type == GammaParticle && particle.e0_verified )
+            continue;
+
   //Comment from Greg T. in his code to read tori.db3:
   // The ToRI x-ray database will return x-rays for GS->isomeric state transitions,
   // even if the x-rays originate from the isomeric de-excitation

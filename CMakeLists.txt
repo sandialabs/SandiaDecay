@@ -19,6 +19,9 @@ target_include_directories( SandiaDecay PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}
 #build tools and examples only if building as a standalone project
 get_directory_property(hasParent PARENT_DIRECTORY)
 if( NOT hasParent  )
+  # Register tests at the top level so a normal `ctest --test-dir <build>` sees
+  # the parser/enricher and cascade-detail tests added by subdirectories.
+  enable_testing()
   add_subdirectory( tools )
   add_subdirectory( examples )
   add_subdirectory( test )
@@ -26,5 +29,4 @@ if( NOT hasParent  )
 #  add_definitions( -DALLOW_TRANSITION_MODIFICATION )
 #  add_subdirectory( wrappers/c )
 endif( NOT hasParent )
-
 

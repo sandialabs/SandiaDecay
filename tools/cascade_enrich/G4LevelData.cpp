@@ -99,6 +99,7 @@ G4LevelScheme load_photon_evaporation(int Z, int A, const std::string& data_dir)
     if (want_level && is_level_line(t)) {
       G4Level lvl;
       lvl.index = std::atoi(t[0].c_str());
+      lvl.floating_flag = t[1];
       lvl.excitation_keV = std::atof(t[2].c_str());
       lvl.halflife_s = std::atof(t[3].c_str());
       const double jpi = std::atof(t[4].c_str());
