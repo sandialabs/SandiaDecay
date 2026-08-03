@@ -199,7 +199,11 @@ constexpr GammaIntensityOverride kGammaIntensityOverrides[] = {
 // replaces energy-proximity matching altogether and can drop unsupported
 // records systematically instead of one at a time.
 //
-// U235 -> Th231, 26.55 keV, intensity 0.0054, alpha 192. Deleted because:
+// Four U235 -> Th231 records total were found unsupported. 64.35 keV is an
+// intensity correction and lives in the table above; the other three are
+// deletions, recorded here:
+//
+// 26.55 keV, intensity 0.0054, alpha 192, occurrence 1.042/decay.
 //   - NNDC ENSDF 235U alpha decay (NDS 185, 560 (2022), cutoff 31-Aug-2022)
 //     lists NO gamma at 26.55 keV; below 45 keV it has only 19.55, 31.6, 34.7,
 //     41.1 and 42.02 (plus an unplaced 15.784).
@@ -216,6 +220,30 @@ constexpr GammaIntensityOverride kGammaIntensityOverrides[] = {
 //     recorded provenance.
 //   If the topology edge is ever needed, it should return as a 26.19 keV record
 //   with an evaluated intensity -- not as this line.
+//
+// 38.90 keV, intensity 0.0011, alpha 59.5, occurrence 0.0665/decay.
+//   - ENSDF lists no gamma at this energy in the 235U alpha decay at all.
+//   - GEANT4 has the corresponding edge (level 44 -> 40, 593.6173 -> 554.6503,
+//     38.967 keV, alpha 59.5), so the transition exists; the photon intensity
+//     does not come from any evaluation. Its iccL1/L2/L3 were all zero while
+//     iccTotal was 59.5, which cannot be right at Z=90 and is a further sign
+//     the record was not evaluated.
+//   - Microcalorimeter spectra show no such line.
+//
+// 41.40 keV, intensity 0.0003, alpha 51, occurrence 0.0156/decay.
+//   - Corresponds to ENSDF 41.100 keV (277.60 -> 236.893, cc=51.0), whose
+//     intensity field is BLANK -- unmeasured, which is NOT the same as an
+//     evaluated zero. GEANT4 independently carries the edge (level 14 -> 8,
+//     40.701 keV) with relative intensity 0.
+//   - Both are consistent with no observable photon, and microcalorimeter
+//     spectra show none where one would be expected. SandiaDecay's 3e-4 has no
+//     traceable source.
+//
+// Together these four moved the branch's level-scheme feed sum from 2.37344 to
+// 1.00130 -- i.e. to within 0.13% of the exact physical bound of 1, which is
+// itself strong evidence that they were the defective records and that the
+// remaining ~50 are mutually consistent. The branch is now ACCEPTED and uses
+// the exact level walk instead of the bounded pairwise fallback.
 
 const GammaIntensityOverride* gamma_intensity_override(
     const char* parent, const char* child, const char* mode, double branch_ratio,
