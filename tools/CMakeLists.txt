@@ -27,3 +27,6 @@ target_include_directories( batch_edit_xml PUBLIC ${RAPID_XML_DIR} )
 
 # Cascade-detail enrichment tool (GEANT4 level data -> sandia.decay.xml).
 add_subdirectory( cascade_enrich )
+
+# Database-wide invariant census over the delivered XML variants.
+add_subdirectory( cascade_census )
