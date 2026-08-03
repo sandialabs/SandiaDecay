@@ -239,6 +239,19 @@ constexpr GammaIntensityOverride kGammaIntensityOverrides[] = {
 //     spectra show none where one would be expected. SandiaDecay's 3e-4 has no
 //     traceable source.
 //
+// REVIEWED, NOT CHANGED (2026-08-03). Recorded so the next reader does not
+// re-derive the same analysis:
+//
+// U235 -> Th231, 182.504 keV (387.824 -> 205.3098). SandiaDecay carries 0.340
+//   per 100 decays; ENSDF gives 0.411(15) -- a 17% gap at roughly 5 sigma, the
+//   largest remaining amplitude disagreement in this branch. The maintainer's
+//   microcalorimeter fit, normalized against the 185.71 keV line, lands near
+//   92% of the ENSDF value (~0.378), i.e. between the two. No change was made:
+//   0.378 is not an evaluated number, and adopting it would mean sourcing an
+//   intensity to a local measurement rather than to an evaluation. Revisit if
+//   that measurement is written up, and record it as measurement provenance
+//   rather than as ENSDF.
+//
 // Together these four moved the branch's level-scheme feed sum from 2.37344 to
 // 1.00130 -- i.e. to within 0.13% of the exact physical bound of 1, which is
 // itself strong evidence that they were the defective records and that the
