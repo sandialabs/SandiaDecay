@@ -551654,7 +551654,7 @@
 		</gamma>
 		<gamma energy="82.087" intensity="0.004" iccTotal="7.47" iccK="0" iccL1="4.97875" iccL2="0.612465" iccL3="0.0460003" mult="304" delta="0.04" fl="12" tl="5"/>
 		<gamma energy="84.216" id="15" intensity="0.066" iccTotal="2.17" iccK="0" iccL1="0.725865" iccL2="0.47089" iccL3="0.439208" mult="2" fl="4" tl="0"/>
-		<gamma energy="89.96" intensity="0.039" iccTotal="0.1598" iccK="0" iccL1="0.0552269" iccL2="0.0340694" iccL3="0.0312089" mult="2" fl="11" tl="4">
+		<gamma energy="89.96" intensity="0.0102" iccTotal="0.1598" iccK="0" iccL1="0.0552269" iccL2="0.0340694" iccL3="0.0312089" mult="2" fl="11" tl="4">
 			<coincidentGamma id="15" intensity="0.0043465662126919739" a2="-0.16" a4="0"/>
 			<coincidentGamma id="8" intensity="2.0949645030425962E-05"/>
 			<coincidentGamma id="5" intensity="0.0093016516951608223" a2="-0.0571429" a4="0"/>
@@ -568098,12 +568098,13 @@
 		<xray energy="19.505" intensity="0.0022" assignment="Lg3" l1intensity="0.023"/>
 		<xray energy="19.599" intensity="0.0068" assignment="Lg6" l1intensity="0.00165" l2intensity="0.0184"/>
 		<xray energy="89.178" intensity="0.00019" assignment="Ka3"/>
-		<xray energy="93.35" intensity="0.0658" assignment="Ka1"/>
-		<xray energy="104.819" intensity="0.0065" assignment="Kb3"/>
-		<xray energy="105.604" intensity="0.012" assignment="Kb1"/>
-		<xray energy="106.239" intensity="0.0009" assignment="Kb5"/>
-		<xray energy="108.583" intensity="0.009" assignment="Kb2"/>
-		<xray energy="108.955" intensity="0.0033" assignment="Kb4"/>
+		<xray energy="93.35" intensity="0.04839" assignment="Ka1"/>
+		<xray energy="104.819" intensity="4.72060E-03" assignment="Kb3"/>
+		<xray energy="105.604" intensity="8.71495E-03" assignment="Kb1"/>
+		<xray energy="106.239" intensity="6.53621E-04" assignment="Kb5"/>
+		<xray energy="108.583" intensity="6.53621E-03" assignment="Kb2"/>
+		<xray energy="108.955" intensity="2.39661E-03" assignment="Kb4"/>
+		<xray energy="89.954" intensity="0.029914" assignment="Ka2"/>
 		<!-- intensity-fix: U235->Th231 19.59-keV gamma intensity 0.61 -> 0.00583; NNDC ENSDF NDS 185 (2022), evaluated Aug-2022, %IG=0.583(11), alpha=114.7(19); energy unchanged. -->
 		<!-- cascade-match: 7 SD gammas below detectable threshold T=0.000572/decay: 291.6 291.6 310.7 517.2 742.5 97.5 371.2; 1 SD gammas with I=0 (not emitted, suppressed); G4-listed-not-in-SD[keV]: 144.47(rI=100) 80.35(rI=51) 259.79(rI=36) 441.57(rI=5) 528.04(rI=100); -->
 		<!-- intensity-fix: U235->Th231 alpha products and level feeds are the G4-topology-backed normalized projection of Aug-2022 ENSDF (NDS 185, 2022); 20 represented probabilities sum to one; emitted alpha energies and hindrances updated; omitted unmapped/tentative ENSDF rows 4042 keV (~0.007%, no G4 level), 4212 keV (0.0131%, no RDM feed), and 4296 keV (0.00915%, no RDM feed); RDM level/Q topology and gamma products unchanged. -->
