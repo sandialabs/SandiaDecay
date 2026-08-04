@@ -551662,7 +551662,7 @@
 		<gamma energy="311.0" intensity="3.20000E-05" iccTotal="0.61" iccK="0.467931" iccL1="0.079483" iccL2="0.021899" iccL3="0.00529968" mult="304" delta="0.7" fl="26" tl="1"/>
 		<gamma energy="317.87" intensity="1.02000E-06" iccTotal="0.0336" iccK="0.0268834" iccL1="0.00358512" iccL2="0.000909888" iccL3="0.000585984" mult="2" fl="25" tl="0"/>
 		<gamma energy="320.15" intensity="1.60000E-06" iccTotal="0.5" iccK="0.3711" iccL1="0.06335" iccL2="0.02566" iccL3="0.00743" mult="304" fl="26" tl="0"/>
-		<gamma energy="9.2" intensity="0" iccTotal="1181" iccK="0" iccL1="0" iccL2="0" iccL3="0" mult="3" fl="1" tl="0"/>
+		<gamma energy="9.2" intensity="4.5389E-06" iccTotal="1181" iccK="0" iccL1="0" iccL2="0" iccL3="0" mult="3" fl="1" tl="0"/>
 		<gamma energy="10.25" intensity="0"/>
 		<gamma energy="19.1" intensity="0" iccTotal="136.3" iccK="0" iccL1="0" iccL2="0" iccL3="2.5529" mult="3" fl="3" tl="2">
 			<coincidentGamma id="8" intensity="0.00041250000000000005" a2="-0.153061" a4="-0"/>
