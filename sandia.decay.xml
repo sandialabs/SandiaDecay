@@ -567975,7 +567975,7 @@
 			<coincidentGamma id="7" intensity="0.010406188213257483" a2="-0.124795" a4="0"/>
 			<coincidentGamma id="16" intensity="0.031565437580214364" a2="-0.0714286" a4="-0"/>
 		</gamma>
-		<gamma energy="182.52" id="29" intensity="0.0034" iccTotal="2.1" iccK="1.40658" iccL1="0.24234" iccL2="0.186333" iccL3="0.086877" mult="304" fl="26" tl="5">
+		<gamma energy="182.52" id="29" intensity="4.11E-03" iccTotal="2.1" iccK="1.40658" iccL1="0.24234" iccL2="0.186333" iccL3="0.086877" mult="304" fl="26" tl="5">
 			<coincidentGamma id="34" intensity="8.2121183416466479E-06" a2="-0.142857" a4="0"/>
 			<coincidentGamma id="26" intensity="8.3268585180768415E-06" a2="0.190476" a4="0"/>
 			<coincidentGamma id="17" intensity="2.5242838814642393E-06" a2="-0.0666667" a4="0"/>
