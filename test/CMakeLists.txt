@@ -29,3 +29,13 @@ add_test( NAME sandia_decay_u238_chain_min COMMAND u238_chain_tests
   "${CMAKE_CURRENT_SOURCE_DIR}/../sandia.decay.min.xml" )
 add_test( NAME sandia_decay_u238_chain_nocoinc COMMAND u238_chain_tests
   "${CMAKE_CURRENT_SOURCE_DIR}/../sandia.decay.nocoinc.min.xml" )
+
+# Reviewed low-energy U-235 / U-238 data (gamma energies and intensities, Th K x-ray group totals).
+add_executable( u235_lowE_tests u235_lowE_tests.cpp )
+target_link_libraries( u235_lowE_tests SandiaDecay )
+add_test( NAME sandia_decay_u235_lowE_full COMMAND u235_lowE_tests
+  "${CMAKE_CURRENT_SOURCE_DIR}/../sandia.decay.xml" )
+add_test( NAME sandia_decay_u235_lowE_min COMMAND u235_lowE_tests
+  "${CMAKE_CURRENT_SOURCE_DIR}/../sandia.decay.min.xml" )
+add_test( NAME sandia_decay_u235_lowE_nocoinc COMMAND u235_lowE_tests
+  "${CMAKE_CURRENT_SOURCE_DIR}/../sandia.decay.nocoinc.min.xml" )
