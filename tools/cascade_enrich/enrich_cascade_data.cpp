@@ -104,6 +104,18 @@ constexpr VerifiedE0Override kVerifiedE0Overrides[] = {
   // sentinel.  Parent-state identity excludes Eu152m's separate 615.44 line.
   // https://www.nndc.bnl.gov/nudat3/getdecaydataset.jsp?dsid=152eu+bM+decay+%2813.517+y%29&nucleus=152GD
   {"Eu152", "Gd152", "b-", 0.279, 615.4, 615.386, 2, 0, 1.0e4},
+  // NNDC ENSDF 234Pa beta-minus decay (6.70 h), S. Ota, NDS 207, 351 (2026),
+  // cutoff 1-Dec-2023: the 809.93-keV 0+ level of U-234 has an 810.0(7)-keV E0
+  // branch to the 0+ ground state with no photon; total Ice = 0.19(6)%. The
+  // SandiaDecay record's 0.0019 is that transition intensity, so it is kept as
+  // level flux and suppressed at emission.
+  // https://www.nndc.bnl.gov/nudat3/getdecaydataset.jsp?dsid=234pa+bM+decay+%286.70+h%29&nucleus=234U
+  {"Pa234", "U234", "b-", 1.0, 810.0, 809.907, 7, 0, 1.0e4},
+  // NNDC ENSDF 234U alpha decay, C. Morse, NDS 197, 259 (2024), cutoff
+  // 26-Sep-2023: the 634.9-keV 0+ level of Th-230 decays to the 0+ ground state
+  // by a 634.9-keV E0 transition (no photon).
+  // https://www.nndc.bnl.gov/nudat3/getdecaydataset.jsp?dsid=234u+a+decay&nucleus=230TH
+  {"U234", "Th230", "a", 1.0, 634.9, 634.919, 7, 0, 1.0e4},
 };
 
 const VerifiedE0Override* verified_e0_identity(
@@ -457,8 +469,11 @@ const char* const kHeaderDoc =
 "   e0Verified      1 only for a pure-E0 transition verified against a reviewed\n"
 "                   primary nuclear-data evaluation. It is independent of mult\n"
 "                   and absent otherwise. Curated records are O-16 6048.2 keV\n"
-"                   [E0] (NNDC ENSDF 1993Ti07) and Gd-152 615.4 keV [E0]\n"
-"                   following Eu-152 beta-minus decay (NDS 111, 2013).\n"
+"                   [E0] (NNDC ENSDF 1993Ti07), Gd-152 615.4 keV [E0]\n"
+"                   following Eu-152 beta-minus decay (NDS 111, 2013), U-234\n"
+"                   810.0 keV [E0] following Pa-234 beta-minus decay (NDS 207,\n"
+"                   2026) and Th-230 634.9 keV [E0] following U-234 alpha\n"
+"                   decay (NDS 197, 2024).\n"
 "   fl, tl          \"from level\" and \"to level\": indices of the nuclear levels\n"
 "                   (in the GEANT4 progeny level scheme) that this gamma\n"
 "                   connects. Together they give the cascade topology, i.e. which\n"
@@ -765,6 +780,8 @@ int main(int argc, char** argv) {
          n_parent_block_missing = 0, n_doc = 0, n_mult = 0,
          n_e0_verified = 0, n_e0_parent_branch = 0, n_n16_e0_verified = 0,
          n_eu152_e0_parent_branch = 0, n_eu152_e0_verified = 0,
+         n_pa234_e0_parent_branch = 0, n_pa234_e0_verified = 0,
+         n_u234_e0_parent_branch = 0, n_u234_e0_verified = 0,
          n_eu152_weak_parent_branch = 0, n_eu152_weak_converted = 0,
          n_intensity_fixed = 0, n_u235_alpha_feed_fixed = 0,
          n_u235_parent_branch = 0,
@@ -792,6 +809,14 @@ int main(int argc, char** argv) {
           std::string(ca->value()) == "Gd152" && std::string(mode) == "b-";
       if (eu152_gd_branch)
         ++n_eu152_e0_parent_branch;
+      const bool pa234_u234_branch = std::string(pa->value()) == "Pa234" &&
+          std::string(ca->value()) == "U234" && std::string(mode) == "b-";
+      if (pa234_u234_branch)
+        ++n_pa234_e0_parent_branch;
+      const bool u234_th230_branch = std::string(pa->value()) == "U234" &&
+          std::string(ca->value()) == "Th230" && std::string(mode) == "a";
+      if (u234_th230_branch)
+        ++n_u234_e0_parent_branch;
       const bool eu152_sm_branch = std::string(pa->value()) == "Eu152" &&
           std::string(ca->value()) == "Sm152" && std::string(mode) == "ec";
       if (eu152_sm_branch)
@@ -1140,6 +1165,8 @@ int main(int argc, char** argv) {
           ++n_e0_verified;
           if (n16_o16_branch) ++n_n16_e0_verified;
           if (eu152_gd_branch) ++n_eu152_e0_verified;
+          if (pa234_u234_branch) ++n_pa234_e0_verified;
+          if (u234_th230_branch) ++n_u234_e0_verified;
         }
         // Level-scheme topology (G4 level indices) for the level-path cascade
         // realization: which progeny levels this gamma connects.
@@ -1825,6 +1852,14 @@ int main(int argc, char** argv) {
         (n_eu152_e0_parent_branch != 1 || n_eu152_e0_verified != 1))
       throw std::runtime_error(
           "Reviewed Eu152->Gd152 E0 override did not match exactly once");
+    if (n_pa234_e0_parent_branch &&
+        (n_pa234_e0_parent_branch != 1 || n_pa234_e0_verified != 1))
+      throw std::runtime_error(
+          "Reviewed Pa234->U234 810.0-keV E0 override did not match exactly once");
+    if (n_u234_e0_parent_branch &&
+        (n_u234_e0_parent_branch != 1 || n_u234_e0_verified != 1))
+      throw std::runtime_error(
+          "Reviewed U234->Th230 634.9-keV E0 override did not match exactly once");
     if (n_eu152_weak_parent_branch &&
         (n_eu152_weak_parent_branch != 1 || n_eu152_weak_converted != 1))
       throw std::runtime_error(

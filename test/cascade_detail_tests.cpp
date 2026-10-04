@@ -6,6 +6,7 @@
 #include <cmath>
 #include <stdexcept>
 #include <string>
+#include <tuple>
 #include <set>
 #include <vector>
 
@@ -147,6 +148,17 @@ void check_database_provenance(const std::string& filename) {
         filename + " retains verified Eu152 615.4-keV E0 physics/topology");
   check(eu152m_615 && !eu152m_615->e0_verified,
         filename + " does not apply Eu152 E0 provenance to Eu152m");
+  // Reviewed U-238-chain pure E0 transitions (ENSDF NDS 207, 2026 and NDS 197, 2024).
+  const bool nocoinc = filename.find("nocoinc") != std::string::npos;
+  for (const auto& e0 : {std::make_tuple("Pa234", "U234", 810.0f), std::make_tuple("U234", "Th230", 634.9f)}) {
+    const SandiaDecay::RadParticle* g =
+        find_gamma(db, std::get<0>(e0), std::get<1>(e0), std::get<2>(e0));
+    const bool topology_ok = g && (nocoinc ? (g->from_level == -1 && g->to_level == -1)
+                                           : (g->from_level == 7 && g->to_level == 0));
+    check(g && g->e0_verified && topology_ok && bounded_single_gamma_yield(*g) == 0.0,
+          filename + " marks reviewed " + std::get<0>(e0) + "->" + std::get<1>(e0) + " " +
+              std::to_string(std::get<2>(e0)) + "-keV pure E0");
+  }
   check(nb98 && nb98->icc_total > 1.0e20f && nb98->icc_K > 1.0e20f &&
             nb98->multipole == 1 && bounded_single_gamma_yield(*nb98) == 0.0,
         filename + " Nb98 sentinel E0 has zero single-gamma yield");
@@ -541,7 +553,7 @@ void check_database_provenance(const std::string& filename) {
                 std::fabs(tfeed->level_feeds[0].probability - 0.7807808f) < 2e-7f,
             filename + " Th234 +X feed maps to level 2 with beta endpoint");
   }
-  check(verified_e0_count(db) == 2,
+  check(verified_e0_count(db) == 4,
         filename + " has the expected verified-E0 count");
 }
 
