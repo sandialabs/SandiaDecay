@@ -39,3 +39,13 @@ add_test( NAME sandia_decay_u235_lowE_min COMMAND u235_lowE_tests
   "${CMAKE_CURRENT_SOURCE_DIR}/../sandia.decay.min.xml" )
 add_test( NAME sandia_decay_u235_lowE_nocoinc COMMAND u235_lowE_tests
   "${CMAKE_CURRENT_SOURCE_DIR}/../sandia.decay.nocoinc.min.xml" )
+
+# Th, Pa and U K x-ray structure (decay sets of Th/Pa/U daughters and the Pb/Th/Pa/U fluorescence blocks).
+add_executable( xray_k_structure_tests xray_k_structure_tests.cpp )
+target_link_libraries( xray_k_structure_tests SandiaDecay )
+add_test( NAME sandia_decay_xray_k_structure_full COMMAND xray_k_structure_tests
+  "${CMAKE_CURRENT_SOURCE_DIR}/../sandia.decay.xml" )
+add_test( NAME sandia_decay_xray_k_structure_min COMMAND xray_k_structure_tests
+  "${CMAKE_CURRENT_SOURCE_DIR}/../sandia.decay.min.xml" )
+add_test( NAME sandia_decay_xray_k_structure_nocoinc COMMAND xray_k_structure_tests
+  "${CMAKE_CURRENT_SOURCE_DIR}/../sandia.decay.nocoinc.min.xml" )

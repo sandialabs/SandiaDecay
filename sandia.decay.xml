@@ -543214,6 +543214,7 @@
 		<levelFeed lvl="32" probability="1.002005168E-05" q="5110.9"/>
 	</transition>
 	<transition branchRatio="0.83" child="Th226" mode="b-" parent="Ac226">
+		<!-- K x-rays (2026-10 review): energies Deslattes 2003 theory (xraylib for K-O/K-P); sub-line rates xraylib (K-L, K-M2,3, K-N2,3) and EADL2023 (weak lines); K-N2/K-N3 split and K-O2,3, K-P2,3 added within the unchanged K'b2 total.  Micro-cal: K-N energies follow theory, K-O at U 115.375(4), Th 109.442(5) keV. -->
 		<gamma energy="72.23" id="0" intensity="0.006804" iccTotal="53.5" iccK="0" iccL1="0.760235" iccL2="21.4642" iccL3="16.9113" mult="4" fl="1" tl="0"/>
 		<gamma energy="81" id="1" intensity="2.1384E-05" iccTotal="0.208" iccK="0" iccL1="0.069472" iccL2="0.0448032" iccL3="0.042744" mult="2" fl="4" tl="2">
 			<coincidentGamma id="2" intensity="0.11448763250883393" a2="-0.140306" a4="-0"/>
@@ -543264,14 +543265,18 @@
 		<xray energy="19.304" intensity="0.00023" assignment="Lg2" l1intensity="0.0231"/>
 		<xray energy="19.505" intensity="0.00023" assignment="Lg3" l1intensity="0.023"/>
 		<xray energy="19.599" intensity="0.0025" assignment="Lg6" l1intensity="0.00165" l2intensity="0.0184"/>
-		<xray energy="89.178" intensity="3.22E-05" assignment="Ka3"/>
-		<xray energy="89.957" intensity="0.0107" assignment="Ka2"/>
-		<xray energy="93.35" intensity="0.0174" assignment="Ka1"/>
-		<xray energy="104.819" intensity="0.00212" assignment="Kb3"/>
-		<xray energy="105.604" intensity="0.00405" assignment="Kb1"/>
-		<xray energy="106.239" intensity="0.000144" assignment="Kb5"/>
-		<xray energy="108.583" intensity="0.00155" assignment="Kb2"/>
-		<xray energy="108.955" intensity="0.000542" assignment="Kb4"/>
+		<xray energy="89.1766" intensity="3.22E-05" assignment="Ka3"/>
+		<xray energy="89.9566" intensity="0.0107" assignment="Ka2"/>
+		<xray energy="93.3479" intensity="0.0174" assignment="Ka1"/>
+		<xray energy="104.8172" intensity="0.0020907" assignment="Kb3"/>
+		<xray energy="105.6019" intensity="0.0040769" assignment="Kb1"/>
+		<xray energy="106.1564" intensity="6.7928E-05" assignment="Kb5II"/>
+		<xray energy="106.3149" intensity="7.8467E-05" assignment="Kb5I"/>
+		<xray energy="108.4812" intensity="0.00053522" assignment="Kb2a"/>
+		<xray energy="108.6809" intensity="0.0010823" assignment="Kb2b"/>
+		<xray energy="108.9546" intensity="4.2551E-05" assignment="Kb4"/>
+		<xray energy="109.4535" intensity="0.000371" assignment="KO23"/>
+		<xray energy="109.6305" intensity="6.0891E-05" assignment="KP23"/>
 		<!-- cascade-feed: omitted(record-sum-closure). -->
 	</transition>
 	<transition branchRatio="0.17" child="Ra226" mode="ec" parent="Ac226">
@@ -543748,6 +543753,7 @@
 		<levelFeed lvl="24" probability="2.90557623E-05" q="4436.87"/>
 	</transition>
 	<transition branchRatio="1" child="Th228" mode="b-" parent="Ac228">
+		<!-- K x-rays (2026-10 review): energies Deslattes 2003 theory (xraylib for K-O/K-P); sub-line rates xraylib (K-L, K-M2,3, K-N2,3) and EADL2023 (weak lines); K-N2/K-N3 split and K-O2,3, K-P2,3 added within the unchanged K'b2 total.  Micro-cal: K-N energies follow theory, K-O at U 115.375(4), Th 109.442(5) keV. -->
 		<gamma energy="18.4" intensity="0.00014" iccTotal="6.47" iccK="0" iccL1="0" iccL2="0" iccL3="3.82959" mult="2" fl="51" tl="49">
 			<coincidentGamma id="45" intensity="0.25883432210515883" a2="-0.280002" a4="0"/>
 			<coincidentGamma id="34" intensity="0.0023699091890101043"/>
@@ -545986,14 +545992,18 @@
 		<xray energy="19.304" intensity="0.0015" assignment="Lg2" l1intensity="0.0231"/>
 		<xray energy="19.505" intensity="0.0015" assignment="Lg3" l1intensity="0.023"/>
 		<xray energy="19.599" intensity="0.0065" assignment="Lg6" l1intensity="0.00165" l2intensity="0.0184"/>
-		<xray energy="89.178" intensity="5.9E-05" assignment="Ka3"/>
-		<xray energy="89.957" intensity="0.0196" assignment="Ka2"/>
-		<xray energy="93.35" intensity="0.0319" assignment="Ka1"/>
-		<xray energy="104.819" intensity="0.0039" assignment="Kb3"/>
-		<xray energy="105.604" intensity="0.0074" assignment="Kb1"/>
-		<xray energy="106.239" intensity="0.000264" assignment="Kb5"/>
-		<xray energy="108.583" intensity="0.00284" assignment="Kb2"/>
-		<xray energy="108.955" intensity="0.00099" assignment="Kb4"/>
+		<xray energy="89.1766" intensity="5.9E-05" assignment="Ka3"/>
+		<xray energy="89.9566" intensity="0.0196" assignment="Ka2"/>
+		<xray energy="93.3479" intensity="0.0319" assignment="Ka1"/>
+		<xray energy="104.8172" intensity="0.0038291" assignment="Kb3"/>
+		<xray energy="105.6019" intensity="0.0074667" assignment="Kb1"/>
+		<xray energy="106.1564" intensity="0.00012441" assignment="Kb5II"/>
+		<xray energy="106.3149" intensity="0.00014371" assignment="Kb5I"/>
+		<xray energy="108.4812" intensity="0.00097988" assignment="Kb2a"/>
+		<xray energy="108.6809" intensity="0.0019815" assignment="Kb2b"/>
+		<xray energy="108.9546" intensity="7.7902E-05" assignment="Kb4"/>
+		<xray energy="109.4535" intensity="0.00067921" assignment="KO23"/>
+		<xray energy="109.6305" intensity="0.00011148" assignment="KP23"/>
 		<!-- cascade-match: SD-unmatched-above-threshold[keV]: 466.40(I=0.00029,neartol) 1110.61(I=0.00285,edge-collision); 17 SD gammas below detectable threshold T=0.000258/decay: 634.2 853.2 853.2 1017.9 1110.6 1337.3 1378.2 1385.4 1434.2 1438.0 1671.6 1684.0 1721.4 1745.3 1919.5 1944.2 2000.9; G4-listed-not-in-SD[keV]: 548.11(rI=15) 910.61(rI=98) 572.36(rI=100) 781.61(rI=13) 910.68(rI=46) 497.18(rI=36) 829.55(rI=28) 214.88(rI=100) 966.65(rI=65.8) 224.18(rI=6.8) 1110.62(rI=18.9) 796.32(rI=48) 779.32(rI=6) 847.39(rI=5) 231.62(rI=36) 326.06(rI=100) 1013.76(rI=11) 206.39(rI=100) 601.99(rI=40) 1110.60(rI=48) 399.71(rI=90) 447.72(rI=33) 1358.33(rI=87) 463.54(rI=7.1) 388.99(rI=100) ...; -->
 		<levelFeed lvl="1" probability="0.07362757635" q="2066.227"/>
 		<levelFeed lvl="2" probability="0.006310963687" q="1937.162"/>
@@ -546333,6 +546343,7 @@
 		<!-- cascade-feed: omitted(unmapped-or-ambiguous-level-record). -->
 	</transition>
 	<transition branchRatio="1" child="Th230" mode="b-" parent="Ac230">
+		<!-- K x-rays (2026-10 review): energies Deslattes 2003 theory (xraylib for K-O/K-P); sub-line rates xraylib (K-L, K-M2,3, K-N2,3) and EADL2023 (weak lines); K-N2/K-N3 split and K-O2,3, K-P2,3 added within the unchanged K'b2 total.  Micro-cal: K-N energies follow theory, K-O at U 115.375(4), Th 109.442(5) keV. -->
 		<gamma energy="53.2" id="0" intensity="2.0160E-03" iccTotal="228" iccK="0" iccL1="2.84772" iccL2="88.0536" iccL3="75.9924" mult="4" fl="1" tl="0"/>
 		<gamma energy="120.8" id="1" intensity="3.3600E-03" iccTotal="4.94" iccK="0.256929" iccL1="0.123451" iccL2="2.00119" iccL3="1.29971" mult="4" fl="2" tl="1">
 			<coincidentGamma id="0" intensity="0.000359127832407" a2="0.102041" a4="0.00907029"/>
@@ -547039,14 +547050,18 @@
 		<xray energy="19.304" intensity="0.00022" assignment="Lg2" l1intensity="0.0231"/>
 		<xray energy="19.505" intensity="0.00022" assignment="Lg3" l1intensity="0.023"/>
 		<xray energy="19.599" intensity="0.0035" assignment="Lg6" l1intensity="0.00165" l2intensity="0.0184"/>
-		<xray energy="89.178" intensity="1.54E-05" assignment="Ka3"/>
-		<xray energy="89.957" intensity="0.0051" assignment="Ka2"/>
-		<xray energy="93.35" intensity="0.0083" assignment="Ka1"/>
-		<xray energy="104.819" intensity="0.00102" assignment="Kb3"/>
-		<xray energy="105.604" intensity="0.00194" assignment="Kb1"/>
-		<xray energy="106.239" intensity="6.9E-05" assignment="Kb5"/>
-		<xray energy="108.583" intensity="0.00074" assignment="Kb2"/>
-		<xray energy="108.955" intensity="0.00026" assignment="Kb4"/>
+		<xray energy="89.1766" intensity="1.54E-05" assignment="Ka3"/>
+		<xray energy="89.9566" intensity="0.0051" assignment="Ka2"/>
+		<xray energy="93.3479" intensity="0.0083" assignment="Ka1"/>
+		<xray energy="104.8172" intensity="0.001003" assignment="Kb3"/>
+		<xray energy="105.6019" intensity="0.0019558" assignment="Kb1"/>
+		<xray energy="106.1564" intensity="3.2587E-05" assignment="Kb5II"/>
+		<xray energy="106.3149" intensity="3.7643E-05" assignment="Kb5I"/>
+		<xray energy="108.4812" intensity="0.00025584" assignment="Kb2a"/>
+		<xray energy="108.6809" intensity="0.00051737" assignment="Kb2b"/>
+		<xray energy="108.9546" intensity="2.034E-05" assignment="Kb4"/>
+		<xray energy="109.4535" intensity="0.00017734" assignment="KO23"/>
+		<xray energy="109.6305" intensity="2.9107E-05" assignment="KP23"/>
 		<!-- cascade-match: SD-unmatched-above-threshold[keV]: 634.90(I=0.00655,edge-collision) 635.60(I=0.00084,edge-collision) 671.40(I=0.00185,absent) 798.00(I=0.00118,absent) 816.70(I=0.00328,neartol) 939.20(I=0.00084,absent) 946.30(I=0.00084,absent) 963.00(I=0.00109,absent) 973.50(I=0.00118,absent) 982.00(I=0.000252,absent) 987.00(I=0.000252,absent) 1045.30(I=0.000504,neartol) 1065.50(I=0.00042,absent) 1093.80(I=0.00151,neartol) 1106.20(I=0.000588,absent) 1212.00(I=0.00151,absent) 1268.20(I=0.0021,neartol) 1306.20(I=0.00118,absent) 1524.60(I=0.00084,absent) 1597.20(I=0.00134,absent) 1728.00(I=0.000252,absent) 1732.00(I=0.000252,absent) 1787.10(I=0.000252,neartol) 1800.40(I=0.000672,absent) 1817.70(I=0.000588,absent) ...; 1 SD gammas below detectable threshold T=8.4e-05/decay: 2517.0; G4-listed-not-in-SD[keV]: 419.03(rI=16); -->
 		<levelFeed lvl="0" probability="0.3999366805" q="2976"/>
 		<levelFeed lvl="1" probability="0.2050982977" q="2922.773"/>
@@ -547088,6 +547103,7 @@
 		<levelFeed lvl="159" probability="0.0009229223397" q="677.4"/>
 	</transition>
 	<transition branchRatio="1" child="Th231" mode="b-" parent="Ac231">
+		<!-- K x-rays (2026-10 review): energies Deslattes 2003 theory (xraylib for K-O/K-P); sub-line rates xraylib (K-L, K-M2,3, K-N2,3) and EADL2023 (weak lines); K-N2/K-N3 split and K-O2,3, K-P2,3 added within the unchanged K'b2 total.  Micro-cal: K-N energies follow theory, K-O at U 115.375(4), Th 109.442(5) keV. -->
 		<gamma energy="19.6" intensity="0" iccTotal="114.7" iccK="0" iccL1="0" iccL2="0" iccL3="2.26303" mult="3" fl="5" tl="4">
 			<coincidentGamma id="8" intensity="0.27903602519640458" a2="-0.0571429" a4="0"/>
 			<coincidentGamma id="7" intensity="0.057151956967938289" a2="0.0178571" a4="0"/>
@@ -547163,14 +547179,18 @@
 		<xray energy="19.304" intensity="0.012" assignment="Lg2" l1intensity="0.0231"/>
 		<xray energy="19.505" intensity="0.012" assignment="Lg3" l1intensity="0.023"/>
 		<xray energy="19.599" intensity="0.0057" assignment="Lg6" l1intensity="0.00165" l2intensity="0.0184"/>
-		<xray energy="89.178" intensity="0.0004" assignment="Ka3"/>
-		<xray energy="89.957" intensity="0.134" assignment="Ka2"/>
-		<xray energy="93.35" intensity="0.218" assignment="Ka1"/>
-		<xray energy="104.819" intensity="0.0266" assignment="Kb3"/>
-		<xray energy="105.604" intensity="0.051" assignment="Kb1"/>
-		<xray energy="106.239" intensity="0.0018" assignment="Kb5"/>
-		<xray energy="108.583" intensity="0.0194" assignment="Kb2"/>
-		<xray energy="108.955" intensity="0.0068" assignment="Kb4"/>
+		<xray energy="89.1766" intensity="0.0004" assignment="Ka3"/>
+		<xray energy="89.9566" intensity="0.134" assignment="Ka2"/>
+		<xray energy="93.3479" intensity="0.218" assignment="Ka1"/>
+		<xray energy="104.8172" intensity="0.026291" assignment="Kb3"/>
+		<xray energy="105.6019" intensity="0.051268" assignment="Kb1"/>
+		<xray energy="106.1564" intensity="0.00085421" assignment="Kb5II"/>
+		<xray energy="106.3149" intensity="0.00098674" assignment="Kb5I"/>
+		<xray energy="108.4812" intensity="0.0067031" assignment="Kb2a"/>
+		<xray energy="108.6809" intensity="0.013555" assignment="Kb2b"/>
+		<xray energy="108.9546" intensity="0.0005329" assignment="Kb4"/>
+		<xray energy="109.4535" intensity="0.0046463" assignment="KO23"/>
+		<xray energy="109.6305" intensity="0.00076259" assignment="KP23"/>
 		<!-- cascade-match: G4-listed-not-in-SD[keV]: 109.18(rI=32.2) 163.36(rI=100) 205.31(rI=99.2) 321.44(rI=8.23) 593.62(rI=9.41); -->
 		<levelFeed lvl="4" probability="0.01802707211" q="1761.284" forbiddenness="1u"/>
 		<levelFeed lvl="6" probability="0.08538934156" q="1725.603"/>
@@ -547180,6 +547200,7 @@
 		<levelFeed lvl="44" probability="0.06167024668" q="1353.383"/>
 	</transition>
 	<transition branchRatio="1" child="Th232" mode="b-" parent="Ac232">
+		<!-- K x-rays (2026-10 review): energies Deslattes 2003 theory (xraylib for K-O/K-P); sub-line rates xraylib (K-L, K-M2,3, K-N2,3) and EADL2023 (weak lines); K-N2/K-N3 split and K-O2,3, K-P2,3 added within the unchanged K'b2 total.  Micro-cal: K-N energies follow theory, K-O at U 115.375(4), Th 109.442(5) keV. -->
 		<gamma energy="49.369" intensity="0" iccTotal="332" iccK="0" iccL1="4.08028" iccL2="127.09" iccL3="111.884" mult="4" fl="1" tl="0"/>
 		<gamma energy="112.7" id="1" intensity="0.00918" iccTotal="6.82" iccK="0.233994" iccL1="0.155019" iccL2="2.79279" iccL3="1.868" mult="4" fl="2" tl="1"/>
 		<gamma energy="612" intensity="2.2950E-03">
@@ -547248,14 +547269,18 @@
 		<xray energy="19.304" intensity="5E-05" assignment="Lg2" l1intensity="0.0231"/>
 		<xray energy="19.505" intensity="4.9E-05" assignment="Lg3" l1intensity="0.023"/>
 		<xray energy="19.599" intensity="0.00052" assignment="Lg6" l1intensity="0.00165" l2intensity="0.0184"/>
-		<xray energy="89.178" intensity="6.2E-06" assignment="Ka3"/>
-		<xray energy="89.957" intensity="0.00204" assignment="Ka2"/>
-		<xray energy="93.35" intensity="0.0033" assignment="Ka1"/>
-		<xray energy="104.819" intensity="0.00041" assignment="Kb3"/>
-		<xray energy="105.604" intensity="0.00078" assignment="Kb1"/>
-		<xray energy="106.239" intensity="2.8E-05" assignment="Kb5"/>
-		<xray energy="108.583" intensity="0.0003" assignment="Kb2"/>
-		<xray energy="108.955" intensity="0.000104" assignment="Kb4"/>
+		<xray energy="89.1766" intensity="6.2E-06" assignment="Ka3"/>
+		<xray energy="89.9566" intensity="0.00204" assignment="Ka2"/>
+		<xray energy="93.3479" intensity="0.0033" assignment="Ka1"/>
+		<xray energy="104.8172" intensity="0.00040331" assignment="Kb3"/>
+		<xray energy="105.6019" intensity="0.00078645" assignment="Kb1"/>
+		<xray energy="106.1564" intensity="1.3104E-05" assignment="Kb5II"/>
+		<xray energy="106.3149" intensity="1.5137E-05" assignment="Kb5I"/>
+		<xray energy="108.4812" intensity="0.00010336" assignment="Kb2a"/>
+		<xray energy="108.6809" intensity="0.00020902" assignment="Kb2b"/>
+		<xray energy="108.9546" intensity="8.2173E-06" assignment="Kb4"/>
+		<xray energy="109.4535" intensity="7.1645E-05" assignment="KO23"/>
+		<xray energy="109.6305" intensity="1.1759E-05" assignment="KP23"/>
 		<!-- cascade-match: SD-unmatched-above-threshold[keV]: 612.00(I=0.0023,edge-collision) 612.00(I=0.0505,edge-collision) 724.70(I=0.00122,edge-collision) 724.80(I=0.00444,edge-collision) 1437.00(I=0.0153,absent) 1815.00(I=0.0199,absent) 1830.00(I=0.0459,absent) 1880.00(I=0.0138,absent) 1948.00(I=0.052,absent) 1978.00(I=0.0382,absent) 2008.00(I=0.0367,absent) 1593.00(I=0.0245,neartol) 1899.00(I=0.0887,absent) 1959.00(I=0.0536,absent); G4-listed-not-in-SD[keV]: 612.03(rI=43) 331.27(rI=38) 391.28(rI=5) 943.58(rI=100) 347.25(rI=30) 407.26(rI=37) 612.67(rI=100) 672.68(rI=55) 1224.98(rI=64) 1337.73(rI=40); -->
 		<levelFeed lvl="0" probability="0.2742219196" q="3708"/>
 		<levelFeed lvl="1" probability="1.828212797E-29" q="3658.631"/>
@@ -547270,6 +547295,7 @@
 		<levelFeed lvl="25" probability="0.09506466545" q="2586.32"/>
 	</transition>
 	<transition branchRatio="1" child="Th233" mode="b-" parent="Ac233">
+		<!-- K x-rays (2026-10 review): energies Deslattes 2003 theory (xraylib for K-O/K-P); sub-line rates xraylib (K-L, K-M2,3, K-N2,3) and EADL2023 (weak lines); K-N2/K-N3 split and K-O2,3, K-P2,3 added within the unchanged K'b2 total.  Micro-cal: K-N energies follow theory, K-O at U 115.375(4), Th 109.442(5) keV. -->
 		<gamma energy="16.8" intensity="0" iccTotal="174.6" iccK="0" iccL1="0" iccL2="0" iccL3="0" mult="3" fl="9" tl="0"/>
 		<gamma energy="522.8" intensity="0.564" iccTotal="0.0116" iccK="0.00942268" iccL1="0.00129804" iccL2="0.000223532" iccL3="0.000129572" mult="2" fl="45" tl="9"/>
 		<gamma energy="539.6" intensity="0.376" iccTotal="0.0109" iccK="0.00886061" iccL1="0.00122298" iccL2="0.000205901" iccL3="0.000118374" mult="2" fl="45" tl="2"/>
@@ -547290,14 +547316,18 @@
 		<xray energy="19.304" intensity="3.2E-05" assignment="Lg2" l1intensity="0.0231"/>
 		<xray energy="19.505" intensity="3.2E-05" assignment="Lg3" l1intensity="0.023"/>
 		<xray energy="19.599" intensity="5.2E-05" assignment="Lg6" l1intensity="0.00165" l2intensity="0.0184"/>
-		<xray energy="89.178" intensity="7.42E-06" assignment="Ka3"/>
-		<xray energy="89.957" intensity="0.00246" assignment="Ka2"/>
-		<xray energy="93.35" intensity="0.00401" assignment="Ka1"/>
-		<xray energy="104.819" intensity="0.000488" assignment="Kb3"/>
-		<xray energy="105.604" intensity="0.000933" assignment="Kb1"/>
-		<xray energy="106.239" intensity="3.31E-05" assignment="Kb5"/>
-		<xray energy="108.583" intensity="0.000357" assignment="Kb2"/>
-		<xray energy="108.955" intensity="0.000125" assignment="Kb4"/>
+		<xray energy="89.1766" intensity="7.42E-06" assignment="Ka3"/>
+		<xray energy="89.9566" intensity="0.00246" assignment="Ka2"/>
+		<xray energy="93.3479" intensity="0.00401" assignment="Ka1"/>
+		<xray energy="104.8172" intensity="0.00048149" assignment="Kb3"/>
+		<xray energy="105.6019" intensity="0.00093889" assignment="Kb1"/>
+		<xray energy="106.1564" intensity="1.5644E-05" assignment="Kb5II"/>
+		<xray energy="106.3149" intensity="1.8071E-05" assignment="Kb5I"/>
+		<xray energy="108.4812" intensity="0.00012332" assignment="Kb2a"/>
+		<xray energy="108.6809" intensity="0.00024937" assignment="Kb2b"/>
+		<xray energy="108.9546" intensity="9.8038E-06" assignment="Kb4"/>
+		<xray energy="109.4535" intensity="8.5478E-05" assignment="KO23"/>
+		<xray energy="109.6305" intensity="1.4029E-05" assignment="KP23"/>
 		<!-- cascade-match: G4-listed-not-in-SD[keV]: 0.00(rI=31) 0.00(rI=24) 0.00(rI=24) 0.00(rI=62) 0.00(rI=100) 0.00(rI=41) 0.00(rI=40) 0.00(rI=21) 0.00(rI=10) 0.00(rI=22) 0.00(rI=14) 0.00(rI=10) 0.00(rI=10) 0.00(rI=10) 0.00(rI=10) 0.00(rI=10) 0.00(rI=59) 0.00(rI=10) 0.00(rI=10) 0.00(rI=12) 0.00(rI=25) 0.00(rI=26) 0.00(rI=10) 0.00(rI=10) 0.00(rI=10) ...; -->
 		<!-- cascade-feed: omitted(unmapped-or-ambiguous-level-record). -->
 	</transition>
@@ -551637,6 +551667,7 @@
 	</transition>
 	<transition branchRatio="3.8E-14" mode="sf" parent="Th230"/>
 	<transition branchRatio="1" child="Pa231" mode="b-" parent="Th231">
+		<!-- K x-rays (2026-10 review): energies Deslattes 2003 theory (xraylib for K-O/K-P); sub-line rates xraylib (K-L, K-M2,3, K-N2,3) and EADL2023 (weak lines); K-N2/K-N3 split and K-O2,3, K-P2,3 added within the unchanged K'b2 total.  Micro-cal: K-N energies follow theory, K-O at U 115.375(4), Th 109.442(5) keV. -->
 		<gamma energy="17.195" intensity="2.80000E-03" iccTotal="166" iccK="0" iccL1="0" iccL2="0" iccL3="0" mult="3" fl="5" tl="4"/>
 		<gamma energy="18.055" intensity="9.50000E-04" iccTotal="218" iccK="0" iccL1="0" iccL2="0" iccL3="32.9616" mult="304" delta="0.04" fl="6" tl="4"/>
 		<gamma energy="42.81" intensity="6.05000E-04" iccTotal="1.136" iccK="0" iccL1="0.24867" iccL2="0.284114" iccL3="0.320466" mult="2" fl="5" tl="2"/>
@@ -551744,14 +551775,18 @@
 		<xray energy="19.888" intensity="0.017" assignment="Lg2" l1intensity="0.0238"/>
 		<xray energy="20.101" intensity="0.016" assignment="Lg3" l1intensity="0.0232"/>
 		<xray energy="20.217" intensity="0.011" assignment="Lg6" l1intensity="0.00146" l2intensity="0.0182"/>
-		<xray energy="91.491" intensity="1.37E-05" assignment="Ka3"/>
-		<xray energy="92.282" intensity="0.0042" assignment="Ka2"/>
-		<xray energy="95.863" intensity="0.0069" assignment="Ka1"/>
-		<xray energy="107.595" intensity="0.00084" assignment="Kb3"/>
-		<xray energy="108.422" intensity="0.0016" assignment="Kb1"/>
-		<xray energy="109.072" intensity="5.8E-05" assignment="Kb5"/>
-		<xray energy="111.486" intensity="0.00062" assignment="Kb2"/>
-		<xray energy="111.87" intensity="0.000216" assignment="Kb4"/>
+		<xray energy="91.4880" intensity="1.37E-05" assignment="Ka3"/>
+		<xray energy="92.2835" intensity="0.0042" assignment="Ka2"/>
+		<xray energy="95.8648" intensity="0.0069" assignment="Ka1"/>
+		<xray energy="107.5912" intensity="0.00082611" assignment="Kb3"/>
+		<xray energy="108.4223" intensity="0.0016128" assignment="Kb1"/>
+		<xray energy="108.9862" intensity="2.7499E-05" assignment="Kb5II"/>
+		<xray energy="109.1535" intensity="3.1572E-05" assignment="Kb5I"/>
+		<xray energy="111.3876" intensity="0.0002127" assignment="Kb2a"/>
+		<xray energy="111.6005" intensity="0.00043188" assignment="Kb2b"/>
+		<xray energy="111.8810" intensity="1.7364E-05" assignment="Kb4"/>
+		<xray energy="112.3915" intensity="0.00014918" assignment="KO23"/>
+		<xray energy="112.5755" intensity="2.4874E-05" assignment="KP23"/>
 		<!-- cascade-match: 1 SD gammas with I=0 (not emitted, suppressed); -->
 		<levelFeed lvl="0" probability="0.0002245706899" q="391.5"/>
 		<levelFeed lvl="1" probability="0.0002245706899" q="382.317" forbiddenness="1u"/>
@@ -551804,6 +551839,7 @@
 	</transition>
 	<transition branchRatio="1.8E-11" mode="sf" parent="Th232"/>
 	<transition branchRatio="1" child="Pa233" mode="b-" parent="Th233">
+		<!-- K x-rays (2026-10 review): energies Deslattes 2003 theory (xraylib for K-O/K-P); sub-line rates xraylib (K-L, K-M2,3, K-N2,3) and EADL2023 (weak lines); K-N2/K-N3 split and K-O2,3, K-P2,3 added within the unchanged K'b2 total.  Micro-cal: K-N energies follow theory, K-O at U 115.375(4), Th 109.442(5) keV. -->
 		<gamma energy="6.68" id="0" intensity="0.00016" iccTotal="3040" iccK="0" iccL1="0" iccL2="0" iccL3="0" mult="3" fl="1" tl="0"/>
 		<gamma energy="8.22" intensity="0.19" iccTotal="1640" iccK="0" iccL1="0" iccL2="0" iccL3="0" mult="3" fl="5" tl="4">
 			<coincidentGamma id="3" intensity="0.14805164041217578" a2="0.05" a4="0"/>
@@ -552330,14 +552366,18 @@
 		<xray energy="19.888" intensity="0.00069" assignment="Lg2" l1intensity="0.0238"/>
 		<xray energy="20.101" intensity="0.00067" assignment="Lg3" l1intensity="0.0232"/>
 		<xray energy="20.217" intensity="0.00134" assignment="Lg6" l1intensity="0.00146" l2intensity="0.0182"/>
-		<xray energy="91.491" intensity="3.1E-05" assignment="Ka3"/>
-		<xray energy="92.282" intensity="0.0097" assignment="Ka2"/>
-		<xray energy="95.863" intensity="0.016" assignment="Ka1"/>
-		<xray energy="107.595" intensity="0.0019" assignment="Kb3"/>
-		<xray energy="108.422" intensity="0.0037" assignment="Kb1"/>
-		<xray energy="109.072" intensity="0.00013" assignment="Kb5"/>
-		<xray energy="111.486" intensity="0.0014" assignment="Kb2"/>
-		<xray energy="111.87" intensity="0.00049" assignment="Kb4"/>
+		<xray energy="91.4880" intensity="3.1E-05" assignment="Ka3"/>
+		<xray energy="92.2835" intensity="0.0097" assignment="Ka2"/>
+		<xray energy="95.8648" intensity="0.016" assignment="Ka1"/>
+		<xray energy="107.5912" intensity="0.001895" assignment="Kb3"/>
+		<xray energy="108.4223" intensity="0.0036995" assignment="Kb1"/>
+		<xray energy="108.9862" intensity="6.3079E-05" assignment="Kb5II"/>
+		<xray energy="109.1535" intensity="7.2421E-05" assignment="Kb5I"/>
+		<xray energy="111.3876" intensity="0.00048087" assignment="Kb2a"/>
+		<xray energy="111.6005" intensity="0.00097638" assignment="Kb2b"/>
+		<xray energy="111.8810" intensity="3.9255E-05" assignment="Kb4"/>
+		<xray energy="112.3915" intensity="0.00033726" assignment="KO23"/>
+		<xray energy="112.5755" intensity="5.6234E-05" assignment="KP23"/>
 		<!-- cascade-match: SD-unmatched-above-threshold[keV]: 210.60(I=0.00035,edge-collision) 211.30(I=0.00019,edge-collision) 513.40(I=0.0002,absent); 22 SD gammas below detectable threshold T=0.00019/decay: 408.8 418.4 473.9 505.5 517.0 531.8 554.9 681.2 698.5 744.9 751.6 774.0 784.2 832.0 846.8 918.9 955.0 1001.0 1026.5 1092.5 1144.0 1201.0; 3 SD gammas with I=0 (not emitted, suppressed); G4-listed-not-in-SD[keV]: 153.52(rI=77.7) 186.84(rI=28) 202.68(rI=44) 256.89(rI=59) 262.28(rI=43.1) 279.46(rI=100) 209.83(rI=9.3) 583.40(rI=19) 464.75(rI=21.1); -->
 		<levelFeed lvl="0" probability="0.5407356235" q="1242.2"/>
 		<levelFeed lvl="1" probability="0.2949476128" q="1235.523"/>
@@ -552360,6 +552400,7 @@
 		<levelFeed lvl="61" probability="9.831520428E-06" q="103.26"/>
 	</transition>
 	<transition branchRatio="1" child="Pa234m" mode="b-" parent="Th234">
+		<!-- K x-rays (2026-10 review): energies Deslattes 2003 theory (xraylib for K-O/K-P); sub-line rates xraylib (K-L, K-M2,3, K-N2,3) and EADL2023 (weak lines); K-N2/K-N3 split and K-O2,3, K-P2,3 added within the unchanged K'b2 total.  Micro-cal: K-N energies follow theory, K-O at U 115.375(4), Th 109.442(5) keV. -->
 		<!-- data-review 2026-10: Pa K x-rays reset to IAEA/ENSDF Ka1 1.4e-4 with the Np-237 Pa K pattern (were 23x, with Ka2 > Ka1, which added 23% to the 92.38 keV line); Pa L x-rays scaled to 0.072 (IAEA; L-vacancy budget 0.066). 73.92 keV stays 0 here: it is the Pa234m IT gamma. ENSDF NDS 207 (2026) 20.02, 29.49 and 57.75 keV not added (not testable in available spectra). -->
 		<gamma energy="62.86" intensity="0.00016" iccTotal="25" iccK="0" iccL1="9.765" iccL2="5.3575" iccL3="3.4825" mult="304" delta="0.33" fl="4" tl="3"/>
 		<gamma energy="73.92" intensity="0" iccTotal="10.6" iccK="0" iccL1="6.71192" iccL2="1.04113" iccL3="0.232246" mult="304" delta="0.11" fl="1" tl="0"/>
@@ -552392,14 +552433,18 @@
 		<xray energy="19.888" intensity="0.00194" assignment="Lg2" l1intensity="0.0238"/>
 		<xray energy="20.101" intensity="0.001875" assignment="Lg3" l1intensity="0.0232"/>
 		<xray energy="20.217" intensity="0.0007177" assignment="Lg6" l1intensity="0.00146" l2intensity="0.0182"/>
-		<xray energy="91.491" intensity="2.8E-07" assignment="Ka3"/>
-		<xray energy="92.282" intensity="8.599E-05" assignment="Ka2"/>
-		<xray energy="95.863" intensity="0.00014" assignment="Ka1"/>
-		<xray energy="107.595" intensity="1.709E-05" assignment="Kb3"/>
-		<xray energy="108.422" intensity="3.251E-05" assignment="Kb1"/>
-		<xray energy="109.072" intensity="1.176E-06" assignment="Kb5"/>
-		<xray energy="111.486" intensity="1.253E-05" assignment="Kb2"/>
-		<xray energy="111.87" intensity="4.41E-06" assignment="Kb4"/>
+		<xray energy="91.4880" intensity="2.8E-07" assignment="Ka3"/>
+		<xray energy="92.2835" intensity="8.599E-05" assignment="Ka2"/>
+		<xray energy="95.8648" intensity="0.00014" assignment="Ka1"/>
+		<xray energy="107.5912" intensity="1.6792E-05" assignment="Kb3"/>
+		<xray energy="108.4223" intensity="3.2783E-05" assignment="Kb1"/>
+		<xray energy="108.9862" intensity="5.5897E-07" assignment="Kb5II"/>
+		<xray energy="109.1535" intensity="6.4175E-07" assignment="Kb5I"/>
+		<xray energy="111.3876" intensity="4.31E-06" assignment="Kb2a"/>
+		<xray energy="111.6005" intensity="8.7512E-06" assignment="Kb2b"/>
+		<xray energy="111.8810" intensity="3.5184E-07" assignment="Kb4"/>
+		<xray energy="112.3915" intensity="3.0228E-06" assignment="KO23"/>
+		<xray energy="112.5755" intensity="5.0403E-07" assignment="KP23"/>
 		<!-- intensity-fix: Th234->Pa234m 13-gamma vector scaled by 25/33; NNDC ENSDF NDS 207 (2026), evaluated through Dec-2023, NR 0.0050(4) replaces 0.0066; gamma energies, beta intensities and coincident conditional intensities unchanged. -->
 		<!-- cascade-match: SD-unmatched-above-threshold[keV]: 87.02(I=0.000145,absent) 108.00(I=8e-05,absent) 184.80(I=0.0001,absent); 1 SD gammas below detectable threshold T=3.67e-05/decay: 103.3; 2 SD gammas with I=0 (not emitted, suppressed); G4-listed-not-in-SD[keV]: 29.50(rI=100); -->
 		<levelFeed lvl="2" probability="0.7807807808" q="200.08"/>
@@ -552449,6 +552494,7 @@
 		<levelFeed lvl="23" probability="0.007021092277" q="973.25"/>
 	</transition>
 	<transition branchRatio="1" child="Pa236" mode="b-" parent="Th236">
+		<!-- K x-rays (2026-10 review): energies Deslattes 2003 theory (xraylib for K-O/K-P); sub-line rates xraylib (K-L, K-M2,3, K-N2,3) and EADL2023 (weak lines); K-N2/K-N3 split and K-O2,3, K-P2,3 added within the unchanged K'b2 total.  Micro-cal: K-N energies follow theory, K-O at U 115.375(4), Th 109.442(5) keV. -->
 		<gamma energy="31.5" intensity="0.035" fl="1" tl="0"/>
 		<gamma energy="110.8" id="1" intensity="0.042" iccTotal="0.09248" iccK="0" iccL1="0.0351609" iccL2="0.01857" iccL3="0.0160453" mult="2" fl="2" tl="0"/>
 		<gamma energy="112.8" intensity="0.0024" fl="4" tl="3">
@@ -552494,14 +552540,18 @@
 		<xray energy="19.888" intensity="0.0021" assignment="Lg2" l1intensity="0.0238"/>
 		<xray energy="20.101" intensity="0.002" assignment="Lg3" l1intensity="0.0232"/>
 		<xray energy="20.217" intensity="0.0008" assignment="Lg6" l1intensity="0.00146" l2intensity="0.0182"/>
-		<xray energy="91.491" intensity="7.8E-05" assignment="Ka3"/>
-		<xray energy="92.282" intensity="0.024" assignment="Ka2"/>
-		<xray energy="95.863" intensity="0.039" assignment="Ka1"/>
-		<xray energy="107.595" intensity="0.0048" assignment="Kb3"/>
-		<xray energy="108.422" intensity="0.009" assignment="Kb1"/>
-		<xray energy="109.072" intensity="0.00033" assignment="Kb5"/>
-		<xray energy="111.486" intensity="0.0035" assignment="Kb2"/>
-		<xray energy="111.87" intensity="0.0012" assignment="Kb4"/>
+		<xray energy="91.4880" intensity="7.8E-05" assignment="Ka3"/>
+		<xray energy="92.2835" intensity="0.024" assignment="Ka2"/>
+		<xray energy="95.8648" intensity="0.039" assignment="Ka1"/>
+		<xray energy="107.5912" intensity="0.0046729" assignment="Kb3"/>
+		<xray energy="108.4223" intensity="0.009123" assignment="Kb1"/>
+		<xray energy="108.9862" intensity="0.00015555" assignment="Kb5II"/>
+		<xray energy="109.1535" intensity="0.00017859" assignment="Kb5I"/>
+		<xray energy="111.3876" intensity="0.0011958" assignment="Kb2a"/>
+		<xray energy="111.6005" intensity="0.002428" assignment="Kb2b"/>
+		<xray energy="111.8810" intensity="9.7619E-05" assignment="Kb4"/>
+		<xray energy="112.3915" intensity="0.00083869" assignment="KO23"/>
+		<xray energy="112.5755" intensity="0.00013984" assignment="KP23"/>
 		<!-- cascade-match: SD-unmatched-above-threshold[keV]: 131.60(I=0.007,absent) 392.40(I=0.0017,absent) 414.80(I=0.0013,absent) 434.30(I=0.0067,absent) 586.40(I=0.0009,absent) 599.70(I=0.0024,absent) 719.90(I=0.0021,absent); -->
 		<levelFeed lvl="0" probability="0.9065622664" q="921"/>
 		<levelFeed lvl="2" probability="0.01918604797" q="810.24"/>
@@ -553090,6 +553140,7 @@
 		<levelFeed lvl="10" probability="0.008097174565" q="6412.9"/>
 	</transition>
 	<transition branchRatio="0.9815" child="Th228" mode="ec" parent="Pa228">
+		<!-- K x-rays (2026-10 review): energies Deslattes 2003 theory (xraylib for K-O/K-P); sub-line rates xraylib (K-L, K-M2,3, K-N2,3) and EADL2023 (weak lines); K-N2/K-N3 split and K-O2,3, K-P2,3 added within the unchanged K'b2 total.  Micro-cal: K-N energies follow theory, K-O at U 115.375(4), Th 109.442(5) keV. -->
 		<gamma energy="18.41" id="0" intensity="0.003515" iccTotal="6.47" iccK="0" iccL1="0" iccL2="0" iccL3="3.82959" mult="2" fl="51" tl="49">
 			<coincidentGamma id="189" intensity="0.00011666940841775193"/>
 			<coincidentGamma id="37" intensity="1.0416445764419698E-06"/>
@@ -556192,14 +556243,18 @@
 		<xray energy="19.304" intensity="0.0062" assignment="Lg2" l1intensity="0.0231"/>
 		<xray energy="19.505" intensity="0.0062" assignment="Lg3" l1intensity="0.023"/>
 		<xray energy="19.599" intensity="0.0128" assignment="Lg6" l1intensity="0.00165" l2intensity="0.0184"/>
-		<xray energy="89.178" intensity="0.00078" assignment="Ka3"/>
-		<xray energy="89.957" intensity="0.257" assignment="Ka2"/>
-		<xray energy="93.35" intensity="0.419" assignment="Ka1"/>
-		<xray energy="104.819" intensity="0.051" assignment="Kb3"/>
-		<xray energy="105.604" intensity="0.098" assignment="Kb1"/>
-		<xray energy="106.239" intensity="0.00346" assignment="Kb5"/>
-		<xray energy="108.583" intensity="0.0373" assignment="Kb2"/>
-		<xray energy="108.955" intensity="0.013" assignment="Kb4"/>
+		<xray energy="89.1766" intensity="0.00078" assignment="Ka3"/>
+		<xray energy="89.9566" intensity="0.257" assignment="Ka2"/>
+		<xray energy="93.3479" intensity="0.419" assignment="Ka1"/>
+		<xray energy="104.8172" intensity="0.050484" assignment="Kb3"/>
+		<xray energy="105.6019" intensity="0.098442" assignment="Kb1"/>
+		<xray energy="106.1564" intensity="0.0016402" assignment="Kb5II"/>
+		<xray energy="106.3149" intensity="0.0018947" assignment="Kb5I"/>
+		<xray energy="108.4812" intensity="0.012869" assignment="Kb2a"/>
+		<xray energy="108.6809" intensity="0.026024" assignment="Kb2b"/>
+		<xray energy="108.9546" intensity="0.0010231" assignment="Kb4"/>
+		<xray energy="109.4535" intensity="0.0089202" assignment="KO23"/>
+		<xray energy="109.6305" intensity="0.0014641" assignment="KP23"/>
 		<!-- cascade-match: SD-unmatched-above-threshold[keV]: 141.00(I=0.00198,edge-collision) 184.61(I=0.000389,edge-collision) 583.40(I=0.00342,edge-collision) 649.12(I=0.000922,edge-collision) 649.12(I=0.000922,edge-collision) 791.43(I=0.00342,edge-collision) 1024.40(I=0.000409,absent) 1058.50(I=0.000627,absent) 1077.50(I=0.000342,neartol) 1432.00(I=0.00057,neartol) 1486.30(I=0.000257,neartol) 1523.40(I=0.00057,edge-collision) 1523.40(I=0.00057,edge-collision) 1919.40(I=0.000247,neartol) 121.87(I=0.000313,edge-collision) 548.74(I=0.000389,edge-collision) 548.74(I=0.000389,edge-collision); 5 SD gammas below detectable threshold T=0.000235/decay: 121.2 141.9 184.6 584.7 791.4; G4-listed-not-in-SD[keV]: 141.01(rI=9.9) 317.25(rI=100) 548.11(rI=15) 910.61(rI=98) 572.36(rI=100) 781.61(rI=13) 910.68(rI=46) 583.43(rI=100) 497.18(rI=36) 829.55(rI=28) 678.71(rI=90) 696.61(rI=16) 887.96(rI=26) 184.50(rI=31) 214.88(rI=100) 224.18(rI=6.8) 779.32(rI=6) 847.39(rI=5) 988.57(rI=100) 1117.64(rI=44) 326.06(rI=100) 170.52(rI=36) 239.03(rI=54) 292.59(rI=36) 293.12(rI=46) ...; -->
 	</transition>
 	<transition branchRatio="0.02" child="Ac224" mode="a" parent="Pa228">
@@ -556528,6 +556583,7 @@
 		<!-- cascade-feed: omitted(record-sum-closure). -->
 	</transition>
 	<transition branchRatio="0.9952" child="Th229" mode="ec" parent="Pa229">
+		<!-- K x-rays (2026-10 review): energies Deslattes 2003 theory (xraylib for K-O/K-P); sub-line rates xraylib (K-L, K-M2,3, K-N2,3) and EADL2023 (weak lines); K-N2/K-N3 split and K-O2,3, K-P2,3 added within the unchanged K'b2 total.  Micro-cal: K-N energies follow theory, K-O at U 115.375(4), Th 109.442(5) keV. -->
 		<gamma energy="29.19" id="0" intensity="5.8800E-05"/>
 		<gamma energy="42.44" intensity="4.4100E-04"/>
 		<gamma energy="71.819" intensity="0" iccTotal="53.9" iccK="0" iccL1="0.763224" iccL2="21.6085" iccL3="17.054" mult="4" fl="4" tl="1"/>
@@ -556563,14 +556619,18 @@
 		<xray energy="19.304" intensity="0.0063" assignment="Lg2" l1intensity="0.0231"/>
 		<xray energy="19.505" intensity="0.0063" assignment="Lg3" l1intensity="0.023"/>
 		<xray energy="19.599" intensity="0.0047" assignment="Lg6" l1intensity="0.00165" l2intensity="0.0184"/>
-		<xray energy="89.178" intensity="0.000549" assignment="Ka3"/>
-		<xray energy="89.957" intensity="0.182" assignment="Ka2"/>
-		<xray energy="93.35" intensity="0.297" assignment="Ka1"/>
-		<xray energy="104.819" intensity="0.0361" assignment="Kb3"/>
-		<xray energy="105.604" intensity="0.0691" assignment="Kb1"/>
-		<xray energy="106.239" intensity="0.00245" assignment="Kb5"/>
-		<xray energy="108.583" intensity="0.0264" assignment="Kb2"/>
-		<xray energy="108.955" intensity="0.0092" assignment="Kb4"/>
+		<xray energy="89.1766" intensity="0.000549" assignment="Ka3"/>
+		<xray energy="89.9566" intensity="0.182" assignment="Ka2"/>
+		<xray energy="93.3479" intensity="0.297" assignment="Ka1"/>
+		<xray energy="104.8172" intensity="0.035646" assignment="Kb3"/>
+		<xray energy="105.6019" intensity="0.069508" assignment="Kb1"/>
+		<xray energy="106.1564" intensity="0.0011581" assignment="Kb5II"/>
+		<xray energy="106.3149" intensity="0.0013378" assignment="Kb5I"/>
+		<xray energy="108.4812" intensity="0.009108" assignment="Kb2a"/>
+		<xray energy="108.6809" intensity="0.018418" assignment="Kb2b"/>
+		<xray energy="108.9546" intensity="0.0007241" assignment="Kb4"/>
+		<xray energy="109.4535" intensity="0.0063133" assignment="KO23"/>
+		<xray energy="109.6305" intensity="0.0010362" assignment="KP23"/>
 		<!-- cascade-match: SD-unmatched-above-threshold[keV]: 29.19(I=5.88e-05,edge-collision) 42.44(I=0.000441,edge-collision) 29.19(I=2.06e-05,edge-collision); 1 SD gammas below detectable threshold T=1e-05/decay: 42.4; G4-listed-not-in-SD[keV]: 29.19(rI=100) 29.19(rI=35) 42.43(rI=100) 29.39(rI=6.1) 42.63(rI=100) 71.82(rI=8.8) 25.31(rI=10.4) 54.70(rI=83) 97.14(rI=100) 76.35(rI=8.3) 25.31(rI=5.8) 101.66(rI=100) 131.05(rI=25); -->
 	</transition>
 	<transition branchRatio="0.0048" child="Ac225" mode="a" parent="Pa229">
@@ -556706,6 +556766,7 @@
 		<levelFeed lvl="15" probability="0.001013157084" q="5508"/>
 	</transition>
 	<transition branchRatio="0.078" child="U230" mode="b-" parent="Pa230">
+		<!-- K x-rays (2026-10 review): energies Deslattes 2003 theory (xraylib for K-O/K-P); sub-line rates xraylib (K-L, K-M2,3, K-N2,3) and EADL2023 (weak lines); K-N2/K-N3 split and K-O2,3, K-P2,3 added within the unchanged K'b2 total.  Micro-cal: K-N energies follow theory, K-O at U 115.375(4), Th 109.442(5) keV. -->
 		<gamma energy="51.75" id="0" intensity="3.2035E-03" iccTotal="308" iccK="0" iccL1="4.16724" iccL2="119.504" iccL3="100.901" mult="4" fl="1" tl="0"/>
 		<gamma energy="117.8" id="1" intensity="2.1605E-04" iccTotal="6.43" iccK="0.189299" iccL1="0.161522" iccL2="2.68388" iccL3="1.70138" mult="4" fl="2" tl="1">
 			<coincidentGamma id="0" intensity="0.000225281293952" a2="0.102041" a4="0.00907029"/>
@@ -556738,19 +556799,24 @@
 		<xray energy="20.487" intensity="3.4E-05" assignment="Lg2" l1intensity="0.0266"/>
 		<xray energy="20.715" intensity="3.2E-05" assignment="Lg3" l1intensity="0.0252"/>
 		<xray energy="20.844" intensity="0.00059" assignment="Lg6" l1intensity="0.00145" l2intensity="0.0181"/>
-		<xray energy="93.844" intensity="7E-07" assignment="Ka3"/>
-		<xray energy="94.654" intensity="0.00021" assignment="Ka2"/>
-		<xray energy="98.434" intensity="0.00034" assignment="Ka1"/>
-		<xray energy="110.421" intensity="4.2E-05" assignment="Kb3"/>
-		<xray energy="111.298" intensity="8E-05" assignment="Kb1"/>
-		<xray energy="111.964" intensity="2.9E-06" assignment="Kb5"/>
-		<xray energy="114.445" intensity="3.1E-05" assignment="Kb2"/>
-		<xray energy="114.844" intensity="1.1E-05" assignment="Kb4"/>
+		<xray energy="93.8420" intensity="7E-07" assignment="Ka3"/>
+		<xray energy="94.6531" intensity="0.00021" assignment="Ka2"/>
+		<xray energy="98.4336" intensity="0.00034" assignment="Ka1"/>
+		<xray energy="110.4182" intensity="4.1258E-05" assignment="Kb3"/>
+		<xray energy="111.2985" intensity="8.063E-05" assignment="Kb1"/>
+		<xray energy="111.8718" intensity="1.4067E-06" assignment="Kb5II"/>
+		<xray energy="112.0481" intensity="1.6046E-06" assignment="Kb5I"/>
+		<xray energy="114.3292" intensity="1.063E-05" assignment="Kb2a"/>
+		<xray energy="114.5562" intensity="2.1663E-05" assignment="Kb2b"/>
+		<xray energy="114.8436" intensity="8.9069E-07" assignment="Kb4"/>
+		<xray energy="115.3897" intensity="7.5464E-06" assignment="KO23"/>
+		<xray energy="115.5815" intensity="1.2697E-06" assignment="KP23"/>
 		<levelFeed lvl="1" probability="0.9748584744" q="507.273"/>
 		<levelFeed lvl="4" probability="0.01924101577" q="192.351"/>
 		<levelFeed lvl="5" probability="0.005900509795" q="123.81"/>
 	</transition>
 	<transition branchRatio="0.922" child="Th230" mode="ec" parent="Pa230">
+		<!-- K x-rays (2026-10 review): energies Deslattes 2003 theory (xraylib for K-O/K-P); sub-line rates xraylib (K-L, K-M2,3, K-N2,3) and EADL2023 (weak lines); K-N2/K-N3 split and K-O2,3, K-P2,3 added within the unchanged K'b2 total.  Micro-cal: K-N energies follow theory, K-O at U 115.375(4), Th 109.442(5) keV. -->
 		<gamma energy="53.22" id="0" intensity="2.6460E-03" iccTotal="228" iccK="0" iccL1="2.84772" iccL2="88.0536" iccL3="75.9924" mult="4" fl="1" tl="0"/>
 		<gamma energy="120.9" id="1" intensity="3.8871E-03" iccTotal="4.94" iccK="0.256929" iccL1="0.123451" iccL2="2.00119" iccL3="1.29971" mult="4" fl="2" tl="1">
 			<coincidentGamma id="0" intensity="2.56993006993e-05" a2="0.102041" a4="0.00907029"/>
@@ -556989,14 +557055,18 @@
 		<xray energy="19.304" intensity="0.0049" assignment="Lg2" l1intensity="0.0231"/>
 		<xray energy="19.505" intensity="0.0049" assignment="Lg3" l1intensity="0.023"/>
 		<xray energy="19.599" intensity="0.0083" assignment="Lg6" l1intensity="0.00165" l2intensity="0.0184"/>
-		<xray energy="89.178" intensity="0.000562" assignment="Ka3"/>
-		<xray energy="89.957" intensity="0.186" assignment="Ka2"/>
-		<xray energy="93.35" intensity="0.304" assignment="Ka1"/>
-		<xray energy="104.819" intensity="0.037" assignment="Kb3"/>
-		<xray energy="105.604" intensity="0.0706" assignment="Kb1"/>
-		<xray energy="106.239" intensity="0.00251" assignment="Kb5"/>
-		<xray energy="108.583" intensity="0.027" assignment="Kb2"/>
-		<xray energy="108.955" intensity="0.0094" assignment="Kb4"/>
+		<xray energy="89.1766" intensity="0.000562" assignment="Ka3"/>
+		<xray energy="89.9566" intensity="0.186" assignment="Ka2"/>
+		<xray energy="93.3479" intensity="0.304" assignment="Ka1"/>
+		<xray energy="104.8172" intensity="0.03646" assignment="Kb3"/>
+		<xray energy="105.6019" intensity="0.071097" assignment="Kb1"/>
+		<xray energy="106.1564" intensity="0.0011846" assignment="Kb5II"/>
+		<xray energy="106.3149" intensity="0.0013684" assignment="Kb5I"/>
+		<xray energy="108.4812" intensity="0.0093127" assignment="Kb2a"/>
+		<xray energy="108.6809" intensity="0.018832" assignment="Kb2b"/>
+		<xray energy="108.9546" intensity="0.00074037" assignment="Kb4"/>
+		<xray energy="109.4535" intensity="0.0064552" assignment="KO23"/>
+		<xray energy="109.6305" intensity="0.0010595" assignment="KP23"/>
 		<!-- cascade-match: 3 SD gammas below detectable threshold T=0.000321/decay: 169.4 970.0 170.5; 4 SD gammas with I=0 (not emitted, suppressed); -->
 	</transition>
 	<transition branchRatio="3.2E-05" child="Ac226" mode="a" parent="Pa230">
@@ -557460,6 +557530,7 @@
 	</transition>
 	<transition branchRatio="1.6E-13" mode="sf" parent="Pa231"/>
 	<transition branchRatio="1" child="U232" mode="b-" parent="Pa232">
+		<!-- K x-rays (2026-10 review): energies Deslattes 2003 theory (xraylib for K-O/K-P); sub-line rates xraylib (K-L, K-M2,3, K-N2,3) and EADL2023 (weak lines); K-N2/K-N3 split and K-O2,3, K-P2,3 added within the unchanged K'b2 total.  Micro-cal: K-N energies follow theory, K-O at U 115.375(4), Th 109.442(5) keV. -->
 		<gamma energy="34" intensity="0" iccTotal="2373" iccK="0" iccL1="28.8794" iccL2="880.62" iccL3="822.956" mult="4" fl="12" tl="11">
 			<coincidentGamma id="4" intensity="0.0819914251741"/>
 			<coincidentGamma id="22" intensity="0.3476" a2="-0.11844" a4="0.151603"/>
@@ -557661,18 +557732,23 @@
 		<xray energy="20.487" intensity="0.0007" assignment="Lg2" l1intensity="0.0266"/>
 		<xray energy="20.715" intensity="0.00066" assignment="Lg3" l1intensity="0.0252"/>
 		<xray energy="20.844" intensity="0.0092" assignment="Lg6" l1intensity="0.00145" l2intensity="0.0181"/>
-		<xray energy="93.844" intensity="3.75E-05" assignment="Ka3"/>
-		<xray energy="94.654" intensity="0.0108" assignment="Ka2"/>
-		<xray energy="98.434" intensity="0.0174" assignment="Ka1"/>
-		<xray energy="110.421" intensity="0.00215" assignment="Kb3"/>
-		<xray energy="111.298" intensity="0.00407" assignment="Kb1"/>
-		<xray energy="111.964" intensity="0.000151" assignment="Kb5"/>
-		<xray energy="114.445" intensity="0.00158" assignment="Kb2"/>
-		<xray energy="114.844" intensity="0.00056" assignment="Kb4"/>
+		<xray energy="93.8420" intensity="3.75E-05" assignment="Ka3"/>
+		<xray energy="94.6531" intensity="0.0108" assignment="Ka2"/>
+		<xray energy="98.4336" intensity="0.0174" assignment="Ka1"/>
+		<xray energy="110.4182" intensity="0.0021045" assignment="Kb3"/>
+		<xray energy="111.2985" intensity="0.0041129" assignment="Kb1"/>
+		<xray energy="111.8718" intensity="7.1752E-05" assignment="Kb5II"/>
+		<xray energy="112.0481" intensity="8.185E-05" assignment="Kb5I"/>
+		<xray energy="114.3292" intensity="0.00054163" assignment="Kb2a"/>
+		<xray energy="114.5562" intensity="0.0011038" assignment="Kb2b"/>
+		<xray energy="114.8436" intensity="4.5383E-05" assignment="Kb4"/>
+		<xray energy="115.3897" intensity="0.00038451" assignment="KO23"/>
+		<xray energy="115.5815" intensity="6.4694E-05" assignment="KP23"/>
 		<!-- cascade-match: 1 SD gammas below detectable threshold T=0.000423/decay: 1171.0; G4-listed-not-in-SD[keV]: 218.41(rI=100) 643.85(rI=100) 578.00(rI=39); -->
 		<!-- cascade-feed: omitted(mode-branch-closure). -->
 	</transition>
 	<transition branchRatio="0.003" child="Th232" mode="ec" parent="Pa232">
+		<!-- K x-rays (2026-10 review): energies Deslattes 2003 theory (xraylib for K-O/K-P); sub-line rates xraylib (K-L, K-M2,3, K-N2,3) and EADL2023 (weak lines); K-N2/K-N3 split and K-O2,3, K-P2,3 added within the unchanged K'b2 total.  Micro-cal: K-N energies follow theory, K-O at U 115.375(4), Th 109.442(5) keV. -->
 		<electronCapture energy="450.60" intensity="1" logFT="8.500" ecK="0.7058" ecL="0.2157" lvl="1"/>
 		<xray energy="11.118" intensity="2.9E-07" assignment="Ll" l1intensity="0.0117" l2intensity="0.00216" l3intensity="0.02"/>
 		<xray energy="12.809" intensity="4.9E-07" assignment="La2" l1intensity="0.0201" l2intensity="0.0037" l3intensity="0.0342"/>
@@ -557688,16 +557764,21 @@
 		<xray energy="19.304" intensity="1.5E-07" assignment="Lg2" l1intensity="0.0231"/>
 		<xray energy="19.505" intensity="1.5E-07" assignment="Lg3" l1intensity="0.023"/>
 		<xray energy="19.599" intensity="1.34E-07" assignment="Lg6" l1intensity="0.00165" l2intensity="0.0184"/>
-		<xray energy="89.178" intensity="1.8E-08" assignment="Ka3"/>
-		<xray energy="89.957" intensity="5.96E-06" assignment="Ka2"/>
-		<xray energy="93.35" intensity="9.7E-06" assignment="Ka1"/>
-		<xray energy="104.819" intensity="1.18E-06" assignment="Kb3"/>
-		<xray energy="105.604" intensity="2.26E-06" assignment="Kb1"/>
-		<xray energy="106.239" intensity="8E-08" assignment="Kb5"/>
-		<xray energy="108.583" intensity="8.65E-07" assignment="Kb2"/>
-		<xray energy="108.955" intensity="3.02E-07" assignment="Kb4"/>
+		<xray energy="89.1766" intensity="1.8E-08" assignment="Ka3"/>
+		<xray energy="89.9566" intensity="5.96E-06" assignment="Ka2"/>
+		<xray energy="93.3479" intensity="9.7E-06" assignment="Ka1"/>
+		<xray energy="104.8172" intensity="1.1656E-06" assignment="Kb3"/>
+		<xray energy="105.6019" intensity="2.2728E-06" assignment="Kb1"/>
+		<xray energy="106.1564" intensity="3.7869E-08" assignment="Kb5II"/>
+		<xray energy="106.3149" intensity="4.3745E-08" assignment="Kb5I"/>
+		<xray energy="108.4812" intensity="2.9857E-07" assignment="Kb2a"/>
+		<xray energy="108.6809" intensity="6.0377E-07" assignment="Kb2b"/>
+		<xray energy="108.9546" intensity="2.3737E-08" assignment="Kb4"/>
+		<xray energy="109.4535" intensity="2.0696E-07" assignment="KO23"/>
+		<xray energy="109.6305" intensity="3.3967E-08" assignment="KP23"/>
 	</transition>
 	<transition branchRatio="1" child="U233" mode="b-" parent="Pa233">
+		<!-- K x-rays (2026-10 review): energies Deslattes 2003 theory (xraylib for K-O/K-P); sub-line rates xraylib (K-L, K-M2,3, K-N2,3) and EADL2023 (weak lines); K-N2/K-N3 split and K-O2,3, K-P2,3 added within the unchanged K'b2 total.  Micro-cal: K-N energies follow theory, K-O at U 115.375(4), Th 109.442(5) keV. -->
 		<gamma energy="17.26" id="0" intensity="4E-05" iccTotal="500" iccK="0" iccL1="0" iccL2="0" iccL3="0" mult="304" delta="0.13" fl="19" tl="17">
 			<coincidentGamma id="160" intensity="1.2230590435683529E-06"/>
 			<coincidentGamma id="15" intensity="2.4967682150248197E-05"/>
@@ -561592,14 +561673,18 @@
 		<xray energy="20.487" intensity="0.012" assignment="Lg2" l1intensity="0.0266"/>
 		<xray energy="20.715" intensity="0.0118" assignment="Lg3" l1intensity="0.0252"/>
 		<xray energy="20.844" intensity="0.0055" assignment="Lg6" l1intensity="0.00145" l2intensity="0.0181"/>
-		<xray energy="93.844" intensity="0.000378" assignment="Ka3"/>
-		<xray energy="94.654" intensity="0.109" assignment="Ka2"/>
-		<xray energy="98.434" intensity="0.176" assignment="Ka1"/>
-		<xray energy="110.421" intensity="0.0216" assignment="Kb3"/>
-		<xray energy="111.298" intensity="0.0411" assignment="Kb1"/>
-		<xray energy="111.964" intensity="0.00152" assignment="Kb5"/>
-		<xray energy="114.445" intensity="0.0159" assignment="Kb2"/>
-		<xray energy="114.844" intensity="0.00568" assignment="Kb4"/>
+		<xray energy="93.8420" intensity="0.000378" assignment="Ka3"/>
+		<xray energy="94.6531" intensity="0.109" assignment="Ka2"/>
+		<xray energy="98.4336" intensity="0.176" assignment="Ka1"/>
+		<xray energy="110.4182" intensity="0.021214" assignment="Kb3"/>
+		<xray energy="111.2985" intensity="0.041458" assignment="Kb1"/>
+		<xray energy="111.8718" intensity="0.00072327" assignment="Kb5II"/>
+		<xray energy="112.0481" intensity="0.00082505" assignment="Kb5I"/>
+		<xray energy="114.3292" intensity="0.0054619" assignment="Kb2a"/>
+		<xray energy="114.5562" intensity="0.011131" assignment="Kb2b"/>
+		<xray energy="114.8436" intensity="0.00045764" assignment="Kb4"/>
+		<xray energy="115.3897" intensity="0.0038774" assignment="KO23"/>
+		<xray energy="115.5815" intensity="0.00065239" assignment="KP23"/>
 		<!-- cascade-match: SD-unmatched-above-threshold[keV]: 18.70(I=0.00046,neartol) 19.70(I=0.00046,neartol) 19.70(I=0.00046,neartol) 28.56(I=0.00071,edge-collision) 75.35(I=0.00695,edge-collision) 75.35(I=0.00695,edge-collision) 86.59(I=0.0195,edge-collision) 103.97(I=0.0087,edge-collision) 248.38(I=0.000609,edge-collision) 340.48(I=0.0445,edge-collision) 375.45(I=0.00679,edge-collision); 162 SD gammas below detectable threshold T=0.000385/decay: 23.9 24.7 31.9 35.3 35.8 38.5 38.5 40.3 40.3 41.7 42.7 45.8 46.7 48.8 49.7 49.7 51.8 52.5 51.8 53.2 52.5 53.2 55.0 58.0 59.2 ...; 24 SD gammas with I=0 (not emitted, suppressed); G4-listed-not-in-SD[keV]: 40.35(rI=100) 51.80(rI=21) 92.15(rI=100) 137.31(rI=100) 298.81(rI=100) 159.36(rI=100) 340.48(rI=67.9) 86.59(rI=100) 75.28(rI=74.1) 103.86(rI=48.9) 375.41(rI=39.1) 415.76(rI=100) 411.47(rI=25) 225.77(rI=12.7) 546.54(rI=100); -->
 		<levelFeed lvl="0" probability="0.08635590872" q="570.3"/>
 		<levelFeed lvl="1" probability="9.813189627E-30" q="529.949"/>
@@ -561614,6 +561699,7 @@
 		<levelFeed lvl="22" probability="1.275698652E-05" q="114.34"/>
 	</transition>
 	<transition branchRatio="1" child="U234" mode="b-" parent="Pa234">
+		<!-- K x-rays (2026-10 review): energies Deslattes 2003 theory (xraylib for K-O/K-P); sub-line rates xraylib (K-L, K-M2,3, K-N2,3) and EADL2023 (weak lines); K-N2/K-N3 split and K-O2,3, K-P2,3 added within the unchanged K'b2 total.  Micro-cal: K-N energies follow theory, K-O at U 115.375(4), Th 109.442(5) keV. -->
 		<!-- data-review 2026-10 (S. Ota NDS 207, 351 (2026)): relative intensities are ENSDF's with NR 1.03 (2007: 1.08, 2026: 1.06(+31-20)); kept, as JRC/IDB U-238-chain spectra and the evaluation's own beta-feed sum (1.08 at NR 1.06) favor it. 34.3, 41.82 and 75.0 keV were transition flux stored as photons; 810.0 keV is a pure E0 (e0Verified); 17 multiply placed lines were counted twice (copy on the placement without evaluated intensity set to 0); a stray 331.4 keV record carrying the 330.40 keV M1+E2 placement's CC and topology duplicated the evaluated 331.4 keV line and was removed; 513.4 and 980.3 keV totals kept (confirmed in spectra) and split per ENSDF; 1393.57 -> 1393.9 keV; 926.72 and 946.0 keV restored (removed before 2019; their intensity had been folded into Pa234m), with ENSDF 926.0 (absent in spectra) folded into 926.72 and the 926.6/946.0 chain totals kept at the measured values (both owners' lines scaled 1.071/1.054); U K x-rays scaled to the K-vacancy budget; coincidence lists regenerated from the ENSDF-2026 level scheme. Some measured deviations were not adopted, pending independent data. -->
 		<gamma energy="34.3" id="330" intensity="3.399E-05" iccTotal="2269" iccK="0" iccL1="0" iccL2="0" iccL3="0" mult="21" fl="16" tl="14">
 			<coincidentGamma id="2" intensity="0.00126579"/>
@@ -566412,14 +566498,18 @@
 		<xray energy="20.487" intensity="0.0039" assignment="Lg2" l1intensity="0.0266"/>
 		<xray energy="20.715" intensity="0.0037" assignment="Lg3" l1intensity="0.0252"/>
 		<xray energy="20.844" intensity="0.016" assignment="Lg6" l1intensity="0.00145" l2intensity="0.0181"/>
-		<xray energy="93.844" intensity="0.0004175" assignment="Ka3"/>
-		<xray energy="94.654" intensity="0.1202" assignment="Ka2"/>
-		<xray energy="98.434" intensity="0.1946" assignment="Ka1"/>
-		<xray energy="110.421" intensity="0.02396" assignment="Kb3"/>
-		<xray energy="111.298" intensity="0.04542" assignment="Kb1"/>
-		<xray energy="111.964" intensity="0.001678" assignment="Kb5"/>
-		<xray energy="114.445" intensity="0.01754" assignment="Kb2"/>
-		<xray energy="114.844" intensity="0.006263" assignment="Kb4"/>
+		<xray energy="93.8420" intensity="0.0004175" assignment="Ka3"/>
+		<xray energy="94.6531" intensity="0.1202" assignment="Ka2"/>
+		<xray energy="98.4336" intensity="0.1946" assignment="Ka1"/>
+		<xray energy="110.4182" intensity="0.023473" assignment="Kb3"/>
+		<xray energy="111.2985" intensity="0.045872" assignment="Kb1"/>
+		<xray energy="111.8718" intensity="0.00080028" assignment="Kb5II"/>
+		<xray energy="112.0481" intensity="0.0009129" assignment="Kb5I"/>
+		<xray energy="114.3292" intensity="0.0060245" assignment="Kb2a"/>
+		<xray energy="114.5562" intensity="0.012277" assignment="Kb2b"/>
+		<xray energy="114.8436" intensity="0.00050479" assignment="Kb4"/>
+		<xray energy="115.3897" intensity="0.0042768" assignment="KO23"/>
+		<xray energy="115.5815" intensity="0.00071959" assignment="KP23"/>
 		<!-- cascade-match: SD-unmatched-above-threshold[keV]: 55.45(I=0.000268,edge-collision) 220.00(I=0.00144,edge-collision) 221.15(I=0.000515,edge-collision) 513.40(I=0.00253,edge-collision) 558.00(I=0.000927,edge-collision) 559.20(I=0.000721,edge-collision) 643.20(I=0.000268,absent) 659.80(I=0.00268,neartol) 699.03(I=0.036,edge-collision) 711.50(I=0.00154,neartol) 778.60(I=0.000453,neartol) 824.20(I=0.0124,edge-collision) 825.10(I=0.0188,edge-collision) 846.10(I=0.000515,neartol) 880.50(I=0.0618,edge-collision) 880.50(I=0.0422,edge-collision) 920.50(I=0.000288,neartol) 935.80(I=0.000659,neartol) 980.30(I=0.0119,edge-collision) 980.30(I=0.0181,edge-collision) 992.00(I=0.000824,neartol) 1023.60(I=0.000618,neartol) 1025.30(I=0.000515,absent) 1035.90(I=0.000258,neartol) 1220.40(I=0.000618,absent) ...; 7 SD gammas below detectable threshold T=0.00018/decay: 1301.2 1327.0 1520.7 1538.8 1664.8 1830.8 1935.2; 2 SD gammas with I=0 (not emitted, suppressed); G4-listed-not-in-SD[keV]: 825.07(rI=24) 880.42(rI=100) 980.27(rI=28) 97.08(rI=5.61) 880.45(rI=100) 980.30(rI=63.4) 880.47(rI=100) 980.33(rI=63) 45.45(rI=19) 220.01(rI=100) 925.93(rI=1.2e+03) 330.37(rI=7) 670.87(rI=16) 559.44(rI=100) 513.40(rI=21) 513.40(rI=11) 468.34(rI=18.1) 509.06(rI=16) 701.86(rI=59) 1553.60(rI=69) 557.82(rI=100) 565.05(rI=100) 699.04(rI=52) 210.53(rI=6.2) 543.96(rI=17) ...; -->
 		<levelFeed lvl="11" probability="0.006025507954" q="1246.36"/>
 		<levelFeed lvl="12" probability="0.003012703977" q="1231.454"/>
@@ -566479,6 +566569,7 @@
 	</transition>
 	<transition branchRatio="3E-12" mode="sf" parent="Pa234"/>
 	<transition branchRatio="0.9984" child="U234" mode="b-" parent="Pa234m">
+		<!-- K x-rays (2026-10 review): energies Deslattes 2003 theory (xraylib for K-O/K-P); sub-line rates xraylib (K-L, K-M2,3, K-N2,3) and EADL2023 (weak lines); K-N2/K-N3 split and K-O2,3, K-P2,3 added within the unchanged K'b2 total.  Micro-cal: K-N energies follow theory, K-O at U 115.375(4), Th 109.442(5) keV. -->
 		<!-- data-review 2026-10 (S. Ota NDS 207, 351 (2026); checked line by line in 32 JRC Detective 16 h and 42 IDB HPGe U spectra): 43.5 and 41.82 keV were transition flux stored as photons (43.5 keV was a 1% phantom line per U-238 decay); 926.61/945.9 keV held this decay's lines plus 0.0016 x Pa-234's 926/946 keV; now this decay's own lines, scaled with Pa-234's by 1.071/1.054 to keep the measured chain totals (926.61 uses the Pa-234 branching of the shared 926.7 keV level, 0.935 x 883.22 keV; ENSDF's own Pa-234m value is 2.9x lower); added 880.9, 883.22, 673.9, 708.2, 866.8, 936.3, 1558.4 keV; 805.74, 808.2, 739.95 (energy kept, confirmed at 739.95) per ENSDF; 781.37 -> 781.75 keV; U K x-rays reset to IAEA (were 21x); U L x-rays to the L-vacancy budget 0.0049; coincidence lists regenerated (were ~1000x too small). ENSDF-2026 lines NOT added because they are absent in the spectra: 243.5, 338.1, 362.8, 456.7, 509.2, 557.3, 647.7, 683.4, 732.5, 760.3, 825.6, 960.0, 1081.9, 1084.25, 1120.6, 1174.2, 1458.5, 1501.0, 1667.6, 1732.2, 1926.5, 1970.0 keV; ENSDF 996.1 and 1550.0 keV are this file's 994.93 and 1548.12 keV (confirmed at those energies). Library-only 1591.65, 1877.25 and 2001.0 keV are confirmed in the spectra. -->
 		<gamma energy="41.82" id="122" intensity="1.5E-08" iccTotal="863" iccK="0" iccL1="11.0809" iccL2="326.904" iccL3="291.608" mult="4" fl="9" tl="7">
 			<coincidentGamma id="123" intensity="0.000413297"/>
@@ -566841,14 +566932,18 @@
 		<xray energy="20.487" intensity="2.503E-05" assignment="Lg2" l1intensity="0.0266"/>
 		<xray energy="20.715" intensity="2.429E-05" assignment="Lg3" l1intensity="0.0252"/>
 		<xray energy="20.844" intensity="7.581E-05" assignment="Lg6" l1intensity="0.00145" l2intensity="0.0181"/>
-		<xray energy="93.844" intensity="2.363E-07" assignment="Ka3"/>
-		<xray energy="94.654" intensity="6.758E-05" assignment="Ka2"/>
-		<xray energy="98.434" intensity="0.0001087" assignment="Ka1"/>
-		<xray energy="110.421" intensity="1.323E-05" assignment="Kb3"/>
-		<xray energy="111.298" intensity="2.552E-05" assignment="Kb1"/>
-		<xray energy="111.964" intensity="9.452E-07" assignment="Kb5"/>
-		<xray energy="114.445" intensity="9.878E-06" assignment="Kb2"/>
-		<xray energy="114.844" intensity="3.545E-06" assignment="Kb4"/>
+		<xray energy="93.8420" intensity="2.363E-07" assignment="Ka3"/>
+		<xray energy="94.6531" intensity="6.758E-05" assignment="Ka2"/>
+		<xray energy="98.4336" intensity="0.0001087" assignment="Ka1"/>
+		<xray energy="110.4182" intensity="1.3113E-05" assignment="Kb3"/>
+		<xray energy="111.2985" intensity="2.5626E-05" assignment="Kb1"/>
+		<xray energy="111.8718" intensity="4.4706E-07" assignment="Kb5II"/>
+		<xray energy="112.0481" intensity="5.0998E-07" assignment="Kb5I"/>
+		<xray energy="114.3292" intensity="3.3974E-06" assignment="Kb2a"/>
+		<xray energy="114.5562" intensity="6.9234E-06" assignment="Kb2b"/>
+		<xray energy="114.8436" intensity="2.8466E-07" assignment="Kb4"/>
+		<xray energy="115.3897" intensity="2.4118E-06" assignment="KO23"/>
+		<xray energy="115.5815" intensity="4.0579E-07" assignment="KP23"/>
 		<!-- cascade-match: SD-unmatched-above-threshold[keV]: 887.28(I=7.1e-05,neartol) 1434.13(I=9.7e-05,neartol) 1759.81(I=1.4e-05,absent) 1877.25(I=1.5e-05,neartol); 7 SD gammas below detectable threshold T=1e-05/decay: 1220.4 2001.0 2022.2 2041.2 2065.8 2102.1 2136.7; G4-listed-not-in-SD[keV]: 99.85(rI=100) 62.71(rI=12) 298.97(rI=10) 1085.26(rI=20) 103.78(rI=5.7) 831.48(rI=100) 984.20(rI=39) 184.67(rI=90) 1174.10(rI=100) 1391.88(rI=35.6) 1435.38(rI=100) 670.87(rI=16) 1457.49(rI=24) 1500.99(rI=16) 509.06(rI=16) 507.03(rI=13.3) 818.13(rI=26) 1667.40(rI=21) 713.66(rI=21) 748.00(rI=15) 210.53(rI=6.2) 655.94(rI=6.5) 695.96(rI=7.4) 193.74(rI=66) 245.33(rI=100) ...; -->
 		<levelFeed lvl="0" probability="0.9772576219" q="2267.92"/>
 		<levelFeed lvl="6" probability="0.0005909479414" q="1481.632"/>
@@ -566931,6 +567026,7 @@
 		<!-- cascade-feed: omitted(multiple-same-mode-transitions). -->
 	</transition>
 	<transition branchRatio="1" child="U236" mode="b-" parent="Pa236">
+		<!-- K x-rays (2026-10 review): energies Deslattes 2003 theory (xraylib for K-O/K-P); sub-line rates xraylib (K-L, K-M2,3, K-N2,3) and EADL2023 (weak lines); K-N2/K-N3 split and K-O2,3, K-P2,3 added within the unchanged K'b2 total.  Micro-cal: K-N energies follow theory, K-O at U 115.375(4), Th 109.442(5) keV. -->
 		<gamma energy="45.24" id="0" intensity="1.1700E-03" iccTotal="589" iccK="0" iccL1="7.69823" iccL2="224.998" iccL3="196.903" mult="4" fl="1" tl="0"/>
 		<gamma energy="56.5" intensity="1.7000E-04" iccTotal="199" iccK="0" iccL1="2.76809" iccL2="78.0279" iccL3="64.277" mult="4" fl="6" tl="5">
 			<coincidentGamma id="3" intensity="0.00096313529263459684"/>
@@ -567230,14 +567326,18 @@
 		<xray energy="20.487" intensity="0.001" assignment="Lg2" l1intensity="0.0266"/>
 		<xray energy="20.715" intensity="0.001" assignment="Lg3" l1intensity="0.0252"/>
 		<xray energy="20.844" intensity="0.0056" assignment="Lg6" l1intensity="0.00145" l2intensity="0.0181"/>
-		<xray energy="93.844" intensity="7E-05" assignment="Ka3"/>
-		<xray energy="94.654" intensity="0.02" assignment="Ka2"/>
-		<xray energy="98.434" intensity="0.032" assignment="Ka1"/>
-		<xray energy="110.421" intensity="0.004" assignment="Kb3"/>
-		<xray energy="111.298" intensity="0.007" assignment="Kb1"/>
-		<xray energy="111.964" intensity="0.00027" assignment="Kb5"/>
-		<xray energy="114.445" intensity="0.0029" assignment="Kb2"/>
-		<xray energy="114.844" intensity="0.001" assignment="Kb4"/>
+		<xray energy="93.8420" intensity="7E-05" assignment="Ka3"/>
+		<xray energy="94.6531" intensity="0.02" assignment="Ka2"/>
+		<xray energy="98.4336" intensity="0.032" assignment="Ka1"/>
+		<xray energy="110.4182" intensity="0.0037228" assignment="Kb3"/>
+		<xray energy="111.2985" intensity="0.0072755" assignment="Kb1"/>
+		<xray energy="111.8718" intensity="0.00012693" assignment="Kb5II"/>
+		<xray energy="112.0481" intensity="0.00014479" assignment="Kb5I"/>
+		<xray energy="114.3292" intensity="0.00098709" assignment="Kb2a"/>
+		<xray energy="114.5562" intensity="0.0020116" assignment="Kb2b"/>
+		<xray energy="114.8436" intensity="8.2707E-05" assignment="Kb4"/>
+		<xray energy="115.3897" intensity="0.00070074" assignment="KO23"/>
+		<xray energy="115.5815" intensity="0.0001179" assignment="KP23"/>
 		<!-- cascade-match: SD-unmatched-above-threshold[keV]: 68.80(I=0.003,absent) 349.70(I=0.0023,absent) 453.40(I=0.005,absent) 587.00(I=0.002,absent) 626.90(I=0.0023,absent) 696.30(I=0.0019,neartol) 740.80(I=0.0033,absent) 1155.90(I=0.004,absent) 1283.70(I=0.0114,absent) 1517.80(I=0.0125,absent) 1587.00(I=0.0066,absent) 1749.00(I=0.0033,neartol) 1773.50(I=0.003,absent) 1907.50(I=0.006,absent) 1917.20(I=0.0006,absent) 1948.10(I=0.0091,absent); G4-listed-not-in-SD[keV]: 698.94(rI=100) 912.66(rI=71) 886.12(rI=100); -->
 		<levelFeed lvl="0" probability="0.09939388073" q="2889"/>
 		<levelFeed lvl="1" probability="0.09939388073" q="2843.757"/>
@@ -567328,6 +567428,7 @@
 		<!-- cascade-feed: omitted(parent-block-not-physically-identified). -->
 	</transition>
 	<transition branchRatio="1" child="Th223" mode="a" parent="U227">
+		<!-- K x-rays (2026-10 review): energies Deslattes 2003 theory (xraylib for K-O/K-P); sub-line rates xraylib (K-L, K-M2,3, K-N2,3) and EADL2023 (weak lines); K-N2/K-N3 split and K-O2,3, K-P2,3 added within the unchanged K'b2 total.  Micro-cal: K-N energies follow theory, K-O at U 115.375(4), Th 109.442(5) keV. -->
 		<gamma energy="51.3" intensity="0" iccTotal="39.2" iccK="0" iccL1="18.1143" iccL2="6.89528" iccL3="4.31592" mult="304" delta="0.214" fl="1" tl="0"/>
 		<gamma energy="158" intensity="0.028" iccTotal="0.168" iccK="0.131611" iccL1="0.0160625" iccL2="0.00636888" iccL3="0.00507696" mult="2" fl="21" tl="20"/>
 		<gamma energy="209" intensity="0.028" iccTotal="1.27" iccK="0.815721" iccL1="0.14097" iccL2="0.135255" iccL3="0.0609092" mult="304" delta="1.3" fl="4" tl="0"/>
@@ -567352,14 +567453,18 @@
 		<xray energy="19.304" intensity="0.0017" assignment="Lg2" l1intensity="0.0231"/>
 		<xray energy="19.505" intensity="0.0017" assignment="Lg3" l1intensity="0.023"/>
 		<xray energy="19.599" intensity="0.0025" assignment="Lg6" l1intensity="0.00165" l2intensity="0.0184"/>
-		<xray energy="89.178" intensity="0.00032" assignment="Ka3"/>
-		<xray energy="89.957" intensity="0.107" assignment="Ka2"/>
-		<xray energy="93.35" intensity="0.174" assignment="Ka1"/>
-		<xray energy="104.819" intensity="0.021" assignment="Kb3"/>
-		<xray energy="105.604" intensity="0.041" assignment="Kb1"/>
-		<xray energy="106.239" intensity="0.00144" assignment="Kb5"/>
-		<xray energy="108.583" intensity="0.0155" assignment="Kb2"/>
-		<xray energy="108.955" intensity="0.0054" assignment="Kb4"/>
+		<xray energy="89.1766" intensity="0.00032" assignment="Ka3"/>
+		<xray energy="89.9566" intensity="0.107" assignment="Ka2"/>
+		<xray energy="93.3479" intensity="0.174" assignment="Ka1"/>
+		<xray energy="104.8172" intensity="0.021007" assignment="Kb3"/>
+		<xray energy="105.6019" intensity="0.040962" assignment="Kb1"/>
+		<xray energy="106.1564" intensity="0.00068251" assignment="Kb5II"/>
+		<xray energy="106.3149" intensity="0.0007884" assignment="Kb5I"/>
+		<xray energy="108.4812" intensity="0.0053471" assignment="Kb2a"/>
+		<xray energy="108.6809" intensity="0.010813" assignment="Kb2b"/>
+		<xray energy="108.9546" intensity="0.0004251" assignment="Kb4"/>
+		<xray energy="109.4535" intensity="0.0037064" assignment="KO23"/>
+		<xray energy="109.6305" intensity="0.00060833" assignment="KP23"/>
 		<!-- cascade-match: G4-listed-not-in-SD[keV]: 157.70(rI=100) 183.50(rI=100) 315.60(rI=13) 341.30(rI=8); -->
 		<levelFeed lvl="1" probability="0.2" q="7183.7"/>
 		<levelFeed lvl="4" probability="0.14" q="7026"/>
@@ -567367,6 +567472,7 @@
 		<levelFeed lvl="8" probability="0.16" q="6925"/>
 	</transition>
 	<transition branchRatio="0.975" child="Th224" mode="a" parent="U228">
+		<!-- K x-rays (2026-10 review): energies Deslattes 2003 theory (xraylib for K-O/K-P); sub-line rates xraylib (K-L, K-M2,3, K-N2,3) and EADL2023 (weak lines); K-N2/K-N3 split and K-O2,3, K-P2,3 added within the unchanged K'b2 total.  Micro-cal: K-N energies follow theory, K-O at U 115.375(4), Th 109.442(5) keV. -->
 		<gamma energy="93" id="0" intensity="0.021"/>
 		<gamma energy="152" intensity="0.002" iccTotal="0.179" iccK="0.14005" iccL1="0.0170193" iccL2="0.00689329" iccL3="0.00554005" mult="2" fl="2" tl="1">
 			<coincidentGamma id="0" intensity="0.073529411764705885"/>
@@ -567391,14 +567497,18 @@
 		<xray energy="19.304" intensity="0.00017" assignment="Lg2" l1intensity="0.0231"/>
 		<xray energy="19.505" intensity="0.00017" assignment="Lg3" l1intensity="0.023"/>
 		<xray energy="19.599" intensity="0.0026" assignment="Lg6" l1intensity="0.00165" l2intensity="0.0184"/>
-		<xray energy="89.178" intensity="7E-06" assignment="Ka3"/>
-		<xray energy="89.957" intensity="0.0022" assignment="Ka2"/>
-		<xray energy="93.35" intensity="0.0037" assignment="Ka1"/>
-		<xray energy="104.819" intensity="0.0004" assignment="Kb3"/>
-		<xray energy="105.604" intensity="0.0009" assignment="Kb1"/>
-		<xray energy="106.239" intensity="3E-05" assignment="Kb5"/>
-		<xray energy="108.583" intensity="0.00033" assignment="Kb2"/>
-		<xray energy="108.955" intensity="0.00011" assignment="Kb4"/>
+		<xray energy="89.1766" intensity="7E-06" assignment="Ka3"/>
+		<xray energy="89.9566" intensity="0.0022" assignment="Ka2"/>
+		<xray energy="93.3479" intensity="0.0037" assignment="Ka1"/>
+		<xray energy="104.8172" intensity="0.0004404" assignment="Kb3"/>
+		<xray energy="105.6019" intensity="0.00085876" assignment="Kb1"/>
+		<xray energy="106.1564" intensity="1.4309E-05" assignment="Kb5II"/>
+		<xray energy="106.3149" intensity="1.6529E-05" assignment="Kb5I"/>
+		<xray energy="108.4812" intensity="0.00011257" assignment="Kb2a"/>
+		<xray energy="108.6809" intensity="0.00022764" assignment="Kb2b"/>
+		<xray energy="108.9546" intensity="8.9495E-06" assignment="Kb4"/>
+		<xray energy="109.4535" intensity="7.803E-05" assignment="KO23"/>
+		<xray energy="109.6305" intensity="1.2807E-05" assignment="KP23"/>
 		<!-- cascade-match: SD-unmatched-above-threshold[keV]: 93.00(I=0.021,absent) 246.00(I=0.004,absent); G4-listed-not-in-SD[keV]: 98.10(rI=100) 251.00(rI=100); -->
 		<!-- cascade-feed: omitted(mode-branch-closure). -->
 	</transition>
@@ -567448,6 +567558,7 @@
 		<levelFeed lvl="31" probability="0.2380961905" q="3981.6"/>
 	</transition>
 	<transition branchRatio="1" child="Th226" mode="a" parent="U230">
+		<!-- K x-rays (2026-10 review): energies Deslattes 2003 theory (xraylib for K-O/K-P); sub-line rates xraylib (K-L, K-M2,3, K-N2,3) and EADL2023 (weak lines); K-N2/K-N3 split and K-O2,3, K-P2,3 added within the unchanged K'b2 total.  Micro-cal: K-N energies follow theory, K-O at U 115.375(4), Th 109.442(5) keV. -->
 		<gamma energy="72.2" id="0" intensity="0.006" iccTotal="53.5" iccK="0" iccL1="0.760235" iccL2="21.4642" iccL3="16.9113" mult="4" fl="1" tl="0"/>
 		<gamma energy="81" id="1" intensity="4.8E-06" iccTotal="0.208" iccK="0" iccL1="0.069472" iccL2="0.0448032" iccL3="0.042744" mult="2" fl="4" tl="2">
 			<coincidentGamma id="0" intensity="0.018348623853211007"/>
@@ -567512,14 +567623,18 @@
 		<xray energy="19.304" intensity="0.000109" assignment="Lg2" l1intensity="0.0231"/>
 		<xray energy="19.505" intensity="0.000109" assignment="Lg3" l1intensity="0.023"/>
 		<xray energy="19.599" intensity="0.0024" assignment="Lg6" l1intensity="0.00165" l2intensity="0.0184"/>
-		<xray energy="89.178" intensity="4.6E-07" assignment="Ka3"/>
-		<xray energy="89.957" intensity="0.000152" assignment="Ka2"/>
-		<xray energy="93.35" intensity="0.00025" assignment="Ka1"/>
-		<xray energy="104.819" intensity="3E-05" assignment="Kb3"/>
-		<xray energy="105.604" intensity="5.8E-05" assignment="Kb1"/>
-		<xray energy="106.239" intensity="2E-06" assignment="Kb5"/>
-		<xray energy="108.583" intensity="2.2E-05" assignment="Kb2"/>
-		<xray energy="108.955" intensity="7.7E-06" assignment="Kb4"/>
+		<xray energy="89.1766" intensity="4.6E-07" assignment="Ka3"/>
+		<xray energy="89.9566" intensity="0.000152" assignment="Ka2"/>
+		<xray energy="93.3479" intensity="0.00025" assignment="Ka1"/>
+		<xray energy="104.8172" intensity="2.9801E-05" assignment="Kb3"/>
+		<xray energy="105.6019" intensity="5.8112E-05" assignment="Kb1"/>
+		<xray energy="106.1564" intensity="9.6825E-07" assignment="Kb5II"/>
+		<xray energy="106.3149" intensity="1.1185E-06" assignment="Kb5I"/>
+		<xray energy="108.4812" intensity="7.5985E-06" assignment="Kb2a"/>
+		<xray energy="108.6809" intensity="1.5366E-05" assignment="Kb2b"/>
+		<xray energy="108.9546" intensity="6.0409E-07" assignment="Kb4"/>
+		<xray energy="109.4535" intensity="5.267E-06" assignment="KO23"/>
+		<xray energy="109.6305" intensity="8.6447E-07" assignment="KP23"/>
 		<levelFeed lvl="0" probability="0.6736434875" q="5992.5"/>
 		<levelFeed lvl="1" probability="0.3198316558" q="5920.3"/>
 		<levelFeed lvl="2" probability="0.003798019663" q="5766.07"/>
@@ -567534,6 +567649,7 @@
 	</transition>
 	<transition branchRatio="1.4E-12" mode="sf" parent="U230"/>
 	<transition branchRatio="1" child="Pa231" mode="ec" parent="U231">
+		<!-- K x-rays (2026-10 review): energies Deslattes 2003 theory (xraylib for K-O/K-P); sub-line rates xraylib (K-L, K-M2,3, K-N2,3) and EADL2023 (weak lines); K-N2/K-N3 split and K-O2,3, K-P2,3 added within the unchanged K'b2 total.  Micro-cal: K-N energies follow theory, K-O at U 115.375(4), Th 109.442(5) keV. -->
 		<gamma energy="9.2" intensity="0" iccTotal="1181" iccK="0" iccL1="0" iccL2="0" iccL3="0" mult="3" fl="1" tl="0"/>
 		<gamma energy="18.07" intensity="6.4970E-04">
 			<coincidentGamma id="4" intensity="0.010138888888888888"/>
@@ -567672,14 +567788,18 @@
 		<xray energy="19.888" intensity="0.0084" assignment="Lg2" l1intensity="0.0238"/>
 		<xray energy="20.101" intensity="0.0082" assignment="Lg3" l1intensity="0.0232"/>
 		<xray energy="20.217" intensity="0.0119" assignment="Lg6" l1intensity="0.00146" l2intensity="0.0182"/>
-		<xray energy="91.491" intensity="0.000568" assignment="Ka3"/>
-		<xray energy="92.282" intensity="0.176" assignment="Ka2"/>
-		<xray energy="95.863" intensity="0.286" assignment="Ka1"/>
-		<xray energy="107.595" intensity="0.035" assignment="Kb3"/>
-		<xray energy="108.422" intensity="0.0666" assignment="Kb1"/>
-		<xray energy="109.072" intensity="0.00241" assignment="Kb5"/>
-		<xray energy="111.486" intensity="0.0256" assignment="Kb2"/>
-		<xray energy="111.87" intensity="0.009" assignment="Kb4"/>
+		<xray energy="91.4880" intensity="0.000568" assignment="Ka3"/>
+		<xray energy="92.2835" intensity="0.176" assignment="Ka2"/>
+		<xray energy="95.8648" intensity="0.286" assignment="Ka1"/>
+		<xray energy="107.5912" intensity="0.034397" assignment="Kb3"/>
+		<xray energy="108.4223" intensity="0.067153" assignment="Kb1"/>
+		<xray energy="108.9862" intensity="0.001145" assignment="Kb5II"/>
+		<xray energy="109.1535" intensity="0.0013146" assignment="Kb5I"/>
+		<xray energy="111.3876" intensity="0.0088033" assignment="Kb2a"/>
+		<xray energy="111.6005" intensity="0.017874" assignment="Kb2b"/>
+		<xray energy="111.8810" intensity="0.00071864" assignment="Kb4"/>
+		<xray energy="112.3915" intensity="0.0061742" assignment="KO23"/>
+		<xray energy="112.5755" intensity="0.0010295" assignment="KP23"/>
 		<!-- cascade-match: SD-unmatched-above-threshold[keV]: 18.07(I=0.00065,edge-collision) 18.07(I=0.00065,edge-collision); G4-listed-not-in-SD[keV]: 17.19(rI=460) 18.05(rI=21); -->
 	</transition>
 	<transition branchRatio="4E-05" child="Th227" mode="a" parent="U231">
@@ -567818,6 +567938,7 @@
 		<levelFeed lvl="20" probability="0.002180406997" q="5257.34"/>
 	</transition>
 	<transition branchRatio="1" child="Th228" mode="a" parent="U232">
+		<!-- K x-rays (2026-10 review): energies Deslattes 2003 theory (xraylib for K-O/K-P); sub-line rates xraylib (K-L, K-M2,3, K-N2,3) and EADL2023 (weak lines); K-N2/K-N3 split and K-O2,3, K-P2,3 added within the unchanged K'b2 total.  Micro-cal: K-N energies follow theory, K-O at U 115.375(4), Th 109.442(5) keV. -->
 		<gamma energy="57.78" id="0" intensity="1.9995E-03" iccTotal="153" iccK="0" iccL1="1.95534" iccL2="59.6853" iccL3="50.337" mult="4" fl="1" tl="0"/>
 		<gamma energy="129.08" id="1" intensity="6.8195E-04" iccTotal="3.74" iccK="0.263782" iccL1="0.102588" iccL2="1.49563" iccL3="0.94435" mult="4" fl="2" tl="1">
 			<coincidentGamma id="0" intensity="1.64969802977e-05" a2="0.102041" a4="0.00907029"/>
@@ -567879,14 +568000,18 @@
 		<xray energy="19.304" intensity="9.4E-05" assignment="Lg2" l1intensity="0.0231"/>
 		<xray energy="19.505" intensity="9.4E-05" assignment="Lg3" l1intensity="0.023"/>
 		<xray energy="19.599" intensity="0.0023" assignment="Lg6" l1intensity="0.00165" l2intensity="0.0184"/>
-		<xray energy="89.178" intensity="1.54E-07" assignment="Ka3"/>
-		<xray energy="89.957" intensity="5.09E-05" assignment="Ka2"/>
-		<xray energy="93.35" intensity="8.3E-05" assignment="Ka1"/>
-		<xray energy="104.819" intensity="1.01E-05" assignment="Kb3"/>
-		<xray energy="105.604" intensity="1.93E-05" assignment="Kb1"/>
-		<xray energy="106.239" intensity="6.9E-07" assignment="Kb5"/>
-		<xray energy="108.583" intensity="7.38E-06" assignment="Kb2"/>
-		<xray energy="108.955" intensity="2.58E-06" assignment="Kb4"/>
+		<xray energy="89.1766" intensity="1.54E-07" assignment="Ka3"/>
+		<xray energy="89.9566" intensity="5.09E-05" assignment="Ka2"/>
+		<xray energy="93.3479" intensity="8.3E-05" assignment="Ka1"/>
+		<xray energy="104.8172" intensity="9.9636E-06" assignment="Kb3"/>
+		<xray energy="105.6019" intensity="1.9429E-05" assignment="Kb1"/>
+		<xray energy="106.1564" intensity="3.2372E-07" assignment="Kb5II"/>
+		<xray energy="106.3149" intensity="3.7394E-07" assignment="Kb5I"/>
+		<xray energy="108.4812" intensity="2.5482E-06" assignment="Kb2a"/>
+		<xray energy="108.6809" intensity="5.153E-06" assignment="Kb2b"/>
+		<xray energy="108.9546" intensity="2.0259E-07" assignment="Kb4"/>
+		<xray energy="109.4535" intensity="1.7663E-06" assignment="KO23"/>
+		<xray energy="109.6305" intensity="2.899E-07" assignment="KP23"/>
 		<!-- cascade-match: G4-listed-not-in-SD[keV]: 687.70(rI=25) 874.53(rI=23) 204.04(rI=21) 707.37(rI=27.5) 1039.74(rI=10); -->
 		<levelFeed lvl="0" probability="0.6814578228" q="5413.63"/>
 		<levelFeed lvl="1" probability="0.3154789921" q="5355.857"/>
@@ -567899,6 +568024,7 @@
 		<levelFeed lvl="10" probability="3.899787541E-08" q="4539.095"/>
 	</transition>
 	<transition branchRatio="1" child="Th229" mode="a" parent="U233">
+		<!-- K x-rays (2026-10 review): energies Deslattes 2003 theory (xraylib for K-O/K-P); sub-line rates xraylib (K-L, K-M2,3, K-N2,3) and EADL2023 (weak lines); K-N2/K-N3 split and K-O2,3, K-P2,3 added within the unchanged K'b2 total.  Micro-cal: K-N energies follow theory, K-O at U 115.375(4), Th 109.442(5) keV. -->
 		<gamma energy="25.31" intensity="2.1100E-05" iccTotal="213" iccK="0" iccL1="143.157" iccL2="16.5267" iccL3="1.03944" mult="3" fl="5" tl="4">
 			<coincidentGamma id="20" intensity="1.35155316607e-05"/>
 		</gamma>
@@ -568495,19 +568621,24 @@
 		<xray energy="19.304" intensity="0.001" assignment="Lg2" l1intensity="0.0231"/>
 		<xray energy="19.505" intensity="0.00099" assignment="Lg3" l1intensity="0.023"/>
 		<xray energy="19.599" intensity="0.0008" assignment="Lg6" l1intensity="0.00165" l2intensity="0.0184"/>
-		<xray energy="89.178" intensity="5.9E-07" assignment="Ka3"/>
-		<xray energy="89.957" intensity="0.00019" assignment="Ka2"/>
-		<xray energy="93.35" intensity="0.00032" assignment="Ka1"/>
-		<xray energy="104.819" intensity="3.9E-05" assignment="Kb3"/>
-		<xray energy="105.604" intensity="7.4E-05" assignment="Kb1"/>
-		<xray energy="106.239" intensity="2.6E-06" assignment="Kb5"/>
-		<xray energy="108.583" intensity="2.8E-05" assignment="Kb2"/>
-		<xray energy="108.955" intensity="9.8E-06" assignment="Kb4"/>
+		<xray energy="89.1766" intensity="5.9E-07" assignment="Ka3"/>
+		<xray energy="89.9566" intensity="0.00019" assignment="Ka2"/>
+		<xray energy="93.3479" intensity="0.00032" assignment="Ka1"/>
+		<xray energy="104.8172" intensity="3.8278E-05" assignment="Kb3"/>
+		<xray energy="105.6019" intensity="7.4642E-05" assignment="Kb1"/>
+		<xray energy="106.1564" intensity="1.2437E-06" assignment="Kb5II"/>
+		<xray energy="106.3149" intensity="1.4366E-06" assignment="Kb5I"/>
+		<xray energy="108.4812" intensity="9.6708E-06" assignment="Kb2a"/>
+		<xray energy="108.6809" intensity="1.9557E-05" assignment="Kb2b"/>
+		<xray energy="108.9546" intensity="7.6885E-07" assignment="Kb4"/>
+		<xray energy="109.4535" intensity="6.7035E-06" assignment="KO23"/>
+		<xray energy="109.6305" intensity="1.1002E-06" assignment="KP23"/>
 		<!-- cascade-match: SD-unmatched-above-threshold[keV]: 29.19(I=7.8e-05,edge-collision) 53.61(I=3.47e-05,edge-collision) 71.81(I=1.81e-05,edge-collision) 96.22(I=1.7e-05,edge-collision) 164.52(I=6e-05,edge-collision) 208.18(I=2.29e-05,edge-collision) 217.15(I=3.28e-05,neartol) 245.35(I=3.57e-05,edge-collision) 291.36(I=4.63e-05,edge-collision) 317.17(I=7.1e-05,edge-collision) 29.19(I=2.7e-05,edge-collision) 42.43(I=0.00072,edge-collision) 71.82(I=1.16e-05,edge-collision); 60 SD gammas below detectable threshold T=1e-05/decay: 31.4 32.5 37.8 42.4 72.8 109.4 129.1 149.7 176.1 200.7 228.1 230.2 295.2 336.6 338.9 383.4 384.0 393.6 393.7 545.1 867.9 1003.0 1119.0 32.7 36.5 ...; 5 SD gammas with I=0 (not emitted, suppressed); G4-listed-not-in-SD[keV]: 29.19(rI=100) 29.19(rI=35) 42.43(rI=100) 71.82(rI=13.7) 71.82(rI=8.8) 53.61(rI=100) 96.25(rI=49) 37.82(rI=9) 164.52(rI=100) 98.58(rI=14) 217.15(rI=100) 208.17(rI=100) 129.51(rI=42) 205.85(rI=16) 245.35(rI=50) 317.17(rI=100) 32.65(rI=21) 291.36(rI=100) 164.55(rI=100) 317.17(rI=100) 336.62(rI=75) 86.32(rI=100) 137.39(rI=68.8) 230.16(rI=74) 261.35(rI=100) ...; -->
 		<!-- cascade-feed: omitted(unmapped-or-ambiguous-level-record). -->
 	</transition>
 	<transition branchRatio="6E-13" mode="sf" parent="U233"/>
 	<transition branchRatio="1" child="Th230" mode="a" parent="U234">
+		<!-- K x-rays (2026-10 review): energies Deslattes 2003 theory (xraylib for K-O/K-P); sub-line rates xraylib (K-L, K-M2,3, K-N2,3) and EADL2023 (weak lines); K-N2/K-N3 split and K-O2,3, K-P2,3 added within the unchanged K'b2 total.  Micro-cal: K-N energies follow theory, K-O at U 115.375(4), Th 109.442(5) keV. -->
 		<!-- data-review 2026-10: all photon lines agree with C. Morse NDS 197, 259 (2024) within 3%; 634.9 keV is a pure E0 (e0Verified). -->
 		<gamma energy="53.2" id="0" intensity="0.00123" iccTotal="228" iccK="0" iccL1="2.84772" iccL2="88.0536" iccL3="75.9924" mult="4" fl="1" tl="0"/>
 		<gamma energy="120.9" id="1" intensity="0.000342" iccTotal="4.94" iccK="0.256929" iccL1="0.123451" iccL2="2.00119" iccL3="1.29971" mult="4" fl="2" tl="1">
@@ -568549,14 +568680,18 @@
 		<xray energy="19.304" intensity="8.4E-05" assignment="Lg2" l1intensity="0.0231"/>
 		<xray energy="19.505" intensity="8.3E-05" assignment="Lg3" l1intensity="0.023"/>
 		<xray energy="19.599" intensity="0.002" assignment="Lg6" l1intensity="0.00165" l2intensity="0.0184"/>
-		<xray energy="89.178" intensity="7.38E-08" assignment="Ka3"/>
-		<xray energy="89.957" intensity="2.45E-05" assignment="Ka2"/>
-		<xray energy="93.35" intensity="3.99E-05" assignment="Ka1"/>
-		<xray energy="104.819" intensity="4.86E-06" assignment="Kb3"/>
-		<xray energy="105.604" intensity="9.28E-06" assignment="Kb1"/>
-		<xray energy="106.239" intensity="3.3E-07" assignment="Kb5"/>
-		<xray energy="108.583" intensity="3.55E-06" assignment="Kb2"/>
-		<xray energy="108.955" intensity="1.24E-06" assignment="Kb4"/>
+		<xray energy="89.1766" intensity="7.38E-08" assignment="Ka3"/>
+		<xray energy="89.9566" intensity="2.45E-05" assignment="Ka2"/>
+		<xray energy="93.3479" intensity="3.99E-05" assignment="Ka1"/>
+		<xray energy="104.8172" intensity="4.7914E-06" assignment="Kb3"/>
+		<xray energy="105.6019" intensity="9.3431E-06" assignment="Kb1"/>
+		<xray energy="106.1564" intensity="1.5567E-07" assignment="Kb5II"/>
+		<xray energy="106.3149" intensity="1.7983E-07" assignment="Kb5I"/>
+		<xray energy="108.4812" intensity="1.2255E-06" assignment="Kb2a"/>
+		<xray energy="108.6809" intensity="2.4782E-06" assignment="Kb2b"/>
+		<xray energy="108.9546" intensity="9.7428E-08" assignment="Kb4"/>
+		<xray energy="109.4535" intensity="8.4946E-07" assignment="KO23"/>
+		<xray energy="109.6305" intensity="1.3942E-07" assignment="KP23"/>
 		<levelFeed lvl="0" probability="0.7137994789" q="4857.5"/>
 		<levelFeed lvl="1" probability="0.2841997925" q="4804.273"/>
 		<levelFeed lvl="2" probability="0.00199999854" q="4683.389"/>
@@ -568566,6 +568701,7 @@
 	</transition>
 	<transition branchRatio="1.64E-11" mode="sf" parent="U234"/>
 	<transition branchRatio="1" child="Th231" mode="a" parent="U235">
+		<!-- K x-rays (2026-10 review): energies Deslattes 2003 theory (xraylib for K-O/K-P); sub-line rates xraylib (K-L, K-M2,3, K-N2,3) and EADL2023 (weak lines); K-N2/K-N3 split and K-O2,3, K-P2,3 added within the unchanged K'b2 total.  Micro-cal: K-N energies follow theory, K-O at U 115.375(4), Th 109.442(5) keV. -->
 		<!-- 2026-10 U low-energy review (iteration 1): 108.99->109.176 keV and 163.38->163.357 keV (energies, ENSDF NDS 185 (2022)); 173.0 keV 0.040%->0.0114% and 198.9->198.927 keV 0.0423% (ENSDF); Th K'b1/K'b2 group totals restored to ENSDF (1.7219/0.5803 per 100).  Checked against LANL micro-cal spectra of 8 U standards and IDB planar HPGe. -->
 		<gamma energy="19.59" intensity="0.00583" iccTotal="114.7" iccK="0" iccL1="0" iccL2="0" iccL3="2.26303" mult="3" fl="5" tl="4">
 			<coincidentGamma id="4" intensity="0.00038196884026453433"/>
@@ -568817,14 +568953,18 @@
 		<xray energy="19.304" intensity="0.0022" assignment="Lg2" l1intensity="0.0231"/>
 		<xray energy="19.505" intensity="0.0022" assignment="Lg3" l1intensity="0.023"/>
 		<xray energy="19.599" intensity="0.0068" assignment="Lg6" l1intensity="0.00165" l2intensity="0.0184"/>
-		<xray energy="89.178" intensity="0.00019" assignment="Ka3"/>
-		<xray energy="93.35" intensity="0.04839" assignment="Ka1"/>
-		<xray energy="104.819" intensity="0.0057693" assignment="Kb3"/>
-		<xray energy="105.604" intensity="0.010651" assignment="Kb1"/>
-		<xray energy="106.239" intensity="0.00079882" assignment="Kb5"/>
-		<xray energy="108.583" intensity="0.0042459" assignment="Kb2"/>
-		<xray energy="108.955" intensity="0.0015568" assignment="Kb4"/>
-		<xray energy="89.954" intensity="0.029914" assignment="Ka2"/>
+		<xray energy="89.1766" intensity="0.00019" assignment="Ka3"/>
+		<xray energy="89.9566" intensity="0.029914" assignment="Ka2"/>
+		<xray energy="93.3479" intensity="0.04839" assignment="Ka1"/>
+		<xray energy="104.8172" intensity="0.0057017" assignment="Kb3"/>
+		<xray energy="105.6019" intensity="0.011118" assignment="Kb1"/>
+		<xray energy="106.1564" intensity="0.00018525" assignment="Kb5II"/>
+		<xray energy="106.3149" intensity="0.00021399" assignment="Kb5I"/>
+		<xray energy="108.4812" intensity="0.0014846" assignment="Kb2a"/>
+		<xray energy="108.6809" intensity="0.0030021" assignment="Kb2b"/>
+		<xray energy="108.9546" intensity="0.00011803" assignment="Kb4"/>
+		<xray energy="109.4535" intensity="0.0010291" assignment="KO23"/>
+		<xray energy="109.6305" intensity="0.0001689" assignment="KP23"/>
 		<!-- intensity-fix: U235->Th231 19.59-keV gamma intensity 0.61 -> 0.00583; NNDC ENSDF NDS 185 (2022), evaluated Aug-2022, %IG=0.583(11), alpha=114.7(19); energy unchanged. -->
 		<!-- cascade-match: 7 SD gammas below detectable threshold T=0.000572/decay: 291.6 291.6 310.7 517.2 742.5 97.5 371.2; 1 SD gammas with I=0 (not emitted, suppressed); G4-listed-not-in-SD[keV]: 144.47(rI=100) 80.35(rI=51) 259.79(rI=36) 441.57(rI=5) 528.04(rI=100); -->
 		<!-- intensity-fix: U235->Th231 alpha products and level feeds are the G4-topology-backed normalized projection of Aug-2022 ENSDF (NDS 185, 2022); 20 represented probabilities sum to one; emitted alpha energies and hindrances updated; omitted unmapped/tentative ENSDF rows 4042 keV (~0.007%, no G4 level), 4212 keV (0.0131%, no RDM feed), and 4296 keV (0.00915%, no RDM feed); RDM level/Q topology and gamma products unchanged. -->
@@ -568851,6 +568991,7 @@
 	</transition>
 	<transition branchRatio="7E-11" mode="sf" parent="U235"/>
 	<transition branchRatio="1" child="Th232" mode="a" parent="U236">
+		<!-- K x-rays (2026-10 review): energies Deslattes 2003 theory (xraylib for K-O/K-P); sub-line rates xraylib (K-L, K-M2,3, K-N2,3) and EADL2023 (weak lines); K-N2/K-N3 split and K-O2,3, K-P2,3 added within the unchanged K'b2 total.  Micro-cal: K-N energies follow theory, K-O at U 115.375(4), Th 109.442(5) keV. -->
 		<gamma energy="49.46" id="0" intensity="0.00078" iccTotal="332" iccK="0" iccL1="4.08028" iccL2="127.09" iccL3="111.884" mult="4" fl="1" tl="0"/>
 		<gamma energy="112.79" intensity="1.8798E-04" iccTotal="6.82" iccK="0.233994" iccL1="0.155019" iccL2="2.79279" iccL3="1.868" mult="4" fl="2" tl="1">
 			<coincidentGamma id="0" intensity="0.0029850746268656717" a2="0.102041" a4="0.00907029"/>
@@ -568874,14 +569015,18 @@
 		<xray energy="19.304" intensity="7.5E-05" assignment="Lg2" l1intensity="0.0231"/>
 		<xray energy="19.505" intensity="7.5E-05" assignment="Lg3" l1intensity="0.023"/>
 		<xray energy="19.599" intensity="0.00185" assignment="Lg6" l1intensity="0.00165" l2intensity="0.0184"/>
-		<xray energy="89.178" intensity="3.6E-08" assignment="Ka3"/>
-		<xray energy="89.957" intensity="1.2E-05" assignment="Ka2"/>
-		<xray energy="93.35" intensity="1.96E-05" assignment="Ka1"/>
-		<xray energy="104.819" intensity="2.4E-06" assignment="Kb3"/>
-		<xray energy="105.604" intensity="4.6E-06" assignment="Kb1"/>
-		<xray energy="106.239" intensity="1.62E-07" assignment="Kb5"/>
-		<xray energy="108.583" intensity="1.74E-06" assignment="Kb2"/>
-		<xray energy="108.955" intensity="6.1E-07" assignment="Kb4"/>
+		<xray energy="89.1766" intensity="3.6E-08" assignment="Ka3"/>
+		<xray energy="89.9566" intensity="1.2E-05" assignment="Ka2"/>
+		<xray energy="93.3479" intensity="1.96E-05" assignment="Ka1"/>
+		<xray energy="104.8172" intensity="2.3715E-06" assignment="Kb3"/>
+		<xray energy="105.6019" intensity="4.6244E-06" assignment="Kb1"/>
+		<xray energy="106.1564" intensity="7.7051E-08" assignment="Kb5II"/>
+		<xray energy="106.3149" intensity="8.9006E-08" assignment="Kb5I"/>
+		<xray energy="108.4812" intensity="6.0123E-07" assignment="Kb2a"/>
+		<xray energy="108.6809" intensity="1.2158E-06" assignment="Kb2b"/>
+		<xray energy="108.9546" intensity="4.7799E-08" assignment="Kb4"/>
+		<xray energy="109.4535" intensity="4.1675E-07" assignment="KO23"/>
+		<xray energy="109.6305" intensity="6.8401E-08" assignment="KP23"/>
 		<levelFeed lvl="0" probability="0.7391072638" q="4573"/>
 		<levelFeed lvl="1" probability="0.2593890397" q="4523.631"/>
 		<levelFeed lvl="2" probability="0.001502294438" q="4410.88"/>
@@ -569160,6 +569305,7 @@
 		<levelFeed lvl="19" probability="0.007984031936" q="147.572"/>
 	</transition>
 	<transition branchRatio="1" child="Th234" mode="a" parent="U238">
+		<!-- K x-rays (2026-10 review): energies Deslattes 2003 theory (xraylib for K-O/K-P); sub-line rates xraylib (K-L, K-M2,3, K-N2,3) and EADL2023 (weak lines); K-N2/K-N3 split and K-O2,3, K-P2,3 added within the unchanged K'b2 total.  Micro-cal: K-N energies follow theory, K-O at U 115.375(4), Th 109.442(5) keV. -->
 		<!-- 2026-10 U low-energy review: Th K'b1/K'b2 group totals restored to the ENSDF split (3.98e-6 / 1.34e-6 per decay). -->
 		<!-- data-review 2026-10: ten U-234 transitions misfiled here (994.93, 1124.93, 1548.12, 1591.65, 2001.0, 2022.3, 2041.4, 2066.0, 2101.9, 2136.6 keV) moved to Pa234m->U234, which emits them; Th K x-rays reset to IAEA/ENSDF Ka1 1.119e-5 (were 25x the K-vacancy budget). -->
 		<gamma energy="49.55" id="0" intensity="0.00064" iccTotal="321" iccK="0" iccL1="3.9483" iccL2="122.975" iccL3="108.113" mult="4" fl="1" tl="0"/>
@@ -569183,14 +569329,18 @@
 		<xray energy="19.304" intensity="6.2E-05" assignment="Lg2" l1intensity="0.0231"/>
 		<xray energy="19.505" intensity="6.2E-05" assignment="Lg3" l1intensity="0.023"/>
 		<xray energy="19.599" intensity="0.0015" assignment="Lg6" l1intensity="0.00165" l2intensity="0.0184"/>
-		<xray energy="89.178" intensity="4.364E-08" assignment="Ka3"/>
-		<xray energy="89.957" intensity="6.918E-06" assignment="Ka2"/>
-		<xray energy="93.35" intensity="1.119E-05" assignment="Ka1"/>
-		<xray energy="104.819" intensity="1.3342E-06" assignment="Kb3"/>
-		<xray energy="105.604" intensity="2.4618E-06" assignment="Kb1"/>
-		<xray energy="106.239" intensity="1.8461E-07" assignment="Kb5"/>
-		<xray energy="108.583" intensity="9.8182E-07" assignment="Kb2"/>
-		<xray energy="108.955" intensity="3.5968E-07" assignment="Kb4"/>
+		<xray energy="89.1766" intensity="4.364E-08" assignment="Ka3"/>
+		<xray energy="89.9566" intensity="6.918E-06" assignment="Ka2"/>
+		<xray energy="93.3479" intensity="1.119E-05" assignment="Ka1"/>
+		<xray energy="104.8172" intensity="1.3181E-06" assignment="Kb3"/>
+		<xray energy="105.6019" intensity="2.5702E-06" assignment="Kb1"/>
+		<xray energy="106.1564" intensity="4.2825E-08" assignment="Kb5II"/>
+		<xray energy="106.3149" intensity="4.9469E-08" assignment="Kb5I"/>
+		<xray energy="108.4812" intensity="3.4321E-07" assignment="Kb2a"/>
+		<xray energy="108.6809" intensity="6.9405E-07" assignment="Kb2b"/>
+		<xray energy="108.9546" intensity="2.7286E-08" assignment="Kb4"/>
+		<xray energy="109.4535" intensity="2.379E-07" assignment="KO23"/>
+		<xray energy="109.6305" intensity="3.9047E-08" assignment="KP23"/>
 		<!-- intensity-fix: U238->Th234 alpha/feed probabilities [ground,49.55,163.05] -> [0.77012,0.2292,0.00068]; 4038-keV alpha hindrance 40 -> 45; NNDC ENSDF NDS 207 (2026), cutoff 1-Dec-2023; alpha energies and RDM level/Q topology unchanged. -->
 		<levelFeed lvl="0" probability="0.77012" q="4269.9"/>
 		<levelFeed lvl="1" probability="0.2292" q="4220.35"/>
@@ -569880,6 +570030,7 @@
 		<levelFeed lvl="1" probability="1" q="6780"/>
 	</transition>
 	<transition branchRatio="0.98" child="U231" mode="ec" parent="Np231">
+		<!-- K x-rays (2026-10 review): energies Deslattes 2003 theory (xraylib for K-O/K-P); sub-line rates xraylib (K-L, K-M2,3, K-N2,3) and EADL2023 (weak lines); K-N2/K-N3 split and K-O2,3, K-P2,3 added within the unchanged K'b2 total.  Micro-cal: K-N energies follow theory, K-O at U 115.375(4), Th 109.442(5) keV. -->
 		<gamma energy="44.8" intensity="0" iccTotal="330" iccK="0" iccL1="20.1894" iccL2="118.767" iccL3="102.399" mult="304" fl="2" tl="0"/>
 		<gamma energy="263.8" intensity="0.029"/>
 		<gamma energy="348.4" intensity="0.037"/>
@@ -569919,14 +570070,18 @@
 		<xray energy="20.487" intensity="0.0044" assignment="Lg2" l1intensity="0.0266"/>
 		<xray energy="20.715" intensity="0.0041" assignment="Lg3" l1intensity="0.0252"/>
 		<xray energy="20.844" intensity="0.0045" assignment="Lg6" l1intensity="0.00145" l2intensity="0.0181"/>
-		<xray energy="93.844" intensity="0.00074" assignment="Ka3"/>
-		<xray energy="94.654" intensity="0.214" assignment="Ka2"/>
-		<xray energy="98.434" intensity="0.347" assignment="Ka1"/>
-		<xray energy="110.421" intensity="0.043" assignment="Kb3"/>
-		<xray energy="111.298" intensity="0.081" assignment="Kb1"/>
-		<xray energy="111.964" intensity="0.003" assignment="Kb5"/>
-		<xray energy="114.445" intensity="0.0313" assignment="Kb2"/>
-		<xray energy="114.844" intensity="0.0112" assignment="Kb4"/>
+		<xray energy="93.8420" intensity="0.00074" assignment="Ka3"/>
+		<xray energy="94.6531" intensity="0.214" assignment="Ka2"/>
+		<xray energy="98.4336" intensity="0.347" assignment="Ka1"/>
+		<xray energy="110.4182" intensity="0.041952" assignment="Kb3"/>
+		<xray energy="111.2985" intensity="0.081986" assignment="Kb1"/>
+		<xray energy="111.8718" intensity="0.0014303" assignment="Kb5II"/>
+		<xray energy="112.0481" intensity="0.0016316" assignment="Kb5I"/>
+		<xray energy="114.3292" intensity="0.010757" assignment="Kb2a"/>
+		<xray energy="114.5562" intensity="0.021921" assignment="Kb2b"/>
+		<xray energy="114.8436" intensity="0.00090129" assignment="Kb4"/>
+		<xray energy="115.3897" intensity="0.0076362" assignment="KO23"/>
+		<xray energy="115.5815" intensity="0.0012848" assignment="KP23"/>
 		<!-- cascade-match: SD-unmatched-above-threshold[keV]: 263.80(I=0.029,absent) 348.40(I=0.037,absent) 484.70(I=0.0166,neartol) 715.50(I=0.0025,absent) 837.30(I=0.0041,absent); -->
 	</transition>
 	<transition branchRatio="0.02" child="Pa227" mode="a" parent="Np231">
@@ -569934,6 +570089,7 @@
 		<!-- cascade-feed: omitted(mode-branch-closure). -->
 	</transition>
 	<transition branchRatio="1" child="U232" mode="ec" parent="Np232">
+		<!-- K x-rays (2026-10 review): energies Deslattes 2003 theory (xraylib for K-O/K-P); sub-line rates xraylib (K-L, K-M2,3, K-N2,3) and EADL2023 (weak lines); K-N2/K-N3 split and K-O2,3, K-P2,3 added within the unchanged K'b2 total.  Micro-cal: K-N energies follow theory, K-O at U 115.375(4), Th 109.442(5) keV. -->
 		<gamma energy="47.574" id="0" intensity="0.00156" iccTotal="464" iccK="0" iccL1="6.14336" iccL2="178.315" iccL3="153.955" mult="4" fl="1" tl="0"/>
 		<gamma energy="108.997" id="1" intensity="0.015288" iccTotal="9.15" iccK="0" iccL1="0.211914" iccL2="3.89881" iccL3="2.55377" mult="4" fl="2" tl="1">
 			<coincidentGamma id="0" intensity="0.0011279826464208245" a2="0.102041" a4="0.00907029"/>
@@ -570049,17 +570205,22 @@
 		<xray energy="20.487" intensity="0.0051" assignment="Lg2" l1intensity="0.0266"/>
 		<xray energy="20.715" intensity="0.0049" assignment="Lg3" l1intensity="0.0252"/>
 		<xray energy="20.844" intensity="0.0117" assignment="Lg6" l1intensity="0.00145" l2intensity="0.0181"/>
-		<xray energy="93.844" intensity="0.0008" assignment="Ka3"/>
-		<xray energy="94.654" intensity="0.229" assignment="Ka2"/>
-		<xray energy="98.434" intensity="0.371" assignment="Ka1"/>
-		<xray energy="110.421" intensity="0.0456" assignment="Kb3"/>
-		<xray energy="111.298" intensity="0.087" assignment="Kb1"/>
-		<xray energy="111.964" intensity="0.0032" assignment="Kb5"/>
-		<xray energy="114.445" intensity="0.0335" assignment="Kb2"/>
-		<xray energy="114.844" intensity="0.012" assignment="Kb4"/>
+		<xray energy="93.8420" intensity="0.0008" assignment="Ka3"/>
+		<xray energy="94.6531" intensity="0.229" assignment="Ka2"/>
+		<xray energy="98.4336" intensity="0.371" assignment="Ka1"/>
+		<xray energy="110.4182" intensity="0.044859" assignment="Kb3"/>
+		<xray energy="111.2985" intensity="0.087667" assignment="Kb1"/>
+		<xray energy="111.8718" intensity="0.0015294" assignment="Kb5II"/>
+		<xray energy="112.0481" intensity="0.0017447" assignment="Kb5I"/>
+		<xray energy="114.3292" intensity="0.011516" assignment="Kb2a"/>
+		<xray energy="114.5562" intensity="0.023468" assignment="Kb2b"/>
+		<xray energy="114.8436" intensity="0.00096491" assignment="Kb4"/>
+		<xray energy="115.3897" intensity="0.0081753" assignment="KO23"/>
+		<xray energy="115.5815" intensity="0.0013755" assignment="KP23"/>
 		<!-- cascade-match: SD-unmatched-above-threshold[keV]: 377.00(I=0.0127,neartol) 970.90(I=0.00318,neartol) 1016.80(I=0.00583,edge-collision) 1016.80(I=0.00572,edge-collision) 1146.30(I=0.00371,edge-collision) 1146.30(I=0.00371,edge-collision) 1936.00(I=0.00424,absent); G4-listed-not-in-SD[keV]: 184.11(rI=11.8) 421.94(rI=12.7); -->
 	</transition>
 	<transition branchRatio="1" child="U233" mode="ec" parent="Np233">
+		<!-- K x-rays (2026-10 review): energies Deslattes 2003 theory (xraylib for K-O/K-P); sub-line rates xraylib (K-L, K-M2,3, K-N2,3) and EADL2023 (weak lines); K-N2/K-N3 split and K-O2,3, K-P2,3 added within the unchanged K'b2 total.  Micro-cal: K-N energies follow theory, K-O at U 115.375(4), Th 109.442(5) keV. -->
 		<gamma energy="28.56" id="0" intensity="1.33E-05" iccTotal="320" iccK="0" iccL1="121.632" iccL2="65.568" iccL3="50.56" mult="304" delta="0.16" fl="13" tl="9">
 			<coincidentGamma id="18" intensity="0.0038658142730281031" a2="-0.00424991" a4="0"/>
 			<coincidentGamma id="14" intensity="3.2859421320738875E-05" a2="-0.0415725" a4="0"/>
@@ -570134,14 +570295,18 @@
 		<xray energy="20.487" intensity="0.0049" assignment="Lg2" l1intensity="0.0266"/>
 		<xray energy="20.715" intensity="0.0046" assignment="Lg3" l1intensity="0.0252"/>
 		<xray energy="20.844" intensity="0.0047" assignment="Lg6" l1intensity="0.00145" l2intensity="0.0181"/>
-		<xray energy="93.844" intensity="0.00076" assignment="Ka3"/>
-		<xray energy="94.654" intensity="0.218" assignment="Ka2"/>
-		<xray energy="98.434" intensity="0.353" assignment="Ka1"/>
-		<xray energy="110.421" intensity="0.0434" assignment="Kb3"/>
-		<xray energy="111.298" intensity="0.0824" assignment="Kb1"/>
-		<xray energy="111.964" intensity="0.00305" assignment="Kb5"/>
-		<xray energy="114.445" intensity="0.0319" assignment="Kb2"/>
-		<xray energy="114.844" intensity="0.0114" assignment="Kb4"/>
+		<xray energy="93.8420" intensity="0.00076" assignment="Ka3"/>
+		<xray energy="94.6531" intensity="0.218" assignment="Ka2"/>
+		<xray energy="98.4336" intensity="0.353" assignment="Ka1"/>
+		<xray energy="110.4182" intensity="0.042563" assignment="Kb3"/>
+		<xray energy="111.2985" intensity="0.08318" assignment="Kb1"/>
+		<xray energy="111.8718" intensity="0.0014512" assignment="Kb5II"/>
+		<xray energy="112.0481" intensity="0.0016554" assignment="Kb5I"/>
+		<xray energy="114.3292" intensity="0.010959" assignment="Kb2a"/>
+		<xray energy="114.5562" intensity="0.022334" assignment="Kb2b"/>
+		<xray energy="114.8436" intensity="0.00091826" assignment="Kb4"/>
+		<xray energy="115.3897" intensity="0.00778" assignment="KO23"/>
+		<xray energy="115.5815" intensity="0.001309" assignment="KP23"/>
 		<!-- cascade-match: SD-unmatched-above-threshold[keV]: 242.50(I=0.00084,neartol) 299.10(I=0.00441,edge-collision) 299.10(I=0.00119,edge-collision) 393.00(I=0.000175,absent) 425.60(I=0.000581,neartol) 644.40(I=7.7e-05,absent) 665.90(I=0.000168,absent); G4-listed-not-in-SD[keV]: 298.81(rI=100) 300.13(rI=100) 182.85(rI=12) 411.47(rI=25) 463.27(rI=49) 503.62(rI=100); -->
 	</transition>
 	<transition branchRatio="0.001" child="Pa229" mode="a" parent="Np233">
@@ -570149,6 +570314,7 @@
 		<levelFeed lvl="0" probability="1" q="5630"/>
 	</transition>
 	<transition branchRatio="1" child="U234" mode="ec" parent="Np234">
+		<!-- K x-rays (2026-10 review): energies Deslattes 2003 theory (xraylib for K-O/K-P); sub-line rates xraylib (K-L, K-M2,3, K-N2,3) and EADL2023 (weak lines); K-N2/K-N3 split and K-O2,3, K-P2,3 added within the unchanged K'b2 total.  Micro-cal: K-N energies follow theory, K-O at U 115.375(4), Th 109.442(5) keV. -->
 		<gamma energy="43.49" id="0" intensity="6.6330E-04" iccTotal="713" iccK="0" iccL1="9.23335" iccL2="271.296" iccL3="239.639" mult="4" fl="1" tl="0"/>
 		<gamma energy="62.7" id="1" intensity="1.1385E-03" iccTotal="0.426" iccK="0" iccL1="0.118385" iccL2="0.100877" iccL3="0.10109" mult="2" fl="14" tl="10">
 			<coincidentGamma id="51" intensity="0.376625434984" a2="0.25" a4="-0"/>
@@ -570579,14 +570745,18 @@
 		<xray energy="20.487" intensity="0.0072" assignment="Lg2" l1intensity="0.0266"/>
 		<xray energy="20.715" intensity="0.0068" assignment="Lg3" l1intensity="0.0252"/>
 		<xray energy="20.844" intensity="0.0077" assignment="Lg6" l1intensity="0.00145" l2intensity="0.0181"/>
-		<xray energy="93.844" intensity="0.000656" assignment="Ka3"/>
-		<xray energy="94.654" intensity="0.189" assignment="Ka2"/>
-		<xray energy="98.434" intensity="0.305" assignment="Ka1"/>
-		<xray energy="110.421" intensity="0.0376" assignment="Kb3"/>
-		<xray energy="111.298" intensity="0.0713" assignment="Kb1"/>
-		<xray energy="111.964" intensity="0.00264" assignment="Kb5"/>
-		<xray energy="114.445" intensity="0.0276" assignment="Kb2"/>
-		<xray energy="114.844" intensity="0.0099" assignment="Kb4"/>
+		<xray energy="93.8420" intensity="0.000656" assignment="Ka3"/>
+		<xray energy="94.6531" intensity="0.189" assignment="Ka2"/>
+		<xray energy="98.4336" intensity="0.305" assignment="Ka1"/>
+		<xray energy="110.4182" intensity="0.036845" assignment="Kb3"/>
+		<xray energy="111.2985" intensity="0.072006" assignment="Kb1"/>
+		<xray energy="111.8718" intensity="0.0012562" assignment="Kb5II"/>
+		<xray energy="112.0481" intensity="0.001433" assignment="Kb5I"/>
+		<xray energy="114.3292" intensity="0.0094912" assignment="Kb2a"/>
+		<xray energy="114.5562" intensity="0.019342" assignment="Kb2b"/>
+		<xray energy="114.8436" intensity="0.00079526" assignment="Kb4"/>
+		<xray energy="115.3897" intensity="0.0067379" assignment="KO23"/>
+		<xray energy="115.5815" intensity="0.0011337" assignment="KP23"/>
 		<!-- cascade-match: SD-unmatched-above-threshold[keV]: 192.91(I=0.000653,edge-collision) 192.91(I=0.000653,edge-collision) 265.80(I=0.000396,neartol) 383.75(I=0.000416,neartol) 649.12(I=0.000267,neartol) 1220.38(I=0.000396,absent); 2 SD gammas with I=0 (not emitted, suppressed); G4-listed-not-in-SD[keV]: 649.25(rI=13) 1457.49(rI=24) 1500.99(rI=16) 1359.03(rI=100) 131.30(rI=100) 468.34(rI=18.1) 509.06(rI=16) 1510.10(rI=100) 1553.60(rI=69) 186.17(rI=30.5) 227.29(rI=100) 754.98(rI=21.1) 796.68(rI=45) 210.53(rI=6.2) 543.96(rI=17) 655.94(rI=6.5) 695.96(rI=7.4) 994.93(rI=19); -->
 	</transition>
 	<transition branchRatio="0.00102038163265306" child="U235m" mode="ec" parent="Np235">
@@ -570605,6 +570775,7 @@
 		<electronCapture energy="123.63" intensity="1.0000E-03" logFT="9.800" ecK="0.0210126" ecL="0.670399"/>
 	</transition>
 	<transition branchRatio="2.6E-05" child="Pa231" mode="a" parent="Np235">
+		<!-- K x-rays (2026-10 review): energies Deslattes 2003 theory (xraylib for K-O/K-P); sub-line rates xraylib (K-L, K-M2,3, K-N2,3) and EADL2023 (weak lines); K-N2/K-N3 split and K-O2,3, K-P2,3 added within the unchanged K'b2 total.  Micro-cal: K-N energies follow theory, K-O at U 115.375(4), Th 109.442(5) keV. -->
 		<gamma energy="9.2" intensity="0" iccTotal="1181" iccK="0" iccL1="0" iccL2="0" iccL3="0" mult="3" fl="1" tl="0"/>
 		<gamma energy="17.18" intensity="0.39" iccTotal="166" iccK="0" iccL1="0" iccL2="0" iccL3="0" mult="3" fl="5" tl="4">
 			<coincidentGamma id="3" intensity="0.13988339789490159" a2="0.0178571" a4="0"/>
@@ -570678,14 +570849,18 @@
 		<xray energy="19.888" intensity="1.26E-07" assignment="Lg2" l1intensity="0.0238"/>
 		<xray energy="20.101" intensity="1.23E-07" assignment="Lg3" l1intensity="0.0232"/>
 		<xray energy="20.217" intensity="2.8E-07" assignment="Lg6" l1intensity="0.00146" l2intensity="0.0182"/>
-		<xray energy="91.491" intensity="9E-11" assignment="Ka3"/>
-		<xray energy="92.282" intensity="2.9E-08" assignment="Ka2"/>
-		<xray energy="95.863" intensity="4.8E-08" assignment="Ka1"/>
-		<xray energy="107.595" intensity="5.8E-09" assignment="Kb3"/>
-		<xray energy="108.422" intensity="1.1E-08" assignment="Kb1"/>
-		<xray energy="109.072" intensity="4E-10" assignment="Kb5"/>
-		<xray energy="111.486" intensity="4.3E-09" assignment="Kb2"/>
-		<xray energy="111.87" intensity="1.5E-09" assignment="Kb4"/>
+		<xray energy="91.4880" intensity="9E-11" assignment="Ka3"/>
+		<xray energy="92.2835" intensity="2.9E-08" assignment="Ka2"/>
+		<xray energy="95.8648" intensity="4.8E-08" assignment="Ka1"/>
+		<xray energy="107.5912" intensity="5.6882E-09" assignment="Kb3"/>
+		<xray energy="108.4223" intensity="1.1105E-08" assignment="Kb1"/>
+		<xray energy="108.9862" intensity="1.8935E-10" assignment="Kb5II"/>
+		<xray energy="109.1535" intensity="2.1739E-10" assignment="Kb5I"/>
+		<xray energy="111.3876" intensity="1.4757E-09" assignment="Kb2a"/>
+		<xray energy="111.6005" intensity="2.9963E-09" assignment="Kb2b"/>
+		<xray energy="111.8810" intensity="1.2047E-10" assignment="Kb4"/>
+		<xray energy="112.3915" intensity="1.035E-09" assignment="KO23"/>
+		<xray energy="112.5755" intensity="1.7257E-10" assignment="KP23"/>
 		<!-- cascade-match: SD-unmatched-above-threshold[keV]: 165.00(I=0.0005,neartol) 185.00(I=0.0004,neartol); G4-listed-not-in-SD[keV]: 42.84(rI=100) 93.09(rI=10.6) 53.08(rI=100) 57.12(rI=7.8) 72.75(rI=25.5) 82.09(rI=46.6) 24.44(rI=44) 81.56(rI=88) 115.52(rI=100) 134.64(rI=75) 145.91(rI=20.6) 163.10(rI=100); -->
 		<levelFeed lvl="0" probability="0.01502979536" q="5193.8"/>
 		<levelFeed lvl="1" probability="0.002003972715" q="5184.617"/>
@@ -570734,6 +570909,7 @@
 		<!-- cascade-feed: omitted(mode-branch-closure). -->
 	</transition>
 	<transition branchRatio="0.863" child="U236" mode="ec" parent="Np236">
+		<!-- K x-rays (2026-10 review): energies Deslattes 2003 theory (xraylib for K-O/K-P); sub-line rates xraylib (K-L, K-M2,3, K-N2,3) and EADL2023 (weak lines); K-N2/K-N3 split and K-O2,3, K-P2,3 added within the unchanged K'b2 total.  Micro-cal: K-N energies follow theory, K-O at U 115.375(4), Th 109.442(5) keV. -->
 		<gamma energy="45.23" id="0" intensity="1.4520E-03" iccTotal="589" iccK="0" iccL1="7.69823" iccL2="224.998" iccL3="196.903" mult="4" fl="1" tl="0"/>
 		<gamma energy="57" intensity="0" iccTotal="199" iccK="0" iccL1="2.76809" iccL2="78.0279" iccL3="64.277" mult="4" fl="6" tl="5"/>
 		<gamma energy="104" intensity="0" iccTotal="11.41" iccK="0" iccL1="0.246912" iccL2="4.83099" iccL3="3.23245" mult="4" fl="8" tl="6"/>
@@ -570765,20 +570941,25 @@
 		<xray energy="20.487" intensity="0.0069" assignment="Lg2" l1intensity="0.0266"/>
 		<xray energy="20.715" intensity="0.0065" assignment="Lg3" l1intensity="0.0252"/>
 		<xray energy="20.844" intensity="0.021" assignment="Lg6" l1intensity="0.00145" l2intensity="0.0181"/>
-		<xray energy="93.844" intensity="0.00081" assignment="Ka3"/>
-		<xray energy="94.654" intensity="0.234" assignment="Ka2"/>
-		<xray energy="98.434" intensity="0.378" assignment="Ka1"/>
-		<xray energy="110.421" intensity="0.0465" assignment="Kb3"/>
-		<xray energy="111.298" intensity="0.0883" assignment="Kb1"/>
-		<xray energy="111.964" intensity="0.00327" assignment="Kb5"/>
-		<xray energy="114.445" intensity="0.0342" assignment="Kb2"/>
-		<xray energy="114.844" intensity="0.0122" assignment="Kb4"/>
+		<xray energy="93.8420" intensity="0.00081" assignment="Ka3"/>
+		<xray energy="94.6531" intensity="0.234" assignment="Ka2"/>
+		<xray energy="98.4336" intensity="0.378" assignment="Ka1"/>
+		<xray energy="110.4182" intensity="0.045609" assignment="Kb3"/>
+		<xray energy="111.2985" intensity="0.089132" assignment="Kb1"/>
+		<xray energy="111.8718" intensity="0.001555" assignment="Kb5II"/>
+		<xray energy="112.0481" intensity="0.0017738" assignment="Kb5I"/>
+		<xray energy="114.3292" intensity="0.011744" assignment="Kb2a"/>
+		<xray energy="114.5562" intensity="0.023932" assignment="Kb2b"/>
+		<xray energy="114.8436" intensity="0.000984" assignment="Kb4"/>
+		<xray energy="115.3897" intensity="0.008337" assignment="KO23"/>
+		<xray energy="115.5815" intensity="0.0014027" assignment="KP23"/>
 		<!-- cascade-match: G4-listed-not-in-SD[keV]: 594.70(rI=100) 698.94(rI=100); -->
 	</transition>
 	<transition branchRatio="0.0016" child="Pa232" mode="a" parent="Np236">
 		<!-- cascade-feed: omitted(missing-or-duplicate-mode-summary). -->
 	</transition>
 	<transition branchRatio="0.5" child="U236" mode="ec" parent="Np236m">
+		<!-- K x-rays (2026-10 review): energies Deslattes 2003 theory (xraylib for K-O/K-P); sub-line rates xraylib (K-L, K-M2,3, K-N2,3) and EADL2023 (weak lines); K-N2/K-N3 split and K-O2,3, K-P2,3 added within the unchanged K'b2 total.  Micro-cal: K-N energies follow theory, K-O at U 115.375(4), Th 109.442(5) keV. -->
 		<gamma energy="45.24" intensity="3.9240E-04" iccTotal="589" iccK="0" iccL1="7.69823" iccL2="224.998" iccL3="196.903" mult="4" fl="1" tl="0"/>
 		<gamma energy="104.23" intensity="2.3544E-05" iccTotal="10.99" iccK="0" iccL1="0.240241" iccL2="4.65866" iccL3="3.10687" mult="4" fl="2" tl="1"/>
 		<gamma energy="538.09" intensity="2.4634E-04" iccTotal="0.2" iccK="0.08736" iccL1="0.02266" iccL2="0.05056" iccL3="0.009122" mult="6" fl="5" tl="2"/>
@@ -570801,16 +570982,21 @@
 		<xray energy="20.487" intensity="0.0026" assignment="Lg2" l1intensity="0.0266"/>
 		<xray energy="20.715" intensity="0.0024" assignment="Lg3" l1intensity="0.0252"/>
 		<xray energy="20.844" intensity="0.0029" assignment="Lg6" l1intensity="0.00145" l2intensity="0.0181"/>
-		<xray energy="93.844" intensity="0.000384" assignment="Ka3"/>
-		<xray energy="94.654" intensity="0.111" assignment="Ka2"/>
-		<xray energy="98.434" intensity="0.179" assignment="Ka1"/>
-		<xray energy="110.421" intensity="0.022" assignment="Kb3"/>
-		<xray energy="111.298" intensity="0.0418" assignment="Kb1"/>
-		<xray energy="111.964" intensity="0.00155" assignment="Kb5"/>
-		<xray energy="114.445" intensity="0.0162" assignment="Kb2"/>
-		<xray energy="114.844" intensity="0.0058" assignment="Kb4"/>
+		<xray energy="93.8420" intensity="0.000384" assignment="Ka3"/>
+		<xray energy="94.6531" intensity="0.111" assignment="Ka2"/>
+		<xray energy="98.4336" intensity="0.179" assignment="Ka1"/>
+		<xray energy="110.4182" intensity="0.021587" assignment="Kb3"/>
+		<xray energy="111.2985" intensity="0.042187" assignment="Kb1"/>
+		<xray energy="111.8718" intensity="0.00073599" assignment="Kb5II"/>
+		<xray energy="112.0481" intensity="0.00083957" assignment="Kb5I"/>
+		<xray energy="114.3292" intensity="0.0055682" assignment="Kb2a"/>
+		<xray energy="114.5562" intensity="0.011347" assignment="Kb2b"/>
+		<xray energy="114.8436" intensity="0.00046655" assignment="Kb4"/>
+		<xray energy="115.3897" intensity="0.0039529" assignment="KO23"/>
+		<xray energy="115.5815" intensity="0.00066508" assignment="KP23"/>
 	</transition>
 	<transition branchRatio="1" child="Pa233" mode="a" parent="Np237">
+		<!-- K x-rays (2026-10 review): energies Deslattes 2003 theory (xraylib for K-O/K-P); sub-line rates xraylib (K-L, K-M2,3, K-N2,3) and EADL2023 (weak lines); K-N2/K-N3 split and K-O2,3, K-P2,3 added within the unchanged K'b2 total.  Micro-cal: K-N energies follow theory, K-O at U 115.375(4), Th 109.442(5) keV. -->
 		<gamma energy="5.18" id="0" intensity="0.00222" iccTotal="1724" iccK="0" iccL1="0" iccL2="0" iccL3="0" mult="3" fl="7" tl="6">
 			<coincidentGamma id="18" intensity="0.0055555555555555549"/>
 			<coincidentGamma id="15" intensity="0.51867219917012453" a2="-0.0666667" a4="0"/>
@@ -571165,14 +571351,18 @@
 		<xray energy="19.888" intensity="0.003" assignment="Lg2" l1intensity="0.0238"/>
 		<xray energy="20.101" intensity="0.0029" assignment="Lg3" l1intensity="0.0232"/>
 		<xray energy="20.217" intensity="0.0079" assignment="Lg6" l1intensity="0.00146" l2intensity="0.0182"/>
-		<xray energy="91.491" intensity="5.3E-05" assignment="Ka3"/>
-		<xray energy="92.282" intensity="0.0164" assignment="Ka2"/>
-		<xray energy="95.863" intensity="0.0267" assignment="Ka1"/>
-		<xray energy="107.595" intensity="0.00326" assignment="Kb3"/>
-		<xray energy="108.422" intensity="0.0062" assignment="Kb1"/>
-		<xray energy="109.072" intensity="0.000225" assignment="Kb5"/>
-		<xray energy="111.486" intensity="0.00239" assignment="Kb2"/>
-		<xray energy="111.87" intensity="0.00084" assignment="Kb4"/>
+		<xray energy="91.4880" intensity="5.3E-05" assignment="Ka3"/>
+		<xray energy="92.2835" intensity="0.0164" assignment="Ka2"/>
+		<xray energy="95.8648" intensity="0.0267" assignment="Ka1"/>
+		<xray energy="107.5912" intensity="0.0032029" assignment="Kb3"/>
+		<xray energy="108.4223" intensity="0.0062531" assignment="Kb1"/>
+		<xray energy="108.9862" intensity="0.00010662" assignment="Kb5II"/>
+		<xray energy="109.1535" intensity="0.00012241" assignment="Kb5I"/>
+		<xray energy="111.3876" intensity="0.00082181" assignment="Kb2a"/>
+		<xray energy="111.6005" intensity="0.0016686" assignment="Kb2b"/>
+		<xray energy="111.8810" intensity="6.7087E-05" assignment="Kb4"/>
+		<xray energy="112.3915" intensity="0.00057638" assignment="KO23"/>
+		<xray energy="112.5755" intensity="9.6104E-05" assignment="KP23"/>
 		<!-- cascade-match: SD-unmatched-above-threshold[keV]: 21.50(I=0.00356,neartol) 27.70(I=0.0084,neartol) 94.64(I=0.00615,edge-collision) 94.66(I=0.0962,edge-collision) 98.44(I=0.174,absent) 111.30(I=0.0592,neartol); 3 SD gammas below detectable threshold T=0.000174/decay: 199.9 199.9 288.3; G4-listed-not-in-SD[keV]: 94.66(rI=100) 199.96(rI=16.1); -->
 		<levelFeed lvl="0" probability="0.02362188366" q="4957.3"/>
 		<levelFeed lvl="1" probability="0.005238174202" q="4950.623"/>
@@ -572668,6 +572858,7 @@
 		<levelFeed lvl="1" probability="1" q="5951"/>
 	</transition>
 	<transition branchRatio="1" child="U232" mode="a" parent="Pu236">
+		<!-- K x-rays (2026-10 review): energies Deslattes 2003 theory (xraylib for K-O/K-P); sub-line rates xraylib (K-L, K-M2,3, K-N2,3) and EADL2023 (weak lines); K-N2/K-N3 split and K-O2,3, K-P2,3 added within the unchanged K'b2 total.  Micro-cal: K-N energies follow theory, K-O at U 115.375(4), Th 109.442(5) keV. -->
 		<gamma energy="47.57" id="0" intensity="6.5000E-04" iccTotal="464" iccK="0" iccL1="6.14336" iccL2="178.315" iccL3="153.955" mult="4" fl="1" tl="0"/>
 		<gamma energy="108.95" id="1" intensity="2.2500E-04" iccTotal="9.15" iccK="0" iccL1="0.211914" iccL2="3.89881" iccL3="2.55377" mult="4" fl="2" tl="1">
 			<coincidentGamma id="0" intensity="0.00211795373086" a2="0.102041" a4="0.00907029"/>
@@ -572733,14 +572924,18 @@
 		<xray energy="20.487" intensity="0.00011" assignment="Lg2" l1intensity="0.0266"/>
 		<xray energy="20.715" intensity="0.000105" assignment="Lg3" l1intensity="0.0252"/>
 		<xray energy="20.844" intensity="0.0022" assignment="Lg6" l1intensity="0.00145" l2intensity="0.0181"/>
-		<xray energy="93.844" intensity="3.66E-09" assignment="Ka3"/>
-		<xray energy="94.654" intensity="1.05E-06" assignment="Ka2"/>
-		<xray energy="98.434" intensity="1.7E-06" assignment="Ka1"/>
-		<xray energy="110.421" intensity="2.1E-07" assignment="Kb3"/>
-		<xray energy="111.298" intensity="4E-07" assignment="Kb1"/>
-		<xray energy="111.964" intensity="1.47E-08" assignment="Kb5"/>
-		<xray energy="114.445" intensity="1.54E-07" assignment="Kb2"/>
-		<xray energy="114.844" intensity="5.5E-08" assignment="Kb4"/>
+		<xray energy="93.8420" intensity="3.66E-09" assignment="Ka3"/>
+		<xray energy="94.6531" intensity="1.05E-06" assignment="Ka2"/>
+		<xray energy="98.4336" intensity="1.7E-06" assignment="Ka1"/>
+		<xray energy="110.4182" intensity="2.0636E-07" assignment="Kb3"/>
+		<xray energy="111.2985" intensity="4.0328E-07" assignment="Kb1"/>
+		<xray energy="111.8718" intensity="7.0356E-09" assignment="Kb5II"/>
+		<xray energy="112.0481" intensity="8.0257E-09" assignment="Kb5I"/>
+		<xray energy="114.3292" intensity="5.2898E-08" assignment="Kb2a"/>
+		<xray energy="114.5562" intensity="1.078E-07" assignment="Kb2b"/>
+		<xray energy="114.8436" intensity="4.4322E-09" assignment="Kb4"/>
+		<xray energy="115.3897" intensity="3.7552E-08" assignment="KO23"/>
+		<xray energy="115.5815" intensity="6.3183E-09" assignment="KP23"/>
 		<!-- cascade-match: 3 SD gammas below detectable threshold T=1e-05/decay: 165.0 166.1 927.7; G4-listed-not-in-SD[keV]: 166.12(rI=100) 218.41(rI=100) 184.11(rI=11.8) 421.94(rI=12.7) 894.33(rI=100); -->
 		<levelFeed lvl="0" probability="0.6900837537" q="5867.15"/>
 		<levelFeed lvl="1" probability="0.3075916731" q="5819.577"/>
@@ -572940,6 +573135,7 @@
 		<xray energy="120.969" intensity="6.03E-05" assignment="Kb4"/>
 	</transition>
 	<transition branchRatio="1" child="U234" mode="a" parent="Pu238">
+		<!-- K x-rays (2026-10 review): energies Deslattes 2003 theory (xraylib for K-O/K-P); sub-line rates xraylib (K-L, K-M2,3, K-N2,3) and EADL2023 (weak lines); K-N2/K-N3 split and K-O2,3, K-P2,3 added within the unchanged K'b2 total.  Micro-cal: K-N energies follow theory, K-O at U 115.375(4), Th 109.442(5) keV. -->
 		<gamma energy="43.50" intensity="3.9200E-04" iccTotal="713" iccK="0" iccL1="9.23335" iccL2="271.296" iccL3="239.639" mult="4" fl="1" tl="0"/>
 		<gamma energy="62.7" intensity="1E-10" iccTotal="0.426" iccK="0" iccL1="0.118385" iccL2="0.100877" iccL3="0.10109" mult="2" fl="14" tl="10">
 			<coincidentGamma id="24" intensity="5.45590786522e-05" a2="-0.0535714" a4="-0"/>
@@ -573047,14 +573243,18 @@
 		<xray energy="20.487" intensity="0.0001" assignment="Lg2" l1intensity="0.0266"/>
 		<xray energy="20.715" intensity="9.4E-05" assignment="Lg3" l1intensity="0.0252"/>
 		<xray energy="20.844" intensity="0.002" assignment="Lg6" l1intensity="0.00145" l2intensity="0.0181"/>
-		<xray energy="93.844" intensity="2.62E-09" assignment="Ka3"/>
-		<xray energy="94.654" intensity="7.55E-07" assignment="Ka2"/>
-		<xray energy="98.434" intensity="1.22E-06" assignment="Ka1"/>
-		<xray energy="110.421" intensity="1.5E-07" assignment="Kb3"/>
-		<xray energy="111.298" intensity="2.85E-07" assignment="Kb1"/>
-		<xray energy="111.964" intensity="1.06E-08" assignment="Kb5"/>
-		<xray energy="114.445" intensity="1.1E-07" assignment="Kb2"/>
-		<xray energy="114.844" intensity="3.95E-08" assignment="Kb4"/>
+		<xray energy="93.8420" intensity="2.62E-09" assignment="Ka3"/>
+		<xray energy="94.6531" intensity="7.55E-07" assignment="Ka2"/>
+		<xray energy="98.4336" intensity="1.22E-06" assignment="Ka1"/>
+		<xray energy="110.4182" intensity="1.472E-07" assignment="Kb3"/>
+		<xray energy="111.2985" intensity="2.8766E-07" assignment="Kb1"/>
+		<xray energy="111.8718" intensity="5.0185E-09" assignment="Kb5II"/>
+		<xray energy="112.0481" intensity="5.7247E-09" assignment="Kb5I"/>
+		<xray energy="114.3292" intensity="3.7838E-08" assignment="Kb2a"/>
+		<xray energy="114.5562" intensity="7.711E-08" assignment="Kb2b"/>
+		<xray energy="114.8436" intensity="3.1704E-09" assignment="Kb4"/>
+		<xray energy="115.3897" intensity="2.6862E-08" assignment="KO23"/>
+		<xray energy="115.5815" intensity="4.5195E-09" assignment="KP23"/>
 		<!-- cascade-match: G4-listed-not-in-SD[keV]: 97.11(rI=5.6) 980.33(rI=63); -->
 		<levelFeed lvl="0" probability="0.7091092937" q="5593.27"/>
 		<levelFeed lvl="1" probability="0.2898097113" q="5549.772"/>
@@ -573073,6 +573273,7 @@
 	</transition>
 	<transition branchRatio="1.85E-09" mode="sf" parent="Pu238"/>
 	<transition branchRatio="0.999529886990047" child="U235m" mode="a" parent="Pu239">
+		<!-- K x-rays (2026-10 review): energies Deslattes 2003 theory (xraylib for K-O/K-P); sub-line rates xraylib (K-L, K-M2,3, K-N2,3) and EADL2023 (weak lines); K-N2/K-N3 split and K-O2,3, K-P2,3 added within the unchanged K'b2 total.  Micro-cal: K-N energies follow theory, K-O at U 115.375(4), Th 109.442(5) keV. -->
 		<gamma energy="30.04" intensity="2.17102062504071E-06" iccTotal="156.7" iccK="0" iccL1="104.911" iccL2="12.4216" iccL3="0.686659" mult="3" fl="5" tl="4"/>
 		<gamma energy="38.661" intensity="0.000105" iccTotal="298" iccK="0" iccL1="43.5676" iccL2="94.019" iccL3="81.3242" mult="304" delta="0.48" fl="4" tl="2"/>
 		<gamma energy="40.41" intensity="1.62E-06"/>
@@ -573245,18 +573446,23 @@
 		<xray energy="20.487" intensity="0.00019" assignment="Lg2" l1intensity="0.0266"/>
 		<xray energy="20.715" intensity="0.00018" assignment="Lg3" l1intensity="0.0252"/>
 		<xray energy="20.844" intensity="0.0008" assignment="Lg6" l1intensity="0.00145" l2intensity="0.0181"/>
-		<xray energy="93.844" intensity="4.305E-08" assignment="Ka3"/>
-		<xray energy="94.654" intensity="1.85E-05" assignment="Ka2"/>
-		<xray energy="98.434" intensity="2E-05" assignment="Ka1"/>
-		<xray energy="110.421" intensity="2.5E-06" assignment="Kb3"/>
-		<xray energy="111.298" intensity="4.7E-06" assignment="Kb1"/>
-		<xray energy="111.964" intensity="1.72E-07" assignment="Kb5"/>
-		<xray energy="114.445" intensity="1.8E-06" assignment="Kb2"/>
-		<xray energy="114.844" intensity="6.3E-07" assignment="Kb4"/>
+		<xray energy="93.8420" intensity="4.305E-08" assignment="Ka3"/>
+		<xray energy="94.6531" intensity="1.85E-05" assignment="Ka2"/>
+		<xray energy="98.4336" intensity="2E-05" assignment="Ka1"/>
+		<xray energy="110.4182" intensity="2.4352E-06" assignment="Kb3"/>
+		<xray energy="111.2985" intensity="4.7591E-06" assignment="Kb1"/>
+		<xray energy="111.8718" intensity="8.3026E-08" assignment="Kb5II"/>
+		<xray energy="112.0481" intensity="9.471E-08" assignment="Kb5I"/>
+		<xray energy="114.3292" intensity="6.1503E-07" assignment="Kb2a"/>
+		<xray energy="114.5562" intensity="1.2534E-06" assignment="Kb2b"/>
+		<xray energy="114.8436" intensity="5.1533E-08" assignment="Kb4"/>
+		<xray energy="115.3897" intensity="4.3661E-07" assignment="KO23"/>
+		<xray energy="115.5815" intensity="7.3461E-08" assignment="KP23"/>
 		<!-- cascade-match: SD-unmatched-above-threshold[keV]: 98.50(I=3e-05,edge-collision) 98.78(I=1.22e-05,edge-collision); 18 SD gammas below detectable threshold T=1e-05/decay: 40.4 68.7 68.7 89.4 89.6 110.6 111.1 112.0 193.1 350.8 538.8 608.9 650.5 686.0 688.1 699.6 713.0 742.7; G4-listed-not-in-SD[keV]: 0.08(rI=100) 12.96(rI=100) 68.69(rI=100) 129.30(rI=100) 68.63(rI=9) 98.66(rI=100) 42.06(rI=100) 67.45(rI=100) 89.63(rI=18.5) 119.66(rI=13) 125.25(rI=38.6) 171.36(rI=75.3) 67.56(rI=100) 125.36(rI=45) 143.66(rI=8.7) 179.28(rI=34) 225.38(rI=7.6) 78.66(rI=100) 146.11(rI=99) 187.23(rI=21) 245.03(rI=10) 332.85(rI=86.8) 320.93(rI=50.4) 367.03(rI=83.3) 189.39(rI=94.3) ...; -->
 		<!-- cascade-feed: omitted(multiple-same-mode-transitions). -->
 	</transition>
 	<transition branchRatio="0.000470113009952838" child="U235" mode="a" parent="Pu239">
+		<!-- K x-rays (2026-10 review): energies Deslattes 2003 theory (xraylib for K-O/K-P); sub-line rates xraylib (K-L, K-M2,3, K-N2,3) and EADL2023 (weak lines); K-N2/K-N3 split and K-O2,3, K-P2,3 added within the unchanged K'b2 total.  Micro-cal: K-N energies follow theory, K-O at U 115.375(4), Th 109.442(5) keV. -->
 		<gamma energy="14.22" intensity="5.5E-05"/>
 		<gamma energy="40.41" intensity="1.62E-06"/>
 		<gamma energy="41.93" intensity="1.46E-06" iccTotal="70" iccK="0" iccL1="36.687" iccL2="10.213" iccL3="5.4761" mult="304" delta="0.14" fl="9" tl="7"/>
@@ -573428,19 +573634,24 @@
 		<xray energy="20.487" intensity="0.00019" assignment="Lg2" l1intensity="0.0266"/>
 		<xray energy="20.715" intensity="0.00018" assignment="Lg3" l1intensity="0.0252"/>
 		<xray energy="20.844" intensity="0.0008" assignment="Lg6" l1intensity="0.00145" l2intensity="0.0181"/>
-		<xray energy="93.844" intensity="4.305E-08" assignment="Ka3"/>
-		<xray energy="94.654" intensity="1.85E-05" assignment="Ka2"/>
-		<xray energy="98.434" intensity="2E-05" assignment="Ka1"/>
-		<xray energy="110.421" intensity="2.5E-06" assignment="Kb3"/>
-		<xray energy="111.298" intensity="4.7E-06" assignment="Kb1"/>
-		<xray energy="111.964" intensity="1.72E-07" assignment="Kb5"/>
-		<xray energy="114.445" intensity="1.8E-06" assignment="Kb2"/>
-		<xray energy="114.844" intensity="6.3E-07" assignment="Kb4"/>
+		<xray energy="93.8420" intensity="4.305E-08" assignment="Ka3"/>
+		<xray energy="94.6531" intensity="1.85E-05" assignment="Ka2"/>
+		<xray energy="98.4336" intensity="2E-05" assignment="Ka1"/>
+		<xray energy="110.4182" intensity="2.4352E-06" assignment="Kb3"/>
+		<xray energy="111.2985" intensity="4.7591E-06" assignment="Kb1"/>
+		<xray energy="111.8718" intensity="8.3026E-08" assignment="Kb5II"/>
+		<xray energy="112.0481" intensity="9.471E-08" assignment="Kb5I"/>
+		<xray energy="114.3292" intensity="6.1503E-07" assignment="Kb2a"/>
+		<xray energy="114.5562" intensity="1.2534E-06" assignment="Kb2b"/>
+		<xray energy="114.8436" intensity="5.1533E-08" assignment="Kb4"/>
+		<xray energy="115.3897" intensity="4.3661E-07" assignment="KO23"/>
+		<xray energy="115.5815" intensity="7.3461E-08" assignment="KP23"/>
 		<!-- cascade-match: SD-unmatched-above-threshold[keV]: 103.06(I=0.00459,neartol); 28 SD gammas below detectable threshold T=0.000134/decay: 14.2 40.4 193.1 350.8 497.0 538.8 608.9 650.5 686.0 688.1 693.2 693.2 699.6 713.0 720.3 720.3 742.7 777.1 803.2 821.3 821.3 826.8 837.3 895.4 898.1 ...; G4-listed-not-in-SD[keV]: 0.08(rI=100) 12.96(rI=100) 30.03(rI=60.3) 68.69(rI=100) 103.83(rI=18.7) 77.60(rI=6.02) 116.27(rI=8.99) 67.45(rI=100) 119.66(rI=13) 125.36(rI=45) 143.66(rI=8.7) 187.23(rI=21) 89.96(rI=71) 160.13(rI=100) 341.52(rI=18.2) 380.18(rI=87.4) 393.14(rI=100) 189.39(rI=94.3) 310.87(rI=29.3) 375.04(rI=100) 413.71(rI=94) 99.41(rI=41) 274.29(rI=8) 323.47(rI=26.2) 344.53(rI=24) ...; -->
 		<!-- cascade-feed: omitted(multiple-same-mode-transitions). -->
 	</transition>
 	<transition branchRatio="3E-12" mode="sf" parent="Pu239"/>
 	<transition branchRatio="1" child="U236" mode="a" parent="Pu240">
+		<!-- K x-rays (2026-10 review): energies Deslattes 2003 theory (xraylib for K-O/K-P); sub-line rates xraylib (K-L, K-M2,3, K-N2,3) and EADL2023 (weak lines); K-N2/K-N3 split and K-O2,3, K-P2,3 added within the unchanged K'b2 total.  Micro-cal: K-N energies follow theory, K-O at U 115.375(4), Th 109.442(5) keV. -->
 		<gamma energy="45.244" id="0" intensity="0.00045" iccTotal="589" iccK="0" iccL1="7.69823" iccL2="224.998" iccL3="196.903" mult="4" fl="1" tl="0"/>
 		<gamma energy="104.23" id="1" intensity="7.08E-05" iccTotal="10.99" iccK="0" iccL1="0.240241" iccL2="4.65866" iccL3="3.10687" mult="4" fl="2" tl="1">
 			<coincidentGamma id="0" intensity="0.0016722408026755853" a2="0.102041" a4="0.00907029"/>
@@ -573496,14 +573707,18 @@
 		<xray energy="20.487" intensity="9.5E-05" assignment="Lg2" l1intensity="0.0266"/>
 		<xray energy="20.715" intensity="9E-05" assignment="Lg3" l1intensity="0.0252"/>
 		<xray energy="20.844" intensity="0.00188" assignment="Lg6" l1intensity="0.00145" l2intensity="0.0181"/>
-		<xray energy="93.844" intensity="8.8E-10" assignment="Ka3"/>
-		<xray energy="94.654" intensity="2.53E-07" assignment="Ka2"/>
-		<xray energy="98.434" intensity="4.1E-07" assignment="Ka1"/>
-		<xray energy="110.421" intensity="5.05E-08" assignment="Kb3"/>
-		<xray energy="111.298" intensity="9.6E-08" assignment="Kb1"/>
-		<xray energy="111.964" intensity="3.54E-09" assignment="Kb5"/>
-		<xray energy="114.445" intensity="3.7E-08" assignment="Kb2"/>
-		<xray energy="114.844" intensity="1.32E-08" assignment="Kb4"/>
+		<xray energy="93.8420" intensity="8.8E-10" assignment="Ka3"/>
+		<xray energy="94.6531" intensity="2.53E-07" assignment="Ka2"/>
+		<xray energy="98.4336" intensity="4.1E-07" assignment="Ka1"/>
+		<xray energy="110.4182" intensity="4.9563E-08" assignment="Kb3"/>
+		<xray energy="111.2985" intensity="9.686E-08" assignment="Kb1"/>
+		<xray energy="111.8718" intensity="1.6898E-09" assignment="Kb5II"/>
+		<xray energy="112.0481" intensity="1.9276E-09" assignment="Kb5I"/>
+		<xray energy="114.3292" intensity="1.2706E-08" assignment="Kb2a"/>
+		<xray energy="114.5562" intensity="2.5892E-08" assignment="Kb2b"/>
+		<xray energy="114.8436" intensity="1.0646E-09" assignment="Kb4"/>
+		<xray energy="115.3897" intensity="9.0198E-09" assignment="KO23"/>
+		<xray energy="115.5815" intensity="1.5176E-09" assignment="KP23"/>
 		<!-- cascade-match: 6 SD gammas below detectable threshold T=1e-05/decay: 958.0 959.9 966.9 958.0 959.9 966.9; G4-listed-not-in-SD[keV]: 56.62(rI=5) 594.70(rI=100); -->
 		<levelFeed lvl="0" probability="0.7276683363" q="5255.82"/>
 		<levelFeed lvl="1" probability="0.2714293794" q="5210.577"/>
@@ -573523,6 +573738,7 @@
 		<levelFeed lvl="0" probability="1" q="20.78"/>
 	</transition>
 	<transition branchRatio="2.45E-05" child="U237" mode="a" parent="Pu241">
+		<!-- K x-rays (2026-10 review): energies Deslattes 2003 theory (xraylib for K-O/K-P); sub-line rates xraylib (K-L, K-M2,3, K-N2,3) and EADL2023 (weak lines); K-N2/K-N3 split and K-O2,3, K-P2,3 added within the unchanged K'b2 total.  Micro-cal: K-N energies follow theory, K-O at U 115.375(4), Th 109.442(5) keV. -->
 		<gamma energy="11.39" intensity="0" iccTotal="689.4" iccK="0" iccL1="0" iccL2="0" iccL3="0" mult="3" fl="1" tl="0"/>
 		<gamma energy="26.70" intensity="0.039" iccTotal="224.1" iccK="0" iccL1="149.9" iccL2="17.751" iccL3="0.993211" mult="3" fl="3" tl="2">
 			<coincidentGamma id="2" intensity="0.0012575452716297787" a2="0.05" a4="0"/>
@@ -573590,14 +573806,18 @@
 		<xray energy="20.487" intensity="1.7E-07" assignment="Lg2" l1intensity="0.0266"/>
 		<xray energy="20.715" intensity="1.6E-07" assignment="Lg3" l1intensity="0.0252"/>
 		<xray energy="20.844" intensity="6E-08" assignment="Lg6" l1intensity="0.00145" l2intensity="0.0181"/>
-		<xray energy="93.844" intensity="6E-09" assignment="Ka3"/>
-		<xray energy="94.654" intensity="1.7E-06" assignment="Ka2"/>
-		<xray energy="98.434" intensity="3E-06" assignment="Ka1"/>
-		<xray energy="110.421" intensity="3E-07" assignment="Kb3"/>
-		<xray energy="111.298" intensity="7E-07" assignment="Kb1"/>
-		<xray energy="111.964" intensity="2.4E-08" assignment="Kb5"/>
-		<xray energy="114.445" intensity="2.5E-07" assignment="Kb2"/>
-		<xray energy="114.844" intensity="9E-08" assignment="Kb4"/>
+		<xray energy="93.8420" intensity="6E-09" assignment="Ka3"/>
+		<xray energy="94.6531" intensity="1.7E-06" assignment="Ka2"/>
+		<xray energy="98.4336" intensity="3E-06" assignment="Ka1"/>
+		<xray energy="110.4182" intensity="3.3826E-07" assignment="Kb3"/>
+		<xray energy="111.2985" intensity="6.6105E-07" assignment="Kb1"/>
+		<xray energy="111.8718" intensity="1.1533E-08" assignment="Kb5II"/>
+		<xray energy="112.0481" intensity="1.3156E-08" assignment="Kb5I"/>
+		<xray energy="114.3292" intensity="8.6054E-08" assignment="Kb2a"/>
+		<xray energy="114.5562" intensity="1.7537E-07" assignment="Kb2b"/>
+		<xray energy="114.8436" intensity="7.2103E-09" assignment="Kb4"/>
+		<xray energy="115.3897" intensity="6.109E-08" assignment="KO23"/>
+		<xray energy="115.5815" intensity="1.0279E-08" assignment="KP23"/>
 		<!-- cascade-match: G4-listed-not-in-SD[keV]: 121.31(rI=16.5) 537.69(rI=27) 614.79(rI=32) 686.26(rI=100) 846.94(rI=100); -->
 		<levelFeed lvl="0" probability="0.00349611235" q="5140.1"/>
 		<levelFeed lvl="1" probability="0.01018883121" q="5128.707"/>
@@ -573613,6 +573833,7 @@
 	</transition>
 	<transition branchRatio="2.4E-16" mode="sf" parent="Pu241"/>
 	<transition branchRatio="1" child="U238" mode="a" parent="Pu242">
+		<!-- K x-rays (2026-10 review): energies Deslattes 2003 theory (xraylib for K-O/K-P); sub-line rates xraylib (K-L, K-M2,3, K-N2,3) and EADL2023 (weak lines); K-N2/K-N3 split and K-O2,3, K-P2,3 added within the unchanged K'b2 total.  Micro-cal: K-N energies follow theory, K-O at U 115.375(4), Th 109.442(5) keV. -->
 		<gamma energy="44.915" id="0" intensity="0.00036" iccTotal="609" iccK="0" iccL1="7.94745" iccL2="232.455" iccL3="203.832" mult="4" fl="1" tl="0"/>
 		<gamma energy="103.5" id="1" intensity="7.8e-05" iccTotal="11.6" iccK="0" iccL1="0.251256" iccL2="4.9126" iccL3="3.28628" mult="4" fl="2" tl="1">
 			<coincidentGamma id="0" intensity="0.0016155088852988692" a2="0.102041" a4="0.00907029"/>
@@ -573639,14 +573860,18 @@
 		<xray energy="20.487" intensity="8.1E-05" assignment="Lg2" l1intensity="0.0266"/>
 		<xray energy="20.715" intensity="7.7E-05" assignment="Lg3" l1intensity="0.0252"/>
 		<xray energy="20.844" intensity="0.00155" assignment="Lg6" l1intensity="0.00145" l2intensity="0.0181"/>
-		<xray energy="93.844" intensity="1.2E-08" assignment="Ka3"/>
-		<xray energy="94.654" intensity="3E-06" assignment="Ka2"/>
-		<xray energy="98.434" intensity="5E-06" assignment="Ka1"/>
-		<xray energy="110.421" intensity="7E-07" assignment="Kb3"/>
-		<xray energy="111.298" intensity="1.3E-06" assignment="Kb1"/>
-		<xray energy="111.964" intensity="5E-08" assignment="Kb5"/>
-		<xray energy="114.445" intensity="5E-07" assignment="Kb2"/>
-		<xray energy="114.844" intensity="1.8E-07" assignment="Kb4"/>
+		<xray energy="93.8420" intensity="1.2E-08" assignment="Ka3"/>
+		<xray energy="94.6531" intensity="3E-06" assignment="Ka2"/>
+		<xray energy="98.4336" intensity="5E-06" assignment="Ka1"/>
+		<xray energy="110.4182" intensity="6.7718E-07" assignment="Kb3"/>
+		<xray energy="111.2985" intensity="1.3234E-06" assignment="Kb1"/>
+		<xray energy="111.8718" intensity="2.3088E-08" assignment="Kb5II"/>
+		<xray energy="112.0481" intensity="2.6337E-08" assignment="Kb5I"/>
+		<xray energy="114.3292" intensity="1.7211E-07" assignment="Kb2a"/>
+		<xray energy="114.5562" intensity="3.5073E-07" assignment="Kb2b"/>
+		<xray energy="114.8436" intensity="1.4421E-08" assignment="Kb4"/>
+		<xray energy="115.3897" intensity="1.2218E-07" assignment="KO23"/>
+		<xray energy="115.5815" intensity="2.0557E-08" assignment="KP23"/>
 		<!-- cascade-feed: omitted(record-sum-closure). -->
 	</transition>
 	<transition branchRatio="5.54E-06" mode="sf" parent="Pu242"/>
@@ -583015,11 +583240,18 @@
 		<isotope abundance="0.241" symbol="Pb206"/>
 		<isotope abundance="0.221" symbol="Pb207"/>
 		<isotope abundance="0.524" symbol="Pb208"/>
-		<xray energy="72.8" relintensity="0.59341"/>
-		<xray energy="75" relintensity="1"/>
-		<xray energy="84.4" relintensity="0.11593"/>
-		<xray energy="84.9" relintensity="0.22198"/>
-		<xray energy="87.3" relintensity="0.1022"/>
+		<xray energy="72.1450" relintensity="0.0009246"/>
+		<xray energy="72.8066" relintensity="0.59493"/>
+		<xray energy="74.9702" relintensity="1"/>
+		<xray energy="84.4518" relintensity="0.11477"/>
+		<xray energy="84.9403" relintensity="0.22254"/>
+		<xray energy="85.4197" relintensity="0.0030366"/>
+		<xray energy="85.5214" relintensity="0.0036751"/>
+		<xray energy="87.2441" relintensity="0.028175"/>
+		<xray energy="87.3620" relintensity="0.055842"/>
+		<xray energy="87.5831" relintensity="0.0017828"/>
+		<xray energy="87.9149" relintensity="0.018372"/>
+		<xray energy="88.0038" relintensity="0.00035151"/>
 	</element>
 	<element atomicNumber="83" name="bismuth" symbol="Bi">
 		<isotope abundance="1" symbol="Bi209"/>
@@ -583073,32 +583305,50 @@
 	</element>
 	<element atomicNumber="90" name="thorium" symbol="Th">
 		<isotope abundance="1" symbol="Th232"/>
-		<xray energy="90" relintensity="0.61453"/>
-		<xray energy="93.3" relintensity="1"/>
-		<xray energy="104.8" relintensity="0.11564"/>
-		<xray energy="105.6" relintensity="0.22067"/>
-		<xray energy="108.6" relintensity="0.12011"/>
+		<xray energy="89.1766" relintensity="0.0018483"/>
+		<xray energy="89.9566" relintensity="0.61825"/>
+		<xray energy="93.3479" relintensity="1"/>
+		<xray energy="104.8172" relintensity="0.11774"/>
+		<xray energy="105.6019" relintensity="0.22959"/>
+		<xray energy="106.1564" relintensity="0.0038254"/>
+		<xray energy="106.3149" relintensity="0.0044189"/>
+		<xray energy="108.4812" relintensity="0.030012"/>
+		<xray energy="108.6809" relintensity="0.060691"/>
+		<xray energy="108.9546" relintensity="0.002386"/>
+		<xray energy="109.4535" relintensity="0.020803"/>
+		<xray energy="109.6305" relintensity="0.0034144"/>
 	</element>
 	<element atomicNumber="91" name="protactinium" symbol="Pa">
 		<isotope abundance="1" symbol="Pa231"/>
-		<xray energy="92.3" relintensity="0.61798"/>
-		<xray energy="95.9" relintensity="1"/>
-		<xray energy="107.6" relintensity="0.11629"/>
-		<xray energy="108.4" relintensity="0.22079"/>
-		<xray energy="111.5" relintensity="0.12135"/>
+		<xray energy="91.4880" relintensity="0.0020025"/>
+		<xray energy="92.2835" relintensity="0.62167"/>
+		<xray energy="95.8648" relintensity="1"/>
+		<xray energy="107.5912" relintensity="0.11805"/>
+		<xray energy="108.4223" relintensity="0.23047"/>
+		<xray energy="108.9862" relintensity="0.0039296"/>
+		<xray energy="109.1535" relintensity="0.0045116"/>
+		<xray energy="111.3876" relintensity="0.030202"/>
+		<xray energy="111.6005" relintensity="0.061323"/>
+		<xray energy="111.8810" relintensity="0.0024655"/>
+		<xray energy="112.3915" relintensity="0.021182"/>
+		<xray energy="112.5755" relintensity="0.0035319"/>
 	</element>
 	<element atomicNumber="92" name="uranium" symbol="U">
 		<isotope abundance="5.5E-05" symbol="U234"/>
 		<isotope abundance="0.0072" symbol="U235"/>
 		<isotope abundance="0.992745" symbol="U238"/>
-		<xray energy="93.844" relintensity="0.00214"/>
-		<xray energy="94.654" relintensity="0.61765"/>
-		<xray energy="98.434" relintensity="1"/>
-		<xray energy="110.421" relintensity="0.12294"/>
-		<xray energy="111.298" relintensity="0.23294"/>
-		<xray energy="111.964" relintensity="0.00859"/>
-		<xray energy="114.445" relintensity="0.09"/>
-		<xray energy="114.844" relintensity="0.03224"/>
+		<xray energy="93.8420" relintensity="0.0021664"/>
+		<xray energy="94.6531" relintensity="0.6248"/>
+		<xray energy="98.4336" relintensity="1"/>
+		<xray energy="110.4182" relintensity="0.11834"/>
+		<xray energy="111.2985" relintensity="0.23127"/>
+		<xray energy="111.8718" relintensity="0.0040347"/>
+		<xray energy="112.0481" relintensity="0.0046025"/>
+		<xray energy="114.3292" relintensity="0.030386"/>
+		<xray energy="114.5562" relintensity="0.061923"/>
+		<xray energy="114.8436" relintensity="0.002546"/>
+		<xray energy="115.3897" relintensity="0.021571"/>
+		<xray energy="115.5815" relintensity="0.0036294"/>
 	</element>
 	<element atomicNumber="93" name="neptunium" symbol="Np">
 		<xray energy="97.1" relintensity="0.61798"/>
