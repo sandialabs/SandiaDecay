@@ -993,6 +993,7 @@ int main(int argc, char** argv) {
       }
 
       bool transition_th234_normalized = false;
+      bool th234_data_reviewed = false;
       if (std::string(pa->value()) == "Th234" &&
           std::string(ca->value()) == "Pa234m" && std::string(mode) == "b-" &&
           hbr && std::fabs(branch_ratio - 1.0) <= 1.0e-12) {
@@ -1011,11 +1012,22 @@ int main(int argc, char** argv) {
             0.0, 0.000132, 0.0485};
         constexpr std::size_t n_expected =
             sizeof(energies) / sizeof(energies[0]);
+        // The 2026-10-05 data review then raised 92.38, 92.80 and 112.8 keV by
+        // x1.16(4) from measured spectra of certified U3O8 standards (the
+        // evaluations take these from 1978Ch06 relative intensities; see the
+        // transition's data-review comment); the other ten keep the 25/33 value.
+        const auto reviewed = [&](std::size_t i) -> double {
+          if (energies[i] == 92.38) return 0.02471;
+          if (energies[i] == 92.80) return 0.02436;
+          if (energies[i] == 112.8) return 0.002436;
+          return old_intensities[i] * 25.0 / 33.0;
+        };
         if (ng != n_expected)
           throw std::runtime_error(
               "Reviewed Th234 gamma normalization saw unexpected gamma count");
         bool all_old = true;
         bool all_corrected = true;
+        bool all_reviewed = true;
         for (std::size_t i = 0; i < n_expected; ++i) {
           if (std::fabs(gs[i].energy - energies[i]) > 1.0e-9)
             throw std::runtime_error(
@@ -1026,11 +1038,14 @@ int main(int argc, char** argv) {
                 std::fabs(gs[i].intensity - old_intensities[i]) <= 1.0e-12;
             all_corrected = all_corrected &&
                 std::fabs(gs[i].intensity - corrected) <= 1.0e-10;
+            all_reviewed = all_reviewed &&
+                std::fabs(gs[i].intensity - reviewed(i)) <= 1.0e-10;
           }
         }
-        if (!all_old && !all_corrected)
+        if (!all_old && !all_corrected && !all_reviewed)
           throw std::runtime_error(
               "Reviewed Th234 gamma normalization saw mixed or unknown intensity vector");
+        th234_data_reviewed = all_reviewed;
         if (all_old) {
           for (std::size_t i = 0; i < n_expected; ++i) {
             const double corrected = old_intensities[i] * 25.0 / 33.0;
@@ -1184,10 +1199,13 @@ int main(int argc, char** argv) {
       }
       if (transition_th234_normalized) {
         const std::string txt =
-            " intensity-fix: Th234->Pa234m 13-gamma vector scaled by 25/33; "
+            std::string(" intensity-fix: Th234->Pa234m 13-gamma vector scaled by 25/33; "
             "NNDC ENSDF NDS 207 (2026), evaluated through Dec-2023, "
             "NR 0.0050(4) replaces 0.0066; gamma energies, beta intensities and "
-            "coincident conditional intensities unchanged. ";
+            "coincident conditional intensities unchanged")
+            + (th234_data_reviewed ? "; 92.38, 92.80 and 112.8 keV then x1.16 by the "
+                                     "2026-10-05 data review (see that comment). "
+                                   : ". ");
         tr->append_node(doc.allocate_node(rapidxml::node_comment, nullptr,
                                           doc.allocate_string(txt.c_str())));
       }

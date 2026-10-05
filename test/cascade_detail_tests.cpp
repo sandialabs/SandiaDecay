@@ -376,13 +376,21 @@ void check_database_provenance(const std::string& filename) {
     const double old_i[] = {0.0002112, 0.0, 0.000792, 0.0001914, 0.028116,
                             0.027715, 0.00004158, 0.0, 0.0001056, 0.002772,
                             0.0, 0.000132, 0.0485};
+    // 92.38, 92.80 and 112.8 keV were then raised x1.16 by the 2026-10-05 data review (measured spectra of certified
+    //  U3O8 standards); the rest keep the 25/33 (ENSDF NR) correction.
+    const auto expected_i = [&](std::size_t i) {
+      if (energies[i] == 92.38) return 0.02471;
+      if (energies[i] == 92.80) return 0.02436;
+      if (energies[i] == 112.8) return 0.002436;
+      return old_i[i] * 25.0 / 33.0;
+    };
     std::size_t gamma_index = 0;
     std::vector<double> beta_intensities;
     for (const SandiaDecay::RadParticle& particle : th234->products) {
       if (particle.type == SandiaDecay::GammaParticle) {
         check(gamma_index < 13 &&
                   std::fabs(particle.energy - energies[gamma_index]) < 0.001 &&
-                  std::fabs(particle.intensity - old_i[gamma_index] * 25.0 / 33.0) < 2e-8,
+                  std::fabs(particle.intensity - expected_i(gamma_index)) < 2e-8,
               filename + " retains exact corrected Th234 gamma vector entry " +
                   std::to_string(gamma_index));
         ++gamma_index;

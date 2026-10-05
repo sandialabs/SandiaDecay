@@ -186,6 +186,13 @@ int main(int argc, char** argv) {
     check(th && near(xray(th, 95.8, 95.9), 1.4e-4, 1e-2) && xray(th, 92.25, 92.32) < xray(th, 95.8, 95.9),
           "Th234 Pa Ka1 1.4e-4 and Ka2 < Ka1");
     check(near(xray(pam, 98.4, 98.5), 1.087e-4, 1e-2), "Pa234m U Ka1 1.087e-4 (was 21x)");
+
+    // --- Th234 low-energy gammas: 92.38, 92.80 and 112.8 keV x1.16 over ENSDF (2026-10-05 review of certified U3O8
+    //     standards on micro-calorimeter, planar and coax HPGe); 63.29 keV keeps the ENSDF-normalized value ---
+    check(near(sum_intensity(gammas_at(th, 92.38)), 0.02471, 1e-6), "Th234 92.38 keV 2.471 % (ENSDF 2.13 x1.16)");
+    check(near(sum_intensity(gammas_at(th, 92.80)), 0.02436, 1e-6), "Th234 92.80 keV 2.436 % (ENSDF 2.10 x1.16)");
+    check(near(sum_intensity(gammas_at(th, 112.8)), 0.002436, 1e-6), "Th234 112.8 keV 0.2436 % (ENSDF 0.210 x1.16)");
+    check(near(sum_intensity(gammas_at(th, 63.29)), 0.0485 * 25.0 / 33.0, 1e-6), "Th234 63.29 keV unchanged (3.674 %)");
     check(near(xray(it, 5.0, 25.0), 0.3377, 1e-2), "Pa234m IT Pa L x-rays 0.338 per IT");
 
     // --- Coincidences (P(partner | gamma), following-direction) ---
