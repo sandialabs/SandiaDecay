@@ -1066,28 +1066,44 @@ int main(int argc, char** argv) {
             0.0002112, 0.0, 0.000792, 0.0001914, 0.028116,
             0.027715, 0.00004158, 0.0, 0.0001056, 0.002772,
             0.0, 0.000132, 0.0485};
+        // The 2026-10-05 data review moved the 92.38/92.80 keV doublet to
+        // 92.362/92.787 keV (micro-calorimeter against the Th Ka1 / U Ka2
+        // x-rays); the identity check accepts either complete energy vector.
+        constexpr double reviewed_energies[] = {
+            62.86, 73.92, 83.3, 87.02, 92.362, 92.787, 103.35,
+            103.71, 108.0, 112.8, 132.9, 184.8, 63.29};
         constexpr std::size_t n_expected =
             sizeof(energies) / sizeof(energies[0]);
+        static_assert(sizeof(reviewed_energies) == sizeof(energies),
+                      "Th234 reviewed energy vector must match the original");
         // The 2026-10-05 data review then raised 92.38, 92.80 and 112.8 keV by
         // x1.16(4) from measured spectra of certified U3O8 standards (the
         // evaluations take these from 1978Ch06 relative intensities; see the
         // transition's data-review comment); the other ten keep the 25/33 value.
         const auto reviewed = [&](std::size_t i) -> double {
-          if (energies[i] == 92.38) return 0.02471;
-          if (energies[i] == 92.80) return 0.02436;
-          if (energies[i] == 112.8) return 0.002436;
+          if (i == 4) return 0.02471;    // 92.38 (92.362) keV
+          if (i == 5) return 0.02436;    // 92.80 (92.787) keV
+          if (i == 9) return 0.002436;   // 112.8 keV
           return old_intensities[i] * 25.0 / 33.0;
         };
         if (ng != n_expected)
           throw std::runtime_error(
               "Reviewed Th234 gamma normalization saw unexpected gamma count");
+        bool old_energies = true;
+        bool new_energies = true;
+        for (std::size_t i = 0; i < n_expected; ++i) {
+          old_energies = old_energies &&
+              std::fabs(gs[i].energy - energies[i]) <= 1.0e-9;
+          new_energies = new_energies &&
+              std::fabs(gs[i].energy - reviewed_energies[i]) <= 1.0e-9;
+        }
+        if (!old_energies && !new_energies)
+          throw std::runtime_error(
+              "Reviewed Th234 gamma normalization saw unexpected energy vector");
         bool all_old = true;
         bool all_corrected = true;
         bool all_reviewed = true;
         for (std::size_t i = 0; i < n_expected; ++i) {
-          if (std::fabs(gs[i].energy - energies[i]) > 1.0e-9)
-            throw std::runtime_error(
-                "Reviewed Th234 gamma normalization saw unexpected energy vector");
           const double corrected = old_intensities[i] * 25.0 / 33.0;
           if (old_intensities[i] != 0.0) {
             all_old = all_old &&

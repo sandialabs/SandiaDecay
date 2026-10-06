@@ -371,7 +371,9 @@ void check_database_provenance(const std::string& filename) {
       db, "Th234", "Pa234m", SandiaDecay::BetaDecay);
   check(th234 != nullptr, filename + " contains Th234->Pa234m beta branch");
   if (th234) {
-    const double energies[] = {62.86, 73.92, 83.3, 87.02, 92.38, 92.80,
+    // 92.38/92.80 keV moved to 92.362/92.787 keV by the 2026-10-05 data review (micro-calorimeter against the
+    //  Th Ka1 / U Ka2 x-rays)
+    const double energies[] = {62.86, 73.92, 83.3, 87.02, 92.362, 92.787,
                                103.35, 103.71, 108.0, 112.8, 132.9, 184.8, 63.29};
     const double old_i[] = {0.0002112, 0.0, 0.000792, 0.0001914, 0.028116,
                             0.027715, 0.00004158, 0.0, 0.0001056, 0.002772,
@@ -379,8 +381,8 @@ void check_database_provenance(const std::string& filename) {
     // 92.38, 92.80 and 112.8 keV were then raised x1.16 by the 2026-10-05 data review (measured spectra of certified
     //  U3O8 standards); the rest keep the 25/33 (ENSDF NR) correction.
     const auto expected_i = [&](std::size_t i) {
-      if (energies[i] == 92.38) return 0.02471;
-      if (energies[i] == 92.80) return 0.02436;
+      if (energies[i] == 92.362) return 0.02471;
+      if (energies[i] == 92.787) return 0.02436;
       if (energies[i] == 112.8) return 0.002436;
       return old_i[i] * 25.0 / 33.0;
     };

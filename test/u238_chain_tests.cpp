@@ -189,8 +189,15 @@ int main(int argc, char** argv) {
 
     // --- Th234 low-energy gammas: 92.38, 92.80 and 112.8 keV x1.16 over ENSDF (2026-10-05 review of certified U3O8
     //     standards on micro-calorimeter, planar and coax HPGe); 63.29 keV keeps the ENSDF-normalized value ---
-    check(near(sum_intensity(gammas_at(th, 92.38)), 0.02471, 1e-6), "Th234 92.38 keV 2.471 % (ENSDF 2.13 x1.16)");
-    check(near(sum_intensity(gammas_at(th, 92.80)), 0.02436, 1e-6), "Th234 92.80 keV 2.436 % (ENSDF 2.10 x1.16)");
+    check(near(sum_intensity(gammas_at(th, 92.362)), 0.02471, 1e-6), "Th234 92.362 keV 2.471 % (ENSDF 2.13 x1.16)");
+    check(near(sum_intensity(gammas_at(th, 92.787)), 0.02436, 1e-6), "Th234 92.787 keV 2.436 % (ENSDF 2.10 x1.16)");
+    // --- Th234 doublet energies: 92.362 / 92.787 keV (2026-10-05 micro-calorimeter review against the Th Ka1 / U Ka2
+    //     x-rays; ENSDF NDS 2026 92.367(5) / 92.792(5), DDEP 92.38 / 92.80) ---
+    {
+      const auto d1 = gammas_at(th, 92.362), d2 = gammas_at(th, 92.787);
+      check(d1.size() == 1 && std::fabs(d1[0]->energy - 92.362) < 1e-4, "Th234 doublet low line at 92.362 keV (was 92.38)");
+      check(d2.size() == 1 && std::fabs(d2[0]->energy - 92.787) < 1e-4, "Th234 doublet high line at 92.787 keV (was 92.80)");
+    }
     check(near(sum_intensity(gammas_at(th, 112.8)), 0.002436, 1e-6), "Th234 112.8 keV 0.2436 % (ENSDF 0.210 x1.16)");
     check(near(sum_intensity(gammas_at(th, 63.29)), 0.0485 * 25.0 / 33.0, 1e-6), "Th234 63.29 keV unchanged (3.674 %)");
     check(near(xray(it, 5.0, 25.0), 0.3377, 1e-2), "Pa234m IT Pa L x-rays 0.338 per IT");

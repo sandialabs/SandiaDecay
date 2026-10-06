@@ -552406,6 +552406,7 @@
 		<levelFeed lvl="61" probability="9.831520428E-06" q="103.26"/>
 	</transition>
 	<transition branchRatio="1" child="Pa234m" mode="b-" parent="Th234">
+		<!-- data-review 2026-10-05: 92.38 -> 92.362(5) keV and 92.80 -> 92.787(5) keV.  A LANL micro-calorimeter (8 certified U3O8 standards) places the doublet 5-6 eV below ENSDF NDS 2026 (92.367(5)/92.792(5)) and 13-18 eV below DDEP, measured against the Th Ka1 and U Ka2 x-rays; its spacing, 0.4255(11) keV, equals ENSDF's.  In IDB planar HPGe x-ray-region fits the SandiaDecay energies left a +5 % / -1.5 % residual on either side of the doublet, and the chi2 minimum of an energy scan is at ENSDF -5.4 eV.  Intensities unchanged. -->
 		<!-- data-review 2026-10-05: 92.38, 92.80 and 112.8 keV raised x1.16(4) (2.13->2.471, 2.0996->2.436, 0.210->0.2436 %); 63.29 keV unchanged.  Evaluations (ENSDF NDS 207 2026 and NDS 108 2007; DDEP 2009) take these lines' relative intensities from a single measurement (1978Ch06) normalised to 63.3 keV; 1992Li05 measured the 92.38+92.80 sum directly as 5.57(28) %, which ENSDF notes as unresolved.  Certified U3O8 standards (NBS SRM-969 / EC NRM-171, NBL) on a LANL micro-calorimeter, IAEA IDB planar HPGe and the JRC Detective (2-15 cm, so not cascade summing) all give the doublet ~16 % above ENSDF relative to the U-235 gammas and to 63.29 keV.  History of this file: 2.8116/2.7715/0.2772/4.85 % (2019 import) -> x25/33 (2026-08) -> this change. -->
 		<!-- K x-rays (2026-10 review): energies Deslattes 2003 theory (xraylib for K-O/K-P); sub-line rates xraylib (K-L, K-M2,3, K-N2,3) and EADL2023 (weak lines); K-N2/K-N3 split and K-O2,3, K-P2,3 added within the unchanged K'b2 total.  Micro-cal: K-N energies follow theory, K-O at U 115.375(4), Th 109.442(5) keV. -->
 		<!-- data-review 2026-10: Pa K x-rays reset to IAEA/ENSDF Ka1 1.4e-4 with the Np-237 Pa K pattern (were 23x, with Ka2 > Ka1, which added 23% to the 92.38 keV line); Pa L x-rays scaled to 0.072 (IAEA; L-vacancy budget 0.066). 73.92 keV stays 0 here: it is the Pa234m IT gamma. ENSDF NDS 207 (2026) 20.02, 29.49 and 57.75 keV not added (not testable in available spectra). -->
@@ -552413,8 +552414,8 @@
 		<gamma energy="73.92" intensity="0" iccTotal="10.6" iccK="0" iccL1="6.71192" iccL2="1.04113" iccL3="0.232246" mult="304" delta="0.11" fl="1" tl="0"/>
 		<gamma energy="83.3" intensity="0.0006" iccTotal="0.196" iccK="0" iccL1="0.0652092" iccL2="0.0426692" iccL3="0.0399056" mult="2" fl="6" tl="3"/>
 		<gamma energy="87.02" intensity="0.000145"/>
-		<gamma energy="92.38" intensity="0.02471" iccTotal="5.27" iccK="0" iccL1="3.53406" iccL2="0.422127" iccL3="0.0217071" mult="3" fl="4" tl="2"/>
-		<gamma energy="92.80" intensity="0.02436" iccTotal="0.1472" iccK="0" iccL1="0.0516525" iccL2="0.0311181" iccL3="0.0282477" mult="2" fl="5" tl="2"/>
+		<gamma energy="92.362" intensity="0.02471" iccTotal="5.27" iccK="0" iccL1="3.53406" iccL2="0.422127" iccL3="0.0217071" mult="3" fl="4" tl="2"/>
+		<gamma energy="92.787" intensity="0.02436" iccTotal="0.1472" iccK="0" iccL1="0.0516525" iccL2="0.0311181" iccL3="0.0282477" mult="2" fl="5" tl="2"/>
 		<gamma energy="103.35" intensity="3.15E-05"/>
 		<gamma energy="103.71" intensity="0"/>
 		<gamma energy="108" intensity="8E-05"/>
