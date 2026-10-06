@@ -278,6 +278,57 @@ const GammaIntensityOverride* gamma_intensity_override(
   return nullptr;
 }
 
+// Reviewed unplaced photon lines: measured photons that no evaluation places in
+// a level scheme. The structure matcher would map such a record onto the
+// nearest GEANT4 edge, and when that edge already belongs to a placed line it
+// rejects both as a collision - stripping the placed line's level, ICC and
+// angular data. A record listed here is kept out of the matcher and emitted as
+// an isolated, isotropic photon with no level, ICC or coincidence data. Every
+// field is an identity gate, so an edited energy or intensity falls back to the
+// ordinary matcher instead of silently exempting a different line.
+struct ReviewedUnplacedGamma {
+  const char* parent;
+  const char* child;
+  const char* mode;
+  double branch_ratio;
+  double sandia_energy_keV;
+  double intensity;
+};
+
+constexpr ReviewedUnplacedGamma kReviewedUnplacedGammas[] = {
+  // 183.02(1) keV, 6.4E-04 per decay (2026-10 U low-energy data review).  LANL
+  // micro-calorimeter spectra of 8 certified U3O8 standards (1.9-93 % U-235)
+  // resolve the evaluated U-235 "182.504 keV" line into 182.51(1) keV and this
+  // line at a constant 0.181(4) of it; IAEA IDB planar HPGe sums give
+  // 0.187(2) from the unresolved peak's shape.  ENSDF/DDEP's 0.411(15)/0.39(5) %
+  // is the Ge-unresolved sum (Ge energies 182.60-182.72 keV are the pair's
+  // centroid).  It is not pile-up, a Sn escape or a detector satellite.  No
+  // level pair 183.02 keV apart exists in the Th-231 or Pa-231 adopted
+  // schemes, and U-235 and Th-231 are always in equilibrium in these samples,
+  // so the parent is not determined; it is filed under Th-231 beta- decay.
+  // GEANT4's nearest edges are U-235 182.52 and Th-231 183.489 keV, each
+  // already owned by a placed line.
+  {"Th231", "Pa231", "b-", 1.0, 183.02, 6.4e-4},
+};
+
+const ReviewedUnplacedGamma* reviewed_unplaced_gamma(
+    const char* parent, const char* child, const char* mode, double branch_ratio,
+    double sandia_energy_keV, double intensity) {
+  constexpr double kSandiaEnergyToleranceKeV = 0.005;
+  constexpr double kIntensityTolerance = 1.0e-12;
+  constexpr double kBranchTolerance = 1.0e-12;
+  for (const ReviewedUnplacedGamma& item : kReviewedUnplacedGammas) {
+    if (std::string(parent) == item.parent && std::string(child) == item.child &&
+        std::string(mode) == item.mode &&
+        std::fabs(branch_ratio - item.branch_ratio) <= kBranchTolerance &&
+        std::fabs(sandia_energy_keV - item.sandia_energy_keV) <=
+            kSandiaEnergyToleranceKeV &&
+        std::fabs(intensity - item.intensity) <= kIntensityTolerance)
+      return &item;
+  }
+  return nullptr;
+}
+
 std::string env_or(const char* var, const std::string& fallback) {
   const char* v = std::getenv(var);
   return (v && v[0]) ? std::string(v) : fallback;
@@ -521,6 +572,10 @@ const char* const kHeaderDoc =
 "                   the same GEANT4 edge. All owners were rejected: one G4 edge\n"
 "                   is not evidence that either Sandia record is a duplicate.\n"
 "         annih511  the 511 keV annihilation line (not a nuclear transition).\n"
+"         reviewed-unplaced\n"
+"                   a measured line with no level placement in any evaluation,\n"
+"                   listed in the reviewed table and kept out of matching so it\n"
+"                   cannot collide with a placed line on a nearby GEANT4 edge.\n"
 "\n"
 "   N SD gammas below detectable threshold T=t/decay: E E ...\n"
 "       Unmatched gammas whose intensity is below the per-transition detection\n"
@@ -770,6 +825,7 @@ int main(int argc, char** argv) {
     }
 
     long n_trans = 0, n_gamma = 0, n_accepted = 0, n_collision_rejected = 0,
+         n_reviewed_unplaced = 0,
          n_struct_changed = 0,
          n_struct_used = 0, n_ambiguous = 0, n_coinc = 0, n_coinc_a2a4 = 0,
          n_icc = 0, n_ec = 0, n_ec_shell = 0, n_ec_level = 0,
@@ -1061,6 +1117,11 @@ int main(int argc, char** argv) {
       std::vector<SdGamma> sg(ng);
       for (std::size_t i = 0; i < ng; ++i) {
         sg[i].energy = gs[i].energy;
+        sg[i].reviewed_unplaced =
+            hbr && ca && reviewed_unplaced_gamma(pa->value(), ca->value(), mode,
+                                                 branch_ratio, gs[i].energy,
+                                                 gs[i].intensity);
+        if (sg[i].reviewed_unplaced) ++n_reviewed_unplaced;
         for (xml_node<char>* cg = gs[i].node->first_node("coincidentGamma"); cg;
              cg = cg->next_sibling("coincidentGamma")) {
           xml_attribute<char>* ida = cg->first_attribute("id");
@@ -1277,7 +1338,9 @@ int main(int argc, char** argv) {
         if (I < T) { below_T.push_back(gs[i].energy); continue; }
         if (nd_above < 25) {
           const char* reason;
-          if (mm[i].collision_rejected) {
+          if (sg[i].reviewed_unplaced) {
+            reason = "reviewed-unplaced";
+          } else if (mm[i].collision_rejected) {
             reason = "edge-collision";
           } else if (std::fabs(gs[i].energy - 510.999) < 1.0) {
             reason = "annih511";
@@ -1926,6 +1989,8 @@ int main(int argc, char** argv) {
                 n_ambiguous, n_struct_changed, n_struct_used);
     std::printf("  records rejected by accepted-edge collisions: %ld\n",
                 n_collision_rejected);
+    std::printf("  reviewed unplaced records kept out of matching: %ld\n",
+                n_reviewed_unplaced);
     std::printf("  coincidences scanned: %ld; got a2/a4: %ld\n", n_coinc, n_coinc_a2a4);
     std::printf("  gammas with ICC written: %ld\n", n_icc);
     std::printf("  electronCapture shell fractions: %ld/%ld; exact fed levels: %ld; "

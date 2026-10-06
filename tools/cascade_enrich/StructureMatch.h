@@ -23,6 +23,7 @@ namespace cascade_enrich {
 struct SdGamma {
   double energy = 0.0;
   std::vector<int> partners;  ///< indices (into the gamma list) of coincidence partners
+  bool reviewed_unplaced = false; ///< reviewed line with no level placement: never matched
 };
 
 struct GammaMatch {

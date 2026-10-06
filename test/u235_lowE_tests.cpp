@@ -77,6 +77,28 @@ int main(int argc, char** argv) {
           "U235: 163.357 keV gamma, 5.08 per 100");
     // --- U-235 gamma intensities (ENSDF) ---
     check(near(sum_in(u5, GammaParticle, 172.95, 173.05), 1.144e-4, 1e-3), "U235: 173.0 keV 0.01144 per 100");
+    // --- U-235 182.5 keV doublet (2026-10-05): micro-cal resolves 182.504 + an unplaced 183.02 keV line (Th-231) ---
+    check(sum_in(u5, GammaParticle, 182.515, 182.525, &n) == 0.0 && n == 0, "U235: no gamma at 182.52 keV");
+    check(near(sum_in(u5, GammaParticle, 182.50, 182.51, &n), 3.54e-3, 1e-6) && n == 1,
+          "U235: 182.504 keV gamma, 0.354 per 100");
+    {
+      const SandiaDecay::Transition* th231 = find_transition(db, "Th231", "Pa231", SandiaDecay::BetaDecay);
+      check(th231 != nullptr, "Th231 beta- transition present");
+      if (th231) {
+        check(near(sum_in(th231, GammaParticle, 183.015, 183.025, &n), 6.4e-4, 1e-6) && n == 1,
+              "Th231: unplaced 183.02 keV gamma, 0.064 per 100");
+        check(near(sum_in(th231, GammaParticle, 183.49, 183.50), 3.4e-4, 1e-6), "Th231: 183.495 keV unchanged");
+        check(near(sum_in(u5, GammaParticle, 182.4, 182.6) + sum_in(th231, GammaParticle, 183.0, 183.05), 4.18e-3, 1e-6),
+              "182.504 + 183.02 keV = 0.418 per 100 (evaluated unresolved 0.411(15))");
+        // the placed 182.504 keV line keeps its cascade data; the unplaced line has none (full/min XML only)
+        for (const SandiaDecay::RadParticle& p : u5->products)
+          if (p.type == GammaParticle && std::fabs(p.energy - 182.504) < 0.001 && file.find("nocoinc") == std::string::npos)
+            check(!p.coincidences.empty(), "U235: 182.504 keV keeps its coincidences");
+        for (const SandiaDecay::RadParticle& p : th231->products)
+          if (p.type == GammaParticle && std::fabs(p.energy - 183.02) < 0.001)
+            check(p.coincidences.empty(), "Th231: 183.02 keV has no coincidences (unplaced)");
+      }
+    }
     check(near(sum_in(u5, GammaParticle, 198.92, 198.935, &n), 4.233e-4, 1e-3) && n == 1,
           "U235: 198.927 keV 0.04233 per 100");
 

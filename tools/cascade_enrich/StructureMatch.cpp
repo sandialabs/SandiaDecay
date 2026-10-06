@@ -38,6 +38,8 @@ std::vector<GammaMatch> match_gammas(const G4LevelScheme& scheme,
   std::vector<int> nearest(n, -1);
   std::vector<int> assign(n, -1);
   for (std::size_t g = 0; g < n; ++g) {
+    if (gammas[g].reviewed_unplaced)
+      continue;  // no candidates: it can neither match nor collide with a placed line
     std::vector<std::pair<double,int>> c;
     for (std::size_t t = 0; t < scheme.transitions.size(); ++t) {
       const double d = std::fabs(scheme.transitions[t].gamma_keV - gammas[g].energy);

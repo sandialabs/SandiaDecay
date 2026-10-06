@@ -88,6 +88,21 @@ int main(int argc, char** argv) {
   check(accepted_matches_are_injective(collision_result),
         "accepted collision result is injective");
 
+  // A reviewed unplaced record next to a placed line must not take part in
+  // matching: the placed line keeps its edge instead of both being rejected.
+  std::vector<SdGamma> with_unplaced = {{99.98, {}}, {100.50, {}}};
+  with_unplaced[1].reviewed_unplaced = true;
+  const auto unplaced_result = match_gammas(one_edge, with_unplaced);
+  check(unplaced_result[0].accepted && !unplaced_result[0].collision_rejected,
+        "placed line keeps its edge beside a reviewed unplaced record");
+  check(!unplaced_result[1].accepted && unplaced_result[1].g4 < 0 &&
+            !unplaced_result[1].collision_rejected,
+        "reviewed unplaced record is never matched or collision-rejected");
+  with_unplaced[1].reviewed_unplaced = false;
+  const auto ordinary_result = match_gammas(one_edge, with_unplaced);
+  check(!ordinary_result[0].accepted && ordinary_result[0].collision_rejected,
+        "without the flag the same pair collides (control)");
+
   const std::string dir = (argc > 1) ? argv[1]
       : env_or("G4LEVELGAMMADATA",
                "/Users/wcjohns/install/GEANT4-11.4.0/share/Geant4/data/PhotonEvaporation6.1.2");

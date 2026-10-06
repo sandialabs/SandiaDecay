@@ -116,6 +116,10 @@
                    the same GEANT4 edge. All owners were rejected: one G4 edge
                    is not evidence that either Sandia record is a duplicate.
          annih511  the 511 keV annihilation line (not a nuclear transition).
+         reviewed-unplaced
+                   a measured line with no level placement in any evaluation,
+                   listed in the reviewed table and kept out of matching so it
+                   cannot collide with a placed line on a nearby GEANT4 edge.
 
    N SD gammas below detectable threshold T=t/decay: E E ...
        Unmatched gammas whose intensity is below the per-transition detection
@@ -551667,6 +551671,7 @@
 	</transition>
 	<transition branchRatio="3.8E-14" mode="sf" parent="Th230"/>
 	<transition branchRatio="1" child="Pa231" mode="b-" parent="Th231">
+		<!-- data-review 2026-10-05: 183.02 keV, 0.064 % per decay, added as an unplaced line.  Resolved by a LANL micro-calorimeter at 0.181(4) x the U-235 182.504 keV line in 8 U3O8 standards (1.9-93 % U-235); not pile-up, a Sn escape or a detector satellite.  No level pair 183.02 keV apart in the Th-231 or Pa-231 adopted schemes, and U-235/Th-231 are in equilibrium in every sample, so the parent is not determined; filed here by judgement.  Previously hidden inside the Ge-unresolved U-235 '182.5 keV' line (evaluated 0.411 % = 0.354 % + this). -->
 		<!-- K x-rays (2026-10 review): energies Deslattes 2003 theory (xraylib for K-O/K-P); sub-line rates xraylib (K-L, K-M2,3, K-N2,3) and EADL2023 (weak lines); K-N2/K-N3 split and K-O2,3, K-P2,3 added within the unchanged K'b2 total.  Micro-cal: K-N energies follow theory, K-O at U 115.375(4), Th 109.442(5) keV. -->
 		<gamma energy="17.195" intensity="2.80000E-03" iccTotal="166" iccK="0" iccL1="0" iccL2="0" iccL3="0" mult="3" fl="5" tl="4"/>
 		<gamma energy="18.055" intensity="9.50000E-04" iccTotal="218" iccK="0" iccL1="0" iccL2="0" iccL3="32.9616" mult="304" delta="0.04" fl="6" tl="4"/>
@@ -551688,6 +551693,7 @@
 		<gamma energy="165.0" intensity="3.54000E-05" iccTotal="1.464" iccK="0.20862" iccL1="0.0577841" iccL2="0.553538" iccL3="0.30583" mult="4" fl="11" tl="1"/>
 		<gamma energy="169.65" intensity="1.36000E-05" iccTotal="0.1421" iccK="0.11125" iccL1="0.0137837" iccL2="0.00538417" iccL3="0.00413369" mult="2" fl="16" tl="3"/>
 		<gamma energy="174.15" intensity="1.82000E-04" iccTotal="2.7" iccK="1.77552" iccL1="0.31158" iccL2="0.254556" iccL3="0.119718" mult="304" fl="11" tl="0"/>
+		<gamma energy="183.02" intensity="6.4E-04"/>
 		<gamma energy="188.76" intensity="3.33000E-05" iccTotal="0.1105" iccK="0.0868972" iccL1="0.010913" iccL2="0.00396253" iccL3="0.00295145" mult="2" fl="16" tl="2"/>
 		<gamma energy="236.04" intensity="9.50000E-05" iccTotal="0.0657" iccK="0.0520935" iccL1="0.00672111" iccL2="0.00209583" iccL3="0.00146642" mult="2" fl="26" tl="4"/>
 		<gamma energy="240.27" intensity="3.06000E-06" iccTotal="0.063" iccK="0.0499779" iccL1="0.0064638" iccL2="0.00199017" iccL3="0.00138537" mult="2" fl="25" tl="3"/>
@@ -551787,7 +551793,7 @@
 		<xray energy="111.8810" intensity="1.7364E-05" assignment="Kb4"/>
 		<xray energy="112.3915" intensity="0.00014918" assignment="KO23"/>
 		<xray energy="112.5755" intensity="2.4874E-05" assignment="KP23"/>
-		<!-- cascade-match: 1 SD gammas with I=0 (not emitted, suppressed); -->
+		<!-- cascade-match: SD-unmatched-above-threshold[keV]: 183.02(I=0.00064,reviewed-unplaced); 1 SD gammas with I=0 (not emitted, suppressed); -->
 		<levelFeed lvl="0" probability="0.0002245706899" q="391.5"/>
 		<levelFeed lvl="1" probability="0.0002245706899" q="382.317" forbiddenness="1u"/>
 		<levelFeed lvl="2" probability="0.003368510349" q="332.9304"/>
@@ -568702,6 +568708,7 @@
 	</transition>
 	<transition branchRatio="1.64E-11" mode="sf" parent="U234"/>
 	<transition branchRatio="1" child="Th231" mode="a" parent="U235">
+		<!-- data-review 2026-10-05: U-235 182.52 keV -> 182.504 keV (ENSDF) and 0.411 % -> 0.354 %.  A LANL micro-calorimeter resolves the evaluated line into 182.51(1) keV and an unlisted 183.02(1) keV line at 0.181(4) of it (8 U3O8 standards, 1.9-93 % U-235; IDB planar HPGe peak shapes give 0.187(2)); the evaluated 0.411(15) % (ENSDF NDS 185 (2022)) / 0.39(5) % (DDEP 2008) is their Ge-unresolved sum, and the Ge decay energies 182.60-182.72 keV are the pair's centroid.  The 183.02 keV line (0.064 %) is filed, unplaced, under Th-231 beta- decay. -->
 		<!-- K x-rays (2026-10 review): energies Deslattes 2003 theory (xraylib for K-O/K-P); sub-line rates xraylib (K-L, K-M2,3, K-N2,3) and EADL2023 (weak lines); K-N2/K-N3 split and K-O2,3, K-P2,3 added within the unchanged K'b2 total.  Micro-cal: K-N energies follow theory, K-O at U 115.375(4), Th 109.442(5) keV. -->
 		<!-- 2026-10 U low-energy review (iteration 1): 108.99->109.176 keV and 163.38->163.357 keV (energies, ENSDF NDS 185 (2022)); 173.0 keV 0.040%->0.0114% and 198.9->198.927 keV 0.0423% (ENSDF); Th K'b1/K'b2 group totals restored to ENSDF (1.7219/0.5803 per 100).  Checked against LANL micro-cal spectra of 8 U standards and IDB planar HPGe. -->
 		<gamma energy="19.59" intensity="0.00583" iccTotal="114.7" iccK="0" iccL1="0" iccL2="0" iccL3="2.26303" mult="3" fl="5" tl="4">
@@ -568804,7 +568811,7 @@
 			<coincidentGamma id="7" intensity="0.010406188213257483" a2="-0.124795" a4="0"/>
 			<coincidentGamma id="16" intensity="0.031565437580214364" a2="-0.0714286" a4="-0"/>
 		</gamma>
-		<gamma energy="182.52" id="29" intensity="4.11E-03" iccTotal="2.1" iccK="1.40658" iccL1="0.24234" iccL2="0.186333" iccL3="0.086877" mult="304" fl="26" tl="5">
+		<gamma energy="182.504" id="29" intensity="3.54E-03" iccTotal="2.1" iccK="1.40658" iccL1="0.24234" iccL2="0.186333" iccL3="0.086877" mult="304" fl="26" tl="5">
 			<coincidentGamma id="34" intensity="8.2121183416466479E-06" a2="-0.142857" a4="0"/>
 			<coincidentGamma id="26" intensity="8.3268585180768415E-06" a2="0.190476" a4="0"/>
 			<coincidentGamma id="17" intensity="2.5242838814642393E-06" a2="-0.0666667" a4="0"/>
