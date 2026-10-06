@@ -374,7 +374,7 @@ void check_database_provenance(const std::string& filename) {
     // 92.38/92.80 keV moved to 92.362/92.787 keV by the 2026-10-05 data review (micro-calorimeter against the
     //  Th Ka1 / U Ka2 x-rays)
     const double energies[] = {62.86, 73.92, 83.3, 87.02, 92.362, 92.787,
-                               103.35, 103.71, 108.0, 112.8, 132.9, 184.8, 63.29};
+                               103.59, 103.71, 108.0, 112.8, 132.9, 184.8, 63.29};   // 103.35 -> 103.59 (2026-10-06)
     const double old_i[] = {0.0002112, 0.0, 0.000792, 0.0001914, 0.028116,
                             0.027715, 0.00004158, 0.0, 0.0001056, 0.002772,
                             0.0, 0.000132, 0.0485};
@@ -384,6 +384,7 @@ void check_database_provenance(const std::string& filename) {
       if (energies[i] == 92.362) return 0.02471;
       if (energies[i] == 92.787) return 0.02436;
       if (energies[i] == 112.8) return 0.002436;
+      if (energies[i] == 108.0) return 1.0e-5;   // 2026-10-06 data review (micro-calorimeter)
       return old_i[i] * 25.0 / 33.0;
     };
     std::size_t gamma_index = 0;

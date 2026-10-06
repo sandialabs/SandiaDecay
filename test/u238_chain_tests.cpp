@@ -183,8 +183,9 @@ int main(int argc, char** argv) {
     };
     const SandiaDecay::Transition* th = find_transition(db, "Th234", "Pa234m", SandiaDecay::BetaDecay);
     check(near(xray(u8, 93.3, 93.4), 1.119e-5, 1e-2), "U238 alpha Th Ka1 1.119e-5 (was 25x the K-vacancy budget)");
-    check(th && near(xray(th, 95.8, 95.9), 1.4e-4, 1e-2) && xray(th, 92.25, 92.32) < xray(th, 95.8, 95.9),
-          "Th234 Pa Ka1 1.4e-4 and Ka2 < Ka1");
+    // Pa K x-rays x2.45 by the 2026-10-06 data review (micro-calorimeter Pa Ka1 decomposition; evaluated 0.014(14) %)
+    check(th && near(xray(th, 95.8, 95.9), 3.43e-4, 1e-2) && xray(th, 92.25, 92.32) < xray(th, 95.8, 95.9),
+          "Th234 Pa Ka1 3.43e-4 (x2.45 over 1.4e-4) and Ka2 < Ka1");
     check(near(xray(pam, 98.4, 98.5), 1.087e-4, 1e-2), "Pa234m U Ka1 1.087e-4 (was 21x)");
 
     // --- Th234 low-energy gammas: 92.38, 92.80 and 112.8 keV x1.16 over ENSDF (2026-10-05 review of certified U3O8
@@ -200,6 +201,12 @@ int main(int argc, char** argv) {
     }
     check(near(sum_intensity(gammas_at(th, 112.8)), 0.002436, 1e-6), "Th234 112.8 keV 0.2436 % (ENSDF 0.210 x1.16)");
     check(near(sum_intensity(gammas_at(th, 63.29)), 0.0485 * 25.0 / 33.0, 1e-6), "Th234 63.29 keV unchanged (3.674 %)");
+    // --- Th234 weak lines (2026-10-06 micro-calorimeter review): one line at 103.59 keV where ENSDF lists 103.35(10)
+    //     and 103.71(6) keV (intensity kept); the unplaced 108.0 keV line at 1.0e-5 (was 8.0e-5) ---
+    check(gammas_at(th, 103.35).empty() || std::fabs(gammas_at(th, 103.35)[0]->energy - 103.35) > 0.01,
+          "Th234 has no 103.35 keV line");
+    check(near(sum_intensity(gammas_at(th, 103.59)), 3.15e-5, 1e-6), "Th234 103.59 keV 3.15e-5");
+    check(near(sum_intensity(gammas_at(th, 108.0)), 1.0e-5, 1e-6), "Th234 108.0 keV 1.0e-5 (was 8.0e-5)");
     check(near(xray(it, 5.0, 25.0), 0.3377, 1e-2), "Pa234m IT Pa L x-rays 0.338 per IT");
 
     // --- Coincidences (P(partner | gamma), following-direction) ---

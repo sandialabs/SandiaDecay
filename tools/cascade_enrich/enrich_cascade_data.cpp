@@ -1066,11 +1066,12 @@ int main(int argc, char** argv) {
             0.0002112, 0.0, 0.000792, 0.0001914, 0.028116,
             0.027715, 0.00004158, 0.0, 0.0001056, 0.002772,
             0.0, 0.000132, 0.0485};
-        // The 2026-10-05 data review moved the 92.38/92.80 keV doublet to
-        // 92.362/92.787 keV (micro-calorimeter against the Th Ka1 / U Ka2
-        // x-rays); the identity check accepts either complete energy vector.
+        // The 2026-10-05/06 data review moved the 92.38/92.80 keV doublet to
+        // 92.362/92.787 keV and 103.35 keV to 103.59 keV (micro-calorimeter;
+        // see the transition's data-review comments).  Each gamma must carry
+        // either its original or its reviewed energy.
         constexpr double reviewed_energies[] = {
-            62.86, 73.92, 83.3, 87.02, 92.362, 92.787, 103.35,
+            62.86, 73.92, 83.3, 87.02, 92.362, 92.787, 103.59,
             103.71, 108.0, 112.8, 132.9, 184.8, 63.29};
         constexpr std::size_t n_expected =
             sizeof(energies) / sizeof(energies[0]);
@@ -1078,28 +1079,28 @@ int main(int argc, char** argv) {
                       "Th234 reviewed energy vector must match the original");
         // The 2026-10-05 data review then raised 92.38, 92.80 and 112.8 keV by
         // x1.16(4) from measured spectra of certified U3O8 standards (the
-        // evaluations take these from 1978Ch06 relative intensities; see the
-        // transition's data-review comment); the other ten keep the 25/33 value.
-        const auto reviewed = [&](std::size_t i) -> double {
-          if (i == 4) return 0.02471;    // 92.38 (92.362) keV
-          if (i == 5) return 0.02436;    // 92.80 (92.787) keV
-          if (i == 9) return 0.002436;   // 112.8 keV
-          return old_intensities[i] * 25.0 / 33.0;
+        // evaluations take these from 1978Ch06 relative intensities), and the
+        // 2026-10-06 review lowered the unplaced 108.0 keV line to 1.0e-5; the
+        // others keep the 25/33 value.  Data written between the two reviews
+        // still has 108.0 keV at its 25/33 value, which is also accepted.
+        const auto reviewed = [&](std::size_t i, double intensity) -> bool {
+          const double corrected = old_intensities[i] * 25.0 / 33.0;
+          const auto is = [&](double v) { return std::fabs(intensity - v) <= 1.0e-10; };
+          if (i == 4) return is(0.02471);    // 92.38 (92.362) keV
+          if (i == 5) return is(0.02436);    // 92.80 (92.787) keV
+          if (i == 9) return is(0.002436);   // 112.8 keV
+          if (i == 8) return is(1.0e-5) || is(corrected);   // 108.0 keV
+          return is(corrected);
         };
         if (ng != n_expected)
           throw std::runtime_error(
               "Reviewed Th234 gamma normalization saw unexpected gamma count");
-        bool old_energies = true;
-        bool new_energies = true;
         for (std::size_t i = 0; i < n_expected; ++i) {
-          old_energies = old_energies &&
-              std::fabs(gs[i].energy - energies[i]) <= 1.0e-9;
-          new_energies = new_energies &&
-              std::fabs(gs[i].energy - reviewed_energies[i]) <= 1.0e-9;
+          if (std::fabs(gs[i].energy - energies[i]) > 1.0e-9 &&
+              std::fabs(gs[i].energy - reviewed_energies[i]) > 1.0e-9)
+            throw std::runtime_error(
+                "Reviewed Th234 gamma normalization saw unexpected energy vector");
         }
-        if (!old_energies && !new_energies)
-          throw std::runtime_error(
-              "Reviewed Th234 gamma normalization saw unexpected energy vector");
         bool all_old = true;
         bool all_corrected = true;
         bool all_reviewed = true;
@@ -1110,8 +1111,7 @@ int main(int argc, char** argv) {
                 std::fabs(gs[i].intensity - old_intensities[i]) <= 1.0e-12;
             all_corrected = all_corrected &&
                 std::fabs(gs[i].intensity - corrected) <= 1.0e-10;
-            all_reviewed = all_reviewed &&
-                std::fabs(gs[i].intensity - reviewed(i)) <= 1.0e-10;
+            all_reviewed = all_reviewed && reviewed(i, gs[i].intensity);
           }
         }
         if (!all_old && !all_corrected && !all_reviewed)
@@ -1280,8 +1280,9 @@ int main(int argc, char** argv) {
             "NNDC ENSDF NDS 207 (2026), evaluated through Dec-2023, "
             "NR 0.0050(4) replaces 0.0066; gamma energies, beta intensities and "
             "coincident conditional intensities unchanged")
-            + (th234_data_reviewed ? "; 92.38, 92.80 and 112.8 keV then x1.16 by the "
-                                     "2026-10-05 data review (see that comment). "
+            + (th234_data_reviewed ? "; 92.38, 92.80 and 112.8 keV then x1.16 (2026-10-05) "
+                                     "and 108.0 keV set to 1.0e-5 (2026-10-06) by the data "
+                                     "review (see those comments). "
                                    : ". ");
         tr->append_node(doc.allocate_node(rapidxml::node_comment, nullptr,
                                           doc.allocate_string(txt.c_str())));
