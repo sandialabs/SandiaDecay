@@ -181,7 +181,14 @@ constexpr GammaIntensityOverride kGammaIntensityOverrides[] = {
   // parent decay, hence the transition-conditional fraction is 0.00583, not
   // 0.61. The photon energy remains the existing SandiaDecay 19.59 keV.
   // https://www.nndc.bnl.gov/nudat3/getdecaydataset.jsp?dsid=235u+a+decay+%287.04eP8+y%29&nucleus=231TH
-  {"U235", "Th231", "a", 1.0, 19.59, 0.61, 0.00583,
+  // The value used is 0.00533 (2026-10-07 level-scheme audit): ENSDF's 0.583 %
+  // comes from the 205.3-keV level's balance, and with it the 185.7-keV level
+  // receives 0.796 transitions per decay but emits only 0.769, so a cascade
+  // walk emits 185.71/143.76 keV 3.6 % above their listed intensities.  The
+  // 185.7-keV level's own balance (185.71 + 143.76 keV out, 3.09 % alpha feed,
+  // 51.21 + 202.11 keV in) gives a 19.55-keV total intensity of 0.617 per decay,
+  // i.e. 0.617/(1+114.7) = 0.00533.  The photon itself is unmeasured.
+  {"U235", "Th231", "a", 1.0, 19.59, 0.61, 0.00533,
    19.5941, 114.7, 5, 4},
   // Same evaluation (NNDC ENSDF 235U alpha decay, NDS 185, 560 (2022), cutoff
   // 31-Aug-2022). The 452.189-keV Th-231 level lists G 64.45(5), %IG=0.0017(14),
@@ -1269,8 +1276,10 @@ int main(int argc, char** argv) {
       if (transition_intensity_fixed) {
         const std::string txt =
             " intensity-fix: U235->Th231 19.59-keV gamma intensity "
-            "0.61 -> 0.00583; NNDC ENSDF NDS 185 (2022), evaluated Aug-2022, "
-            "%IG=0.583(11), alpha=114.7(19); energy unchanged. ";
+            "0.61 -> 0.00533; NNDC ENSDF NDS 185 (2022), evaluated Aug-2022, "
+            "alpha=114.7(19), %IG=0.583(11) from the 205.3-keV level balance; "
+            "0.00533 = TI from the 185.7-keV level balance/(1+alpha) "
+            "(2026-10-07 level-scheme audit); energy unchanged. ";
         tr->append_node(doc.allocate_node(rapidxml::node_comment, nullptr,
                                           doc.allocate_string(txt.c_str())));
       }

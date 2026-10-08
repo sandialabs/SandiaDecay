@@ -164,11 +164,11 @@ void check_database_provenance(const std::string& filename) {
         filename + " Nb98 sentinel E0 has zero single-gamma yield");
   check(u235 && u235->icc_total > 114.0f && u235->icc_K == 0.0f &&
             u235->multipole == 3 &&
-            std::fabs(u235->intensity - 0.00583f) < 1e-8f,
-        filename + " applies reviewed U235 19.59-keV intensity");
+            std::fabs(u235->intensity - 0.00533f) < 1e-8f,
+        filename + " applies reviewed U235 19.59-keV intensity");   // 185.7-keV level balance (2026-10-07)
   if (u235) {
     const double occurrence = u235->intensity * (1.0 + u235->icc_total);
-    check(std::fabs(occurrence - 0.674531) < 2e-6 && occurrence < 1.0,
+    check(std::fabs(occurrence - 0.616681) < 2e-6 && occurrence < 1.0,
           filename + " U235 19.59-keV transition occurrence is physical");
     check(std::fabs(bounded_single_gamma_yield(*u235) - u235->intensity) < 1e-9,
           filename + " U235 direct and fallback photon yields close");
