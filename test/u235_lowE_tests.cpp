@@ -77,6 +77,8 @@ int main(int argc, char** argv) {
     // --- U-235 74.67 keV (2026-10-08): micro-cal line at 74.664-74.691 keV, nothing at ENSDF's 74.94(4) keV ---
     check(sum_in(u5, GammaParticle, 74.85, 75.10, &n) == 0.0 && n == 0, "U235: no gamma at 74.94/75.02 keV");
     check(near(sum_in(u5, GammaParticle, 74.66, 74.68, &n), 6.0e-4, 1e-6) && n == 1, "U235: 74.67 keV gamma, 0.060 per 100");
+    // --- U-235 72.70 keV removed (2026-10-08): planar HPGe and micro-cal give I(72.70) consistent with zero ---
+    check(sum_in(u5, GammaParticle, 72.6, 72.72, &n) == 0.0 && n == 0, "U235: no 72.70 keV gamma");
     check(sum_in(u5, GammaParticle, 163.37, 163.39, &n) == 0.0 && n == 0, "U235: no gamma at 163.38 keV");
     check(near(sum_in(u5, GammaParticle, 163.352, 163.362, &n), 0.0508, 1e-6) && n == 1,
           "U235: 163.357 keV gamma, 5.08 per 100");
@@ -96,6 +98,7 @@ int main(int argc, char** argv) {
         check(near(sum_in(th231, XrayParticle, 10.0, 21.0), 0.651, 2e-3), "Th231: Pa L x-rays 65.1 per 100");
         check(near(sum_in(th231, XrayParticle, 13.2, 13.4), 0.294, 1e-3), "Th231: Pa L-alpha 29.4 per 100");
         check(near(sum_in(th231, XrayParticle, 19.5, 20.3), 0.0493, 2e-3), "Th231: Pa L-gamma 4.93 per 100");
+        check(near(sum_in(th231, GammaParticle, 72.74, 72.76), 0.0026, 1e-6), "Th231: 72.751 keV unchanged, 0.26 per 100");
         check(near(sum_in(th231, GammaParticle, 183.015, 183.025, &n), 6.4e-4, 1e-6) && n == 1,
               "Th231: unplaced 183.02 keV gamma, 0.064 per 100");
         check(near(sum_in(th231, GammaParticle, 183.49, 183.50), 3.4e-4, 1e-6), "Th231: 183.495 keV unchanged");

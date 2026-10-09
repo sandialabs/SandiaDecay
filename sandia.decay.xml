@@ -568711,6 +568711,7 @@
 	</transition>
 	<transition branchRatio="1.64E-11" mode="sf" parent="U234"/>
 	<transition branchRatio="1" child="Th231" mode="a" parent="U235">
+		<!-- 2026-10 review: the 72.70 keV line (3.09E-03; ENSDF 72.7(2), DDEP 1.16E-03) removed - IDB planar HPGe (8 items) and LANL micro-cal HEU standards give I(72.70) consistent with zero (planar -0.03..+0.015 %), the 72.7 keV peak being Th-231 72.751 keV plus Pb K-alpha2; ENSDF's placement 277.60 -> 205.31 keV implies 72.29 keV and its flux exceeds the 277.6 keV level's feeding. -->
 		<!-- 2026-10 review: 75.02 -> 74.67 keV (LANL micro-cal: 74.664-74.691 keV, 5.2-6.1E-04 per decay, nothing at 74.94 keV beyond Pb K-alpha1; ENSDF/DDEP 74.94(4) keV) and 109.176 -> 109.182 keV (micro-cal relative to the Th K-N3 / K-O2,3 x-rays of the same decays; ENSDF 109.176(31), DDEP 109.19(7)). -->
 		<!-- level-scheme audit 2026-10-07: 19.59 keV 0.00583 -> 0.00533, i.e. TI(19.55) from the 185.7 keV level's intensity balance (0.617 per decay) instead of ENSDF's 205.3 keV-level value (0.675; NDS 185 (2022) lists TI 118(6) relative, the 185.7 keV-level balance gives 107.8).  With 0.00583 the 185.7 keV level received 0.796 transitions per decay but emitted 0.769, so a level-scheme walk emitted 185.71 and 143.76 keV 3.6 % above their listed intensities.  The 19.59 keV photon itself is unmeasured (Th L x-ray region); DDEP gives I(g+ce) 60(60) %. -->
 		<!-- data-review 2026-10-05: U-235 182.52 keV -> 182.504 keV (ENSDF) and 0.411 % -> 0.354 %.  A LANL micro-calorimeter resolves the evaluated line into 182.51(1) keV and an unlisted 183.02(1) keV line at 0.181(4) of it (8 U3O8 standards, 1.9-93 % U-235; IDB planar HPGe peak shapes give 0.187(2)); the evaluated 0.411(15) % (ENSDF NDS 185 (2022)) / 0.39(5) % (DDEP 2008) is their Ge-unresolved sum, and the Ge decay energies 182.60-182.72 keV are the pair's centroid.  The 183.02 keV line (0.064 %) is filed, unplaced, under Th-231 beta- decay. -->
@@ -568771,11 +568772,6 @@
 			<coincidentGamma id="31" intensity="0.0026005240646006593"/>
 			<coincidentGamma id="33" intensity="0.17401526693941946" a2="0.05" a4="0"/>
 			<coincidentGamma id="50" intensity="0.0064450098866451651"/>
-		</gamma>
-		<gamma energy="72.7" intensity="3.0888E-03" iccTotal="50.8" iccK="0" iccL1="0.725424" iccL2="20.3962" iccL3="16.0376" mult="4" fl="14" tl="5">
-			<coincidentGamma id="34" intensity="8.2121183416466479E-06" a2="-0.0714286" a4="-0"/>
-			<coincidentGamma id="26" intensity="8.3268585180768415E-06" a2="0.0952381" a4="-0"/>
-			<coincidentGamma id="17" intensity="2.5242838814642393E-06" a2="-0.0333333" a4="-0"/>
 		</gamma>
 		<gamma energy="74.67" id="12" intensity="0.0006" iccTotal="0.252" iccK="0" iccL1="0.0808164" iccL2="0.0553896" iccL3="0.0539784" mult="2" fl="8" tl="3">
 			<coincidentGamma id="4" intensity="0.0022172949002217295"/>
@@ -568979,7 +568975,7 @@
 		<xray energy="109.4535" intensity="0.0010291" assignment="KO23"/>
 		<xray energy="109.6305" intensity="0.0001689" assignment="KP23"/>
 		<!-- intensity-fix: U235->Th231 19.59-keV gamma intensity 0.61 -> 0.00533; NNDC ENSDF NDS 185 (2022), evaluated Aug-2022, alpha=114.7(19), %IG=0.583(11) from the 205.3-keV level balance; 0.00533 = TI from the 185.7-keV level balance/(1+alpha) (2026-10-07 level-scheme audit); energy unchanged. -->
-		<!-- cascade-match: 7 SD gammas below detectable threshold T=0.000572/decay: 291.6 291.6 310.7 517.2 742.5 97.5 371.2; 1 SD gammas with I=0 (not emitted, suppressed); G4-listed-not-in-SD[keV]: 144.47(rI=100) 80.35(rI=51) 259.79(rI=36) 441.57(rI=5) 528.04(rI=100); -->
+		<!-- cascade-match: 7 SD gammas below detectable threshold T=0.000572/decay: 291.6 291.6 310.7 517.2 742.5 97.5 371.2; 1 SD gammas with I=0 (not emitted, suppressed); G4-listed-not-in-SD[keV]: 144.47(rI=100) 72.29(rI=100) 80.35(rI=51) 259.79(rI=36) 441.57(rI=5) 528.04(rI=100); -->
 		<!-- intensity-fix: U235->Th231 alpha products and level feeds are the G4-topology-backed normalized projection of Aug-2022 ENSDF (NDS 185, 2022); 20 represented probabilities sum to one; emitted alpha energies and hindrances updated; omitted unmapped/tentative ENSDF rows 4042 keV (~0.007%, no G4 level), 4212 keV (0.0131%, no RDM feed), and 4296 keV (0.00915%, no RDM feed); RDM level/Q topology and gamma products unchanged. -->
 		<levelFeed lvl="0" probability="0.047121041" q="4678.1"/>
 		<levelFeed lvl="1" probability="0.03773603283" q="4636.148"/>
