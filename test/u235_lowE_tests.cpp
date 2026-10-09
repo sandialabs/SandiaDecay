@@ -115,6 +115,8 @@ int main(int argc, char** argv) {
     }
     check(near(sum_in(u5, GammaParticle, 198.92, 198.935, &n), 4.233e-4, 1e-3) && n == 1,
           "U235: 198.927 keV 0.04233 per 100");
+    // --- U-235 240.88 keV (2026-10-09): ENSDF 0.068(4) %; micro-cal 0.918(16) x the former DDEP-equal 0.075 % ---
+    check(near(sum_in(u5, GammaParticle, 240.87, 240.89, &n), 6.8e-4, 1e-6) && n == 1, "U235: 240.88 keV gamma, 0.068 per 100");
 
     // --- Th K x-rays from U-235 alpha: ENSDF group totals, K'b1 (K-M) and K'b2 (K-N, K-O) ---
     check(near(sum_in(u5, XrayParticle, 93.30, 93.40), 0.04839, 1e-3), "U235: Th Ka1 4.839 per 100");

@@ -568711,6 +568711,7 @@
 	</transition>
 	<transition branchRatio="1.64E-11" mode="sf" parent="U234"/>
 	<transition branchRatio="1" child="Th231" mode="a" parent="U235">
+		<!-- 2026-10 review: 240.88 keV 7.5E-04 (= DDEP 0.074(4) %) -> 6.8E-04 (ENSDF NDS 185 (2022) 0.068(4) %) - LANL micro-cal HEU standards read 0.918(16) x 7.5E-04 with Ra-224 240.986 keV (U-232 chain, present in the NBL HEU materials) resolved; IDB HPGe sets 0.93-0.98 once Ra-224 is modeled (it had inflated SGD to 1.05). -->
 		<!-- 2026-10 review: the 72.70 keV line (3.09E-03; ENSDF 72.7(2), DDEP 1.16E-03) removed - IDB planar HPGe (8 items) and LANL micro-cal HEU standards give I(72.70) consistent with zero (planar -0.03..+0.015 %), the 72.7 keV peak being Th-231 72.751 keV plus Pb K-alpha2; ENSDF's placement 277.60 -> 205.31 keV implies 72.29 keV and its flux exceeds the 277.6 keV level's feeding. -->
 		<!-- 2026-10 review: 75.02 -> 74.67 keV (LANL micro-cal: 74.664-74.691 keV, 5.2-6.1E-04 per decay, nothing at 74.94 keV beyond Pb K-alpha1; ENSDF/DDEP 74.94(4) keV) and 109.176 -> 109.182 keV (micro-cal relative to the Th K-N3 / K-O2,3 x-rays of the same decays; ENSDF 109.176(31), DDEP 109.19(7)). -->
 		<!-- level-scheme audit 2026-10-07: 19.59 keV 0.00583 -> 0.00533, i.e. TI(19.55) from the 185.7 keV level's intensity balance (0.617 per decay) instead of ENSDF's 205.3 keV-level value (0.675; NDS 185 (2022) lists TI 118(6) relative, the 185.7 keV-level balance gives 107.8).  With 0.00583 the 185.7 keV level received 0.796 transitions per decay but emitted 0.769, so a level-scheme walk emitted 185.71 and 143.76 keV 3.6 % above their listed intensities.  The 19.59 keV photon itself is unmeasured (Th L x-ray region); DDEP gives I(g+ce) 60(60) %. -->
@@ -568855,7 +568856,7 @@
 		<gamma energy="233.47" intensity="0.00029" iccTotal="1.688" iccK="1.3504" iccL1="0.22653" iccL2="0.0273962" iccL3="0.00130634" mult="3" fl="13" tl="1">
 			<coincidentGamma id="4" intensity="0.0022172949002217295" a2="0.352897" a4="0"/>
 		</gamma>
-		<gamma energy="240.88" id="39" intensity="0.00075" iccTotal="1.45" iccK="1.14681" iccL1="0.19256" iccL2="0.0313635" iccL3="0.00492565" mult="304" delta="0.3" fl="10" tl="0"/>
+		<gamma energy="240.88" id="39" intensity="0.00068" iccTotal="1.45" iccK="1.14681" iccL1="0.19256" iccL2="0.0313635" iccL3="0.00492565" mult="304" delta="0.3" fl="10" tl="0"/>
 		<gamma energy="246.84" intensity="0.00053" iccTotal="1.445" iccK="1.15629" iccL1="0.19363" iccL2="0.0234524" iccL3="0.00110933" mult="3" fl="30" tl="5">
 			<coincidentGamma id="34" intensity="8.2121183416466479E-06" a2="0.05" a4="0"/>
 			<coincidentGamma id="26" intensity="8.3268585180768415E-06" a2="-0.0666667" a4="0"/>
