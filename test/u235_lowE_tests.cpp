@@ -122,6 +122,10 @@ int main(int argc, char** argv) {
     check(near(sum_in(u5, XrayParticle, 104.5, 106.6), 0.017219, 1e-3), "U235: Th K'b1 (K-M) 1.722 per 100");
     check(near(sum_in(u5, XrayParticle, 108.3, 110.0), 0.0058027, 1e-3), "U235: Th K'b2 (K-N, K-O) 0.580 per 100");
 
+    // --- U-238 49.49 keV (2026-10-08): micro-cal against the adjacent Sn-escape peaks; ENSDF 49.55(6) ---
+    check(sum_in(u8, GammaParticle, 49.52, 49.58, &n) == 0.0 && n == 0, "U238: no gamma at 49.55 keV");
+    check(near(sum_in(u8, GammaParticle, 49.48, 49.50, &n), 6.4e-4, 1e-6) && n == 1, "U238: 49.49 keV gamma, 0.064 per 100");
+
     // --- Th K x-rays from U-238 alpha: same split (ENSDF K'b1/Ka1 0.356, K'b2/Ka1 0.120) ---
     check(near(sum_in(u8, XrayParticle, 104.5, 106.6), 3.9806e-6, 1e-3), "U238: Th K'b1 3.98e-6 per decay");
     check(near(sum_in(u8, XrayParticle, 108.3, 110.0), 1.3415e-6, 1e-3), "U238: Th K'b2 1.34e-6 per decay");

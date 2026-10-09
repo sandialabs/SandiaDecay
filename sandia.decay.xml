@@ -569314,10 +569314,11 @@
 		<levelFeed lvl="19" probability="0.007984031936" q="147.572"/>
 	</transition>
 	<transition branchRatio="1" child="Th234" mode="a" parent="U238">
+		<!-- 2026-10 review: 49.55 -> 49.49 keV (LANL micro-cal relative to the adjacent Sn-escape peaks of Pb K-alpha and Th-231 72.751 keV: 49.477-49.500 keV in four standards; IDB planar HPGe 49.47-49.51 keV; ENSDF/DDEP 49.55(6) keV). -->
 		<!-- K x-rays (2026-10 review): energies Deslattes 2003 theory (xraylib for K-O/K-P); sub-line rates xraylib (K-L, K-M2,3, K-N2,3) and EADL2023 (weak lines); K-N2/K-N3 split and K-O2,3, K-P2,3 added within the unchanged K'b2 total.  Micro-cal: K-N energies follow theory, K-O at U 115.375(4), Th 109.442(5) keV. -->
 		<!-- 2026-10 U low-energy review: Th K'b1/K'b2 group totals restored to the ENSDF split (3.98e-6 / 1.34e-6 per decay). -->
 		<!-- data-review 2026-10: ten U-234 transitions misfiled here (994.93, 1124.93, 1548.12, 1591.65, 2001.0, 2022.3, 2041.4, 2066.0, 2101.9, 2136.6 keV) moved to Pa234m->U234, which emits them; Th K x-rays reset to IAEA/ENSDF Ka1 1.119e-5 (were 25x the K-vacancy budget). -->
-		<gamma energy="49.55" id="0" intensity="0.00064" iccTotal="321" iccK="0" iccL1="3.9483" iccL2="122.975" iccL3="108.113" mult="4" fl="1" tl="0"/>
+		<gamma energy="49.49" id="0" intensity="0.00064" iccTotal="321" iccK="0" iccL1="3.9483" iccL2="122.975" iccL3="108.113" mult="4" fl="1" tl="0"/>
 		<gamma energy="113.5" intensity="0.000102" iccTotal="6.47" iccK="0.232402" iccL1="0.148357" iccL2="2.64688" iccL3="1.76566" mult="4" fl="2" tl="1">
 			<coincidentGamma id="0" intensity="0.0030543677458766036" a2="0.102041" a4="0.00907029"/>
 		</gamma>
