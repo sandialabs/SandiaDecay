@@ -92,6 +92,10 @@ int main(int argc, char** argv) {
       if (th231) {
         // Th-231's 53.2 keV line (ENSDF TI from intensity balance only) removed 2026-10-08; U-234's 53.20 keV stays
         check(sum_in(th231, GammaParticle, 52.9, 53.5, &n) == 0.0 && n == 0, "Th231: no 53.2 keV gamma");
+        // Pa L x-rays (2026-10-08): the 2017Le03 measured group totals quoted in ENSDF NDS 185 (2022) (DDEP 65(3) per 100)
+        check(near(sum_in(th231, XrayParticle, 10.0, 21.0), 0.651, 2e-3), "Th231: Pa L x-rays 65.1 per 100");
+        check(near(sum_in(th231, XrayParticle, 13.2, 13.4), 0.294, 1e-3), "Th231: Pa L-alpha 29.4 per 100");
+        check(near(sum_in(th231, XrayParticle, 19.5, 20.3), 0.0493, 2e-3), "Th231: Pa L-gamma 4.93 per 100");
         check(near(sum_in(th231, GammaParticle, 183.015, 183.025, &n), 6.4e-4, 1e-6) && n == 1,
               "Th231: unplaced 183.02 keV gamma, 0.064 per 100");
         check(near(sum_in(th231, GammaParticle, 183.49, 183.50), 3.4e-4, 1e-6), "Th231: 183.495 keV unchanged");

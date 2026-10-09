@@ -551671,6 +551671,7 @@
 	</transition>
 	<transition branchRatio="3.8E-14" mode="sf" parent="Th230"/>
 	<transition branchRatio="1" child="Pa231" mode="b-" parent="Th231">
+		<!-- Pa L x-rays (2026-10 review): group totals set to the 2017Le03 measurement quoted in ENSDF NDS 185, 560 (2022) - Ll 1.663, L-alpha 29.4, L-beta 28.8, L-gamma 4.93 per 100 decays (total 64.8(14); DDEP RADLST 65(3)); was 114.7 per 100 decays from the 2019 import.  Sub-line split within each group unchanged; L-eta scaled with L-beta. -->
 		<!-- 2026-10 review: the 53.2 keV line (4.8E-03; ENSDF TI from the 111.648 keV level's intensity balance, no measured R.I., not in DDEP) removed - LANL micro-cal U standards show no line at its level energy 53.078 keV (< 10 % of 4.8E-03) and the 53.20 keV peak is fully accounted for by U-234 at the certificate activities. -->
 		<!-- data-review 2026-10-05: 183.02 keV, 0.064 % per decay, added as an unplaced line.  Resolved by a LANL micro-calorimeter at 0.181(4) x the U-235 182.504 keV line in 8 U3O8 standards (1.9-93 % U-235); not pile-up, a Sn escape or a detector satellite.  No level pair 183.02 keV apart in the Th-231 or Pa-231 adopted schemes, and U-235/Th-231 are in equilibrium in every sample, so the parent is not determined; filed here by judgement.  Previously hidden inside the Ge-unresolved U-235 '182.5 keV' line (evaluated 0.411 % = 0.354 % + this). -->
 		<!-- K x-rays (2026-10 review): energies Deslattes 2003 theory (xraylib for K-O/K-P); sub-line rates xraylib (K-L, K-M2,3, K-N2,3) and EADL2023 (weak lines); K-N2/K-N3 split and K-O2,3, K-P2,3 added within the unchanged K'b2 total.  Micro-cal: K-N energies follow theory, K-O at U 115.375(4), Th 109.442(5) keV. -->
@@ -551768,19 +551769,19 @@
 		<beta energy="311.815" intensity="0.0033" logFT="8.1"/>
 		<beta energy="330.9301" intensity="0.0033" logFT="8.2"/>
 		<beta energy="389.5" intensity="0.00022" logFT="9.56"/>
-		<xray energy="11.372" intensity="0.035" assignment="Ll" l1intensity="0.0125" l2intensity="0.0029" l3intensity="0.0209"/>
-		<xray energy="13.291" intensity="0.53" assignment="La1" l1intensity="0.188" l2intensity="0.0435" l3intensity="0.313"/>
-		<xray energy="14.953" intensity="0.0057" assignment="Lh" l1intensity="0.000755" l2intensity="0.00944"/>
-		<xray energy="15.35" intensity="0.01" assignment="Lb6" l1intensity="0.00347" l2intensity="0.000805" l3intensity="0.00579"/>
-		<xray energy="16.007" intensity="0.14" assignment="Lb2" l1intensity="0.0494" l2intensity="0.0115" l3intensity="0.0824"/>
-		<xray energy="16.104" intensity="0.042" assignment="Lb4" l1intensity="0.0595"/>
-		<xray energy="16.639" intensity="0.029" assignment="Lb5" l1intensity="0.0101" l2intensity="0.00234" l3intensity="0.0169"/>
-		<xray energy="16.708" intensity="0.22" assignment="Lb1" l1intensity="0.0287" l2intensity="0.359"/>
-		<xray energy="16.931" intensity="0.039" assignment="Lb3" l1intensity="0.0555"/>
-		<xray energy="19.571" intensity="0.052" assignment="Lg1" l1intensity="0.00683" l2intensity="0.0854"/>
-		<xray energy="19.888" intensity="0.017" assignment="Lg2" l1intensity="0.0238"/>
-		<xray energy="20.101" intensity="0.016" assignment="Lg3" l1intensity="0.0232"/>
-		<xray energy="20.217" intensity="0.011" assignment="Lg6" l1intensity="0.00146" l2intensity="0.0182"/>
+		<xray energy="11.372" intensity="0.01663" assignment="Ll" l1intensity="0.0125" l2intensity="0.0029" l3intensity="0.0209"/>
+		<xray energy="13.291" intensity="0.294" assignment="La1" l1intensity="0.188" l2intensity="0.0435" l3intensity="0.313"/>
+		<xray energy="14.953" intensity="0.00342" assignment="Lh" l1intensity="0.000755" l2intensity="0.00944"/>
+		<xray energy="15.35" intensity="0.006" assignment="Lb6" l1intensity="0.00347" l2intensity="0.000805" l3intensity="0.00579"/>
+		<xray energy="16.007" intensity="0.084" assignment="Lb2" l1intensity="0.0494" l2intensity="0.0115" l3intensity="0.0824"/>
+		<xray energy="16.104" intensity="0.0252" assignment="Lb4" l1intensity="0.0595"/>
+		<xray energy="16.639" intensity="0.0174" assignment="Lb5" l1intensity="0.0101" l2intensity="0.00234" l3intensity="0.0169"/>
+		<xray energy="16.708" intensity="0.132" assignment="Lb1" l1intensity="0.0287" l2intensity="0.359"/>
+		<xray energy="16.931" intensity="0.0234" assignment="Lb3" l1intensity="0.0555"/>
+		<xray energy="19.571" intensity="0.026704" assignment="Lg1" l1intensity="0.00683" l2intensity="0.0854"/>
+		<xray energy="19.888" intensity="0.0087302" assignment="Lg2" l1intensity="0.0238"/>
+		<xray energy="20.101" intensity="0.0082167" assignment="Lg3" l1intensity="0.0232"/>
+		<xray energy="20.217" intensity="0.005649" assignment="Lg6" l1intensity="0.00146" l2intensity="0.0182"/>
 		<xray energy="91.4880" intensity="1.37E-05" assignment="Ka3"/>
 		<xray energy="92.2835" intensity="0.0042" assignment="Ka2"/>
 		<xray energy="95.8648" intensity="0.0069" assignment="Ka1"/>
