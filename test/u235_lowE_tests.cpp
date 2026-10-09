@@ -67,11 +67,16 @@ int main(int argc, char** argv) {
     using SandiaDecay::GammaParticle;
     using SandiaDecay::XrayParticle;
 
-    // --- U-235 gamma energies (ENSDF; micro-cal 109.1781(45) and 163.341(11) keV) ---
+    // --- U-235 gamma energies (ENSDF; micro-cal 163.341(11) keV; 109.182 keV from the micro-cal against the Th K-N3 /
+    //     K-O2,3 x-rays of the same decays, 2026-10-08) ---
     int n = 0;
     check(sum_in(u5, GammaParticle, 108.94, 109.04, &n) == 0.0 && n == 0, "U235: no gamma at 108.99 keV");
-    check(near(sum_in(u5, GammaParticle, 109.170, 109.182, &n), 0.0154, 1e-6) && n == 1,
-          "U235: 109.176 keV gamma, 1.54 per 100");
+    check(sum_in(u5, GammaParticle, 109.170, 109.179, &n) == 0.0 && n == 0, "U235: no gamma at 109.176 keV");
+    check(near(sum_in(u5, GammaParticle, 109.180, 109.185, &n), 0.0154, 1e-6) && n == 1,
+          "U235: 109.182 keV gamma, 1.54 per 100");
+    // --- U-235 74.67 keV (2026-10-08): micro-cal line at 74.664-74.691 keV, nothing at ENSDF's 74.94(4) keV ---
+    check(sum_in(u5, GammaParticle, 74.85, 75.10, &n) == 0.0 && n == 0, "U235: no gamma at 74.94/75.02 keV");
+    check(near(sum_in(u5, GammaParticle, 74.66, 74.68, &n), 6.0e-4, 1e-6) && n == 1, "U235: 74.67 keV gamma, 0.060 per 100");
     check(sum_in(u5, GammaParticle, 163.37, 163.39, &n) == 0.0 && n == 0, "U235: no gamma at 163.38 keV");
     check(near(sum_in(u5, GammaParticle, 163.352, 163.362, &n), 0.0508, 1e-6) && n == 1,
           "U235: 163.357 keV gamma, 5.08 per 100");
@@ -85,6 +90,8 @@ int main(int argc, char** argv) {
       const SandiaDecay::Transition* th231 = find_transition(db, "Th231", "Pa231", SandiaDecay::BetaDecay);
       check(th231 != nullptr, "Th231 beta- transition present");
       if (th231) {
+        // Th-231's 53.2 keV line (ENSDF TI from intensity balance only) removed 2026-10-08; U-234's 53.20 keV stays
+        check(sum_in(th231, GammaParticle, 52.9, 53.5, &n) == 0.0 && n == 0, "Th231: no 53.2 keV gamma");
         check(near(sum_in(th231, GammaParticle, 183.015, 183.025, &n), 6.4e-4, 1e-6) && n == 1,
               "Th231: unplaced 183.02 keV gamma, 0.064 per 100");
         check(near(sum_in(th231, GammaParticle, 183.49, 183.50), 3.4e-4, 1e-6), "Th231: 183.495 keV unchanged");

@@ -551671,13 +551671,13 @@
 	</transition>
 	<transition branchRatio="3.8E-14" mode="sf" parent="Th230"/>
 	<transition branchRatio="1" child="Pa231" mode="b-" parent="Th231">
+		<!-- 2026-10 review: the 53.2 keV line (4.8E-03; ENSDF TI from the 111.648 keV level's intensity balance, no measured R.I., not in DDEP) removed - LANL micro-cal U standards show no line at its level energy 53.078 keV (< 10 % of 4.8E-03) and the 53.20 keV peak is fully accounted for by U-234 at the certificate activities. -->
 		<!-- data-review 2026-10-05: 183.02 keV, 0.064 % per decay, added as an unplaced line.  Resolved by a LANL micro-calorimeter at 0.181(4) x the U-235 182.504 keV line in 8 U3O8 standards (1.9-93 % U-235); not pile-up, a Sn escape or a detector satellite.  No level pair 183.02 keV apart in the Th-231 or Pa-231 adopted schemes, and U-235/Th-231 are in equilibrium in every sample, so the parent is not determined; filed here by judgement.  Previously hidden inside the Ge-unresolved U-235 '182.5 keV' line (evaluated 0.411 % = 0.354 % + this). -->
 		<!-- K x-rays (2026-10 review): energies Deslattes 2003 theory (xraylib for K-O/K-P); sub-line rates xraylib (K-L, K-M2,3, K-N2,3) and EADL2023 (weak lines); K-N2/K-N3 split and K-O2,3, K-P2,3 added within the unchanged K'b2 total.  Micro-cal: K-N energies follow theory, K-O at U 115.375(4), Th 109.442(5) keV. -->
 		<gamma energy="17.195" intensity="2.80000E-03" iccTotal="166" iccK="0" iccL1="0" iccL2="0" iccL3="0" mult="3" fl="5" tl="4"/>
 		<gamma energy="18.055" intensity="9.50000E-04" iccTotal="218" iccK="0" iccL1="0" iccL2="0" iccL3="32.9616" mult="304" delta="0.04" fl="6" tl="4"/>
 		<gamma energy="42.81" intensity="6.05000E-04" iccTotal="1.136" iccK="0" iccL1="0.24867" iccL2="0.284114" iccL3="0.320466" mult="2" fl="5" tl="2"/>
 		<gamma energy="44.08" intensity="7.50000E-06" iccTotal="330" iccK="0" iccL1="19.206" iccL2="118.371" iccL3="104.214" mult="304" fl="15" tl="11"/>
-		<gamma energy="53.2" intensity="4.80000E-03" iccTotal="0.64" iccK="0" iccL1="0.163648" iccL2="0.154368" iccL3="0.16352" mult="2" fl="7" tl="2"/>
 		<gamma energy="63.86" intensity="2.30000E-04" iccTotal="39" iccK="0" iccL1="8.1042" iccL2="11.817" iccL3="8.8413" mult="304" delta="0.6" fl="16" tl="12"/>
 		<gamma energy="68.5" intensity="5.98000E-05" iccTotal="73.3" iccK="0" iccL1="1.05699" iccL2="29.3273" iccL3="23.1335" mult="4" fl="3" tl="1"/>
 		<gamma energy="73.0" intensity="6.80000E-05" iccTotal="0.277" iccK="0" iccL1="0.0859254" iccL2="0.0623527" iccL3="0.0604968" mult="2" fl="16" tl="11"/>
@@ -551793,7 +551793,7 @@
 		<xray energy="111.8810" intensity="1.7364E-05" assignment="Kb4"/>
 		<xray energy="112.3915" intensity="0.00014918" assignment="KO23"/>
 		<xray energy="112.5755" intensity="2.4874E-05" assignment="KP23"/>
-		<!-- cascade-match: SD-unmatched-above-threshold[keV]: 183.02(I=0.00064,reviewed-unplaced); 1 SD gammas with I=0 (not emitted, suppressed); -->
+		<!-- cascade-match: SD-unmatched-above-threshold[keV]: 183.02(I=0.00064,reviewed-unplaced); 1 SD gammas with I=0 (not emitted, suppressed); G4-listed-not-in-SD[keV]: 53.08(rI=100); -->
 		<levelFeed lvl="0" probability="0.0002245706899" q="391.5"/>
 		<levelFeed lvl="1" probability="0.0002245706899" q="382.317" forbiddenness="1u"/>
 		<levelFeed lvl="2" probability="0.003368510349" q="332.9304"/>
@@ -568710,6 +568710,7 @@
 	</transition>
 	<transition branchRatio="1.64E-11" mode="sf" parent="U234"/>
 	<transition branchRatio="1" child="Th231" mode="a" parent="U235">
+		<!-- 2026-10 review: 75.02 -> 74.67 keV (LANL micro-cal: 74.664-74.691 keV, 5.2-6.1E-04 per decay, nothing at 74.94 keV beyond Pb K-alpha1; ENSDF/DDEP 74.94(4) keV) and 109.176 -> 109.182 keV (micro-cal relative to the Th K-N3 / K-O2,3 x-rays of the same decays; ENSDF 109.176(31), DDEP 109.19(7)). -->
 		<!-- level-scheme audit 2026-10-07: 19.59 keV 0.00583 -> 0.00533, i.e. TI(19.55) from the 185.7 keV level's intensity balance (0.617 per decay) instead of ENSDF's 205.3 keV-level value (0.675; NDS 185 (2022) lists TI 118(6) relative, the 185.7 keV-level balance gives 107.8).  With 0.00583 the 185.7 keV level received 0.796 transitions per decay but emitted 0.769, so a level-scheme walk emitted 185.71 and 143.76 keV 3.6 % above their listed intensities.  The 19.59 keV photon itself is unmeasured (Th L x-ray region); DDEP gives I(g+ce) 60(60) %. -->
 		<!-- data-review 2026-10-05: U-235 182.52 keV -> 182.504 keV (ENSDF) and 0.411 % -> 0.354 %.  A LANL micro-calorimeter resolves the evaluated line into 182.51(1) keV and an unlisted 183.02(1) keV line at 0.181(4) of it (8 U3O8 standards, 1.9-93 % U-235; IDB planar HPGe peak shapes give 0.187(2)); the evaluated 0.411(15) % (ENSDF NDS 185 (2022)) / 0.39(5) % (DDEP 2008) is their Ge-unresolved sum, and the Ge decay energies 182.60-182.72 keV are the pair's centroid.  The 183.02 keV line (0.064 %) is filed, unplaced, under Th-231 beta- decay. -->
 		<!-- K x-rays (2026-10 review): energies Deslattes 2003 theory (xraylib for K-O/K-P); sub-line rates xraylib (K-L, K-M2,3, K-N2,3) and EADL2023 (weak lines); K-N2/K-N3 split and K-O2,3, K-P2,3 added within the unchanged K'b2 total.  Micro-cal: K-N energies follow theory, K-O at U 115.375(4), Th 109.442(5) keV. -->
@@ -568775,7 +568776,7 @@
 			<coincidentGamma id="26" intensity="8.3268585180768415E-06" a2="0.0952381" a4="-0"/>
 			<coincidentGamma id="17" intensity="2.5242838814642393E-06" a2="-0.0333333" a4="-0"/>
 		</gamma>
-		<gamma energy="75.02" id="12" intensity="0.0006" iccTotal="0.252" iccK="0" iccL1="0.0808164" iccL2="0.0553896" iccL3="0.0539784" mult="2" fl="8" tl="3">
+		<gamma energy="74.67" id="12" intensity="0.0006" iccTotal="0.252" iccK="0" iccL1="0.0808164" iccL2="0.0553896" iccL3="0.0539784" mult="2" fl="8" tl="3">
 			<coincidentGamma id="4" intensity="0.0022172949002217295"/>
 			<coincidentGamma id="19" intensity="0.16286644951140067"/>
 		</gamma>
@@ -568788,7 +568789,7 @@
 			<coincidentGamma id="36" intensity="0.32467532467532467" a2="0.01" a4="0"/>
 		</gamma>
 		<gamma energy="96.15" id="16" intensity="6.3E-04" iccTotal="13.6" iccK="0" iccL1="0.254592" iccL2="5.6576" iccL3="4.0324" mult="4" fl="2" tl="0"/>
-		<gamma energy="109.176" id="17" intensity="0.0154" iccTotal="0.0932" iccK="0" iccL1="0.0357702" iccL2="0.0184163" iccL3="0.0162168" mult="2" fl="5" tl="2">
+		<gamma energy="109.182" id="17" intensity="0.0154" iccTotal="0.0932" iccK="0" iccL1="0.0357702" iccL2="0.0184163" iccL3="0.0162168" mult="2" fl="5" tl="2">
 			<coincidentGamma id="4" intensity="0.0011744456320505674"/>
 			<coincidentGamma id="7" intensity="0.010406188213257483" a2="-0.228791" a4="0"/>
 			<coincidentGamma id="16" intensity="0.031565437580214364" a2="-0.130952" a4="-0"/>
