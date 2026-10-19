@@ -79717,28 +79717,13 @@
 		<electronCapture energy="671.83" intensity="9.9990E-01" logFT="4.39" ecK="0.844559"/>
 	</transition>
 	<transition branchRatio="9.64E-05" child="Y89m" mode="b-" parent="Sr89">
+		<!-- 2026-10 review: removed the Y K x-rays (Ka1 2.9E-07 ...); they are the 909 keV transition's IC x-rays per Sr-89 decay (ENSDF Ka1 2.85E-5 %), already emitted by the Y89m IT transition. -->
 		<beta energy="586.14" intensity="1" logFT="11.068"/>
-		<xray energy="14.666" intensity="1.94E-12" assignment="Ka3"/>
-		<xray energy="14.883" intensity="1.51E-07" assignment="Ka2"/>
-		<xray energy="14.958" intensity="2.9E-07" assignment="Ka1"/>
-		<xray energy="16.726" intensity="2.2E-08" assignment="Kb3"/>
-		<xray energy="16.738" intensity="4.25E-08" assignment="Kb1"/>
-		<xray energy="16.88" intensity="1.76E-10" assignment="Kb5"/>
-		<xray energy="17.013" intensity="8.2E-09" assignment="Kb2"/>
-		<xray energy="17.036" intensity="1.38E-09" assignment="Kb4"/>
 		<!-- cascade-feed: omitted(multiple-same-mode-transitions). -->
 	</transition>
 	<transition branchRatio="0.9999036" child="Y89" mode="b-" parent="Sr89">
+		<!-- 2026-10 review: removed a 908.96 keV gamma (I=0.00956; the ENSDF/DDEP per-100 value stored as a fraction, ~100x too intense) and its Y K IC x-rays; the ground-state feed emits no gamma, the 909 keV line comes only from Y89m IT (ENSDF NDS 114 (2013) and DDEP 2004: 0.00956(6) % per Sr-89 decay). -->
 		<beta energy="1488" forbiddenness="1u" intensity="1" logFT="9.423"/>
-		<xray energy="14.666" intensity="1.94E-12" assignment="Ka3"/>
-		<xray energy="14.883" intensity="1.51E-07" assignment="Ka2"/>
-		<xray energy="14.958" intensity="2.9E-07" assignment="Ka1"/>
-		<xray energy="16.726" intensity="2.2E-08" assignment="Kb3"/>
-		<xray energy="16.738" intensity="4.25E-08" assignment="Kb1"/>
-		<xray energy="16.88" intensity="1.76E-10" assignment="Kb5"/>
-		<xray energy="17.013" intensity="8.2E-09" assignment="Kb2"/>
-		<xray energy="17.036" intensity="1.38E-09" assignment="Kb4"/>
-		<gamma energy="908.96" intensity="0.00956" iccTotal="0.00851" iccK="0.00742668" mult="910" delta="0.00041" fl="1" tl="0"/>
 		<!-- cascade-feed: omitted(multiple-same-mode-transitions). -->
 	</transition>
 	<transition branchRatio="1" child="Y90" mode="b-" parent="Sr90">
@@ -87536,7 +87521,8 @@
 		<xray energy="17.036" intensity="6.1E-05" assignment="Kb4"/>
 	</transition>
 	<transition branchRatio="1" child="Y89" mode="it" parent="Y89m">
-		<gamma energy="908.96" intensity="0.9904" iccTotal="0.00851" iccK="0.00742668" mult="910" delta="0.00041" fl="1" tl="0"/>
+		<!-- 2026-10 review: 908.96 keV 0.9904 -> 0.9916 (ENSDF NDS 114 (2013) 99.16 % = 1/(1+aT), aT = 0.00851; DDEP Pg/Pg+ce = 0.00956/0.00964). -->
+		<gamma energy="908.96" intensity="0.9916" iccTotal="0.00851" iccK="0.00742668" mult="910" delta="0.00041" fl="1" tl="0"/>
 		<xray energy="14.666" intensity="2.01E-08" assignment="Ka3"/>
 		<xray energy="14.883" intensity="0.00157" assignment="Ka2"/>
 		<xray energy="14.958" intensity="0.00301" assignment="Ka1"/>

@@ -49,3 +49,13 @@ add_test( NAME sandia_decay_xray_k_structure_min COMMAND xray_k_structure_tests
   "${CMAKE_CURRENT_SOURCE_DIR}/../sandia.decay.min.xml" )
 add_test( NAME sandia_decay_xray_k_structure_nocoinc COMMAND xray_k_structure_tests
   "${CMAKE_CURRENT_SOURCE_DIR}/../sandia.decay.nocoinc.min.xml" )
+
+# Individually reviewed decay lines outside the U-235 / U-238 reviews (Sr-89 / Y-89m 909 keV, ...).
+add_executable( reviewed_lines_tests reviewed_lines_tests.cpp )
+target_link_libraries( reviewed_lines_tests SandiaDecay )
+add_test( NAME sandia_decay_reviewed_lines_full COMMAND reviewed_lines_tests
+  "${CMAKE_CURRENT_SOURCE_DIR}/../sandia.decay.xml" )
+add_test( NAME sandia_decay_reviewed_lines_min COMMAND reviewed_lines_tests
+  "${CMAKE_CURRENT_SOURCE_DIR}/../sandia.decay.min.xml" )
+add_test( NAME sandia_decay_reviewed_lines_nocoinc COMMAND reviewed_lines_tests
+  "${CMAKE_CURRENT_SOURCE_DIR}/../sandia.decay.nocoinc.min.xml" )
