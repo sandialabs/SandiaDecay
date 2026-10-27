@@ -59,3 +59,13 @@ add_test( NAME sandia_decay_reviewed_lines_min COMMAND reviewed_lines_tests
   "${CMAKE_CURRENT_SOURCE_DIR}/../sandia.decay.min.xml" )
 add_test( NAME sandia_decay_reviewed_lines_nocoinc COMMAND reviewed_lines_tests
   "${CMAKE_CURRENT_SOURCE_DIR}/../sandia.decay.nocoinc.min.xml" )
+
+# The 511 keV annihilation entry is only added for decay chains with a positron emitter.
+add_executable( annihilation_tests annihilation_tests.cpp )
+target_link_libraries( annihilation_tests SandiaDecay )
+add_test( NAME sandia_decay_annihilation_full COMMAND annihilation_tests
+  "${CMAKE_CURRENT_SOURCE_DIR}/../sandia.decay.xml" )
+add_test( NAME sandia_decay_annihilation_min COMMAND annihilation_tests
+  "${CMAKE_CURRENT_SOURCE_DIR}/../sandia.decay.min.xml" )
+add_test( NAME sandia_decay_annihilation_nocoinc COMMAND annihilation_tests
+  "${CMAKE_CURRENT_SOURCE_DIR}/../sandia.decay.nocoinc.min.xml" )

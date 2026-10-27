@@ -2247,6 +2247,11 @@ vector<EnergyRatePair> NuclideMixture::gammas( const double time_in_seconds,
   vector<EnergyRatePair> gams = decayParticle( time_in_seconds, GammaParticle, sortType );
   const vector<EnergyRatePair> poss = decayParticle( time_in_seconds, PositronParticle, OrderByEnergy );
 
+  // `decayParticle` lists every positron product in the decay chain, even at zero rate, so this is
+  //  age-independent: the annihilation entry is present at every age, or at none.
+  if( poss.empty() )
+    return gams;
+
   EnergyRatePair possbr( 0.0, 510.998910 );
   
   for( size_t i = 0; i < poss.size(); ++i )
@@ -2467,6 +2472,10 @@ NuclideMixture::decayGammasInInterval( const double initial_age,
 
   const vector<EnergyCountPair> poss = decayParticlesInInterval( initial_age, interval_duration,
                                       PositronParticle, OrderByEnergy, characteristic_time_slices );
+
+  // As in `gammas(...)`: no annihilation entry unless the decay chain has a positron product.
+  if( poss.empty() )
+    return gams;
 
   EnergyCountPair possbr( 510.998910, 0.0 );
   

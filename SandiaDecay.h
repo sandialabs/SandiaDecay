@@ -705,7 +705,10 @@ namespace SandiaDecay
     /** Get the rate (how many per second) of each energy of gammas at a given
         time after mixture t=0.
         If annihilation gamas is specified as true, two 511 keV gammas will
-        be included for each positron emission.
+        be included for each positron emission.  The 511 keV entry is only present if some
+        nuclide in the mixture's decay chain emits positrons; it is then present at every
+        age (with zero rate when those nuclides have no activity), so the energies returned
+        do not depend on age.
         Xrays are not included in the result.
      */
     std::vector<EnergyRatePair> gammas( const double time,
@@ -746,6 +749,8 @@ namespace SandiaDecay
     
     /** Returns rate of gammas, anihilation, and xrays for a given mixture age.
         X-rays only included if the XML file contained decay xrays.
+        Annihilation (511 keV) is only included if the decay chain has a positron emitter;
+        see `gammas(...)`.
      */
     std::vector<EnergyRatePair> photons( const double time,
                                               const HowToOrder sortType = OrderByAbundance
