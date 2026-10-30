@@ -2716,7 +2716,7 @@ those topology/audit details are available in the full sandia.decay.xml.
 	<n am="184.953419264" an="74" hl="6488640" iso="0" mn="185" s="W185"/>
 	<n am="184.953631163" an="74" hl="100.2" iso="1" mn="185" s="W185m"/>
 	<n am="185.954364127" an="74" hl="INF" iso="0" mn="186" s="W186"/>
-	<n am="186.957160466" an="74" hl="8.64E+04" iso="0" mn="187" s="W187"/>
+	<n am="186.957160466" an="74" hl="85680" iso="0" mn="187" s="W187"/>
 	<n am="187.958489105" an="74" hl="6.02899E+06" iso="0" mn="188" s="W188"/>
 	<n am="188.961912868" an="74" hl="642" iso="0" mn="189" s="W189"/>
 	<n am="189.963181378" an="74" hl="1800" iso="0" mn="190" s="W190"/>

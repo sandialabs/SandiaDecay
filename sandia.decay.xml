@@ -2806,7 +2806,7 @@
 	<nuclide atomicMass="184.953419264" atomicNumber="74" halfLife="6488640" isomerNumber="0" massNumber="185" symbol="W185"/>
 	<nuclide atomicMass="184.953631163" atomicNumber="74" halfLife="100.2" isomerNumber="1" massNumber="185" symbol="W185m"/>
 	<nuclide atomicMass="185.954364127" atomicNumber="74" halfLife="INF" isomerNumber="0" massNumber="186" symbol="W186"/>
-	<nuclide atomicMass="186.957160466" atomicNumber="74" halfLife="8.64000E+04" isomerNumber="0" massNumber="187" symbol="W187"/>
+	<nuclide atomicMass="186.957160466" atomicNumber="74" halfLife="85680" isomerNumber="0" massNumber="187" symbol="W187"/>
 	<nuclide atomicMass="187.958489105" atomicNumber="74" halfLife="6.02899E+06" isomerNumber="0" massNumber="188" symbol="W188"/>
 	<nuclide atomicMass="188.961912868" atomicNumber="74" halfLife="642" isomerNumber="0" massNumber="189" symbol="W189"/>
 	<nuclide atomicMass="189.963181378" atomicNumber="74" halfLife="1800" isomerNumber="0" massNumber="190" symbol="W190"/>
